@@ -1,0 +1,32 @@
+tile.blightbuster_dawnTotem.name=Totem of Dawn
+tile.blightbuster_dawnMachineInput.name=Dawn Machine Input
+tile.blightbuster_dawnMachineBuffer.name=Dawn Machine
+tile.blightbuster_dawnMachine.name=Dawn Machine
+tile.blightbuster_cyberTotem.name=Cyber Totem
+tile.blightbuster_offering.name=Offering of Dawn
+
+item.blightbuster_purityFocus.name=Wand Focus: Purity
+item.blightbuster_silverPotion.name=Silverleaf Splash Potion
+item.blightbuster_worldTainter.name=World Tainter
+item.blightbuster_worldOreKiller.name=Ore Killer
+item.blightbuster_researchnote.name=Translated Alien Grimoire
+
+tc.research_name.SILVERPOTION=Silverwood potions
+tc.research_text.SILVERPOTION=Spot cleaning taint!
+tc.research_page.SILVERPOTION.1=Ethereal blooms are wonderful, but if you plant them too far apart, you can miss spots, especially in the corners. This potion, made from silverwood leaves, will cure blighted land in a 5 block radius. It doesn't eradicate tainted blocks besides those it hits directly, but any remaining blocks will not survive long on cured land. Unlike a bloom, this potion does not offer continuous protection, meaning it's possible for the land to become reinfected, sometimes quite quickly.
+tc.research_name.PURITYFOCUS=Purity Focus
+tc.research_text.PURITYFOCUS=The Blightbuster
+tc.research_page.PURITYFOCUS.1=You have found a way to infuse the properties of an ethereal bloom into a wand focus. When you right click on a block, that block and all blocks above and below it will immediately be cured of taint. The enlarge enchantment is especially useful on this focus, increasing the radius of the cleansing to 3, 5, 7, or 9, depending on the level. Beware rapidly spawning thaumic slimes when working near crusted taint. Also beware the high vis cost, especially when enlarge is applied. On the plus side, you can heal tainted creatures simply by right-clicking them with this wand.
+tc.research_name.DAWNTOTEM=Totems of Dawn
+tc.research_text.DAWNTOTEM=The start of a glorious new era!
+tc.research_page.DAWNTOTEM.1=By infusing ethereal blooms into a silverwood log, you have created the totem of dawn. It is the greatest magical protection against taint you have yet devised. Boasting an area much larger than a bloom, this totem also excels in keeping the edges of its area free of taint. It may take slightly longer to completely clean an area, however.
+
+blightbuster.researchnote=The alien grimoire reveals secret thaumaturgic knowledge!
+
+gui.offering.pairFailed=Your wand failed to attune to the Dawn Machine.
+gui.offering.pairSucceeded=Your wand attunes to the Dawn Machine.
+gui.offering.pairAlreadyExists=Your wand was already attuned to this Dawn Machine.
+gui.offering.noPairing=This wand isn't attuned to a Dawn Machine.
+gui.offering.wrongDimension=You cannot transport a Dawn Machine across dimensions.
+gui.offering.pairingDestroyed=The attuned Dawn Machine has been moved or destroyed.
+gui.offering.clearArea=Clear the area around the offering.

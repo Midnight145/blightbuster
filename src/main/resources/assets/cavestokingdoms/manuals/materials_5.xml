@@ -1,0 +1,751 @@
+<?xml version="1.0"?>
+
+<!-- This is going to be the armor guide book. -->
+
+<book>
+<page type="intro">
+<text>Materials - The Armor Edition
+A Guide to Material Properties
+
+By Ayumu Nagasawa</text>
+</page>
+
+<page type="text">
+<text>This book contains statistics and information on all known armors.</text>
+</page>
+
+   <page type = "c2kArmorPage">
+      <title>Chain</title>
+      <requires>discover.cavestokingdoms.chain</requires>
+      <requiresIcon>minecraft:chainmail_chestplate</requiresIcon>
+      <text>Uncraftable. If you find any in full repair, it can be melted into steel by placing it in a smeltery.</text>
+      <armors>
+         <armor>minecraft:chainmail_helmet</armor>
+         <armor>minecraft:chainmail_chestplate</armor>
+         <armor>minecraft:chainmail_boots</armor>
+         <armor>minecraft:chainmail_leggings</armor>
+      </armors>
+      <title>Iron</title>
+      <requires>discover.cavestokingdoms.iron</requires>
+      <requiresIcon>minecraft:iron_ingot</requiresIcon>
+      <text>Decent armor made of a plentiful material.</text>
+      <armors>
+         <armor>minecraft:iron_helmet</armor>
+         <armor>minecraft:iron_chestplate</armor>
+         <armor>minecraft:iron_boots</armor>
+         <armor>minecraft:iron_leggings</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Leather</title>
+      <requires>discover.cavestokingdoms.leather</requires>
+      <requiresIcon>minecraft:leather</requiresIcon>
+      <text>Can be Dyed.</text>
+      <armors>
+         <armor>minecraft:leather_helmet</armor>
+         <armor>minecraft:leather_chestplate</armor>
+         <armor>minecraft:leather_boots</armor>
+         <armor>minecraft:leather_leggings</armor>
+      </armors>
+      <title>Cobalt</title>
+      <requires>discover.cavestokingdoms.cobalt</requires>
+      <requiresIcon>TConstruct:materials:3</requiresIcon>
+      <text>Looks like diamond armor used to. Don't be fooled.</text>
+      <armors>
+         <armor>minecraft:diamond_helmet</armor>
+         <armor>minecraft:diamond_chestplate</armor>
+         <armor>minecraft:diamond_boots</armor>
+         <armor>minecraft:diamond_leggings</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Gold</title>
+      <requires>discover.cavestokingdoms.gold</requires>
+      <requiresIcon>minecraft:gold_ingot</requiresIcon>
+      <text>Highly enchantable. Does not last long.</text>
+      <armors>
+         <armor>minecraft:golden_helmet</armor>
+         <armor>minecraft:golden_chestplate</armor>
+         <armor>minecraft:golden_boots</armor>
+         <armor>minecraft:golden_leggings</armor>
+      </armors>
+      <title>Manasteel</title>
+      <requires>discover.cavestokingdoms.manasteel</requires>
+      <requiresIcon>Botania:manaResource</requiresIcon>
+      <text>Seems to repair itself sometimes. Don't suppose you know how it works?</text>
+      <armors>
+         <armor>Botania:manasteelHelm</armor>
+         <armor>Botania:manasteelChest</armor>
+         <armor>Botania:manasteelLegs</armor>
+         <armor>Botania:manasteelBoots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+   <title>Terrasteel</title>
+   <requires>discover.cavestokingdoms.terrasteel</requires>
+   <requiresIcon>Botania:manaResource:4</requiresIcon>
+   <text>Incredibly protective and durable. Self repairing, somehow.</text>
+   <armors>
+      <armor>Botania:terrasteelHelm</armor>
+      <armor>Botania:terrasteelChest</armor>
+      <armor>Botania:terrasteelLegs</armor>
+      <armor>Botania:terrasteelBoots</armor>
+   </armors>
+   <title>Elementium</title>
+   <requires>discover.cavestokingdoms.elementium</requires>
+   <requiresIcon>Botania:manaResource:7</requiresIcon>
+   <text>Self repairing. In tests, the wearer has been known to hallucinate about pixies.</text>
+   <armors>
+      <armor>Botania:elementiumHelm</armor>
+      <armor>Botania:elementiumChest</armor>
+      <armor>Botania:elementiumLegs</armor>
+      <armor>Botania:elementiumBoots</armor>
+   </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+   <title>Copper</title>
+   <requires>discover.cavestokingdoms.copper</requires>
+   <requiresIcon>TConstruct:materials:9</requiresIcon>
+   <text></text>
+   <armors>
+      <armor>Metallurgy:metallurgy.copper.helmet</armor>
+      <armor>Metallurgy:metallurgy.copper.chestplate</armor>
+      <armor>Metallurgy:metallurgy.copper.leggings</armor>
+      <armor>Metallurgy:metallurgy.copper.boots</armor>
+   </armors>
+   <title>Bronze</title>
+   <requires>discover.cavestokingdoms.bronze</requires>
+   <requiresIcon>TConstruct:materials:13</requiresIcon>
+   <text></text>
+   <armors>
+      <armor>Metallurgy:metallurgy.bronze.helmet</armor>
+      <armor>Metallurgy:metallurgy.bronze.chestplate</armor>
+      <armor>Metallurgy:metallurgy.bronze.leggings</armor>
+      <armor>Metallurgy:metallurgy.bronze.boots</armor>
+   </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+   <title>Hepatizon</title>
+   <requires>discover.cavestokingdoms.hepatizon</requires>
+   <requiresIcon>Metallurgy:hepatizon.ingot</requiresIcon>
+   <text></text>
+   <armors>
+      <armor>Metallurgy:metallurgy.hepatizon.helmet</armor>
+      <armor>Metallurgy:metallurgy.hepatizon.chestplate</armor>
+      <armor>Metallurgy:metallurgy.hepatizon.leggings</armor>
+      <armor>Metallurgy:metallurgy.hepatizon.boots</armor>
+   </armors>
+   <title>Damascus Steel</title>
+   <requires>discover.cavestokingdoms.damascussteel</requires>
+   <requiresIcon>Metallurgy:damascus.steel.ingot</requiresIcon>
+   <text></text>
+   <armors>
+      <armor>Metallurgy:metallurgy.damascus.steel.helmet</armor>
+      <armor>Metallurgy:metallurgy.damascus.steel.chestplate</armor>
+      <armor>Metallurgy:metallurgy.damascus.steel.leggings</armor>
+      <armor>Metallurgy:metallurgy.damascus.steel.boots</armor>
+   </armors>
+</page>
+
+   <page type = "c2kArmorPage">
+      <title>Angmallen</title>
+      <requires>discover.cavestokingdoms.angmallen</requires>
+      <requiresIcon>Metallurgy:angmallen.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.angmallen.helmet</armor>
+         <armor>Metallurgy:metallurgy.angmallen.chestplate</armor>
+         <armor>Metallurgy:metallurgy.angmallen.leggings</armor>
+         <armor>Metallurgy:metallurgy.angmallen.boots</armor>
+      </armors>
+      <title>Steel</title>
+      <requires>discover.cavestokingdoms.steel</requires>
+      <requiresIcon>TConstruct:materials:16</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.steel.helmet</armor>
+         <armor>Metallurgy:metallurgy.steel.chestplate</armor>
+         <armor>Metallurgy:metallurgy.steel.leggings</armor>
+         <armor>Metallurgy:metallurgy.steel.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Eximite</title>
+      <requires>discover.cavestokingdoms.eximite</requires>
+      <requiresIcon>Metallurgy:eximite.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.eximite.helmet</armor>
+         <armor>Metallurgy:metallurgy.eximite.chestplate</armor>
+         <armor>Metallurgy:metallurgy.eximite.leggings</armor>
+         <armor>Metallurgy:metallurgy.eximite.boots</armor>
+      </armors>
+      <title>Desichalkos</title>
+      <requires>discover.cavestokingdoms.desichalkos</requires>
+      <requiresIcon>Metallurgy:desichalkos.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.desichalkos.helmet</armor>
+         <armor>Metallurgy:metallurgy.desichalkos.chestplate</armor>
+         <armor>Metallurgy:metallurgy.desichalkos.leggings</armor>
+         <armor>Metallurgy:metallurgy.desichalkos.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Prometheum</title>
+      <requires>discover.cavestokingdoms.prometheum</requires>
+      <requiresIcon>Metallurgy:prometheum.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.prometheum.helmet</armor>
+         <armor>Metallurgy:metallurgy.prometheum.chestplate</armor>
+         <armor>Metallurgy:metallurgy.prometheum.leggings</armor>
+         <armor>Metallurgy:metallurgy.prometheum.boots</armor>
+      </armors>
+      <title>Deep Iron</title>
+      <requires>discover.cavestokingdoms.deepiron</requires>
+      <requiresIcon>Metallurgy:deep.iron.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.deep.iron.helmet</armor>
+         <armor>Metallurgy:metallurgy.deep.iron.chestplate</armor>
+         <armor>Metallurgy:metallurgy.deep.iron.leggings</armor>
+         <armor>Metallurgy:metallurgy.deep.iron.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Black Steel</title>
+      <requires>discover.cavestokingdoms.blacksteel</requires>
+      <requiresIcon>Metallurgy:black.steel.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.black.steel.helmet</armor>
+         <armor>Metallurgy:metallurgy.black.steel.chestplate</armor>
+         <armor>Metallurgy:metallurgy.black.steel.leggings</armor>
+         <armor>Metallurgy:metallurgy.black.steel.boots</armor>
+      </armors>
+      <title>Oureclase</title>
+      <requires>discover.cavestokingdoms.oureclase</requires>
+      <requiresIcon>Metallurgy:oureclase.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.oureclase.helmet</armor>
+         <armor>Metallurgy:metallurgy.oureclase.chestplate</armor>
+         <armor>Metallurgy:metallurgy.oureclase.leggings</armor>
+         <armor>Metallurgy:metallurgy.oureclase.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Astral Silver</title>
+      <requires>discover.cavestokingdoms.astralsilver</requires>
+      <requiresIcon>Metallurgy:astral.silver.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.astral.silver.helmet</armor>
+         <armor>Metallurgy:metallurgy.astral.silver.chestplate</armor>
+         <armor>Metallurgy:metallurgy.astral.silver.leggings</armor>
+         <armor>Metallurgy:metallurgy.astral.silver.boots</armor>
+      </armors>
+      <title>Carmot</title>
+      <requires>discover.cavestokingdoms.carmot</requires>
+      <requiresIcon>Metallurgy:carmot.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.carmot.helmet</armor>
+         <armor>Metallurgy:metallurgy.carmot.chestplate</armor>
+         <armor>Metallurgy:metallurgy.carmot.leggings</armor>
+         <armor>Metallurgy:metallurgy.carmot.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Mithril</title>
+      <requires>discover.cavestokingdoms.mithril</requires>
+      <requiresIcon>ThermalFoundation:material:70</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.mithril.helmet</armor>
+         <armor>Metallurgy:metallurgy.mithril.chestplate</armor>
+         <armor>Metallurgy:metallurgy.mithril.leggings</armor>
+         <armor>Metallurgy:metallurgy.mithril.boots</armor>
+      </armors>
+      <title>Quicksilver</title>
+      <requires>discover.cavestokingdoms.quicksilver</requires>
+      <requiresIcon>Metallurgy:quicksilver.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.quicksilver.helmet</armor>
+         <armor>Metallurgy:metallurgy.quicksilver.chestplate</armor>
+         <armor>Metallurgy:metallurgy.quicksilver.leggings</armor>
+         <armor>Metallurgy:metallurgy.quicksilver.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Haderoth</title>
+      <requires>discover.cavestokingdoms.haderoth</requires>
+      <requiresIcon>Metallurgy:haderoth.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.haderoth.helmet</armor>
+         <armor>Metallurgy:metallurgy.haderoth.chestplate</armor>
+         <armor>Metallurgy:metallurgy.haderoth.leggings</armor>
+         <armor>Metallurgy:metallurgy.haderoth.boots</armor>
+      </armors>
+      <title>Orichalcum</title>
+      <requires>discover.cavestokingdoms.orichalcum</requires>
+      <requiresIcon>Metallurgy:orichalcum.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.orichalcum.helmet</armor>
+         <armor>Metallurgy:metallurgy.orichalcum.chestplate</armor>
+         <armor>Metallurgy:metallurgy.orichalcum.leggings</armor>
+         <armor>Metallurgy:metallurgy.orichalcum.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Celenegil</title>
+      <requires>discover.cavestokingdoms.celenegil</requires>
+      <requiresIcon>Metallurgy:celenegil.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.celenegil.helmet</armor>
+         <armor>Metallurgy:metallurgy.celenegil.chestplate</armor>
+         <armor>Metallurgy:metallurgy.celenegil.leggings</armor>
+         <armor>Metallurgy:metallurgy.celenegil.boots</armor>
+      </armors>
+      <title>Adamantine</title>
+      <requires>discover.cavestokingdoms.adamantine</requires>
+      <requiresIcon>Metallurgy:adamantine.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.adamantine.helmet</armor>
+         <armor>Metallurgy:metallurgy.adamantine.chestplate</armor>
+         <armor>Metallurgy:metallurgy.adamantine.leggings</armor>
+         <armor>Metallurgy:metallurgy.adamantine.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Atlarus</title>
+      <requires>discover.cavestokingdoms.atlarus</requires>
+      <requiresIcon>Metallurgy:atlarus.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.atlarus.helmet</armor>
+         <armor>Metallurgy:metallurgy.atlarus.chestplate</armor>
+         <armor>Metallurgy:metallurgy.atlarus.leggings</armor>
+         <armor>Metallurgy:metallurgy.atlarus.boots</armor>
+      </armors>
+      <title>Tartarite</title>
+      <requires>discover.cavestokingdoms.tartarite</requires>
+      <requiresIcon>Metallurgy:tartarite.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.tartarite.helmet</armor>
+         <armor>Metallurgy:metallurgy.tartarite.chestplate</armor>
+         <armor>Metallurgy:metallurgy.tartarite.leggings</armor>
+         <armor>Metallurgy:metallurgy.tartarite.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Shadow Steel</title>
+      <requires>discover.cavestokingdoms.shadowsteel</requires>
+      <requiresIcon>Metallurgy:shadow.steel.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.shadow.steel.helmet</armor>
+         <armor>Metallurgy:metallurgy.shadow.steel.chestplate</armor>
+         <armor>Metallurgy:metallurgy.shadow.steel.leggings</armor>
+         <armor>Metallurgy:metallurgy.shadow.steel.boots</armor>
+      </armors>
+      <title>Inolashite</title>
+      <requires>discover.cavestokingdoms.inolashite</requires>
+      <requiresIcon>Metallurgy:inolashite.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.inolashite.helmet</armor>
+         <armor>Metallurgy:metallurgy.inolashite.chestplate</armor>
+         <armor>Metallurgy:metallurgy.inolashite.leggings</armor>
+         <armor>Metallurgy:metallurgy.inolashite.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Amordrine</title>
+      <requires>discover.cavestokingdoms.amordrine</requires>
+      <requiresIcon>Metallurgy:amordrine.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.amordrine.helmet</armor>
+         <armor>Metallurgy:metallurgy.amordrine.chestplate</armor>
+         <armor>Metallurgy:metallurgy.amordrine.leggings</armor>
+         <armor>Metallurgy:metallurgy.amordrine.boots</armor>
+      </armors>
+      <title>Silver</title>
+      <requires>discover.cavestokingdoms.silver</requires>
+      <requiresIcon>ThermalFoundation:material:66</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.silver.helmet</armor>
+         <armor>Metallurgy:metallurgy.silver.chestplate</armor>
+         <armor>Metallurgy:metallurgy.silver.leggings</armor>
+         <armor>Metallurgy:metallurgy.silver.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Platinum</title>
+      <requires>discover.cavestokingdoms.platinum</requires>
+      <requiresIcon>ThermalFoundation:material:69</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.platinum.helmet</armor>
+         <armor>Metallurgy:metallurgy.platinum.chestplate</armor>
+         <armor>Metallurgy:metallurgy.platinum.leggings</armor>
+         <armor>Metallurgy:metallurgy.platinum.boots</armor>
+      </armors>
+      <title>Brass</title>
+      <requires>discover.cavestokingdoms.brass</requires>
+      <requiresIcon>Metallurgy:brass.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.brass.helmet</armor>
+         <armor>Metallurgy:metallurgy.brass.chestplate</armor>
+         <armor>Metallurgy:metallurgy.brass.leggings</armor>
+         <armor>Metallurgy:metallurgy.brass.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Electrum</title>
+      <requires>discover.cavestokingdoms.electrum</requires>
+      <requiresIcon>ThermalFoundation:material:71</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.electrum.helmet</armor>
+         <armor>Metallurgy:metallurgy.electrum.chestplate</armor>
+         <armor>Metallurgy:metallurgy.electrum.leggings</armor>
+         <armor>Metallurgy:metallurgy.electrum.boots</armor>
+      </armors>
+      <title>Ignatius</title>
+      <requires>discover.cavestokingdoms.ignatius</requires>
+      <requiresIcon>Metallurgy:ignatius.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.ignatius.helmet</armor>
+         <armor>Metallurgy:metallurgy.ignatius.chestplate</armor>
+         <armor>Metallurgy:metallurgy.ignatius.leggings</armor>
+         <armor>Metallurgy:metallurgy.ignatius.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Shadow Iron</title>
+      <requires>discover.cavestokingdoms.shadowiron</requires>
+      <requiresIcon>Metallurgy:shadow.iron.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.shadow.iron.helmet</armor>
+         <armor>Metallurgy:metallurgy.shadow.iron.chestplate</armor>
+         <armor>Metallurgy:metallurgy.shadow.iron.leggings</armor>
+         <armor>Metallurgy:metallurgy.shadow.iron.boots</armor>
+      </armors>
+      <title>Midasium</title>
+      <requires>discover.cavestokingdoms.midasium</requires>
+      <requiresIcon>Metallurgy:midasium.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.midasium.helmet</armor>
+         <armor>Metallurgy:metallurgy.midasium.chestplate</armor>
+         <armor>Metallurgy:metallurgy.midasium.leggings</armor>
+         <armor>Metallurgy:metallurgy.midasium.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Vyroxeres</title>
+      <requires>discover.cavestokingdoms.vyroxeres</requires>
+      <requiresIcon>Metallurgy:vyroxeres.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.vyroxeres.helmet</armor>
+         <armor>Metallurgy:metallurgy.vyroxeres.chestplate</armor>
+         <armor>Metallurgy:metallurgy.vyroxeres.leggings</armor>
+         <armor>Metallurgy:metallurgy.vyroxeres.boots</armor>
+      </armors>
+      <title>Ceruclase</title>
+      <requires>discover.cavestokingdoms.ceruclase</requires>
+      <requiresIcon>Metallurgy:ceruclase.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.ceruclase.helmet</armor>
+         <armor>Metallurgy:metallurgy.ceruclase.chestplate</armor>
+         <armor>Metallurgy:metallurgy.ceruclase.leggings</armor>
+         <armor>Metallurgy:metallurgy.ceruclase.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Kalendrite</title>
+      <requires>discover.cavestokingdoms.kalendrite</requires>
+      <requiresIcon>Metallurgy:kalendrite.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.kalendrite.helmet</armor>
+         <armor>Metallurgy:metallurgy.kalendrite.chestplate</armor>
+         <armor>Metallurgy:metallurgy.kalendrite.leggings</armor>
+         <armor>Metallurgy:metallurgy.kalendrite.boots</armor>
+      </armors>
+      <title>Vulcanite</title>
+      <requires>discover.cavestokingdoms.vulcanite</requires>
+      <requiresIcon>Metallurgy:vulcanite.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.vulcanite.helmet</armor>
+         <armor>Metallurgy:metallurgy.vulcanite.chestplate</armor>
+         <armor>Metallurgy:metallurgy.vulcanite.leggings</armor>
+         <armor>Metallurgy:metallurgy.vulcanite.boots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Sanguinite</title>
+      <requires>discover.cavestokingdoms.sanguinite</requires>
+      <requiresIcon>Metallurgy:sanguinite.ingot</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Metallurgy:metallurgy.sanguinite.helmet</armor>
+         <armor>Metallurgy:metallurgy.sanguinite.chestplate</armor>
+         <armor>Metallurgy:metallurgy.sanguinite.leggings</armor>
+         <armor>Metallurgy:metallurgy.sanguinite.boots</armor>
+      </armors>
+      <title>Flux-Infused</title>
+      <requires>discover.cavestokingdoms.fluxinfused</requires>
+      <requiresIcon>RedstoneArsenal:material:32</requiresIcon>
+      <text>Can be repaired by recharging it in an energetic infuser.</text>
+      <armors>
+         <armor>RedstoneArsenal:armor.helmetFlux</armor>
+         <armor>RedstoneArsenal:armor.plateFlux</armor>
+         <armor>RedstoneArsenal:armor.legsFlux</armor>
+         <armor>RedstoneArsenal:armor.bootsFlux</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Wood</title>
+      <requires>discover.cavestokingdoms.wood</requires>
+      <requiresIcon>minecraft:log</requiresIcon>
+      <text>Takes lots of wood to make, but at least wood is highly renewable.</text>
+      <armors>
+         <armor>TConstruct:helmetWood</armor>
+         <armor>TConstruct:chestplateWood</armor>
+         <armor>TConstruct:leggingsWood</armor>
+         <armor>TConstruct:bootsWood</armor>
+      </armors>
+      <title>Thaumium</title>
+      <requires>discover.cavestokingdoms.thaumium</requires>
+      <requiresIcon>Thaumcraft:ItemResource:2</requiresIcon>
+      <text>Can be repaired by recharging it in an energetic infuser.</text>
+      <armors>
+         <armor>Thaumcraft:ItemHelmetThaumium</armor>
+         <armor>Thaumcraft:ItemChestplateThaumium</armor>
+         <armor>Thaumcraft:ItemLeggingsThaumium</armor>
+         <armor>Thaumcraft:ItemBootsThaumium</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Void Metal</title>
+      <requires>discover.cavestokingdoms.voidmetal</requires>
+      <requiresIcon>Thaumcraft:ItemResource:16</requiresIcon>
+      <text>Self-repairing. Causes hallucinations.</text>
+      <armors>
+         <armor>Thaumcraft:ItemHelmetVoid</armor>
+         <armor>Thaumcraft:ItemChestplateVoid</armor>
+         <armor>Thaumcraft:ItemLeggingsVoid</armor>
+         <armor>Thaumcraft:ItemBootsVoid</armor>
+      </armors>
+      <title>Crimson Robes</title>
+      <requires>discover.cavestokingdoms.crimson</requires>
+      <requiresIcon>Thaumcraft:ItemHelmetCultistRobe</requiresIcon>
+      <text>Uncraftable. Looks unusually cool. Slowly drives you insane.</text>
+      <armors>
+         <armor>Thaumcraft:ItemHelmetCultistRobe</armor>
+         <armor>Thaumcraft:ItemChestplateCultistRobe</armor>
+         <armor>Thaumcraft:ItemLeggingsCultistRobe</armor>
+         <armor>Thaumcraft:ItemBootsCultist</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Crimson Plate</title>
+      <requires>discover.cavestokingdoms.crimson</requires>
+      <requiresIcon>Thaumcraft:ItemHelmetCultistRobe</requiresIcon>
+      <text>Uncraftable. Looks unusually cool. Omit the boots to retain your sanity.</text>
+      <armors>
+         <armor>Thaumcraft:ItemHelmetCultistPlate</armor>
+         <armor>Thaumcraft:ItemChestplateCultistPlate</armor>
+         <armor>Thaumcraft:ItemLeggingsCultistPlate</armor>
+         <armor>Thaumcraft:ItemBootsCultist</armor>
+      </armors>
+      <title>Crimson Praetor Plate</title>
+      <requires>discover.cavestokingdoms.crimson</requires>
+      <requiresIcon>Thaumcraft:ItemHelmetCultistRobe</requiresIcon>
+      <text>Uncraftable. Looks unusually cool. Omit the boots to retain your sanity.</text>
+      <armors>
+         <armor>Thaumcraft:ItemHelmetCultistLeaderPlate</armor>
+         <armor>Thaumcraft:ItemChestplateCultistLeaderPlate</armor>
+         <armor>Thaumcraft:ItemLeggingsCultistLeaderPlate</armor>
+         <armor>Thaumcraft:ItemBootsCultist</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Invar</title>
+      <requires>discover.cavestokingdoms.invar</requires>
+      <requiresIcon>ThermalFoundation:material:72</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>ThermalFoundation:armor.helmetInvar</armor>
+         <armor>ThermalFoundation:armor.plateInvar</armor>
+         <armor>ThermalFoundation:armor.legsInvar</armor>
+         <armor>ThermalFoundation:armor.bootsInvar</armor>
+      </armors>
+      <title>Lead</title>
+      <requires>discover.cavestokingdoms.lead</requires>
+      <requiresIcon>ThermalFoundation:material:67</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>ThermalFoundation:armor.helmetLead</armor>
+         <armor>ThermalFoundation:armor.plateLead</armor>
+         <armor>ThermalFoundation:armor.legsLead</armor>
+         <armor>ThermalFoundation:armor.bootsLead</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Nickel</title>
+      <requires>discover.cavestokingdoms.nickel</requires>
+      <requiresIcon>ThermalFoundation:material:72</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>ThermalFoundation:armor.helmetNickel</armor>
+         <armor>ThermalFoundation:armor.plateNickel</armor>
+         <armor>ThermalFoundation:armor.legsNickel</armor>
+         <armor>ThermalFoundation:armor.bootsNickel</armor>
+      </armors>
+      <title>Tin</title>
+      <requires>discover.cavestokingdoms.tin</requires>
+      <requiresIcon>ThermalFoundation:material:67</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>ThermalFoundation:armor.helmetTin</armor>
+         <armor>ThermalFoundation:armor.plateTin</armor>
+         <armor>ThermalFoundation:armor.legsTin</armor>
+         <armor>ThermalFoundation:armor.bootsTin</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Cardboard</title>
+      <requires>discover.cavestokingdoms.reeds</requires>
+      <requiresIcon>minecraft:reeds</requiresIcon>
+      <text>Can be dyed.</text>
+      <armors>
+         <armor>betterstorage:cardboardHelmet</armor>
+         <armor>betterstorage:cardboardChestplate</armor>
+         <armor>betterstorage:cardboardLeggings</armor>
+         <armor>betterstorage:cardboardBoots</armor>
+      </armors>
+      <title>Wizard Robes</title>
+      <requires>discover.cavestokingdoms.wizard</requires>
+      <requiresIcon>customnpcs:npcWizardHead</requiresIcon>
+      <text>More decorative than functional. Uncraftable. A rare drop from some aliens.</text>
+      <armors>
+         <armor>customnpcs:npcWizardHead</armor>
+         <armor>customnpcs:npcWizardChest</armor>
+         <armor>customnpcs:npcWizardPants</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Assassin Set</title>
+      <requires>discover.cavestokingdoms.assassin</requires>
+      <requiresIcon>customnpcs:npcAssassinHead</requiresIcon>
+      <text>More decorative than functional. Uncraftable. A rare drop from some aliens.</text>
+      <armors>
+         <armor>customnpcs:npcAssassinHead</armor>
+         <armor>customnpcs:npcAssassinChest</armor>
+         <armor>customnpcs:npcAssassinLeggings</armor>
+         <armor>customnpcs:npcAssassinBoots</armor>
+      </armors>
+      <title>Scout Set</title>
+      <requires>discover.cavestokingdoms.scout</requires>
+      <requiresIcon>customnpcs:npcNanorumChest</requiresIcon>
+      <text>Decorative. Uncraftable. A rare drop from tainted Jaded Scouts.</text>
+      <armors>
+         <armor>customnpcs:npcSoldierHead</armor>
+         <armor>customnpcs:npcNanorumChest</armor>
+         <armor>customnpcs:npcSoldierBottom</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Hardened Leather</title>
+      <requires>discover.cavestokingdoms.wax</requires>
+      <requiresIcon>harvestcraft:beeswaxItem</requiresIcon>
+      <text>Surprisingly protective. Also a rare drop from some aliens.</text>
+      <armors>
+         <armor>harvestcraft:hardenedleatherhelmItem</armor>
+         <armor>harvestcraft:hardenedleatherchestItem</armor>
+         <armor>harvestcraft:hardenedleatherleggingsItem</armor>
+         <armor>harvestcraft:hardenedleatherbootsItem</armor>
+      </armors>
+      <title>Ichorcloth</title>
+      <requires>discover.cavestokingdoms.ichorcloth</requires>
+      <requiresIcon>ThaumicTinkerer:kamiResource:1</requiresIcon>
+      <text>I don't understand how this can be so protective and yet so light.</text>
+      <armors>
+         <armor>ThaumicTinkerer:ichorclothHelm</armor>
+         <armor>ThaumicTinkerer:ichorclothChest</armor>
+         <armor>ThaumicTinkerer:ichorclothLegs</armor>
+         <armor>ThaumicTinkerer:ichorclothBoots</armor>
+      </armors>
+   </page>
+
+   <page type = "c2kArmorPage">
+      <title>Robes</title>
+      <requires>discover.cavestokingdoms.magiccloth</requires>
+      <requiresIcon>Thaumcraft:ItemResource:7</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Thaumcraft:ItemHelmetRobe</armor>
+         <armor>Thaumcraft:ItemChestplateRobe</armor>
+         <armor>Thaumcraft:ItemLeggingsRobe</armor>
+         <armor>Thaumcraft:ItemBootsRobe</armor>
+      </armors>
+      <title>Void Robes</title>
+      <requires>discover.cavestokingdoms.voidmetal</requires>
+      <requiresIcon>Thaumcraft:ItemResource:16</requiresIcon>
+      <text></text>
+      <armors>
+         <armor>Thaumcraft:ItemHelmetVoidFortress</armor>
+         <armor>Thaumcraft:ItemChestplateVoidFortress</armor>
+         <armor>Thaumcraft:ItemLeggingsVoidFortress</armor>
+         <armor>Thaumcraft:ItemBootsVoidFortress</armor>
+      </armors>
+   </page>
+
+</book>

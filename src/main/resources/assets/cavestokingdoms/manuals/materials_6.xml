@@ -1,0 +1,351 @@
+<?xml version="1.0"?>
+
+<book>
+ <page type="intro">
+  <text>Materials - Terrestrial Weaponry
+   A Guide to Material Properties
+
+   By Ayumu Nagasawa</text>
+ </page>
+
+ <page type="text">
+  <text>The previous materials books may help with classical tinker tools, but new advances by Dr. Boni have necessitated an additional volume due to the additional material statistics introduced by tinker bows and arrows. This volume lists the same materials as volumes one and two of Materials, but only lists statistics useful for ranged tinker weapons.</text>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Wood</mat>
+  <icon>minecraft:planks</icon>
+  <mat>Stone</mat>
+  <icon>minecraft:cobblestone</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Flint</mat>
+  <icon>minecraft:flint</icon>
+  <mat>Paper</mat>
+  <icon>minecraft:paper</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Slime</mat>
+  <icon>TConstruct:materials:1</icon>
+  <mat>Bone</mat>
+  <icon>minecraft:bone</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Copper</mat>
+  <icon>TConstruct:materials:9</icon>
+  <mat>Tin</mat>
+  <icon>TConstruct:materials:10</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Bronze</mat>
+  <icon>TConstruct:materials:13</icon>
+  <mat>Iron</mat>
+  <icon>minecraft:iron_ingot</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Nickel</mat>
+  <icon>ThermalFoundation:material:68</icon>
+  <mat>Invar</mat>
+  <icon>ThermalFoundation:material:72</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Lead</mat>
+  <icon>ThermalFoundation:material:67</icon>
+  <mat>Steel</mat>
+  <icon>TConstruct:materials:16</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Silver</mat>
+  <icon>ThermalFoundation:material:66</icon>
+  <mat>Platinum</mat>
+  <icon>ThermalFoundation:material:69</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Cardboard</mat>
+  <icon>betterstorage:cardboardSheet</icon>
+  <mat>Glue</mat>
+  <icon>TConstruct:materials:36</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Ruby</mat>
+  <icon>customnpcs:npcRuby</icon>
+  <mat>Peridot</mat>
+  <icon>ExtraTiC:chunk:165</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Sapphire</mat>
+  <icon>customnpcs:npcSaphire</icon>
+  <mat>Amethyst</mat>
+  <icon>customnpcs:npcAmethyst</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Bedrockium</mat>
+  <icon>ExtraUtilities:bedrockiumIngot</icon>
+  <mat>Enderium</mat>
+  <icon>ThermalFoundation:material:76</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Signalum</mat>
+  <icon>ThermalFoundation:material:74</icon>
+  <mat>Lumium</mat>
+  <icon>ThermalFoundation:material:75</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Netherrack</mat>
+  <icon>minecraft:netherrack</icon>
+  <mat>Certus Quartz</mat>
+  <icon>appliedenergistics2:item.ItemMultiMaterial</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Nether Quartz</mat>
+  <icon>minecraft:quartz</icon>
+  <mat>Obsidian</mat>
+  <icon>minecraft:obsidian</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Ghostwood</mat>
+  <icon>Natura:planks:2</icon>
+  <mat>Darkwood</mat>
+  <icon>Natura:planks:11</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Fusewood</mat>
+  <icon>Natura:planks:12</icon>
+  <mat>Bloodwood</mat>
+  <icon>Natura:planks:4</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Cactus</mat>
+  <icon>minecraft:cactus</icon>
+  <mat>Plastic</mat>
+  <icon>MineFactoryReloaded:plastic.sheet:0</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>BlueSlime</mat>
+  <icon>TConstruct:materials:17</icon>
+  <mat>Pink Slime</mat>
+  <icon>MineFactoryReloaded:pinkslime:1</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Damascus Steel</mat>
+  <icon>Metallurgy:damascus.steel.ingot</icon>
+  <mat>Alumite</mat>
+  <icon>TConstruct:materials:15</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Cobalt</mat>
+  <icon>TConstruct:materials:3</icon>
+  <mat>Ardite</mat>
+  <icon>TConstruct:materials:4</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Manyullyn</mat>
+  <icon>TConstruct:materials:5</icon>
+  <mat>Brass</mat>
+  <icon>Metallurgy:brass.ingot</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Angmallen</mat>
+  <icon>Metallurgy:angmallen.ingot</icon>
+  <mat>Hepatizon</mat>
+  <icon>Metallurgy:hepatizon.ingot</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Electrum</mat>
+  <icon>Metallurgy:electrum.ingot</icon>
+  <mat>Pokefennium</mat>
+  <icon>ExtraTiC:funStuffIngot:1</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Fairy</mat>
+  <icon>ExtraTiC:funStuffIngot</icon>
+  <mat>PigIron</mat>
+  <icon>TConstruct:materials:34</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Prometheum</mat>
+  <icon>Metallurgy:prometheum.ingot</icon>
+  <mat>Deep Iron</mat>
+  <icon>Metallurgy:deep.iron.ingot</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Black Steel</mat>
+  <icon>Metallurgy:black.steel.ingot</icon>
+  <mat>Oureclase</mat>
+  <icon>Metallurgy:oureclase.ingot</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Thaumium</mat>
+  <icon>Thaumcraft:ItemResource:2</icon>
+  <desc0>Adds an extra modifier slot.</desc0>
+  <mat>Void Metal</mat>
+  <icon>Thaumcraft:ItemResource:16</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Mithril</mat>
+  <icon>Metallurgy:mithril.ingot</icon>
+  <mat>Haderoth</mat>
+  <icon>Metallurgy:haderoth.ingot</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Orichalcum</mat>
+  <icon>Metallurgy:orichalcum.ingot</icon>
+  <mat>Adamantine</mat>
+  <icon>Metallurgy:adamantine.ingot</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Atlarus</mat>
+  <icon>Metallurgy:atlarus.ingot</icon>
+  <mat>Tartarite</mat>
+  <icon>Metallurgy:tartarite.ingot</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Carmot</mat>
+  <icon>Metallurgy:carmot.ingot</icon>
+  <mat>Celenegil</mat>
+  <icon>Metallurgy:celenegil.ingot</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Astral Silver</mat>
+  <icon>Metallurgy:astral.silver.ingot</icon>
+  <mat>Quicksilver</mat>
+  <icon>Metallurgy:quicksilver.ingot</icon>
+ </page>
+
+
+ <page type="bowMaterialsPage">
+  <mat>Manasteel</mat>
+  <icon>Botania:manaResource:0</icon>
+  <mat>Terrasteel</mat>
+  <icon>Botania:manaResource:4</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Elementium</mat>
+  <icon>Botania:manaResource:7</icon>
+  <mat>Livingwood</mat>
+  <icon>Botania:manaResource:3</icon>
+ </page>
+
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Kalendrite</mat>
+  <icon>Metallurgy:kalendrite.ingot</icon>
+  <mat>Midasium</mat>
+  <icon>Metallurgy:midasium.ingot</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Ceruclase</mat>
+  <icon>Metallurgy:ceruclase.ingot</icon>
+  <mat>Vyroxeres</mat>
+  <icon>Metallurgy:vyroxeres.ingot</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Inolashite</mat>
+  <icon>Metallurgy:inolashite.ingot</icon>
+  <mat>Vulcanite</mat>
+  <icon>Metallurgy:vulcanite.ingot</icon>
+ </page>
+
+
+ <page type="bowMaterialsPage">
+  <mat>Sanguinite</mat>
+  <icon>Metallurgy:sanguinite.ingot</icon>
+  <mat>Ignatius</mat>
+  <icon>Metallurgy:ignatius.ingot</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Shadow Iron</mat>
+  <icon>Metallurgy:shadow.iron.ingot</icon>
+  <mat>Shadow Steel</mat>
+  <icon>Metallurgy:shadow.steel.ingot</icon>
+ </page>
+
+
+
+ <page type="bowMaterialsPage">
+  <mat>Amordrine</mat>
+  <icon>Metallurgy:amordrine.ingot</icon>
+  <mat>Eximite</mat>
+  <icon>Metallurgy:eximite.ingot</icon>
+ </page>
+
+ <page type="bowMaterialsPage">
+  <mat>Meutoite</mat>
+  <icon>Metallurgy:meutoite.ingot</icon>
+  <mat>Desichalkos</mat>
+  <icon>Metallurgy:desichalkos.ingot</icon>
+ </page>
+
+</book>

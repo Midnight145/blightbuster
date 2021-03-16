@@ -1,0 +1,535 @@
+<?xml version="1.0"?>
+
+<!-- This is going to be the ore guide book. -->
+
+<book>
+<page type="intro">
+<text>Mining and Resource Collection
+A guide to finding materials
+
+By Ayumu Nagasawa</text>
+</page>
+
+<page type="text">
+<text>This book contains statistics and information to help you find materials to use for tools. It is specific to this world and its unique distribution of ores, and includes helpful maps to help you know where to dig.
+
+To avoid confusing users, this book is intentionally incomplete. You will notice some pages are listed as being "locked". To unlock these pages, simply acquire one of the listed materials.</text>
+</page>
+
+    <page type="c2kMiningPage">
+        <title>Stone</title>
+        <min>0</min>
+        <max>240</max>
+        <minesAsLevel>0</minesAsLevel>
+        <location>all</location>
+        <ore>minecraft:stone</ore>
+        <text>All varieties of alien cobblestone can be crafted into regular cobblestone.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Gravel</title>
+        <min>0</min>
+        <max>64</max>
+        <minesAsLevel>1</minesAsLevel>
+        <location>chunkerror</location>
+        <ore>minecraft:gravel</ore>
+        <text>Uncommmon in desert, much rarer in swamps. "Mines as" level represents flint.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>End Stone</title>
+        <min>0</min>
+        <max>90</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>eerie</location>
+        <ore>minecraft:end_stone</ore>
+        <text>Also found under any miniature eerie biomes you may find.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Netherrack</title>
+        <min>0</min>
+        <max>90</max>
+        <minesAsLevel>1</minesAsLevel>
+        <location>nether</location>
+        <ore>minecraft:netherrack</ore>
+        <text>This world doesn't have a nether, so netherrack is only available as indicated above.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Shards</title>
+        <min>10</min>
+        <max>50</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>all</location>
+        <ore>Thaumcraft:blockCustomOre:2</ore>
+        <text>Most are found between 20 and 40. Yellow shards are found from 30-50; green shards from 10-30.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Coal</title>
+        <min>0</min>
+        <max>128</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>all</location>
+        <ore>minecraft:coal_ore</ore>
+        <text>As plentiful as you would expect.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Copper</title>
+        <min>7</min>
+        <max>60</max>
+        <minesAsLevel>2</minesAsLevel>
+        <location>cache</location>
+        <ore>Metallurgy:base.ore</ore>
+        <text>To unlock cache locations, complete quests in "The geologist" questline.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Prometheum</title>
+        <min>20</min>
+        <max>50</max>
+        <minesAsLevel>2</minesAsLevel>
+        <location>plains</location>
+        <ore>Metallurgy:fantasy.ore</ore>
+        <text>Can substitute for copper as a "soft metal"</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Deep Iron</title>
+        <min>4</min>
+        <max>16</max>
+        <minesAsLevel>2</minesAsLevel>
+        <location>mountains</location>
+        <ore>Metallurgy:fantasy.ore:1</ore>
+        <text>Can substitute for copper as a "Soft metal"</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Zinc</title>
+        <min>13</min>
+        <max>128</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>mountains</location>
+        <ore>Metallurgy:precious.ore</ore>
+        <text>Used to make brass.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Certus Quartz</title>
+        <min>8</min>
+        <max>50</max>
+        <minesAsLevel>2</minesAsLevel>
+        <location>alldesert</location>
+        <ore>appliedenergistics2:tile.OreQuartz</ore>
+        <text>Can mine anything copper can. Info above also applies to charged quartz.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Iron</title>
+        <min>0</min>
+        <max>64</max>
+        <minesAsLevel>3</minesAsLevel>
+        <location>all</location>
+        <ore>minecraft:iron_ore</ore>
+        <text>Cannot be used to make tools without a smeltery!</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Nether Quartz</title>
+        <min>8</min>
+        <max>50</max>
+        <minesAsLevel>3</minesAsLevel>
+        <location>desert</location>
+        <ore>minecraft:quartz_ore</ore>
+        <text>Can mine anything Iron could.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Oureclase</title>
+        <min>10</min>
+        <max>40</max>
+        <minesAsLevel>3</minesAsLevel>
+        <location>swamps</location>
+        <ore>Metallurgy:fantasy.ore:4</ore>
+        <text>Can substitute for iron or bronze as a "hard metal".</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Shadow Iron</title>
+        <min>38</min>
+        <max>53</max>
+        <minesAsLevel>3</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:nether.ore:1</ore>
+        <text>Could probably substitute for iron or bronze as a "hard metal" if it weren't so rare.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Tin</title>
+        <min>7</min>
+        <max>60</max>
+        <minesAsLevel>0</minesAsLevel>
+        <location>cache</location>
+        <ore>Metallurgy:base.ore:1</ore>
+        <text>To unlock cache locations, complete quests in "The geologist" questline.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Infuscolium</title>
+        <min>30</min>
+        <max>60</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>magic</location>
+        <ore>Metallurgy:fantasy.ore:2</ore>
+        <text>Also found under those tiny eerie biomes and directly under most scout locations.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Ignatius</title>
+        <min>42</min>
+        <max>57</max>
+        <minesAsLevel>3</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:nether.ore</ore>
+        <text>Its dust can be used as a fuel source.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Lapis</title>
+        <min>0</min>
+        <max>32</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>all</location>
+        <ore>minecraft:lapis_ore</ore>
+        <text>Not found in a gaussian distribution on this planet.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Bitumen</title>
+        <min>13</min>
+        <max>128</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>swamps</location>
+        <ore>Metallurgy:utility.ore:4</ore>
+        <text>Can be made into rubber.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Magnesium</title>
+        <min>13</min>
+        <max>128</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>cold</location>
+        <ore>Metallurgy:utility.ore:3</ore>
+        <text>Used in fertilizer.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Phosphorite</title>
+        <min>13</min>
+        <max>128</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:utility.ore:1</ore>
+        <text>Used in fertilizer.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Saltpeter</title>
+        <min>13</min>
+        <max>128</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>swamps</location>
+        <ore>Metallurgy:utility.ore:2</ore>
+        <text>Used in making cryotheum.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Sulphur</title>
+        <min>13</min>
+        <max>128</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:utility.ore</ore>
+        <text>Can also be obtained by pulverizing coal.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Potash</title>
+        <min>13</min>
+        <max>128</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>ocean</location>
+        <ore>Metallurgy:utility.ore:5</ore>
+        <text>Used in fertilizer and as an apple flavoring.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Aluminum</title>
+        <min>7</min>
+        <max>60</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>cache</location>
+        <ore>TConstruct:SearedBrick:5</ore>
+        <text>Notably rare. Alloyed with copper, it can substitute for gold when making casts in a smeltery.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Silver</title>
+        <min>7</min>
+        <max>60</max>
+        <minesAsLevel>3</minesAsLevel>
+        <location>cache</location>
+        <ore>Metallurgy:precious.ore:1</ore>
+        <text>To unlock cache locations, complete quests in "The geologist" questline.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Gold</title>
+        <min>0</min>
+        <max>32</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>all</location>
+        <ore>minecraft:gold_ore</ore>
+        <text>As plentiful as one would expect.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Redstone</title>
+        <min>0</min>
+        <max>16</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>all</location>
+        <ore>minecraft:redstone_ore</ore>
+        <text>As plentiful as one would expect.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Manganese</title>
+        <min>35</min>
+        <max>50</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>cold</location>
+        <ore>Metallurgy:base.ore:2</ore>
+        <text>Used to make steel in a smeltery, bypassing the need for an induction smelter.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Lead</title>
+        <min>7</min>
+        <max>60</max>
+        <minesAsLevel>1</minesAsLevel>
+        <location>cache</location>
+        <ore>ThermalFoundation:Ore:3</ore>
+        <text>To unlock cache locations, complete quests in "The geologist" questline.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Nickel</title>
+        <min>7</min>
+        <max>60</max>
+        <minesAsLevel>4</minesAsLevel>
+        <location>cache</location>
+        <ore>ThermalFoundation:Ore:4</ore>
+        <text>To unlock cache locations, complete quests in "The geologist" questline.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Lemurite</title>
+        <min>34</min>
+        <max>49</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:nether.ore:2</ore>
+        <text>Alloys with Shadow Iron</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Midasium</title>
+        <min>30</min>
+        <max>45</max>
+        <minesAsLevel>4</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:nether.ore:3</ore>
+        <text>Its dust can somehow turn any other metal to gold.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Diamond</title>
+        <min>0</min>
+        <max>16</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>all</location>
+        <ore>minecraft:diamond_ore</ore>
+        <text>Remember: Cannot be used for tools or armor!</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Emerald</title>
+        <min>13</min>
+        <max>128</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>mountains</location>
+        <ore>minecraft:emerald_ore</ore>
+        <text>Tainted villagers will likely not be interested in trading with you.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Astral Silver</title>
+        <min>5</min>
+        <max>30</max>
+        <minesAsLevel>5</minesAsLevel>
+        <location>magic</location>
+        <ore>Metallurgy:fantasy.ore:5</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Platinum</title>
+        <min>7</min>
+        <max>60</max>
+        <minesAsLevel>5</minesAsLevel>
+        <location>cache</location>
+        <ore>Metallurgy:precious.ore:2</ore>
+        <text>Cache locations are unlocked through the "Geologist" questline.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Cinnabar</title>
+        <min>20</min>
+        <max>40</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>all</location>
+        <ore>Thaumcraft:blockCustomOre</ore>
+        <text>Infusing it with cryotheum can lead to tripled ore yields.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Ardite</title>
+        <min>46</min>
+        <max>61</max>
+        <minesAsLevel>5</minesAsLevel>
+        <location>nether</location>
+        <ore>TConstruct:SearedBrick:2</ore>
+        <text>Note the height level: This ore is close to the surface!</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Vyroxeres</title>
+        <min>26</min>
+        <max>41</max>
+        <minesAsLevel>5</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:nether.ore:4</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Ceruclase</title>
+        <min>22</min>
+        <max>27</max>
+        <minesAsLevel>5</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:nether.ore:5</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Alduorite</title>
+        <min>18</min>
+        <max>33</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:nether.ore:6</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Rubracium</title>
+        <min>10</min>
+        <max>35</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>desert</location>
+        <ore>Metallurgy:fantasy.ore:8</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Mithril</title>
+        <min>16</min>
+        <max>32</max>
+        <minesAsLevel>6</minesAsLevel>
+        <location>mountains</location>
+        <ore>Metallurgy:fantasy.ore:7</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Carmot</title>
+        <min>10</min>
+        <max>50</max>
+        <minesAsLevel>6</minesAsLevel>
+        <location>forests</location>
+        <ore>Metallurgy:fantasy.ore:6</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Eximite</title>
+        <min>5</min>
+        <max>80</max>
+        <minesAsLevel>6</minesAsLevel>
+        <location>eerie</location>
+        <ore>Metallurgy:ender.ore</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Meutoite</title>
+        <min>5</min>
+        <max>80</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>eerie</location>
+        <ore>Metallurgy:ender.ore:1</ore>
+        <text>Can be made into ender pearls</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Cobalt</title>
+        <min>50</min>
+        <max>65</max>
+        <minesAsLevel>6</minesAsLevel>
+        <location>nether</location>
+        <ore>TConstruct:SearedBrick:1</ore>
+        <text>Note the height level: This ore is close to the surface!</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Kalendrite</title>
+        <min>14</min>
+        <max>29</max>
+        <minesAsLevel>6</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:nether.ore:7</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Obsidian</title>
+        <min>9</min>
+        <max>10</max>
+        <minesAsLevel>4</minesAsLevel>
+        <location>all</location>
+        <ore>minecraft:obsidian</ore>
+        <text>It's probably easiest to make this yourself.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Yellorite</title>
+        <min>5</min>
+        <max>30</max>
+        <minesAsLevel>-1</minesAsLevel>
+        <location>cache</location>
+        <ore>BigReactors:YelloriteOre</ore>
+        <text>Nuclear fuel is indeed found naturally on the planet!</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Orichalcum</title>
+        <min>4</min>
+        <max>20</max>
+        <minesAsLevel>7</minesAsLevel>
+        <location>ocean</location>
+        <ore>Metallurgy:fantasy.ore:11</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Vulcanite</title>
+        <min>10</min>
+        <max>25</max>
+        <minesAsLevel>7</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:nether.ore:8</ore>
+        <text>Can be made into blaze rods.</text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Adamantine</title>
+        <min>5</min>
+        <max>16</max>
+        <minesAsLevel>8</minesAsLevel>
+        <location>mountains</location>
+        <ore>Metallurgy:fantasy.ore:13</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Sanguinite</title>
+        <min>6</min>
+        <max>21</max>
+        <minesAsLevel>8</minesAsLevel>
+        <location>nether</location>
+        <ore>Metallurgy:nether.ore:9</ore>
+        <text></text>
+    </page>
+    <page type="c2kMiningPage">
+        <title>Atlarus</title>
+        <min>20</min>
+        <max>25</max>
+        <minesAsLevel>8</minesAsLevel>
+        <location>mushroom</location>
+        <ore>Metallurgy:fantasy.ore:14</ore>
+        <text>Also found very rarely directly under scout locations.</text>
+    </page>
+
+
+
+</book>

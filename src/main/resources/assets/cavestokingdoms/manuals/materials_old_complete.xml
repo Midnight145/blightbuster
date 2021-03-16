@@ -1,0 +1,2129 @@
+<?xml version="1.0"?>
+
+<!-- This is the old "Complete" book. -->
+
+<book>
+<page type="intro">
+<text>Materials - The Complete Edition
+A Guide to Material Properties
+
+By Ayumu Nagasawa</text>
+</page>
+
+<page type="text">
+<text>This book contains statistics and information on all known materials. Is is the consummation of the work begun with previous materials guides.</text>
+</page>
+
+<page type="sectionpage">
+<title>Material Traits</title>
+<text>Some materials have traits that augment their natural uses.
+
+- Reinforced: 10% chance per level of not using durability
+- Stonebound: The tool mines faster as it wears out, but does less damage
+- Jagged: The tool does more damage as it wears out, but mines slower
+- Writable: One extra modifier per piece
+- Tasty: Sometimes drops food items</text>
+</page>
+
+<page type="sectionpage">
+<title>Material Statistics:</title>
+<text>Materials have more possible attributes than 
+when Skyla wrote his seminal work.
+
+- Harvest Difficulty: What tool level is needed 
+  to mine it.
+- Harvest level: The maximum hardness a tool
+  can mine.
+- Durability: How many times the material can 
+  be used before breaking.
+- Handle Mod: Tools with this as a handle 
+  multiply their durability by this amount.
+- Mining Speed: How quickly the tool mines 
+  materials it is effective against.
+- Attack Damage: How much extra damage this 
+  tool does when attacking
+- XP Required: How much XP this material 
+  requires to level up.</text>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Wood</title>
+<icon>minecraft:planks</icon>
+<ore>minecraft:log</ore>
+<text>The lowliest of tool materials. Decent as a handle and levels pretty fast, but otherwise completely sub-par.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Wood</title>
+<tools type = "2">
+   <icon>minecraft:wooden_pickaxe</icon>
+   <icon>minecraft:wooden_shovel</icon>
+   <icon>minecraft:wooden_axe</icon>
+   <icon>minecraft:wooden_hoe</icon>
+   <icon>minecraft:wooden_sword</icon>
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "2">
+   <icon>TConstruct:helmetWood</icon>
+   <icon>TConstruct:chestplateWood</icon>
+   <icon>TConstruct:leggingsWood</icon>
+   <icon>TConstruct:bootsWood</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Stone</title>
+<icon>minecraft:cobblestone</icon>
+<ore>minecraft:stone</ore>
+<text>A basic, terrestrial, low-tech tool material. Levels and mines slowly, can harvest few types of materials, and is bad as a handle.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Stone</title>
+<tools type = "2">
+   <icon>minecraft:stone_pickaxe</icon>
+   <icon>minecraft:stone_shovel</icon>
+   <icon>minecraft:stone_axe</icon>
+   <icon>minecraft:stone_hoe</icon>
+   <icon>minecraft:stone_sword</icon>
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Flint</title>
+<icon>minecraft:flint</icon>
+<ore>minecraft:gravel</ore>
+<text>More durable than stone, but worse as a handle. Can harvest more materials than stone.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Flint</title>
+<tools type = "0">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Paper</title>
+<icon>minecraft:paper</icon>
+<ore></ore>
+<text>A very weak material. It's only redeeming feature is its ability to grant items extra modifier slots.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Paper</title>
+<tools type = "0">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Slime</title>
+<icon>TConstruct:materials:1</icon>
+<ore></ore>
+<text>Soft and Springy. It seems to last a long time.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Slime</title>
+<tools type = "0">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Bone</title>
+<icon>minecraft:bone</icon>
+<ore></ore>
+<text>Less durable than stone, but mines and levels much faster. Also great as a handle.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Bone</title>
+<tools type = "0">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Copper</title>
+<icon>TConstruct:materials:9</icon>
+<ore>Metallurgy:base.ore:0</ore>
+<text>A common terrestrial metal; extremely rare on this planet. Inferior to iron in every way, and levels quite slowly to boot.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Copper</title>
+<tools type = "1">
+   <icon>Metallurgy:copper.pickaxe</icon>
+   <icon>Metallurgy:copper.shovel</icon>
+   <icon>Metallurgy:copper.axe</icon>
+   <icon>Metallurgy:copper.hoe</icon>
+   <icon>Metallurgy:copper.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.copper.helmet</icon>
+   <icon>Metallurgy:metallurgy.copper.chestplate</icon>
+   <icon>Metallurgy:metallurgy.copper.leggings</icon>
+   <icon>Metallurgy:metallurgy.copper.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Tin</title>
+<icon>TConstruct:materials:10</icon>
+<ore>Metallurgy:base.ore:1</ore>
+<text>A tech metal rare on this world. Useless for tools, but used in tech and in making bronze.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Tin</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Bronze</title>
+<icon>TConstruct:materials:13</icon>
+<ore></ore>
+<text>An alloyed metal slightly superior to iron. A good stepping stone to obtaining gold.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Bronze</title>
+<tools type = "1">
+   <icon>Metallurgy:bronze.pickaxe</icon>
+   <icon>Metallurgy:bronze.shovel</icon>
+   <icon>Metallurgy:bronze.axe</icon>
+   <icon>Metallurgy:bronze.hoe</icon>
+   <icon>Metallurgy:bronze.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.bronze.helmet</icon>
+   <icon>Metallurgy:metallurgy.bronze.chestplate</icon>
+   <icon>Metallurgy:metallurgy.bronze.leggings</icon>
+   <icon>Metallurgy:metallurgy.bronze.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Iron</title>
+<icon>minecraft:iron_ingot</icon>
+<ore>minecraft:iron_ore</ore>
+<text>The base by which all other metals are compared. Good all-around terrestrial metal.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Iron</title>
+<tools type = "2">
+   <icon>minecraft:iron_pickaxe</icon>
+   <icon>minecraft:iron_shovel</icon>
+   <icon>minecraft:iron_axe</icon>
+   <icon>minecraft:iron_hoe</icon>
+   <icon>minecraft:iron_sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>minecraft:iron_helmet</icon>
+   <icon>minecraft:iron_chestplate</icon>
+   <icon>minecraft:iron_leggings</icon>
+   <icon>minecraft:iron_boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Nickel</title>
+<icon>ThermalFoundation:material:68</icon>
+<ore>ThermalFoundation:Ore:4</ore>
+<text>Informally known as "Ferrous". A brittle but hard tech metal. High mining level and mining speed, but prone to breakage.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Nickel</title>
+<tools type = "0">
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Invar</title>
+<icon>ThermalFoundation:material:72</icon>
+<ore></ore>
+<text>A tech alloy that does not change size when heated. Better than iron, but worse than steel. High reinforced level, but hard to level up.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Invar</title>
+<tools type = "1">
+   <icon>ThermalExpansion:tool.swordInvar</icon>
+   <icon>ThermalExpansion:tool.shovelInvar</icon>
+   <icon>ThermalExpansion:tool.pickaxeInvar</icon>
+   <icon>ThermalExpansion:tool.axeInvar</icon>
+   <icon>ThermalExpansion:tool.hoeInvar</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>ThermalExpansion:armor.helmetInvar</icon>
+   <icon>ThermalExpansion:armor.plateInvar</icon>
+   <icon>ThermalExpansion:armor.legsInvar</icon>
+   <icon>ThermalExpansion:armor.bootsInvar</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Lead</title>
+<icon>ThermalFoundation:material:67</icon>
+<ore>ThermalFoundation:Ore:3</ore>
+<text>A soft, heavy tech metal. Abnormally low mining level and mining speed, abnormally high durability.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Lead</title>
+<tools type = "0">
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Manganese</title>
+<icon>Metallurgy:manganese.ingot</icon>
+<ore>Metallurgy:base.ore:2</ore>
+<text>A hard but exceedingly brittle metal. Useless for tools, but essential for steel production.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Manganese</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Steel</title>
+<icon>TConstruct:materials:16</icon>
+<ore></ore>
+<text>A higher tech version of iron, better in every way.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Steel</title>
+<tools type = "1">
+   <icon>Metallurgy:steel.pickaxe</icon>
+   <icon>Metallurgy:steel.shovel</icon>
+   <icon>Metallurgy:steel.axe</icon>
+   <icon>Metallurgy:steel.hoe</icon>
+   <icon>Metallurgy:steel.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.steel.helmet</icon>
+   <icon>Metallurgy:metallurgy.steel.chestplate</icon>
+   <icon>Metallurgy:metallurgy.steel.leggings</icon>
+   <icon>Metallurgy:metallurgy.steel.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Silver</title>
+<icon>ThermalFoundation:material:66</icon>
+<ore>Metallurgy:precious.ore:1</ore>
+<text>A weak terrestrial metal better suited for ornamentation than tools. Better than brass in every way.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Silver</title>
+<tools type = "1">
+   <icon>Metallurgy:silver.pickaxe</icon>
+   <icon>Metallurgy:silver.shovel</icon>
+   <icon>Metallurgy:silver.axe</icon>
+   <icon>Metallurgy:silver.hoe</icon>
+   <icon>Metallurgy:silver.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.silver.helmet</icon>
+   <icon>Metallurgy:metallurgy.silver.chestplate</icon>
+   <icon>Metallurgy:metallurgy.silver.leggings</icon>
+   <icon>Metallurgy:metallurgy.silver.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Gold</title>
+<icon>minecraft:gold_ingot</icon>
+<ore>minecraft:gold_ore</ore>
+<text>A soft, precious metal mostly used in recipes.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Gold</title>
+<tools type = "2">
+   <icon>minecraft:golden_pickaxe</icon>
+   <icon>minecraft:golden_shovel</icon>
+   <icon>minecraft:golden_axe</icon>
+   <icon>minecraft:golden_hoe</icon>
+   <icon>minecraft:golden_sword</icon>
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "1">
+   <icon>minecraft:golden_helmet</icon>
+   <icon>minecraft:golden_chestplate</icon>
+   <icon>minecraft:golden_leggings</icon>
+   <icon>minecraft:golden_boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Platinum</title>
+<icon>ThermalFoundation:material:69</icon>
+<ore>Metallurgy:precious.ore:2</ore>
+<text>A weak terrestrial alloy better suited for ornamentation than tools. Like electrum, but mines faster and levels nearly twice as quickly. High harvest level.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Platinum</title>
+<tools type = "1">
+   <icon>Metallurgy:platinum.pickaxe</icon>
+   <icon>Metallurgy:platinum.shovel</icon>
+   <icon>Metallurgy:platinum.axe</icon>
+   <icon>Metallurgy:platinum.hoe</icon>
+   <icon>Metallurgy:platinum.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.platinum.helmet</icon>
+   <icon>Metallurgy:metallurgy.platinum.chestplate</icon>
+   <icon>Metallurgy:metallurgy.platinum.leggings</icon>
+   <icon>Metallurgy:metallurgy.platinum.boots</icon>
+</armor>
+</page>
+
+   <page type="extMaterialPage">
+      <title>Cardboard</title>
+      <icon>betterstorage:cardboardSheet</icon>
+      <ore></ore>
+      <text>Better than paper in every way, except you can't write on it. Which basically makes it worse in every way.</text>
+   </page>
+
+   <page type = "extMaterialUsePage">
+      <title>Cardboard</title>
+      <tools type = "1">
+         <icon>betterstorage:cardboardPickaxe</icon>
+         <icon>betterstorage:cardboardShovel</icon>
+         <icon>betterstorage:cardboardAxe</icon>
+         <icon>betterstorage:cardboardHoe</icon>
+         <icon>betterstorage:cardboardSword</icon>
+      </tools>
+      <mods type = "1">
+      </mods>
+      <armor type = "1">
+         <icon>betterstorage:cardboardHelmet</icon>
+         <icon>betterstorage:cardboardChestplate</icon>
+         <icon>betterstorage:cardboardLeggings</icon>
+         <icon>betterstorage:cardboardBoots</icon>
+      </armor>
+   </page>
+
+   <page type="extMaterialPage">
+      <title>Glue</title>
+      <icon>TConstruct:materials:36</icon>
+      <ore></ore>
+      <text>Bindings made of glue help tools hold together. Anything else made of glue is a really bad idea.</text>
+   </page>
+
+   <page type = "extMaterialUsePage">
+      <title>Glue</title>
+      <tools type = "0">
+      </tools>
+      <mods type = "1">
+      </mods>
+      <armor type = "0">
+      </armor>
+   </page>
+
+   <page type="extMaterialPage">
+      <title>Ruby</title>
+      <icon>customnpcs:npcRuby</icon>
+      <ore></ore>
+      <text>A rare gem. Unusually high attack damage.</text>
+   </page>
+
+   <page type = "extMaterialUsePage">
+      <title>Ruby</title>
+      <tools type = "0">
+      </tools>
+      <mods type = "1">
+      </mods>
+      <armor type = "0">
+      </armor>
+   </page>
+
+   <page type="extMaterialPage">
+      <title>Peridot</title>
+      <icon>ExtraTiC:chunk:165</icon>
+      <ore></ore>
+      <text>A rare gem. Unusually high Mining Speed</text>
+   </page>
+
+   <page type = "extMaterialUsePage">
+      <title>Peridot</title>
+      <tools type = "0">
+      </tools>
+      <mods type = "1">
+      </mods>
+      <armor type = "0">
+      </armor>
+   </page>
+
+   <page type="extMaterialPage">
+      <title>Sapphire</title>
+      <icon>customnpcs:npcSaphire</icon>
+      <ore></ore>
+      <text>A rare gem. Unusually high durability.</text>
+   </page>
+
+   <page type = "extMaterialUsePage">
+      <title>Sapphire</title>
+      <tools type = "0">
+      </tools>
+      <mods type = "1">
+      </mods>
+      <armor type = "0">
+      </armor>
+   </page>
+
+   <page type="extMaterialPage">
+      <title>Amethyst</title>
+      <icon>customnpcs:npcAmethyst</icon>
+      <ore></ore>
+      <text>A gem like diamond but used to make modular tools. Tools made with Amethyst are as good as diamond historically was.</text>
+   </page>
+
+   <page type = "extMaterialUsePage">
+      <title>Amethyst</title>
+      <tools type = "0">
+      </tools>
+      <mods type = "1">
+      </mods>
+      <armor type = "0">
+      </armor>
+   </page>
+
+    <page type="extMaterialPage">
+        <title>Bedrockium</title>
+        <icon>ExtraUtilities:bedrockiumIngot</icon>
+        <ore></ore>
+        <text>An amazingly tough metal. That's all that's good about it.</text>
+    </page>
+
+    <page type = "extMaterialUsePage">
+        <title>Bedrockium</title>
+        <tools type = "0">
+        </tools>
+        <mods type = "2">
+        </mods>
+        <armor type = "0">
+        </armor>
+    </page>
+
+    <page type="extMaterialPage">
+        <title>Enderium</title>
+        <icon>ThermalFoundation:material:76</icon>
+        <ore></ore>
+        <text>A soft, pulsating alloy made from ender pearls. Takes a fantastically sharp edge... but has a hard time keeping it.</text>
+    </page>
+
+    <page type = "extMaterialUsePage">
+        <title>Enderium</title>
+        <tools type = "0">
+        </tools>
+        <mods type = "2">
+        </mods>
+        <armor type = "0">
+        </armor>
+    </page>
+
+    <page type="extMaterialPage">
+        <title>Signalum</title>
+        <icon>ThermalFoundation:material:74</icon>
+        <ore></ore>
+        <text>An artificial alloy made from copper. Known to conduct redstone quite well. Like copper, but twice as durable and levels twice as fast.</text>
+    </page>
+
+    <page type = "extMaterialUsePage">
+        <title>Signalum</title>
+        <tools type = "0">
+        </tools>
+        <mods type = "2">
+        </mods>
+        <armor type = "0">
+        </armor>
+    </page>
+
+    <page type="extMaterialPage">
+        <title>Lumium</title>
+        <icon>ThermalFoundation:material:75</icon>
+        <ore></ore>
+        <text>A synthetic, glowing metal not normally used in tools. Levels extremely fast, but...</text>
+    </page>
+
+    <page type = "extMaterialUsePage">
+        <title>Lumium</title>
+        <tools type = "0">
+        </tools>
+        <mods type = "2">
+        </mods>
+        <armor type = "0">
+        </armor>
+    </page>
+
+<page type="extMaterialPage">
+<title>Prometheum</title>
+<icon>Metallurgy:prometheum.ingot</icon>
+<ore>Metallurgy:fantasy.ore:0</ore>
+<text>A rather soft alien metal. Mines slowly, but is more durable than iron and levels up more quickly.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Prometheum</title>
+<tools type = "1">
+   <icon>Metallurgy:prometheum.pickaxe</icon>
+   <icon>Metallurgy:prometheum.shovel</icon>
+   <icon>Metallurgy:prometheum.axe</icon>
+   <icon>Metallurgy:prometheum.hoe</icon>
+   <icon>Metallurgy:prometheum.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.prometheum.helmet</icon>
+   <icon>Metallurgy:metallurgy.prometheum.chestplate</icon>
+   <icon>Metallurgy:metallurgy.prometheum.leggings</icon>
+   <icon>Metallurgy:metallurgy.prometheum.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Deep Iron</title>
+<icon>Metallurgy:deep.iron.ingot</icon>
+<ore>Metallurgy:fantasy.ore:1</ore>
+<text>An alien variant of iron. Softer, weaker, and slower but it levels up much more quickly.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Deep Iron</title>
+<tools type = "1">
+   <icon>Metallurgy:deep.iron.pickaxe</icon>
+   <icon>Metallurgy:deep.iron.shovel</icon>
+   <icon>Metallurgy:deep.iron.axe</icon>
+   <icon>Metallurgy:deep.iron.hoe</icon>
+   <icon>Metallurgy:deep.iron.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.deep.iron.helmet</icon>
+   <icon>Metallurgy:metallurgy.deep.iron.chestplate</icon>
+   <icon>Metallurgy:metallurgy.deep.iron.leggings</icon>
+   <icon>Metallurgy:metallurgy.deep.iron.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Infuscolium</title>
+<icon>Metallurgy:infuscolium.ingot</icon>
+<ore>Metallurgy:fantasy.ore:2</ore>
+<text>A metal used to "infuse" deep iron into black steel.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Infuscolium</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Black Steel</title>
+<icon>Metallurgy:black.steel.ingot</icon>
+<ore></ore>
+<text>An alien variant of steel. Weaker, slower, but far easier to level up than terrestrial steel.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Black Steel</title>
+<tools type = "1">
+   <icon>Metallurgy:black.steel.pickaxe</icon>
+   <icon>Metallurgy:black.steel.shovel</icon>
+   <icon>Metallurgy:black.steel.axe</icon>
+   <icon>Metallurgy:black.steel.hoe</icon>
+   <icon>Metallurgy:black.steel.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.black.steel.helmet</icon>
+   <icon>Metallurgy:metallurgy.black.steel.chestplate</icon>
+   <icon>Metallurgy:metallurgy.black.steel.leggings</icon>
+   <icon>Metallurgy:metallurgy.black.steel.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Oureclase</title>
+<icon>Metallurgy:oureclase.ingot</icon>
+<ore>Metallurgy:fantasy.ore:4</ore>
+<text>A mediocre alien metal. Can mine everything that bronze can, but is worse in every way than one: it levels up faster.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Oureclase</title>
+<tools type = "1">
+   <icon>Metallurgy:oureclase.pickaxe</icon>
+   <icon>Metallurgy:oureclase.shovel</icon>
+   <icon>Metallurgy:oureclase.axe</icon>
+   <icon>Metallurgy:oureclase.hoe</icon>
+   <icon>Metallurgy:oureclase.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.oureclase.helmet</icon>
+   <icon>Metallurgy:metallurgy.oureclase.chestplate</icon>
+   <icon>Metallurgy:metallurgy.oureclase.leggings</icon>
+   <icon>Metallurgy:metallurgy.oureclase.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Thaumium</title>
+<icon>Thaumcraft:ItemResource:2</icon>
+<ore></ore>
+<text>An artificially created alien metal. Can mine everything that iron can, but is slower and less durable. Its best feature is that it allows for an extra modifier slot.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Thaumium</title>
+<tools type = "1">
+   <icon>Thaumcraft:ItemPickThaumium</icon>
+   <icon>Thaumcraft:ItemShovelThaumium</icon>
+   <icon>Thaumcraft:ItemAxeThaumium</icon>
+   <icon>Thaumcraft:ItemHoeThaumium</icon>
+   <icon>Thaumcraft:ItemSwordThaumium</icon>
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "1">
+   <icon>Thaumcraft:ItemHelmetThaumium</icon>
+   <icon>Thaumcraft:ItemChestplateThaumium</icon>
+   <icon>Thaumcraft:ItemLeggingsThaumium</icon>
+   <icon>Thaumcraft:ItemBootsThaumium</icon>
+</armor>
+</page>
+
+    <page type="extMaterialPage">
+        <title>Void Metal</title>
+        <icon>Thaumcraft:ItemResource:16</icon>
+        <ore></ore>
+        <text>A strange metal that repairs itself. Possibly biological in nature? Scientists seem uncomfortable working with it.</text>
+    </page>
+
+    <page type = "extMaterialUsePage">
+        <title>Void Metal</title>
+        <tools type = "1">
+            <icon>Thaumcraft:ItemPickVoid</icon>
+            <icon>Thaumcraft:ItemShovelVoid</icon>
+            <icon>Thaumcraft:ItemAxeVoid</icon>
+            <icon>Thaumcraft:ItemHoeVoid</icon>
+            <icon>Thaumcraft:ItemSwordVoid</icon>
+        </tools>
+        <mods type = "1">
+        </mods>
+        <armor type = "1">
+            <icon>Thaumcraft:ItemHelmetVoid</icon>
+            <icon>Thaumcraft:ItemChestplateVoid</icon>
+            <icon>Thaumcraft:ItemLeggingsVoid</icon>
+            <icon>Thaumcraft:ItemBootsVoid</icon>
+        </armor>
+    </page>
+
+
+<page type="extMaterialPage">
+<title>Mithril</title>
+<icon>Metallurgy:mithril.ingot</icon>
+<ore>Metallurgy:fantasy.ore:7</ore>
+<text>A good alien metal, roughly comparable to alumite. It's less reinforced, but mines more and levels up much faster.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Mithril</title>
+<tools type = "1">
+   <icon>Metallurgy:mithril.pickaxe</icon>
+   <icon>Metallurgy:mithril.shovel</icon>
+   <icon>Metallurgy:mithril.axe</icon>
+   <icon>Metallurgy:mithril.hoe</icon>
+   <icon>Metallurgy:mithril.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.mithril.helmet</icon>
+   <icon>Metallurgy:metallurgy.mithril.chestplate</icon>
+   <icon>Metallurgy:metallurgy.mithril.leggings</icon>
+   <icon>Metallurgy:metallurgy.mithril.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Rubracium</title>
+<icon>Metallurgy:rubracium.ingot</icon>
+<ore>Metallurgy:fantasy.ore:8</ore>
+<text>A ruby colored metal that "Braces" mithril, making haderoth.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Rubracium</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Haderoth</title>
+<icon>Metallurgy:haderoth.ingot</icon>
+<ore></ore>
+<text>Alien alloy of Mithril and Rubracium, and better in every way. Much more durable than alumite, but lacks the reinforced trait.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Haderoth</title>
+<tools type = "1">
+   <icon>Metallurgy:haderoth.pickaxe</icon>
+   <icon>Metallurgy:haderoth.shovel</icon>
+   <icon>Metallurgy:haderoth.axe</icon>
+   <icon>Metallurgy:haderoth.hoe</icon>
+   <icon>Metallurgy:haderoth.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.haderoth.helmet</icon>
+   <icon>Metallurgy:metallurgy.haderoth.chestplate</icon>
+   <icon>Metallurgy:metallurgy.haderoth.leggings</icon>
+   <icon>Metallurgy:metallurgy.haderoth.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Orichalcum</title>
+<icon>Metallurgy:orichalcum.ingot</icon>
+<ore>Metallurgy:fantasy.ore:11</ore>
+<text>A great alien metal better than any known terrestrial metal. Like Manyullyn, but slightly less durable and levels very slowly.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Orichalcum</title>
+<tools type = "1">
+   <icon>Metallurgy:orichalcum.pickaxe</icon>
+   <icon>Metallurgy:orichalcum.shovel</icon>
+   <icon>Metallurgy:orichalcum.axe</icon>
+   <icon>Metallurgy:orichalcum.hoe</icon>
+   <icon>Metallurgy:orichalcum.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.orichalcum.helmet</icon>
+   <icon>Metallurgy:metallurgy.orichalcum.chestplate</icon>
+   <icon>Metallurgy:metallurgy.orichalcum.leggings</icon>
+   <icon>Metallurgy:metallurgy.orichalcum.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Adamantine</title>
+<icon>Metallurgy:adamantine.ingot</icon>
+<ore>Metallurgy:fantasy.ore:13</ore>
+<text>An amazing alien metal better than any metal known to homeworld. Faster, harder, more reinforced, and faster levelling than manyullyn.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Adamantine</title>
+<tools type = "1">
+   <icon>Metallurgy:adamantine.pickaxe</icon>
+   <icon>Metallurgy:adamantine.shovel</icon>
+   <icon>Metallurgy:adamantine.axe</icon>
+   <icon>Metallurgy:adamantine.hoe</icon>
+   <icon>Metallurgy:adamantine.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.adamantine.helmet</icon>
+   <icon>Metallurgy:metallurgy.adamantine.chestplate</icon>
+   <icon>Metallurgy:metallurgy.adamantine.leggings</icon>
+   <icon>Metallurgy:metallurgy.adamantine.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Atlarus</title>
+<icon>Metallurgy:atlarus.ingot</icon>
+<ore>Metallurgy:fantasy.ore:14</ore>
+<text>An amazing alien metal better than any metal known to homeworld. Better than Adamantine in almost every way; it lacks the reinforced trait.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Atlarus</title>
+<tools type = "1">
+   <icon>Metallurgy:atlarus.pickaxe</icon>
+   <icon>Metallurgy:atlarus.shovel</icon>
+   <icon>Metallurgy:atlarus.axe</icon>
+   <icon>Metallurgy:atlarus.hoe</icon>
+   <icon>Metallurgy:atlarus.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.atlarus.helmet</icon>
+   <icon>Metallurgy:metallurgy.atlarus.chestplate</icon>
+   <icon>Metallurgy:metallurgy.atlarus.leggings</icon>
+   <icon>Metallurgy:metallurgy.atlarus.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Tartarite</title>
+<icon>Metallurgy:tartarite.ingot</icon>
+<ore></ore>
+<text>A combination of alien metals and homeworld's metallurgic knowledge. Widely considered to be the ultimate metal.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Tartarite</title>
+<tools type = "1">
+   <icon>Metallurgy:tartarite.pickaxe</icon>
+   <icon>Metallurgy:tartarite.shovel</icon>
+   <icon>Metallurgy:tartarite.axe</icon>
+   <icon>Metallurgy:tartarite.hoe</icon>
+   <icon>Metallurgy:tartarite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.tartarite.helmet</icon>
+   <icon>Metallurgy:metallurgy.tartarite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.tartarite.leggings</icon>
+   <icon>Metallurgy:metallurgy.tartarite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Carmot</title>
+<icon>Metallurgy:carmot.ingot</icon>
+<ore>Metallurgy:fantasy.ore:6</ore>
+<text>A highly enchantable alien metal. When making modular tools with it, they level very fast.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Carmot</title>
+<tools type = "1">
+   <icon>Metallurgy:carmot.pickaxe</icon>
+   <icon>Metallurgy:carmot.shovel</icon>
+   <icon>Metallurgy:carmot.axe</icon>
+   <icon>Metallurgy:carmot.hoe</icon>
+   <icon>Metallurgy:carmot.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.carmot.helmet</icon>
+   <icon>Metallurgy:metallurgy.carmot.chestplate</icon>
+   <icon>Metallurgy:metallurgy.carmot.leggings</icon>
+   <icon>Metallurgy:metallurgy.carmot.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Celenegil</title>
+<icon>Metallurgy:celenegil.ingot</icon>
+<ore></ore>
+<text>A amazingly enchantable alien alloy. The most enchantable thing known to man. Levels up five times as quickly as iron!</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Celenegil</title>
+<tools type = "1">
+   <icon>Metallurgy:celenegil.pickaxe</icon>
+   <icon>Metallurgy:celenegil.shovel</icon>
+   <icon>Metallurgy:celenegil.axe</icon>
+   <icon>Metallurgy:celenegil.hoe</icon>
+   <icon>Metallurgy:celenegil.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.celenegil.helmet</icon>
+   <icon>Metallurgy:metallurgy.celenegil.chestplate</icon>
+   <icon>Metallurgy:metallurgy.celenegil.leggings</icon>
+   <icon>Metallurgy:metallurgy.celenegil.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Astral Silver</title>
+<icon>Metallurgy:astral.silver.ingot</icon>
+<ore>Metallurgy:fantasy.ore:5</ore>
+<text>An alien variant of Silver. Mines faster, levels much faster, and can mine more things, but is only marginally more durable.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Astral Silver</title>
+<tools type = "1">
+   <icon>Metallurgy:astral.silver.pickaxe</icon>
+   <icon>Metallurgy:astral.silver.shovel</icon>
+   <icon>Metallurgy:astral.silver.axe</icon>
+   <icon>Metallurgy:astral.silver.hoe</icon>
+   <icon>Metallurgy:astral.silver.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.astral.silver.helmet</icon>
+   <icon>Metallurgy:metallurgy.astral.silver.chestplate</icon>
+   <icon>Metallurgy:metallurgy.astral.silver.leggings</icon>
+   <icon>Metallurgy:metallurgy.astral.silver.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Quicksilver</title>
+<icon>Metallurgy:quicksilver.ingot</icon>
+<ore></ore>
+<text>An alloy of Mithril and Silver. Armor made from this metal makes you move faster.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Quicksilver</title>
+<tools type = "1">
+   <icon>Metallurgy:quicksilver.pickaxe</icon>
+   <icon>Metallurgy:quicksilver.shovel</icon>
+   <icon>Metallurgy:quicksilver.axe</icon>
+   <icon>Metallurgy:quicksilver.hoe</icon>
+   <icon>Metallurgy:quicksilver.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.quicksilver.helmet</icon>
+   <icon>Metallurgy:metallurgy.quicksilver.chestplate</icon>
+   <icon>Metallurgy:metallurgy.quicksilver.leggings</icon>
+   <icon>Metallurgy:metallurgy.quicksilver.boots</icon>
+</armor>
+</page>
+
+
+
+<page type="extMaterialPage">
+<title>Kalendrite</title>
+<icon>Metallurgy:kalendrite.ingot</icon>
+<ore>Metallurgy:nether.ore:7</ore>
+<text>A rare alien nether metal. Comparable to alumite, but twice as durable, slower, and levels more quickly.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Kalendrite</title>
+<tools type = "1">
+   <icon>Metallurgy:kalendrite.pickaxe</icon>
+   <icon>Metallurgy:kalendrite.shovel</icon>
+   <icon>Metallurgy:kalendrite.axe</icon>
+   <icon>Metallurgy:kalendrite.hoe</icon>
+   <icon>Metallurgy:kalendrite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.kalendrite.helmet</icon>
+   <icon>Metallurgy:metallurgy.kalendrite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.kalendrite.leggings</icon>
+   <icon>Metallurgy:metallurgy.kalendrite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Midasium</title>
+<icon>Metallurgy:midasium.ingot</icon>
+<ore>Metallurgy:nether.ore:3</ore>
+<text>A strange alien nether metal. Mixing its dust with any other metal dust turns it to gold.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Midasium</title>
+<tools type = "1">
+   <icon>Metallurgy:midasium.pickaxe</icon>
+   <icon>Metallurgy:midasium.shovel</icon>
+   <icon>Metallurgy:midasium.axe</icon>
+   <icon>Metallurgy:midasium.hoe</icon>
+   <icon>Metallurgy:midasium.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.midasium.helmet</icon>
+   <icon>Metallurgy:metallurgy.midasium.chestplate</icon>
+   <icon>Metallurgy:metallurgy.midasium.leggings</icon>
+   <icon>Metallurgy:metallurgy.midasium.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Ceruclase</title>
+<icon>Metallurgy:ceruclase.ingot</icon>
+<ore>Metallurgy:nether.ore:5</ore>
+<text>An alien nether metal. Very similar in properties to steel, but it can mine slightly more things.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Ceruclase</title>
+<tools type = "1">
+   <icon>Metallurgy:ceruclase.pickaxe</icon>
+   <icon>Metallurgy:ceruclase.shovel</icon>
+   <icon>Metallurgy:ceruclase.axe</icon>
+   <icon>Metallurgy:ceruclase.hoe</icon>
+   <icon>Metallurgy:ceruclase.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.ceruclase.helmet</icon>
+   <icon>Metallurgy:metallurgy.ceruclase.chestplate</icon>
+   <icon>Metallurgy:metallurgy.ceruclase.leggings</icon>
+   <icon>Metallurgy:metallurgy.ceruclase.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Vyroxeres</title>
+<icon>Metallurgy:vyroxeres.ingot</icon>
+<ore>Metallurgy:nether.ore:4</ore>
+<text>A strange alien nether metal that emits constant radiation.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Vyroxeres</title>
+<tools type = "1">
+   <icon>Metallurgy:vyroxeres.pickaxe</icon>
+   <icon>Metallurgy:vyroxeres.shovel</icon>
+   <icon>Metallurgy:vyroxeres.axe</icon>
+   <icon>Metallurgy:vyroxeres.hoe</icon>
+   <icon>Metallurgy:vyroxeres.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.vyroxeres.helmet</icon>
+   <icon>Metallurgy:metallurgy.vyroxeres.chestplate</icon>
+   <icon>Metallurgy:metallurgy.vyroxeres.leggings</icon>
+   <icon>Metallurgy:metallurgy.vyroxeres.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Inolashite</title>
+<icon>Metallurgy:inolashite.ingot</icon>
+<ore></ore>
+<text>An alloy of two alien nether metals. The alloying process makes it better in every way, except for its use as a handle.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Inolashite</title>
+<tools type = "1">
+   <icon>Metallurgy:inolashite.pickaxe</icon>
+   <icon>Metallurgy:inolashite.shovel</icon>
+   <icon>Metallurgy:inolashite.axe</icon>
+   <icon>Metallurgy:inolashite.hoe</icon>
+   <icon>Metallurgy:inolashite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.inolashite.helmet</icon>
+   <icon>Metallurgy:metallurgy.inolashite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.inolashite.leggings</icon>
+   <icon>Metallurgy:metallurgy.inolashite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Vulcanite</title>
+<icon>Metallurgy:vulcanite.ingot</icon>
+<ore>Metallurgy:nether.ore:8</ore>
+<text>An unusual alien nether metal. Can mine everything Manyullyn can, just very slowly. It is much more durable, however.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Vulcanite</title>
+<tools type = "1">
+   <icon>Metallurgy:vulcanite.pickaxe</icon>
+   <icon>Metallurgy:vulcanite.shovel</icon>
+   <icon>Metallurgy:vulcanite.axe</icon>
+   <icon>Metallurgy:vulcanite.hoe</icon>
+   <icon>Metallurgy:vulcanite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.vulcanite.helmet</icon>
+   <icon>Metallurgy:metallurgy.vulcanite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.vulcanite.leggings</icon>
+   <icon>Metallurgy:metallurgy.vulcanite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Sanguinite</title>
+<icon>Metallurgy:sanguinite.ingot</icon>
+<ore>Metallurgy:nether.ore:9</ore>
+<text>An amazing alien nether metal. Incredibly durable, but mines blocks slowly. It can mine most anything.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Sanguinite</title>
+<tools type = "1">
+   <icon>Metallurgy:sanguinite.pickaxe</icon>
+   <icon>Metallurgy:sanguinite.shovel</icon>
+   <icon>Metallurgy:sanguinite.axe</icon>
+   <icon>Metallurgy:sanguinite.hoe</icon>
+   <icon>Metallurgy:sanguinite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.sanguinite.helmet</icon>
+   <icon>Metallurgy:metallurgy.sanguinite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.sanguinite.leggings</icon>
+   <icon>Metallurgy:metallurgy.sanguinite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Ignatius</title>
+<icon>Metallurgy:ignatius.ingot</icon>
+<ore>Metallurgy:nether.ore</ore>
+<text>A strange nether stone. Its dust can be used as fuel.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Ignatius</title>
+<tools type = "1">
+   <icon>Metallurgy:ignatius.pickaxe</icon>
+   <icon>Metallurgy:ignatius.shovel</icon>
+   <icon>Metallurgy:ignatius.axe</icon>
+   <icon>Metallurgy:ignatius.hoe</icon>
+   <icon>Metallurgy:ignatius.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.ignatius.helmet</icon>
+   <icon>Metallurgy:metallurgy.ignatius.chestplate</icon>
+   <icon>Metallurgy:metallurgy.ignatius.leggings</icon>
+   <icon>Metallurgy:metallurgy.ignatius.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Shadow Iron</title>
+<icon>Metallurgy:shadow.iron.ingot</icon>
+<ore>Metallurgy:nether.ore:1</ore>
+<text>An alien variant of iron. It's four times as durable, but slower and is very hard to level up.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Shadow Iron</title>
+<tools type = "1">
+   <icon>Metallurgy:shadow.iron.pickaxe</icon>
+   <icon>Metallurgy:shadow.iron.shovel</icon>
+   <icon>Metallurgy:shadow.iron.axe</icon>
+   <icon>Metallurgy:shadow.iron.hoe</icon>
+   <icon>Metallurgy:shadow.iron.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.shadow.iron.helmet</icon>
+   <icon>Metallurgy:metallurgy.shadow.iron.chestplate</icon>
+   <icon>Metallurgy:metallurgy.shadow.iron.leggings</icon>
+   <icon>Metallurgy:metallurgy.shadow.iron.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Shadow Steel</title>
+<icon>Metallurgy:shadow.steel.ingot</icon>
+<ore></ore>
+<text>An alien variant of steel. Incredibly durable. Hard to level up, but much easier than shadow iron.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Shadow Steel</title>
+<tools type = "1">
+   <icon>Metallurgy:shadow.steel.pickaxe</icon>
+   <icon>Metallurgy:shadow.steel.shovel</icon>
+   <icon>Metallurgy:shadow.steel.axe</icon>
+   <icon>Metallurgy:shadow.steel.hoe</icon>
+   <icon>Metallurgy:shadow.steel.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.shadow.steel.helmet</icon>
+   <icon>Metallurgy:metallurgy.shadow.steel.chestplate</icon>
+   <icon>Metallurgy:metallurgy.shadow.steel.leggings</icon>
+   <icon>Metallurgy:metallurgy.shadow.steel.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Amordrine</title>
+<icon>Metallurgy:amordrine.ingot</icon>
+<ore></ore>
+<text>An alloy of platinum with an alien nether metal. Better in every way than platinum, including mining and levelling speed.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Amordrine</title>
+<tools type = "1">
+   <icon>Metallurgy:amordrine.pickaxe</icon>
+   <icon>Metallurgy:amordrine.shovel</icon>
+   <icon>Metallurgy:amordrine.axe</icon>
+   <icon>Metallurgy:amordrine.hoe</icon>
+   <icon>Metallurgy:amordrine.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.amordrine.helmet</icon>
+   <icon>Metallurgy:metallurgy.amordrine.chestplate</icon>
+   <icon>Metallurgy:metallurgy.amordrine.leggings</icon>
+   <icon>Metallurgy:metallurgy.amordrine.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Lemurite</title>
+<icon>Metallurgy:lemurite.ingot</icon>
+<ore>Metallurgy:nether.ore:2</ore>
+<text>A crumbly material that turns to liquid at high tempuratures. Alloys with Shadow iron to make Shadow Steel.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Lemurite</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Alduorite</title>
+<icon>Metallurgy:alduorite.ingot</icon>
+<ore>Metallurgy:nether.ore:6</ore>
+<text>A nether metal used only for alloying.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Alduorite</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Eximite</title>
+<icon>Metallurgy:eximite.ingot</icon>
+<ore>Metallurgy:ender.ore:0</ore>
+<text>A rare alien metal found in pockets of endstone. Mines more than Alumite can, and is better than alumite in nearly every way, including being twice as durable.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Eximite</title>
+<tools type = "1">
+   <icon>Metallurgy:eximite.pickaxe</icon>
+   <icon>Metallurgy:eximite.shovel</icon>
+   <icon>Metallurgy:eximite.axe</icon>
+   <icon>Metallurgy:eximite.hoe</icon>
+   <icon>Metallurgy:eximite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.eximite.helmet</icon>
+   <icon>Metallurgy:metallurgy.eximite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.eximite.leggings</icon>
+   <icon>Metallurgy:metallurgy.eximite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Meutoite</title>
+<icon>Metallurgy:meutoite.ingot</icon>
+<ore>Metallurgy:ender.ore:1</ore>
+<text>A strange material that resonates with ender energy. Mix with Exemite to make Desichalkos.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Meutoite</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Desichalkos</title>
+<icon>Metallurgy:desichalkos.ingot</icon>
+<ore></ore>
+<text>An alloy of two rare alien metals found in pockets of endstone. Better than anything developed on homeworld. More durable than adamantine, and levels faster, too.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Desichalkos</title>
+<tools type = "1">
+   <icon>Metallurgy:desichalkos.pickaxe</icon>
+   <icon>Metallurgy:desichalkos.shovel</icon>
+   <icon>Metallurgy:desichalkos.axe</icon>
+   <icon>Metallurgy:desichalkos.hoe</icon>
+   <icon>Metallurgy:desichalkos.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.desichalkos.helmet</icon>
+   <icon>Metallurgy:metallurgy.desichalkos.chestplate</icon>
+   <icon>Metallurgy:metallurgy.desichalkos.leggings</icon>
+   <icon>Metallurgy:metallurgy.desichalkos.boots</icon>
+</armor>
+</page>
+
+
+
+<page type="extMaterialPage">
+<title>Netherrack</title>
+<icon>minecraft:netherrack</icon>
+<ore>minecraft:netherrack</ore>
+<text>Less durable than stone, but levels faster, harvests slightly more, and mines twice as fast.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Netherrack</title>
+<tools type = "0">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Certus Quartz</title>
+<icon>appliedenergistics2:item.ItemMultiMaterial</icon>
+<ore>appliedenergistics2:tile.OreQuartz</ore>
+<text>Better than stone in every way.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Certus Quartz</title>
+<tools type = "1">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Nether Quartz</title>
+<icon>minecraft:quartz</icon>
+<ore>minecraft:quartz_ore</ore>
+<text>Better than certus quartz in every way. Faster than most metals. Levels quickly. Still not great as a handle.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Nether Quartz</title>
+<tools type = "0">
+   <icon>Natura:natura.sword.netherquartz</icon>
+   <icon>Natura:natura.pickaxe.netherquartz</icon>
+   <icon>Natura:natura.shovel.netherquartz</icon>
+   <icon>Natura:natura.axe.netherquartz</icon>
+   <icon>Natura:natura.kama.netherquartz</icon>
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Obsidian</title>
+<icon>minecraft:obsidian</icon>
+<ore>minecraft:obsidian</ore>
+<text>Brittle, but fast and has a high level of "Reinforced." Can harvest many blocks. Good for bindings.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Obsidian</title>
+<tools type = "0">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Ghostwood</title>
+<icon>Natura:planks:2</icon>
+<ore>Natura:tree:2</ore>
+<text>Can't hold an edge, but mines fast and lasts well as a handle. Levels up faster than slime-based materials.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Ghostwood</title>
+<tools type = "1">
+   <icon>Natura:natura.sword.ghostwood</icon>
+   <icon>Natura:natura.pickaxe.ghostwood</icon>
+   <icon>Natura:natura.shovel.ghostwood</icon>
+   <icon>Natura:natura.axe.ghostwood</icon>
+   <icon>Natura:natura.kama.ghostwood</icon>
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Darkwood</title>
+<icon>Natura:planks:11</icon>
+<ore>Natura:Dark Tree</ore>
+<text>A very hard wood. Comparable to copper, but slightly worse in every way except handle utility and levelling speed.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Darkwood</title>
+<tools type = "1">
+   <icon>Natura:natura.sword.darkwood</icon>
+   <icon>Natura:natura.pickaxe.darkwood</icon>
+   <icon>Natura:natura.shovel.darkwood</icon>
+   <icon>Natura:natura.axe.darkwood</icon>
+   <icon>Natura:natura.kama.darkwood</icon>
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Fusewood</title>
+<icon>Natura:planks:12</icon>
+<ore>Natura:Dark Tree:1</ore>
+<text>A very hard wood. Statistics identical to iron, but with a faster levelling speed and better use as a handle.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Fusewood</title>
+<tools type = "1">
+   <icon>Natura:natura.sword.fusewood</icon>
+   <icon>Natura:natura.pickaxe.fusewood</icon>
+   <icon>Natura:natura.shovel.fusewood</icon>
+   <icon>Natura:natura.axe.fusewood</icon>
+   <icon>Natura:natura.kama.fusewood</icon>
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Bloodwood</title>
+<icon>Natura:planks:4</icon>
+<ore>Natura:bloodwood</ore>
+<text>A amazingly hard wood. Only slightly less durable than steel. Also better as a handle, but levels more slowly.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Bloodwood</title>
+<tools type = "1">
+   <icon>Natura:natura.sword.bloodwood</icon>
+   <icon>Natura:natura.pickaxe.bloodwood</icon>
+   <icon>Natura:natura.shovel.bloodwood</icon>
+   <icon>Natura:natura.axe.bloodwood</icon>
+   <icon>Natura:natura.kama.bloodwood</icon>
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Cactus</title>
+<icon>minecraft:cactus</icon>
+<ore>minecraft:cactus</ore>
+<text>Nicknamed the "Desert Wood". Mines much faster and is over twice as durable wood. Levels slowly, but not as slow as stone.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Cactus</title>
+<tools type = "0">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Plastic</title>
+<icon>MineFactoryReloaded:plastic.sheet:0</icon>
+<ore></ore>
+<text>A highly durable material with a low mining level. Almost incapable of levelling.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Plastic</title>
+<tools type = "0">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>BlueSlime</title>
+<icon>TConstruct:materials:17</icon>
+<ore></ore>
+<text>Softer and Springier. It seems to last forever! Makes an exellent handle.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>BlueSlime</title>
+<tools type = "0">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Pink Slime</title>
+<icon>MineFactoryReloaded:pinkslime:1</icon>
+<ore></ore>
+<text>The ultimate slime; the most durable material in existence. Makes fantastic handles, but like other slimes, it mines slowly.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Pink Slime</title>
+<tools type = "0">
+</tools>
+<mods type = "1">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Damascus Steel</title>
+<icon>Metallurgy:damascus.steel.ingot</icon>
+<ore></ore>
+<text>A rediscovered ancient form of steel that naturally forms carbon nano-tubes. Extremely sharp, but more brittle and slower than normal steel.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Damascus Steel</title>
+<tools type = "1">
+   <icon>Metallurgy:damascus.steel.pickaxe</icon>
+   <icon>Metallurgy:damascus.steel.shovel</icon>
+   <icon>Metallurgy:damascus.steel.axe</icon>
+   <icon>Metallurgy:damascus.steel.hoe</icon>
+   <icon>Metallurgy:damascus.steel.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.damascus.steel.helmet</icon>
+   <icon>Metallurgy:metallurgy.damascus.steel.chestplate</icon>
+   <icon>Metallurgy:metallurgy.damascus.steel.leggings</icon>
+   <icon>Metallurgy:metallurgy.damascus.steel.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Alumite</title>
+<icon>TConstruct:materials:9</icon>
+<ore></ore>
+<text>Alloy of iron, obsidian, and aluminum. Comparable to steel, but easier to make and levels up more slowly.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Alumite</title>
+<tools type = "0">
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Cobalt</title>
+<icon>TConstruct:materials:3</icon>
+<ore>TConstruct:SearedBrick:1</ore>
+<text>A common nether metal known to homeworld. It levels quickly and is faster than any other terrestrial metal.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Cobalt</title>
+<tools type = "0">
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>minecraft:diamond_helmet</icon>
+   <icon>minecraft:diamond_chestplate</icon>
+   <icon>minecraft:diamond_leggings</icon>
+   <icon>minecraft:diamond_boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Ardite</title>
+<icon>TConstruct:materials:4</icon>
+<ore>TConstruct:SearedBrick:2</ore>
+<text>A common nether metal known to homeworld. It makes an excellent handle.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Ardite</title>
+<tools type = "0">
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Manyullyn</title>
+<icon>TConstruct:materials:5</icon>
+<ore></ore>
+<text>The best metal known to homeworld; an alloy of two powerful nether metals. The gold standard against which any competing metal must exceed.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Manyullyn</title>
+<tools type = "0">
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Zinc</title>
+<icon>Metallurgy:zinc.ingot</icon>
+<ore>Metallurgy:precious.ore:0</ore>
+<text>A brittle metal mostly used in making alloys. Mix it with copper to produce brass.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Zinc</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Brass</title>
+<icon>Metallurgy:brass.ingot</icon>
+<ore></ore>
+<text>A weak terrestrial alloy better suited for ornamentation than tools. Has a high mining speed and levels quickly, however.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Brass</title>
+<tools type = "1">
+   <icon>Metallurgy:brass.pickaxe</icon>
+   <icon>Metallurgy:brass.shovel</icon>
+   <icon>Metallurgy:brass.axe</icon>
+   <icon>Metallurgy:brass.hoe</icon>
+   <icon>Metallurgy:brass.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.brass.helmet</icon>
+   <icon>Metallurgy:metallurgy.brass.chestplate</icon>
+   <icon>Metallurgy:metallurgy.brass.leggings</icon>
+   <icon>Metallurgy:metallurgy.brass.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Angmallen</title>
+<icon>Metallurgy:angmallen.ingot</icon>
+<ore></ore>
+<text>A mediocre terrestrial alloy of iron and gold. Less durable than iron, but levels much faster.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Angmallen</title>
+<tools type = "1">
+   <icon>Metallurgy:angmallen.pickaxe</icon>
+   <icon>Metallurgy:angmallen.shovel</icon>
+   <icon>Metallurgy:angmallen.axe</icon>
+   <icon>Metallurgy:angmallen.hoe</icon>
+   <icon>Metallurgy:angmallen.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.angmallen.helmet</icon>
+   <icon>Metallurgy:metallurgy.angmallen.chestplate</icon>
+   <icon>Metallurgy:metallurgy.angmallen.leggings</icon>
+   <icon>Metallurgy:metallurgy.angmallen.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Hepatizon</title>
+<icon>Metallurgy:hepatizon.ingot</icon>
+<ore></ore>
+<text>A recently rediscovered ancient precious alloy. Nine times as durable as silver, and levels faster to boot.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Hepatizon</title>
+<tools type = "1">
+   <icon>Metallurgy:hepatizon.pickaxe</icon>
+   <icon>Metallurgy:hepatizon.shovel</icon>
+   <icon>Metallurgy:hepatizon.axe</icon>
+   <icon>Metallurgy:hepatizon.hoe</icon>
+   <icon>Metallurgy:hepatizon.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.hepatizon.helmet</icon>
+   <icon>Metallurgy:metallurgy.hepatizon.chestplate</icon>
+   <icon>Metallurgy:metallurgy.hepatizon.leggings</icon>
+   <icon>Metallurgy:metallurgy.hepatizon.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Electrum</title>
+<icon>Metallurgy:electrum.ingot</icon>
+<ore></ore>
+<text>A weak terrestrial alloy better suited for ornamentation than tools. Better than silver in every way.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Electrum</title>
+<tools type = "1">
+   <icon>Metallurgy:electrum.pickaxe</icon>
+   <icon>Metallurgy:electrum.shovel</icon>
+   <icon>Metallurgy:electrum.axe</icon>
+   <icon>Metallurgy:electrum.hoe</icon>
+   <icon>Metallurgy:electrum.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.electrum.helmet</icon>
+   <icon>Metallurgy:metallurgy.electrum.chestplate</icon>
+   <icon>Metallurgy:metallurgy.electrum.leggings</icon>
+   <icon>Metallurgy:metallurgy.electrum.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Pokefennium</title>
+<icon>ExtraTiC:funStuffIngot:1</icon>
+<ore></ore>
+<text>A recently invented biometallurgic alloy. Can mine many rare alien minerals, but is comparitively weak and very hard to level up.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Pokefennium</title>
+<tools type = "0">
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Fairy</title>
+<icon>ExtraTiC:funStuffIngot</icon>
+<ore></ore>
+<text>A recently invented biometallurgic alloy. Comparable to Manyullyn, but about 1/4th the durability, levels more than twice as fast, and mines more quickly.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Fairy</title>
+<tools type = "0">
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>PigIron</title>
+<icon>TConstruct:materials:34</icon>
+<ore></ore>
+<text>A horrifying biometallurgic alloy invented while Dr. Diyo was intoxicated. When striking opponents, has a chance of dropping bacon. You monster.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>PigIron</title>
+<tools type = "0">
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+    <page type = "extMaterialUsePage">
+        <title>Quicksilver</title>
+        <tools type = "1">
+            <icon>Metallurgy:quicksilver.pickaxe</icon>
+            <icon>Metallurgy:quicksilver.shovel</icon>
+            <icon>Metallurgy:quicksilver.axe</icon>
+            <icon>Metallurgy:quicksilver.hoe</icon>
+            <icon>Metallurgy:quicksilver.sword</icon>
+        </tools>
+        <mods type = "2">
+        </mods>
+        <armor type = "1">
+            <icon>Metallurgy:metallurgy.quicksilver.helmet</icon>
+            <icon>Metallurgy:metallurgy.quicksilver.chestplate</icon>
+            <icon>Metallurgy:metallurgy.quicksilver.leggings</icon>
+            <icon>Metallurgy:metallurgy.quicksilver.boots</icon>
+        </armor>
+    </page>
+
+    <page type="extMaterialPage">
+        <title>Manasteel</title>
+        <icon>Botania:manaResource:0</icon>
+        <ore></ore>
+        <text>A strange, easily worked metal that seems to repair itself only under certain unknown conditions.</text>
+    </page>
+
+    <page type = "extMaterialUsePage">
+        <title>Manasteel</title>
+        <tools type = "1">
+            <icon>Botania:manasteelPick</icon>
+            <icon>Botania:manasteelShovel</icon>
+            <icon>Botania:manasteelAxe</icon>
+            <icon>Botania:manasteelSword</icon>
+        </tools>
+        <mods type = "1">
+        </mods>
+        <armor type = "1">
+            <icon>Botania:manasteelHelm</icon>
+            <icon>Botania:manasteelChest</icon>
+            <icon>Botania:manasteelLegs</icon>
+            <icon>Botania:manasteelBoots</icon>
+        </armor>
+    </page>
+
+    <page type="extMaterialPage">
+        <title>Terrasteel</title>
+        <icon>Botania:manaResource:4</icon>
+        <ore></ore>
+        <text>A supremely durable yet easily worked metal. All reports of successfully damaging it turn out to be mysteriously false.</text>
+    </page>
+
+    <page type = "extMaterialUsePage">
+        <title>Terrasteel</title>
+        <tools type = "1">
+            <icon>Botania:terraPick</icon>
+            <icon>Botania:terraAxe</icon>
+            <icon>Botania:terraSword</icon>
+        </tools>
+        <mods type = "1">
+        </mods>
+        <armor type = "1">
+            <icon>Botania:terrasteelHelm</icon>
+            <icon>Botania:terrasteelChest</icon>
+            <icon>Botania:terrasteelLegs</icon>
+            <icon>Botania:terrasteelBoots</icon>
+        </armor>
+    </page>
+
+    <page type="extMaterialPage">
+        <title>Elementium</title>
+        <icon>Botania:manaResource:7</icon>
+        <ore></ore>
+        <text>A strange metal that never responds to tests the same way twice. It seems soft when worked but durable once used as a tool.</text>
+    </page>
+
+    <page type = "extMaterialUsePage">
+        <title>Elementium</title>
+        <tools type = "1">
+            <icon>Botania:elementiumPick</icon>
+            <icon>Botania:elementiumShovel</icon>
+            <icon>Botania:elementiumAxe</icon>
+            <icon>Botania:elementiumSword</icon>
+        </tools>
+        <mods type = "1">
+        </mods>
+        <armor type = "1">
+            <icon>Botania:elementiumHelm</icon>
+            <icon>Botania:elementiumChest</icon>
+            <icon>Botania:elementiumLegs</icon>
+            <icon>Botania:elementiumBoots</icon>
+        </armor>
+    </page>
+
+
+</book>

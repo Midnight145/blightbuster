@@ -1,0 +1,774 @@
+﻿<?xml version="1.0"?>
+
+<!-- This is going to be the normal tools guide book. -->
+
+<!-- This is going to be the normal tools guide book. -->
+
+<!-- This is going to be the normal tools guide book. -->
+
+<book>
+    <page type="intro">
+        <text>Materials - The Classical Tools and Weapons Edition.
+A Guide to Material Properties
+
+By Ayumu Nagasawa</text>
+    </page>
+
+    <page type="text">
+        <text>While most tools and weapons created these days use Dr. Diyo's modular tool system, some people (especially those fond of enchantments) prefer classical tools. This book describes the properties of such tools.</text>
+    </page>
+
+<!--    <page type = "c2kClassicToolsPage">
+        <title>Tin</title>
+        <requires>discover.cavestokingdoms.tin</requires>
+        <requiresIcon>TConstruct:materials:10</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>ThermalFoundation:tool.pickaxeTin</tool>
+            <tool>ThermalFoundation:tool.shovelTin</tool>
+            <tool>ThermalFoundation:tool.axeTin</tool>
+            <tool>ThermalFoundation:tool.hoeTin</tool>
+            <tool>ThermalFoundation:tool.swordTin</tool>
+        </tools>
+        <title>Lead</title>
+        <requires>discover.cavestokingdoms.lead</requires>
+        <requiresIcon>ThermalFoundation:material:67</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>ThermalFoundation:tool.pickaxeLead</tool>
+            <tool>ThermalFoundation:tool.shovelLead</tool>
+            <tool>ThermalFoundation:tool.axeLead</tool>
+            <tool>ThermalFoundation:tool.hoeLead</tool>
+            <tool>ThermalFoundation:tool.swordLead</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Ferrous</title>
+        <requires>discover.cavestokingdoms.nickel</requires>
+        <requiresIcon>ThermalFoundation:material:68</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>ThermalFoundation:tool.pickaxeNickel</tool>
+            <tool>ThermalFoundation:tool.shovelNickel</tool>
+            <tool>ThermalFoundation:tool.axeNickel</tool>
+            <tool>ThermalFoundation:tool.hoeNickel</tool>
+            <tool>ThermalFoundation:tool.swordNickel</tool>
+        </tools>
+        <title>Invar</title>
+        <requires>discover.cavestokingdoms.invar</requires>
+        <requiresIcon>ThermalFoundation:material:72</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>ThermalFoundation:tool.pickaxeInvar</tool>
+            <tool>ThermalFoundation:tool.shovelInvar</tool>
+            <tool>ThermalFoundation:tool.axeInvar</tool>
+            <tool>ThermalFoundation:tool.hoeInvar</tool>
+            <tool>ThermalFoundation:tool.swordInvar</tool>
+        </tools>
+    </page> -->
+
+    <page type = "c2kClassicToolsPage">
+        <title>Silver</title>
+        <requires>discover.cavestokingdoms.silver</requires>
+        <requiresIcon>ThermalFoundation:material:66</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:silver.pickaxe</tool>
+            <tool>Metallurgy:silver.shovel</tool>
+            <tool>Metallurgy:silver.axe</tool>
+            <tool>Metallurgy:silver.hoe</tool>
+            <tool>Metallurgy:silver.sword</tool>
+        </tools>
+        <title>Platinum</title>
+        <requires>discover.cavestokingdoms.platinum</requires>
+        <requiresIcon>ThermalFoundation:material:69</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:platinum.pickaxe</tool>
+            <tool>Metallurgy:platinum.shovel</tool>
+            <tool>Metallurgy:platinum.axe</tool>
+            <tool>Metallurgy:platinum.hoe</tool>
+            <tool>Metallurgy:platinum.sword</tool>
+        </tools>
+    </page>
+
+
+    <page type = "c2kClassicToolsPage">
+        <title>Electrum</title>
+        <requires>discover.cavestokingdoms.electrum</requires>
+        <requiresIcon>ThermalFoundation:material:71</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:electrum.pickaxe</tool>
+            <tool>Metallurgy:electrum.shovel</tool>
+            <tool>Metallurgy:electrum.axe</tool>
+            <tool>Metallurgy:electrum.hoe</tool>
+            <tool>Metallurgy:electrum.sword</tool>
+        </tools>
+        <title>Flux-Infused</title>
+        <requires>discover.cavestokingdoms.fluxinfused</requires>
+        <requiresIcon>RedstoneArsenal:material:32</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>RedstoneArsenal:tool.pickaxeFlux</tool>
+            <tool>RedstoneArsenal:tool.shovelFlux</tool>
+            <tool>RedstoneArsenal:tool.axeFlux</tool>
+            <tool>RedstoneArsenal:tool.swordFlux</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Copper</title>
+        <requires>discover.cavestokingdoms.copper</requires>
+        <requiresIcon>TConstruct:materials:9</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:copper.pickaxe</tool>
+            <tool>Metallurgy:copper.shovel</tool>
+            <tool>Metallurgy:copper.axe</tool>
+            <tool>Metallurgy:copper.hoe</tool>
+            <tool>Metallurgy:copper.sword</tool>
+        </tools>
+        <title>Brass</title>
+        <requires>discover.cavestokingdoms.brass</requires>
+        <requiresIcon>Metallurgy:brass.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:brass.pickaxe</tool>
+            <tool>Metallurgy:brass.shovel</tool>
+            <tool>Metallurgy:brass.axe</tool>
+            <tool>Metallurgy:brass.hoe</tool>
+            <tool>Metallurgy:brass.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Bronze</title>
+        <requires>discover.cavestokingdoms.bronze</requires>
+        <requiresIcon>TConstruct:materials:13</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:bronze.pickaxe</tool>
+            <tool>Metallurgy:bronze.shovel</tool>
+            <tool>Metallurgy:bronze.axe</tool>
+            <tool>Metallurgy:bronze.hoe</tool>
+            <tool>Metallurgy:bronze.sword</tool>
+        </tools>
+        <title>Angmallen</title>
+        <requires>discover.cavestokingdoms.angmallen</requires>
+        <requiresIcon>Metallurgy:angmallen.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:angmallen.pickaxe</tool>
+            <tool>Metallurgy:angmallen.shovel</tool>
+            <tool>Metallurgy:angmallen.axe</tool>
+            <tool>Metallurgy:angmallen.hoe</tool>
+            <tool>Metallurgy:angmallen.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Hepatizon</title>
+        <requires>discover.cavestokingdoms.hepatizon</requires>
+        <requiresIcon>Metallurgy:hepatizon.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:hepatizon.pickaxe</tool>
+            <tool>Metallurgy:hepatizon.shovel</tool>
+            <tool>Metallurgy:hepatizon.axe</tool>
+            <tool>Metallurgy:hepatizon.hoe</tool>
+            <tool>Metallurgy:hepatizon.sword</tool>
+        </tools>
+        <title>Damascus Steel</title>
+        <requires>discover.cavestokingdoms.damascussteel</requires>
+        <requiresIcon>Metallurgy:damascus.steel.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:damascus.steel.pickaxe</tool>
+            <tool>Metallurgy:damascus.steel.shovel</tool>
+            <tool>Metallurgy:damascus.steel.axe</tool>
+            <tool>Metallurgy:damascus.steel.hoe</tool>
+            <tool>Metallurgy:damascus.steel.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Steel</title>
+        <requires>discover.cavestokingdoms.steel</requires>
+        <requiresIcon>TConstruct:materials:16</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:steel.pickaxe</tool>
+            <tool>Metallurgy:steel.shovel</tool>
+            <tool>Metallurgy:steel.axe</tool>
+            <tool>Metallurgy:steel.hoe</tool>
+            <tool>Metallurgy:steel.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Prometheum</title>
+        <requires>discover.cavestokingdoms.prometheum</requires>
+        <requiresIcon>Metallurgy:prometheum.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:prometheum.pickaxe</tool>
+            <tool>Metallurgy:prometheum.shovel</tool>
+            <tool>Metallurgy:prometheum.axe</tool>
+            <tool>Metallurgy:prometheum.hoe</tool>
+            <tool>Metallurgy:prometheum.sword</tool>
+        </tools>
+        <title>Oureclase</title>
+        <requires>discover.cavestokingdoms.oureclase</requires>
+        <requiresIcon>Metallurgy:oureclase.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:oureclase.pickaxe</tool>
+            <tool>Metallurgy:oureclase.shovel</tool>
+            <tool>Metallurgy:oureclase.axe</tool>
+            <tool>Metallurgy:oureclase.hoe</tool>
+            <tool>Metallurgy:oureclase.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Deep Iron</title>
+        <requires>discover.cavestokingdoms.deepiron</requires>
+        <requiresIcon>Metallurgy:deep.iron.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:deep.iron.pickaxe</tool>
+            <tool>Metallurgy:deep.iron.shovel</tool>
+            <tool>Metallurgy:deep.iron.axe</tool>
+            <tool>Metallurgy:deep.iron.hoe</tool>
+            <tool>Metallurgy:deep.iron.sword</tool>
+        </tools>
+        <title>Black Steel</title>
+        <requires>discover.cavestokingdoms.blacksteel</requires>
+        <requiresIcon>Metallurgy:black.steel.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:black.steel.pickaxe</tool>
+            <tool>Metallurgy:black.steel.shovel</tool>
+            <tool>Metallurgy:black.steel.axe</tool>
+            <tool>Metallurgy:black.steel.hoe</tool>
+            <tool>Metallurgy:black.steel.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Mithril</title>
+        <requires>discover.cavestokingdoms.mithril</requires>
+        <requiresIcon>ThermalFoundation:material:70</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:mithril.pickaxe</tool>
+            <tool>Metallurgy:mithril.shovel</tool>
+            <tool>Metallurgy:mithril.axe</tool>
+            <tool>Metallurgy:mithril.hoe</tool>
+            <tool>Metallurgy:mithril.sword</tool>
+        </tools>
+        <title>Quicksilver</title>
+        <requires>discover.cavestokingdoms.quicksilver</requires>
+        <requiresIcon>Metallurgy:quicksilver.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:quicksilver.pickaxe</tool>
+            <tool>Metallurgy:quicksilver.shovel</tool>
+            <tool>Metallurgy:quicksilver.axe</tool>
+            <tool>Metallurgy:quicksilver.hoe</tool>
+            <tool>Metallurgy:quicksilver.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Haderoth</title>
+        <requires>discover.cavestokingdoms.haderoth</requires>
+        <requiresIcon>Metallurgy:haderoth.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:haderoth.pickaxe</tool>
+            <tool>Metallurgy:haderoth.shovel</tool>
+            <tool>Metallurgy:haderoth.axe</tool>
+            <tool>Metallurgy:haderoth.hoe</tool>
+            <tool>Metallurgy:haderoth.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Orichalcum</title>
+        <requires>discover.cavestokingdoms.orichalcum</requires>
+        <requiresIcon>Metallurgy:orichalcum.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:orichalcum.pickaxe</tool>
+            <tool>Metallurgy:orichalcum.shovel</tool>
+            <tool>Metallurgy:orichalcum.axe</tool>
+            <tool>Metallurgy:orichalcum.hoe</tool>
+            <tool>Metallurgy:orichalcum.sword</tool>
+        </tools>
+        <title>Celenegil</title>
+        <requires>discover.cavestokingdoms.celenegil</requires>
+        <requiresIcon>Metallurgy:celenegil.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:celenegil.pickaxe</tool>
+            <tool>Metallurgy:celenegil.shovel</tool>
+            <tool>Metallurgy:celenegil.axe</tool>
+            <tool>Metallurgy:celenegil.hoe</tool>
+            <tool>Metallurgy:celenegil.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Astral Silver</title>
+        <requires>discover.cavestokingdoms.mithril</requires>
+        <requiresIcon>Metallurgy:astral.silver.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:astral.silver.pickaxe</tool>
+            <tool>Metallurgy:astral.silver.shovel</tool>
+            <tool>Metallurgy:astral.silver.axe</tool>
+            <tool>Metallurgy:astral.silver.hoe</tool>
+            <tool>Metallurgy:astral.silver.sword</tool>
+        </tools>
+        <title>Carmot</title>
+        <requires>discover.cavestokingdoms.carmot</requires>
+        <requiresIcon>Metallurgy:carmot.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:carmot.pickaxe</tool>
+            <tool>Metallurgy:carmot.shovel</tool>
+            <tool>Metallurgy:carmot.axe</tool>
+            <tool>Metallurgy:carmot.hoe</tool>
+            <tool>Metallurgy:carmot.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Adamantine</title>
+        <requires>discover.cavestokingdoms.adamantine</requires>
+        <requiresIcon>Metallurgy:adamantine.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:adamantine.pickaxe</tool>
+            <tool>Metallurgy:adamantine.shovel</tool>
+            <tool>Metallurgy:adamantine.axe</tool>
+            <tool>Metallurgy:adamantine.hoe</tool>
+            <tool>Metallurgy:adamantine.sword</tool>
+        </tools>
+        <title>Atlarus</title>
+        <requires>discover.cavestokingdoms.atlarus</requires>
+        <requiresIcon>Metallurgy:atlarus.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:atlarus.pickaxe</tool>
+            <tool>Metallurgy:atlarus.shovel</tool>
+            <tool>Metallurgy:atlarus.axe</tool>
+            <tool>Metallurgy:atlarus.hoe</tool>
+            <tool>Metallurgy:atlarus.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Tartarite</title>
+        <requires>discover.cavestokingdoms.tartarite</requires>
+        <requiresIcon>Metallurgy:tartarite.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:tartarite.pickaxe</tool>
+            <tool>Metallurgy:tartarite.shovel</tool>
+            <tool>Metallurgy:tartarite.axe</tool>
+            <tool>Metallurgy:tartarite.hoe</tool>
+            <tool>Metallurgy:tartarite.sword</tool>
+        </tools>
+        <title>Vyroxeres</title>
+        <requires>discover.cavestokingdoms.vyroxeres</requires>
+        <requiresIcon>Metallurgy:vyroxeres.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:vyroxeres.pickaxe</tool>
+            <tool>Metallurgy:vyroxeres.shovel</tool>
+            <tool>Metallurgy:vyroxeres.axe</tool>
+            <tool>Metallurgy:vyroxeres.hoe</tool>
+            <tool>Metallurgy:vyroxeres.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Ignatius</title>
+        <requires>discover.cavestokingdoms.ignatius</requires>
+        <requiresIcon>Metallurgy:ignatius.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:ignatius.pickaxe</tool>
+            <tool>Metallurgy:ignatius.shovel</tool>
+            <tool>Metallurgy:ignatius.axe</tool>
+            <tool>Metallurgy:ignatius.hoe</tool>
+            <tool>Metallurgy:ignatius.sword</tool>
+        </tools>
+        <title>Midasium</title>
+        <requires>discover.cavestokingdoms.midasium</requires>
+        <requiresIcon>Metallurgy:midasium.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:midasium.pickaxe</tool>
+            <tool>Metallurgy:midasium.shovel</tool>
+            <tool>Metallurgy:midasium.axe</tool>
+            <tool>Metallurgy:midasium.hoe</tool>
+            <tool>Metallurgy:midasium.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Shadow Iron</title>
+        <requires>discover.cavestokingdoms.shadowiron</requires>
+        <requiresIcon>Metallurgy:shadow.iron.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:shadow.iron.pickaxe</tool>
+            <tool>Metallurgy:shadow.iron.shovel</tool>
+            <tool>Metallurgy:shadow.iron.axe</tool>
+            <tool>Metallurgy:shadow.iron.hoe</tool>
+            <tool>Metallurgy:shadow.iron.sword</tool>
+        </tools>
+        <title>Shadow Steel</title>
+        <requires>discover.cavestokingdoms.shadowsteel</requires>
+        <requiresIcon>Metallurgy:shadow.steel.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:shadow.steel.pickaxe</tool>
+            <tool>Metallurgy:shadow.steel.shovel</tool>
+            <tool>Metallurgy:shadow.steel.axe</tool>
+            <tool>Metallurgy:shadow.steel.hoe</tool>
+            <tool>Metallurgy:shadow.steel.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Ceruclase</title>
+        <requires>discover.cavestokingdoms.ceruclase</requires>
+        <requiresIcon>Metallurgy:ceruclase.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:ceruclase.pickaxe</tool>
+            <tool>Metallurgy:ceruclase.shovel</tool>
+            <tool>Metallurgy:ceruclase.axe</tool>
+            <tool>Metallurgy:ceruclase.hoe</tool>
+            <tool>Metallurgy:ceruclase.sword</tool>
+        </tools>
+        <title>Inolashite</title>
+        <requires>discover.cavestokingdoms.inolashite</requires>
+        <requiresIcon>Metallurgy:inolashite.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:inolashite.pickaxe</tool>
+            <tool>Metallurgy:inolashite.shovel</tool>
+            <tool>Metallurgy:inolashite.axe</tool>
+            <tool>Metallurgy:inolashite.hoe</tool>
+            <tool>Metallurgy:inolashite.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Kalendrite</title>
+        <requires>discover.cavestokingdoms.kalendrite</requires>
+        <requiresIcon>Metallurgy:kalendrite.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:kalendrite.pickaxe</tool>
+            <tool>Metallurgy:kalendrite.shovel</tool>
+            <tool>Metallurgy:kalendrite.axe</tool>
+            <tool>Metallurgy:kalendrite.hoe</tool>
+            <tool>Metallurgy:kalendrite.sword</tool>
+        </tools>
+        <title>Amordrine</title>
+        <requires>discover.cavestokingdoms.amordrine</requires>
+        <requiresIcon>Metallurgy:amordrine.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:amordrine.pickaxe</tool>
+            <tool>Metallurgy:amordrine.shovel</tool>
+            <tool>Metallurgy:amordrine.axe</tool>
+            <tool>Metallurgy:amordrine.hoe</tool>
+            <tool>Metallurgy:amordrine.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Vulcanite</title>
+        <requires>discover.cavestokingdoms.vulcanite</requires>
+        <requiresIcon>Metallurgy:vulcanite.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:vulcanite.pickaxe</tool>
+            <tool>Metallurgy:vulcanite.shovel</tool>
+            <tool>Metallurgy:vulcanite.axe</tool>
+            <tool>Metallurgy:vulcanite.hoe</tool>
+            <tool>Metallurgy:vulcanite.sword</tool>
+        </tools>
+        <title>Sanguinite</title>
+        <requires>discover.cavestokingdoms.sanguinite</requires>
+        <requiresIcon>Metallurgy:sanguinite.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:sanguinite.pickaxe</tool>
+            <tool>Metallurgy:sanguinite.shovel</tool>
+            <tool>Metallurgy:sanguinite.axe</tool>
+            <tool>Metallurgy:sanguinite.hoe</tool>
+            <tool>Metallurgy:sanguinite.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Eximite</title>
+        <requires>discover.cavestokingdoms.eximite</requires>
+        <requiresIcon>Metallurgy:eximite.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:eximite.pickaxe</tool>
+            <tool>Metallurgy:eximite.shovel</tool>
+            <tool>Metallurgy:eximite.axe</tool>
+            <tool>Metallurgy:eximite.hoe</tool>
+            <tool>Metallurgy:eximite.sword</tool>
+        </tools>
+        <title>Desichalkos</title>
+        <requires>discover.cavestokingdoms.desichalkos</requires>
+        <requiresIcon>Metallurgy:desichalkos.ingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Metallurgy:desichalkos.pickaxe</tool>
+            <tool>Metallurgy:desichalkos.shovel</tool>
+            <tool>Metallurgy:desichalkos.axe</tool>
+            <tool>Metallurgy:desichalkos.hoe</tool>
+            <tool>Metallurgy:desichalkos.sword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Vitreous</title>
+        <requires>discover.cavestokingdoms.manasteel</requires>
+        <requiresIcon>Botania:manaResource</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Botania:glassPick</tool>
+        </tools>
+        <title>Manasteel</title>
+        <requires>discover.cavestokingdoms.manasteel</requires>
+        <requiresIcon>Botania:manaResource</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Botania:manasteelPick</tool>
+            <tool>Botania:manasteelShovel</tool>
+            <tool>Botania:manasteelAxe</tool>
+            <tool>Botania:manasteelSword</tool>
+        </tools>
+    </page>
+
+
+    <page type = "c2kClassicToolsPage">
+        <title>Elementium</title>
+        <requires>discover.cavestokingdoms.elementium</requires>
+        <requiresIcon>Botania:manaResource:7</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Botania:elementiumPick</tool>
+            <tool>Botania:elementiumShovel</tool>
+            <tool>Botania:elementiumAxe</tool>
+            <tool>Botania:elementiumSword</tool>
+
+        </tools>
+        <title>Terrasteel</title>
+        <requires>discover.cavestokingdoms.terrasteel</requires>
+        <requiresIcon>Botania:manaResource:4</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Botania:terraPick</tool>
+            <tool>Botania:terraAxe</tool>
+            <tool>Botania:terraSword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Thaumium</title>
+        <requires>discover.cavestokingdoms.thaumium</requires>
+        <requiresIcon>Thaumcraft:ItemResource:2</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Thaumcraft:ItemPickThaumium</tool>
+            <tool>Thaumcraft:ItemShovelThaumium</tool>
+            <tool>Thaumcraft:ItemAxeThaumium</tool>
+            <tool>Thaumcraft:ItemHoeThaumium</tool>
+            <tool>Thaumcraft:ItemSwordThaumium</tool>
+        </tools>
+        <title>Enhanced Thaumium</title>
+        <requires>discover.cavestokingdoms.enhancedthaumium</requires>
+        <requiresIcon>Thaumcraft:ItemPickThaumium</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Thaumcraft:ItemPickElemental</tool>
+            <tool>Thaumcraft:ItemShovelElemental</tool>
+            <tool>Thaumcraft:ItemAxeElemental</tool>
+            <tool>Thaumcraft:ItemHoeElemental</tool>
+            <tool>Thaumcraft:ItemSwordElemental</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Enhanced Thaumium</title>
+        <requires>discover.cavestokingdoms.enhancedthaumium</requires>
+        <requiresIcon>Thaumcraft:ItemPickThaumium</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>ForbiddenMagic:TaintPickaxe</tool>
+            <tool>ForbiddenMagic:TaintShovel</tool>
+            <tool>ForbiddenMagic:SkullAxe</tool>
+
+        </tools>
+        <title>Chameleon</title>
+        <requires>discover.cavestokingdoms.chameleon</requires>
+        <requiresIcon>ForbiddenMagic:NetherShard:1</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>ForbiddenMagic:MorphPickaxe</tool>
+            <tool>ForbiddenMagic:MorphShovel</tool>
+            <tool>ForbiddenMagic:MorphAxe</tool>
+            <tool>ForbiddenMagic:MorphSword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Ichorium</title>
+        <requires>discover.cavestokingdoms.ichorium</requires>
+        <requiresIcon>ThaumicTinkerer:kamiResource:2</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>ThaumicTinkerer:ichorPick</tool>
+            <tool>ThaumicTinkerer:ichorShovel</tool>
+            <tool>ThaumicTinkerer:ichorAxe</tool>
+            <tool>ThaumicTinkerer:ichorSword</tool>
+
+
+        </tools>
+        <title>Awakened Ichorium</title>
+        <requires>discover.cavestokingdoms.ichorium</requires>
+        <requiresIcon>ThaumicTinkerer:ichorPick</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>ThaumicTinkerer:ichorPickGem</tool>
+            <tool>ThaumicTinkerer:ichorShovelGem</tool>
+            <tool>ThaumicTinkerer:ichorAxeGem</tool>
+            <tool>ThaumicTinkerer:ichorSwordGem</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Void</title>
+        <requires>discover.cavestokingdoms.voidmetal</requires>
+        <requiresIcon>Thaumcraft:ItemResource:16</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Thaumcraft:ItemPickVoid</tool>
+            <tool>Thaumcraft:ItemShovelVoid</tool>
+            <tool>Thaumcraft:ItemAxeVoid</tool>
+            <tool>Thaumcraft:ItemHoeVoid</tool>
+            <tool>Thaumcraft:ItemSwordVoid</tool>
+        </tools>
+        <title>Quartz</title>
+        <requires>discover.cavestokingdoms.netherquartz</requires>
+        <requiresIcon>minecraft:quartz_block</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Natura:natura.pickaxe.netherquartz</tool>
+            <tool>Natura:natura.shovel.netherquartz</tool>
+            <tool>Natura:natura.axe.netherquartz</tool>
+            <tool>Natura:natura.sword.netherquartz</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Ghostwood</title>
+        <requires>discover.cavestokingdoms.ghostwood</requires>
+        <requiresIcon>Natura:planks:2</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Natura:natura.pickaxe.ghostwood</tool>
+            <tool>Natura:natura.shovel.ghostwood</tool>
+            <tool>Natura:natura.axe.ghostwood</tool>
+            <tool>Natura:natura.sword.ghostwood</tool>
+        </tools>
+        <title>Darkwood</title>
+        <requires>discover.cavestokingdoms.darkwood</requires>
+        <requiresIcon>Natura:planks:11</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Natura:natura.pickaxe.darkwood</tool>
+            <tool>Natura:natura.shovel.darkwood</tool>
+            <tool>Natura:natura.axe.darkwood</tool>
+            <tool>Natura:natura.sword.darkwood</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Fusewood</title>
+        <requires>discover.cavestokingdoms.fusewood</requires>
+        <requiresIcon>Natura:planks:12</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Natura:natura.pickaxe.fusewood</tool>
+            <tool>Natura:natura.shovel.fusewood</tool>
+            <tool>Natura:natura.axe.fusewood</tool>
+            <tool>Natura:natura.sword.fusewood</tool>
+        </tools>
+        <title>Bloodwood</title>
+        <requires>discover.cavestokingdoms.bloodwood</requires>
+        <requiresIcon>Natura:planks:4</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>Natura:natura.pickaxe.bloodwood</tool>
+            <tool>Natura:natura.shovel.bloodwood</tool>
+            <tool>Natura:natura.axe.bloodwood</tool>
+            <tool>Natura:natura.sword.bloodwood</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Cardboard</title>
+        <requires>discover.cavestokingdoms.reeds</requires>
+        <requiresIcon>minecraft:reeds</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>betterstorage:cardboardPickaxe</tool>
+            <tool>betterstorage:cardboardShovel</tool>
+            <tool>betterstorage:cardboardAxe</tool>
+            <tool>betterstorage:cardboardHoe</tool>
+            <tool>betterstorage:cardboardSword</tool>
+        </tools>
+        <title>Unstable</title>
+        <requires>discover.cavestokingdoms.unstable</requires>
+        <requiresIcon>ExtraUtilities:unstableingot</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>ExtraUtilities:destructionpickaxe</tool>
+            <tool>ExtraUtilities:erosionShovel</tool>
+            <tool>ExtraUtilities:defoliageAxe</tool>
+            <tool>ExtraUtilities:temporalHoe</tool>
+            <tool>ExtraUtilities:ethericsword</tool>
+        </tools>
+    </page>
+
+    <page type = "c2kClassicToolsPage">
+        <title>Bound</title>
+        <requires>discover.cavestokingdoms.bound</requires>
+        <requiresIcon>AWWayofTime:masterStone</requiresIcon>
+        <text></text>
+        <tools>
+            <tool>AWWayofTime:boundPickaxe</tool>
+            <tool>AWWayofTime:boundShovel</tool>
+            <tool>AWWayofTime:boundAxe</tool>
+            <tool>AWWayofTime:energySword</tool>
+        </tools>
+    </page>
+
+</book>

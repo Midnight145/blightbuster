@@ -1,0 +1,491 @@
+﻿<?xml version="1.0"?>
+
+<!-- This is going to be the modular weapons book. -->
+
+<book>
+
+   <page type="intro">
+<text>Materials - Modular Ranged Weaponry
+A Guide to Material Properties
+
+By Ayumu Nagasawa</text>
+   </page>
+
+   <page type="text">
+      <text>Dr. Boni has made significant new advances in the development of modular tools. As wonderful as these advances are, they have never been fully documented in "materials and you."
+
+This book serves as documentation for all the new material attributes involved in the creation of ranged weaponry.</text>
+   </page>
+
+   <page type="sectionpage">
+      <title>Material Statistics:</title>
+      <text>This book lists the following material properties:
+
+- Durability: How many times the material
+  can be used before breaking.
+- Draw Delay: A measure of how long it takes
+  to draw a bow made of this material.
+- Launch Strength: A measure of how fast
+  projectiles fired from a bow would be.
+- XP Required: How much XP this material
+  requires to level up.
+- Mass: How well this material penetrates armor.
+  and how much gravity affects it. Galileo who?
+- Break Chance: The chance an arrowhead make
+  of this material will break if you miss.
+- Attack Damage: How much extra damage this
+  does as an arrowhead.
+      </text>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Wood</mat>
+      <icon>minecraft:planks</icon>
+      <requires></requires>
+      <requiresIcon>Natura:tree:2</requiresIcon>
+      <icon>Natura:planks:2</icon>
+      <mat>Ghostwood</mat>
+      <requires>discover.cavestokingdoms.ghostwood</requires>
+      <requiresIcon>Natura:tree:2</requiresIcon>
+      <icon>Natura:planks:2</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Darkwood</mat>
+      <requires>discover.cavestokingdoms.darkwood</requires>
+      <requiresIcon>Natura:Dark Tree</requiresIcon>
+      <icon>Natura:planks:11</icon>
+      <mat>Fusewood</mat>
+      <requires>discover.cavestokingdoms.fusewood</requires>
+      <requiresIcon>Natura:Dark Tree:1</requiresIcon>
+      <icon>Natura:planks:12</icon>
+      <ore>Natura:Dark Tree:1</ore>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Bloodwood</mat>
+      <requires>discover.cavestokingdoms.bloodwood</requires>
+      <requiresIcon>Natura:bloodwood</requiresIcon>
+      <icon>Natura:planks:4</icon>
+      <ore>Natura:bloodwood</ore>
+      <mat>Cactus</mat>
+      <requires>discover.cavestokingdoms.cactus</requires>
+      <requiresIcon>minecraft:cactus</requiresIcon>
+      <icon>minecraft:cactus</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Stone</mat>
+      <requires></requires>
+      <requiresIcon>minecraft:gravel</requiresIcon>
+      <icon>minecraft:cobblestone</icon>
+      <mat>Flint</mat>
+      <requires>discover.cavestokingdoms.gravel</requires>
+      <requiresIcon>minecraft:gravel</requiresIcon>
+      <icon>minecraft:flint</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Netherrack</mat>
+      <requires>discover.cavestokingdoms.netherrack</requires>
+      <requiresIcon>minecraft:netherrack</requiresIcon>
+      <icon>minecraft:netherrack</icon>
+      <mat>Certus Quartz</mat>
+      <requires>discover.cavestokingdoms.certusquartz</requires>
+      <requiresIcon>appliedenergistics2:item.ItemMultiMaterial</requiresIcon>
+      <icon>appliedenergistics2:item.ItemMultiMaterial</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Nether Quartz</mat>
+      <requires>discover.cavestokingdoms.netherquartz</requires>
+      <requiresIcon>minecraft:quartz_ore</requiresIcon>
+      <icon>minecraft:quartz</icon>
+      <mat>Obsidian</mat>
+      <requires>discover.cavestokingdoms.obsidian</requires>
+      <requiresIcon>minecraft:obsidian</requiresIcon>
+      <icon>minecraft:obsidian</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Copper</mat>
+      <requires>discover.cavestokingdoms.copper</requires>
+      <requiresIcon>Metallurgy:base.ore</requiresIcon>
+      <icon>TConstruct:materials:9</icon>
+      <mat>Iron</mat>
+      <requires>discover.cavestokingdoms.iron</requires>
+      <requiresIcon>minecraft:iron_ore</requiresIcon>
+      <icon>minecraft:iron_ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Nickel</mat>
+      <requires>discover.cavestokingdoms.nickel</requires>
+      <requiresIcon>ThermalFoundation:Ore:4</requiresIcon>
+      <icon>ThermalFoundation:material:68</icon>
+      <mat>Lead</mat>
+      <requires>discover.cavestokingdoms.lead</requires>
+      <requiresIcon>ThermalFoundation:Ore:3</requiresIcon>
+      <icon>ThermalFoundation:material:67</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Silver</mat>
+      <requires>discover.cavestokingdoms.silver</requires>
+      <requiresIcon>Metallurgy:precious.ore:1</requiresIcon>
+      <icon>ThermalFoundation:material:66</icon>
+      <mat>Platinum</mat>
+      <requires>discover.cavestokingdoms.platinum</requires>
+      <requiresIcon>Metallurgy:precious.ore:2</requiresIcon>
+      <icon>ThermalFoundation:material:69</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Prometheum</mat>
+      <requires>discover.cavestokingdoms.prometheum</requires>
+      <requiresIcon>Metallurgy:fantasy.ore:0</requiresIcon>
+      <icon>Metallurgy:prometheum.ingot</icon>
+      <mat>Deep Iron</mat>
+      <requires>discover.cavestokingdoms.deepiron</requires>
+      <requiresIcon>Metallurgy:fantasy.ore:1</requiresIcon>
+      <icon>Metallurgy:deep.iron.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Oureclase</mat>
+      <requires>discover.cavestokingdoms.oureclase</requires>
+      <requiresIcon>Metallurgy:fantasy.ore:4</requiresIcon>
+      <icon>Metallurgy:oureclase.ingot</icon>
+      <mat>Mithril</mat>
+      <requires>discover.cavestokingdoms.mithril</requires>
+      <requiresIcon>Metallurgy:fantasy.ore:7</requiresIcon>
+      <icon>Metallurgy:mithril.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Orichalcum</mat>
+      <requires>discover.cavestokingdoms.orichalcum</requires>
+      <requiresIcon>Metallurgy:fantasy.ore:11</requiresIcon>
+      <icon>Metallurgy:orichalcum.ingot</icon>
+      <mat>Adamantine</mat>
+      <requires>discover.cavestokingdoms.adamantine</requires>
+      <requiresIcon>Metallurgy:fantasy.ore:13</requiresIcon>
+      <icon>Metallurgy:adamantine.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Atlarus</mat>
+      <requires>discover.cavestokingdoms.atlarus</requires>
+      <requiresIcon>Metallurgy:fantasy.ore:14</requiresIcon>
+      <icon>Metallurgy:atlarus.ingot</icon>
+      <mat>Carmot</mat>
+      <requires>discover.cavestokingdoms.carmot</requires>
+      <requiresIcon>Metallurgy:fantasy.ore:6</requiresIcon>
+      <icon>Metallurgy:carmot.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Astral Silver</mat>
+      <requires>discover.cavestokingdoms.astralsilver</requires>
+      <requiresIcon>Metallurgy:fantasy.ore:5</requiresIcon>
+      <icon>Metallurgy:astral.silver.ingot</icon>
+      <mat>Thaumium</mat>
+      <requires>discover.cavestokingdoms.thaumium</requires>
+      <requiresIcon>Thaumcraft:ItemResource:2</requiresIcon>
+      <icon>Thaumcraft:ItemResource:2</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Void Metal</mat>
+      <requires>discover.cavestokingdoms.voidmetal</requires>
+      <requiresIcon>Thaumcraft:ItemResource:16</requiresIcon>
+      <icon>Thaumcraft:ItemResource:16</icon>
+      <mat>Manasteel</mat>
+      <requires>discover.cavestokingdoms.manasteel</requires>
+      <requiresIcon>Botania:manaResource:0</requiresIcon>
+      <icon>Botania:manaResource:0</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Terrasteel</mat>
+      <requires>discover.cavestokingdoms.terrasteel</requires>
+      <requiresIcon>Botania:manaResource:4</requiresIcon>
+      <icon>Botania:manaResource:4</icon>
+      <mat>Elementium</mat>
+      <requires>discover.cavestokingdoms.elementium</requires>
+      <requiresIcon>Botania:manaResource:7</requiresIcon>
+      <icon>Botania:manaResource:7</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Cobalt</mat>
+      <requires>discover.cavestokingdoms.cobalt</requires>
+      <requiresIcon>TConstruct:SearedBrick:1</requiresIcon>
+      <icon>TConstruct:materials:3</icon>
+      <mat>Ardite</mat>
+      <requires>discover.cavestokingdoms.ardite</requires>
+      <requiresIcon>TConstruct:SearedBrick:2</requiresIcon>
+      <icon>TConstruct:materials:4</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Ignatius</mat>
+      <requires>discover.cavestokingdoms.ignatius</requires>
+      <requiresIcon>Metallurgy:nether.ore</requiresIcon>
+      <icon>Metallurgy:ignatius.ingot</icon>
+      <mat>Shadow Iron</mat>
+      <requires>discover.cavestokingdoms.shadowiron</requires>
+      <requiresIcon>Metallurgy:nether.ore:1</requiresIcon>
+      <icon>Metallurgy:shadow.iron.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Kalendrite</mat>
+      <requires>discover.cavestokingdoms.kalendrite</requires>
+      <requiresIcon>Metallurgy:nether.ore:7</requiresIcon>
+      <icon>Metallurgy:kalendrite.ingot</icon>
+      <mat>Midasium</mat>
+      <requires>discover.cavestokingdoms.midasium</requires>
+      <requiresIcon>Metallurgy:nether.ore:3</requiresIcon>
+      <icon>Metallurgy:midasium.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Ceruclase</mat>
+      <requires>discover.cavestokingdoms.ceruclase</requires>
+      <requiresIcon>Metallurgy:nether.ore:5</requiresIcon>
+      <icon>Metallurgy:ceruclase.ingot</icon>
+      <mat>Vyroxeres</mat>
+      <requires>discover.cavestokingdoms.vyroxeres</requires>
+      <requiresIcon>Metallurgy:nether.ore:4</requiresIcon>
+      <icon>Metallurgy:vyroxeres.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Vulcanite</mat>
+      <requires>discover.cavestokingdoms.vulcanite</requires>
+      <requiresIcon>Metallurgy:nether.ore:8</requiresIcon>
+      <icon>Metallurgy:vulcanite.ingot</icon>
+      <mat>Sanguinite</mat>
+      <requires>discover.cavestokingdoms.sanguinite</requires>
+      <requiresIcon>Metallurgy:nether.ore:9</requiresIcon>
+      <icon>Metallurgy:sanguinite.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Eximite</mat>
+      <requires>discover.cavestokingdoms.eximite</requires>
+      <requiresIcon>Metallurgy:ender.ore:0</requiresIcon>
+      <icon>Metallurgy:eximite.ingot</icon>
+      <mat>Bronze</mat>
+      <requires>discover.cavestokingdoms.bronze</requires>
+      <requiresIcon>TConstruct:materials:13</requiresIcon>
+      <icon>TConstruct:materials:13</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Invar</mat>
+      <requires>discover.cavestokingdoms.invar</requires>
+      <requiresIcon>ThermalFoundation:material:72</requiresIcon>
+      <icon>ThermalFoundation:material:72</icon>
+      <mat>Steel</mat>
+      <requires>discover.cavestokingdoms.steel</requires>
+      <requiresIcon>TConstruct:materials:16</requiresIcon>
+      <icon>TConstruct:materials:16</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Brass</mat>
+      <requires>discover.cavestokingdoms.brass</requires>
+      <requiresIcon>Metallurgy:brass.ingot</requiresIcon>
+      <icon>Metallurgy:brass.ingot</icon>
+      <mat>Angmallen</mat>
+      <requires>discover.cavestokingdoms.angmallen</requires>
+      <requiresIcon>Metallurgy:angmallen.ingot</requiresIcon>
+      <icon>Metallurgy:angmallen.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Hepatizon</mat>
+      <requires>discover.cavestokingdoms.hepatizon</requires>
+      <requiresIcon>Metallurgy:hepatizon.ingot</requiresIcon>
+      <icon>Metallurgy:hepatizon.ingot</icon>
+      <mat>Electrum</mat>
+      <requires>discover.cavestokingdoms.electrum</requires>
+      <requiresIcon>Metallurgy:electrum.ingot</requiresIcon>
+      <icon>Metallurgy:electrum.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Damascus Steel</mat>
+      <requires>discover.cavestokingdoms.damascussteel</requires>
+      <requiresIcon>Metallurgy:damascus.steel.ingot</requiresIcon>
+      <icon>Metallurgy:damascus.steel.ingot</icon>
+      <mat>Alumite</mat>
+      <requires>discover.cavestokingdoms.alumite</requires>
+      <requiresIcon>TConstruct:materials:15</requiresIcon>
+      <icon>TConstruct:materials:15</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Manyullyn</mat>
+      <requires>discover.cavestokingdoms.manyullyn</requires>
+      <requiresIcon>TConstruct:materials:5</requiresIcon>
+      <icon>TConstruct:materials:5</icon>
+      <mat>Pokefennium</mat>
+      <requires>discover.cavestokingdoms.pokefennium</requires>
+      <requiresIcon>ExtraTiC:funStuffIngot:1</requiresIcon>
+      <icon>ExtraTiC:funStuffIngot:1</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Fairy</mat>
+      <requires>discover.cavestokingdoms.fairy</requires>
+      <requiresIcon>ExtraTiC:funStuffIngot</requiresIcon>
+      <icon>ExtraTiC:funStuffIngot</icon>
+      <mat>PigIron</mat>
+      <requires>discover.cavestokingdoms.pigiron</requires>
+      <requiresIcon>TConstruct:materials:34</requiresIcon>
+      <icon>TConstruct:materials:34</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Enderium</mat>
+      <requires>discover.cavestokingdoms.enderium</requires>
+      <requiresIcon>ThermalFoundation:material:76</requiresIcon>
+      <icon>ThermalFoundation:material:76</icon>
+      <mat>Signalum</mat>
+      <requires>discover.cavestokingdoms.signalum</requires>
+      <requiresIcon>ThermalFoundation:material:74</requiresIcon>
+      <icon>ThermalFoundation:material:74</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Lumium</mat>
+      <requires>discover.cavestokingdoms.lumium</requires>
+      <requiresIcon>ThermalFoundation:material:75</requiresIcon>
+      <icon>ThermalFoundation:material:75</icon>
+      <mat>Black Steel</mat>
+      <requires>discover.cavestokingdoms.blacksteel</requires>
+      <requiresIcon>Metallurgy:black.steel.ingot</requiresIcon>
+      <icon>Metallurgy:black.steel.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Haderoth</mat>
+      <requires>discover.cavestokingdoms.haderoth</requires>
+      <requiresIcon>Metallurgy:haderoth.ingot</requiresIcon>
+      <icon>Metallurgy:haderoth.ingot</icon>
+      <mat>Tartarite</mat>
+      <requires>discover.cavestokingdoms.tartarite</requires>
+      <requiresIcon>Metallurgy:tartarite.ingot</requiresIcon>
+      <icon>Metallurgy:tartarite.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Celenegil</mat>
+      <requires>discover.cavestokingdoms.celenegil</requires>
+      <requiresIcon>Metallurgy:celenegil.ingot</requiresIcon>
+      <icon>Metallurgy:celenegil.ingot</icon>
+      <mat>Quicksilver</mat>
+      <requires>discover.cavestokingdoms.quicksilver</requires>
+      <requiresIcon>Metallurgy:quicksilver.ingot</requiresIcon>
+      <icon>Metallurgy:quicksilver.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Inolashite</mat>
+      <requires>discover.cavestokingdoms.inolashite</requires>
+      <requiresIcon>Metallurgy:inolashite.ingot</requiresIcon>
+      <icon>Metallurgy:inolashite.ingot</icon>
+      <mat>Shadow Steel</mat>
+      <requires>discover.cavestokingdoms.shadowsteel</requires>
+      <requiresIcon>Metallurgy:shadow.steel.ingot</requiresIcon>
+      <icon>Metallurgy:shadow.steel.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Amordrine</mat>
+      <requires>discover.cavestokingdoms.amordrine</requires>
+      <requiresIcon>Metallurgy:amordrine.ingot</requiresIcon>
+      <icon>Metallurgy:amordrine.ingot</icon>
+      <mat>Desichalkos</mat>
+      <requires>discover.cavestokingdoms.desichalkos</requires>
+      <requiresIcon>Metallurgy:desichalkos.ingot</requiresIcon>
+      <icon>Metallurgy:desichalkos.ingot</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Slime</mat>
+      <requires>discover.cavestokingdoms.greenslime</requires>
+      <requiresIcon>minecraft:slime_ball</requiresIcon>
+      <icon>TConstruct:materials:1</icon>
+      <mat>BlueSlime</mat>
+      <requires>discover.cavestokingdoms.blueslime</requires>
+      <requiresIcon>TConstruct:strangeFood</requiresIcon>
+      <icon>TConstruct:materials:17</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Pink Slime</mat>
+      <requires>discover.cavestokingdoms.pinkslime</requires>
+      <requiresIcon>MineFactoryReloaded:pinkslime</requiresIcon>
+      <icon>MineFactoryReloaded:pinkslime:1</icon>
+      <mat>Glue</mat>
+      <requires>discover.cavestokingdoms.glue</requires>
+      <requiresIcon>TConstruct:materials:36</requiresIcon>
+      <icon>TConstruct:materials:36</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Plastic</mat>
+      <requires>discover.cavestokingdoms.plastic</requires>
+      <requiresIcon>MineFactoryReloaded:rubber.raw</requiresIcon>
+      <icon>MineFactoryReloaded:plastic.sheet:0</icon>
+      <mat>Ruby</mat>
+      <requires>discover.cavestokingdoms.ruby</requires>
+      <requiresIcon>customnpcs:npcRuby</requiresIcon>
+      <icon>customnpcs:npcRuby</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Peridot</mat>
+      <requires>discover.cavestokingdoms.peridot</requires>
+      <requiresIcon>ExtraTiC:chunk:165</requiresIcon>
+      <icon>ExtraTiC:chunk:165</icon>
+      <mat>Sapphire</mat>
+      <requires>discover.cavestokingdoms.sapphire</requires>
+      <requiresIcon>customnpcs:npcSaphire</requiresIcon>
+      <icon>customnpcs:npcSaphire</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Amethyst</mat>
+      <requires>discover.cavestokingdoms.amethyst</requires>
+      <requiresIcon>customnpcs:npcAmethyst</requiresIcon>
+      <icon>customnpcs:npcAmethyst</icon>
+      <mat>Paper</mat>
+      <requires>discover.cavestokingdoms.reeds</requires>
+      <requiresIcon>minecraft:reeds</requiresIcon>
+      <icon>minecraft:paper</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Cardboard</mat>
+      <requires>discover.cavestokingdoms.reeds</requires>
+      <requiresIcon>minecraft:reeds</requiresIcon>
+      <icon>betterstorage:cardboardSheet</icon>
+      <mat>Bone</mat>
+      <requires>discover.cavestokingdoms.bonemeal</requires>
+      <requiresIcon>minecraft:dye:15</requiresIcon>
+      <icon>minecraft:bone</icon>
+   </page>
+
+   <page type="bowMaterialsPage">
+      <mat>Bedrockium</mat>
+      <requires>discover.cavestokingdoms.bedrockium</requires>
+      <requiresIcon>ExtraUtilities:bedrockiumIngot</requiresIcon>
+      <icon>ExtraUtilities:bedrockiumIngot</icon>
+   </page>
+
+</book>

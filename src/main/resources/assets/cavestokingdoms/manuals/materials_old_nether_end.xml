@@ -1,0 +1,454 @@
+﻿<?xml version="1.0"?>
+
+<!-- This is the old "Nether and end" book. -->
+
+<book>
+<page type="intro">
+<text>Materials - Alien Nether and End Edition
+A Guide to Material Properties
+
+By Ayumu Nagasawa</text>
+</page>
+
+<page type="text">
+<text>Upon landing on the alien world, many new materials have been discovered. Some of these only appear in pockets of netherrack and endstone. These are rare enough (and diverse enough) that they didn't merit inclusion in volume three of Materials. They are instead found in this version.</text>
+</page>
+
+<page type="sectionpage">
+<title>Material Traits</title>
+<text>Some materials have traits that augment their natural uses.
+
+- Reinforced: 10% chance per level of not using durability
+- Stonebound: The tool mines faster as it wears out, but does less damage
+- Jagged: The tool does more damage as it wears out, but mines slower
+- Writable: One extra modifier per piece
+- Tasty: Sometimes drops food items</text>
+</page>
+
+<page type="sectionpage">
+<title>Material Statistics:</title>
+<text>Materials have more possible attributes than 
+when Skyla wrote his seminal work.
+
+- Harvest Difficulty: What tool level is needed 
+  to mine it.
+- Harvest level: The maximum hardness a tool
+  can mine.
+- Durability: How many times the material can 
+  be used before breaking.
+- Handle Mod: Tools with this as a handle 
+  multiply their durability by this amount.
+- Mining Speed: How quickly the tool mines 
+  materials it is effective against.
+- Attack Damage: How much extra damage this 
+  tool does when attacking
+- XP Required: How much XP this material 
+  requires to level up.</text>
+</page>
+
+<page type="extMaterialPage">
+<title>Kalendrite</title>
+<icon>Metallurgy:kalendrite.ingot</icon>
+<ore>Metallurgy:nether.ore:7</ore>
+<text>A rare alien nether metal. Comparable to alumite, but mines more, is twice as durable, slower, and levels more quickly.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Kalendrite</title>
+<tools type = "1">
+   <icon>Metallurgy:kalendrite.pickaxe</icon>
+   <icon>Metallurgy:kalendrite.shovel</icon>
+   <icon>Metallurgy:kalendrite.axe</icon>
+   <icon>Metallurgy:kalendrite.hoe</icon>
+   <icon>Metallurgy:kalendrite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.kalendrite.helmet</icon>
+   <icon>Metallurgy:metallurgy.kalendrite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.kalendrite.leggings</icon>
+   <icon>Metallurgy:metallurgy.kalendrite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Midasium</title>
+<icon>Metallurgy:midasium.ingot</icon>
+<ore>Metallurgy:nether.ore:3</ore>
+<text>A strange alien nether metal. Mixing its dust with any other metal dust turns it to gold.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Midasium</title>
+<tools type = "1">
+   <icon>Metallurgy:midasium.pickaxe</icon>
+   <icon>Metallurgy:midasium.shovel</icon>
+   <icon>Metallurgy:midasium.axe</icon>
+   <icon>Metallurgy:midasium.hoe</icon>
+   <icon>Metallurgy:midasium.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.midasium.helmet</icon>
+   <icon>Metallurgy:metallurgy.midasium.chestplate</icon>
+   <icon>Metallurgy:metallurgy.midasium.leggings</icon>
+   <icon>Metallurgy:metallurgy.midasium.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Ceruclase</title>
+<icon>Metallurgy:ceruclase.ingot</icon>
+<ore>Metallurgy:nether.ore:5</ore>
+<text>An alien nether metal. Very similar in properties to steel, but it can mine slightly more things.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Ceruclase</title>
+<tools type = "1">
+   <icon>Metallurgy:ceruclase.pickaxe</icon>
+   <icon>Metallurgy:ceruclase.shovel</icon>
+   <icon>Metallurgy:ceruclase.axe</icon>
+   <icon>Metallurgy:ceruclase.hoe</icon>
+   <icon>Metallurgy:ceruclase.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.ceruclase.helmet</icon>
+   <icon>Metallurgy:metallurgy.ceruclase.chestplate</icon>
+   <icon>Metallurgy:metallurgy.ceruclase.leggings</icon>
+   <icon>Metallurgy:metallurgy.ceruclase.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Vyroxeres</title>
+<icon>Metallurgy:vyroxeres.ingot</icon>
+<ore>Metallurgy:nether.ore:4</ore>
+<text>A strange alien nether metal that emits constant radiation.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Vyroxeres</title>
+<tools type = "1">
+   <icon>Metallurgy:vyroxeres.pickaxe</icon>
+   <icon>Metallurgy:vyroxeres.shovel</icon>
+   <icon>Metallurgy:vyroxeres.axe</icon>
+   <icon>Metallurgy:vyroxeres.hoe</icon>
+   <icon>Metallurgy:vyroxeres.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.vyroxeres.helmet</icon>
+   <icon>Metallurgy:metallurgy.vyroxeres.chestplate</icon>
+   <icon>Metallurgy:metallurgy.vyroxeres.leggings</icon>
+   <icon>Metallurgy:metallurgy.vyroxeres.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Inolashite</title>
+<icon>Metallurgy:inolashite.ingot</icon>
+<ore></ore>
+<text>An alloy of two alien nether metals. The alloying process makes it better in every way, except for its use as a handle.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Inolashite</title>
+<tools type = "1">
+   <icon>Metallurgy:inolashite.pickaxe</icon>
+   <icon>Metallurgy:inolashite.shovel</icon>
+   <icon>Metallurgy:inolashite.axe</icon>
+   <icon>Metallurgy:inolashite.hoe</icon>
+   <icon>Metallurgy:inolashite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.inolashite.helmet</icon>
+   <icon>Metallurgy:metallurgy.inolashite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.inolashite.leggings</icon>
+   <icon>Metallurgy:metallurgy.inolashite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Vulcanite</title>
+<icon>Metallurgy:vulcanite.ingot</icon>
+<ore>Metallurgy:nether.ore:8</ore>
+<text>An unusual alien nether metal. Can mine everything Manyullyn can, just very slowly. It is much more durable, however.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Vulcanite</title>
+<tools type = "1">
+   <icon>Metallurgy:vulcanite.pickaxe</icon>
+   <icon>Metallurgy:vulcanite.shovel</icon>
+   <icon>Metallurgy:vulcanite.axe</icon>
+   <icon>Metallurgy:vulcanite.hoe</icon>
+   <icon>Metallurgy:vulcanite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.vulcanite.helmet</icon>
+   <icon>Metallurgy:metallurgy.vulcanite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.vulcanite.leggings</icon>
+   <icon>Metallurgy:metallurgy.vulcanite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Sanguinite</title>
+<icon>Metallurgy:sanguinite.ingot</icon>
+<ore>Metallurgy:nether.ore:9</ore>
+<text>An amazing alien nether metal. Incredibly durable, but mines blocks slowly. It can mine most anything.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Sanguinite</title>
+<tools type = "1">
+   <icon>Metallurgy:sanguinite.pickaxe</icon>
+   <icon>Metallurgy:sanguinite.shovel</icon>
+   <icon>Metallurgy:sanguinite.axe</icon>
+   <icon>Metallurgy:sanguinite.hoe</icon>
+   <icon>Metallurgy:sanguinite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.sanguinite.helmet</icon>
+   <icon>Metallurgy:metallurgy.sanguinite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.sanguinite.leggings</icon>
+   <icon>Metallurgy:metallurgy.sanguinite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Ignatius</title>
+<icon>Metallurgy:ignatius.ingot</icon>
+<ore>Metallurgy:nether.ore</ore>
+<text>A strange nether stone. Its dust can be used as fuel.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Ignatius</title>
+<tools type = "1">
+   <icon>Metallurgy:ignatius.pickaxe</icon>
+   <icon>Metallurgy:ignatius.shovel</icon>
+   <icon>Metallurgy:ignatius.axe</icon>
+   <icon>Metallurgy:ignatius.hoe</icon>
+   <icon>Metallurgy:ignatius.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.ignatius.helmet</icon>
+   <icon>Metallurgy:metallurgy.ignatius.chestplate</icon>
+   <icon>Metallurgy:metallurgy.ignatius.leggings</icon>
+   <icon>Metallurgy:metallurgy.ignatius.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Shadow Iron</title>
+<icon>Metallurgy:shadow.iron.ingot</icon>
+<ore>Metallurgy:nether.ore:1</ore>
+<text>An alien variant of iron. It's four times as durable, but slower and is very hard to level up.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Shadow Iron</title>
+<tools type = "1">
+   <icon>Metallurgy:shadow.iron.pickaxe</icon>
+   <icon>Metallurgy:shadow.iron.shovel</icon>
+   <icon>Metallurgy:shadow.iron.axe</icon>
+   <icon>Metallurgy:shadow.iron.hoe</icon>
+   <icon>Metallurgy:shadow.iron.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.shadow.iron.helmet</icon>
+   <icon>Metallurgy:metallurgy.shadow.iron.chestplate</icon>
+   <icon>Metallurgy:metallurgy.shadow.iron.leggings</icon>
+   <icon>Metallurgy:metallurgy.shadow.iron.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Shadow Steel</title>
+<icon>Metallurgy:shadow.steel.ingot</icon>
+<ore></ore>
+<text>An alien variant of steel. Incredibly durable. Hard to level up, but much easier than shadow iron.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Shadow Steel</title>
+<tools type = "1">
+   <icon>Metallurgy:shadow.steel.pickaxe</icon>
+   <icon>Metallurgy:shadow.steel.shovel</icon>
+   <icon>Metallurgy:shadow.steel.axe</icon>
+   <icon>Metallurgy:shadow.steel.hoe</icon>
+   <icon>Metallurgy:shadow.steel.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.shadow.steel.helmet</icon>
+   <icon>Metallurgy:metallurgy.shadow.steel.chestplate</icon>
+   <icon>Metallurgy:metallurgy.shadow.steel.leggings</icon>
+   <icon>Metallurgy:metallurgy.shadow.steel.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Amordrine</title>
+<icon>Metallurgy:amordrine.ingot</icon>
+<ore></ore>
+<text>An alloy of platinum with an alien nether metal. Better in every way than platinum, including mining and levelling speed.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Amordrine</title>
+<tools type = "1">
+   <icon>Metallurgy:amordrine.pickaxe</icon>
+   <icon>Metallurgy:amordrine.shovel</icon>
+   <icon>Metallurgy:amordrine.axe</icon>
+   <icon>Metallurgy:amordrine.hoe</icon>
+   <icon>Metallurgy:amordrine.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.amordrine.helmet</icon>
+   <icon>Metallurgy:metallurgy.amordrine.chestplate</icon>
+   <icon>Metallurgy:metallurgy.amordrine.leggings</icon>
+   <icon>Metallurgy:metallurgy.amordrine.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Lemurite</title>
+<icon>Metallurgy:lemurite.ingot</icon>
+<ore>Metallurgy:nether.ore:2</ore>
+<text>A crumbly material that turns to liquid at high tempuratures. Alloys with Shadow iron to make Shadow Steel.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Lemurite</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Alduorite</title>
+<icon>Metallurgy:alduorite.ingot</icon>
+<ore>Metallurgy:nether.ore:6</ore>
+<text>A nether metal used only for alloying.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Alduorite</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Eximite</title>
+<icon>Metallurgy:eximite.ingot</icon>
+<ore>Metallurgy:ender.ore:0</ore>
+<text>A rare alien metal found in pockets of endstone. Mines what Alumite can, but is better than alumite in nearly every way, including being twice as durable.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Eximite</title>
+<tools type = "1">
+   <icon>Metallurgy:eximite.pickaxe</icon>
+   <icon>Metallurgy:eximite.shovel</icon>
+   <icon>Metallurgy:eximite.axe</icon>
+   <icon>Metallurgy:eximite.hoe</icon>
+   <icon>Metallurgy:eximite.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.eximite.helmet</icon>
+   <icon>Metallurgy:metallurgy.eximite.chestplate</icon>
+   <icon>Metallurgy:metallurgy.eximite.leggings</icon>
+   <icon>Metallurgy:metallurgy.eximite.boots</icon>
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Meutoite</title>
+<icon>Metallurgy:meutoite.ingot</icon>
+<ore>Metallurgy:ender.ore:1</ore>
+<text>A strange material that resonates with ender energy. Mix with Exemite to make Desichalkos.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Meutoite</title>
+<tools type = "0">
+</tools>
+<mods type = "0">
+</mods>
+<armor type = "0">
+</armor>
+</page>
+
+
+<page type="extMaterialPage">
+<title>Desichalkos</title>
+<icon>Metallurgy:desichalkos.ingot</icon>
+<ore></ore>
+<text>An alloy of two rare alien metals found in pockets of endstone. Better than anything developed on homeworld. More durable than adamantine, and levels faster, too.</text>
+</page>
+
+<page type = "extMaterialUsePage">
+<title>Desichalkos</title>
+<tools type = "1">
+   <icon>Metallurgy:desichalkos.pickaxe</icon>
+   <icon>Metallurgy:desichalkos.shovel</icon>
+   <icon>Metallurgy:desichalkos.axe</icon>
+   <icon>Metallurgy:desichalkos.hoe</icon>
+   <icon>Metallurgy:desichalkos.sword</icon>
+</tools>
+<mods type = "2">
+</mods>
+<armor type = "1">
+   <icon>Metallurgy:metallurgy.desichalkos.helmet</icon>
+   <icon>Metallurgy:metallurgy.desichalkos.chestplate</icon>
+   <icon>Metallurgy:metallurgy.desichalkos.leggings</icon>
+   <icon>Metallurgy:metallurgy.desichalkos.boots</icon>
+</armor>
+</page>
+
+
+</book>
