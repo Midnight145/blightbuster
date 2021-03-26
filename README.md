@@ -1,6 +1,6 @@
 # BlightBuster
 
-### Fork of @talonos2 and @CannibalVox's code [here](https://github.com/CannibalVox/CavesToKingdoms)
+### Fork of @talonos2, Icedice, and @CannibalVox's code [here](https://github.com/CannibalVox/CavesToKingdoms)
 
 Installation:
 
