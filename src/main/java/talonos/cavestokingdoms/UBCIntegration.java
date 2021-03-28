@@ -3,12 +3,8 @@ package talonos.cavestokingdoms;
 import java.util.logging.Logger;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import thaumcraft.common.config.ConfigBlocks;
 import exterminatorJeff.undergroundBiomes.api.UBAPIHook;
-import exterminatorJeff.undergroundBiomes.api.UBOreTexturizer;
+import net.minecraft.init.Blocks;
 
 public class UBCIntegration
 {

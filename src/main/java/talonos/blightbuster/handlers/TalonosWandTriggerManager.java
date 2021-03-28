@@ -1,17 +1,16 @@
 package talonos.blightbuster.handlers;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
-import org.apache.commons.lang3.tuple.Pair;
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.multiblock.BlockMultiblock;
-import talonos.blightbuster.multiblock.Multiblock;
 import talonos.blightbuster.multiblock.entries.MultiblockEntry;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;

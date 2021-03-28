@@ -4,6 +4,7 @@ tile.blightbuster_dawnMachineBuffer.name=Dawn Machine
 tile.blightbuster_dawnMachine.name=Dawn Machine
 tile.blightbuster_cyberTotem.name=Cyber Totem
 tile.blightbuster_offering.name=Offering of Dawn
+tile.blightbuster_dawnCharger.name=Dawn Charger
 
 item.blightbuster_purityFocus.name=Wand Focus: Purity
 item.blightbuster_silverPotion.name=Silverleaf Splash Potion
@@ -20,6 +21,9 @@ tc.research_page.PURITYFOCUS.1=You have found a way to infuse the properties of 
 tc.research_name.DAWNTOTEM=Totems of Dawn
 tc.research_text.DAWNTOTEM=The start of a glorious new era!
 tc.research_page.DAWNTOTEM.1=By infusing ethereal blooms into a silverwood log, you have created the totem of dawn. It is the greatest magical protection against taint you have yet devised. Boasting an area much larger than a bloom, this totem also excels in keeping the edges of its area free of taint. It may take slightly longer to completely clean an area, however.
+tc.research_name.DAWNCHARGER=Dawn Charger
+tc.research_text.DAWNCHARGER=Magical RF Transfer
+tc.research_page.DAWNCHARGER.1=The ritual infuses a diamond into the energy cell, giving you a safe way to pump RF into the Dawn Machine. The Offering of Dawn resonates with the infused diamond, confirming the Dawn Machine will be transported safely, avoiding the risky effects of mixing power with magic. Your first attempts led to the cell being destroyed in the process, though you found that the magical properties of the Primal Charm helped combat that.
 
 blightbuster.researchnote=The alien grimoire reveals secret thaumaturgic knowledge!
 

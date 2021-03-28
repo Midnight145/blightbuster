@@ -1,14 +1,15 @@
 package talonos.blightbuster.tileentity.dawnmachine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.common.collect.ImmutableSet;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import talonos.blightbuster.BlightBuster;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DawnMachineChunkLoader implements ForgeChunkManager.LoadingCallback {
 

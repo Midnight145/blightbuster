@@ -1,14 +1,20 @@
 package talonos.cavestokingdoms.proxies;
 
+import java.lang.reflect.Field;
+
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import mantle.client.MProxyClient;
 import mantle.client.gui.GuiManual;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import talonos.cavestokingdoms.client.pages.*;
-
-import java.lang.reflect.Field;
+import talonos.cavestokingdoms.client.pages.C2KArmorPage;
+import talonos.cavestokingdoms.client.pages.C2KBowMaterialsPage;
+import talonos.cavestokingdoms.client.pages.C2KClassicToolsPage;
+import talonos.cavestokingdoms.client.pages.C2KContentsPage;
+import talonos.cavestokingdoms.client.pages.C2KMiningPage;
+import talonos.cavestokingdoms.client.pages.C2KModularToolsPage;
+import talonos.cavestokingdoms.client.pages.ExtMaterialsUsagePage;
 
 public class ClientProxy extends CommonProxy
 {

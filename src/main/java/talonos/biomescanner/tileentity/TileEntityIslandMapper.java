@@ -1,14 +1,11 @@
 package talonos.biomescanner.tileentity;
 
-import java.util.Random;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import talonos.biomescanner.map.BiomeMapColors;
 import talonos.biomescanner.map.MapScanner;
 import talonos.biomescanner.map.event.UpdateMapEvent;
 

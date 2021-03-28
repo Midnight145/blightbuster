@@ -1,8 +1,5 @@
 package talonos.blightbuster.blocks;
 
-import talonos.blightbuster.BBStrings;
-import talonos.blightbuster.BlightBuster;
-import talonos.blightbuster.tileentity.DawnTotemEntity;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,6 +11,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import talonos.blightbuster.BBStrings;
+import talonos.blightbuster.BlightBuster;
+import talonos.blightbuster.tileentity.DawnTotemEntity;
 
 public class BlockDawnTotem extends BBBlock
 {

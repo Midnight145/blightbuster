@@ -1,5 +1,10 @@
 package talonos.cavestokingdoms.client.pages;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import mantle.client.pages.BookPage;
 import net.minecraft.client.renderer.RenderHelper;
@@ -7,10 +12,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 public class C2KContentsPage extends BookPage
 {

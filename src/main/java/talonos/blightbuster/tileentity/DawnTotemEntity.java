@@ -6,7 +6,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.network.packets.SpawnCleanseParticlesPacket;
 import thaumcraft.common.config.Config;
-import thaumcraft.common.lib.utils.Utils;
 
 public class DawnTotemEntity extends TileEntity {
     public long queuedTicks = 0;

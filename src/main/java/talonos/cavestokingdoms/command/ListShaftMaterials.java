@@ -1,5 +1,8 @@
 package talonos.cavestokingdoms.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,9 +11,6 @@ import net.minecraft.util.StatCollector;
 import tconstruct.library.TConstructRegistry;
 import tconstruct.library.tools.CustomMaterial;
 import tconstruct.library.weaponry.ArrowShaftMaterial;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ListShaftMaterials implements ICommand
 {

@@ -1,5 +1,9 @@
 package talonos.biomescanner;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -22,11 +26,6 @@ import talonos.biomescanner.gui.GuiHandlerBadgePrinter;
 import talonos.biomescanner.map.BiomeMapColors;
 import talonos.biomescanner.map.MapScanner;
 import talonos.biomescanner.map.Zone;
-import talonos.blightbuster.network.BlightbusterNetwork;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 @Mod(modid = BiomeScanner.MODID, name = BiomeScanner.MODNAME, version = BiomeScanner.VERSION, dependencies = BiomeScanner.DEPS)
 public class BiomeScanner

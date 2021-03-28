@@ -1,6 +1,12 @@
 package talonos.cavestokingdoms;
 
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.common.MinecraftForge;
 import talonos.cavestokingdoms.blocks.CtKBlock;
 import talonos.cavestokingdoms.client.pages.orediscovery.OreDiscoveryRegistry;
 import talonos.cavestokingdoms.command.DiscoverAll;
@@ -11,12 +17,6 @@ import talonos.cavestokingdoms.extendedproperties.OrbEventHandler;
 import talonos.cavestokingdoms.lib.DEFS;
 import talonos.cavestokingdoms.network.CavesToKingdomsNetwork;
 import talonos.cavestokingdoms.proxies.CommonProxy;
-import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = DEFS.MODID, name = DEFS.MODNAME, version = DEFS.VERSION, dependencies = DEFS.DEPS)
 public class CavesToKindgoms

@@ -1,11 +1,16 @@
 package talonos.blightbuster.multiblock;
 
-import talonos.blightbuster.blocks.BBBlock;
-import talonos.blightbuster.multiblock.entries.*;
-import thaumcraft.common.config.ConfigBlocks;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import talonos.blightbuster.blocks.BBBlock;
+import talonos.blightbuster.multiblock.entries.BasicMultiblockState;
+import talonos.blightbuster.multiblock.entries.IMultiblockEntryState;
+import talonos.blightbuster.multiblock.entries.MultiblockEntry;
+import talonos.blightbuster.multiblock.entries.NonSolidBlockState;
+import talonos.blightbuster.multiblock.entries.NullMultiblockState;
+import talonos.blightbuster.multiblock.entries.OrientationMultiblockState;
+import thaumcraft.common.config.ConfigBlocks;
 
 public class DawnMachineMultiblock extends Multiblock {
 

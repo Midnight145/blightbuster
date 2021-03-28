@@ -1,20 +1,9 @@
 package talonos.blightbuster.items;
 
-import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
 
-import exterminatorJeff.undergroundBiomes.api.UBStrataColumn;
-import talonos.blightbuster.BBStrings;
-import talonos.blightbuster.BlightBuster;
-import talonos.blightbuster.network.BlightbusterNetwork;
-import thaumcraft.common.config.Config;
-import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.lib.utils.Utils;
-import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import exterminatorJeff.undergroundBiomes.api.UBAPIHook;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -24,9 +13,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.common.util.ForgeDirection;
+import talonos.blightbuster.BBStrings;
+import talonos.blightbuster.BlightBuster;
+import talonos.blightbuster.network.BlightbusterNetwork;
+import thaumcraft.common.config.ConfigBlocks;
+import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
 
 public class ItemSuperTestWorldTainter extends Item
 {

@@ -3,11 +3,6 @@ package talonos.blightbuster.items;
 import java.util.HashSet;
 import java.util.Set;
 
-import talonos.blightbuster.BBStrings;
-import talonos.blightbuster.BlightBuster;
-import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.lib.utils.Utils;
-import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
 import cpw.mods.fml.common.registry.GameRegistry;
 import exterminatorJeff.undergroundBiomes.api.UBAPIHook;
 import exterminatorJeff.undergroundBiomes.api.UBStrataColumn;
@@ -21,7 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.layer.IntCache;
-import net.minecraftforge.common.util.ForgeDirection;
+import talonos.blightbuster.BBStrings;
+import talonos.blightbuster.BlightBuster;
+import thaumcraft.common.config.ConfigBlocks;
 
 public class ItemWorldOreKiller extends Item
 {

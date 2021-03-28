@@ -1,20 +1,21 @@
 package talonos.cavestokingdoms.client.pages;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import iguanaman.iguanatweakstconstruct.override.XPAdjustmentMap;
+import iguanaman.iguanatweakstconstruct.util.HarvestLevels;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-
-import org.lwjgl.opengl.*;
-import org.w3c.dom.*;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 import talonos.cavestokingdoms.client.pages.orediscovery.OreDiscoveryPage;
 import tconstruct.library.TConstructRegistry;
 import tconstruct.library.tools.ToolMaterial;
-import iguanaman.iguanatweakstconstruct.util.HarvestLevels;
 
 public class C2KModularToolsPage extends OreDiscoveryPage
 {

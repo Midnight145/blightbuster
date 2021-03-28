@@ -6,7 +6,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import talonos.biomescanner.BSItems;
-import talonos.biomescanner.gui.BadgeSlot;
 import talonos.biomescanner.tileentity.TileEntityIslandScanner;
 
 public class ContainerBadgePrinter extends Container {

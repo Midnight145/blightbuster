@@ -1,12 +1,12 @@
 package talonos.blightbuster.blocks;
 
+import java.util.Random;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -18,10 +18,7 @@ import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.multiblock.BlockMultiblock;
 import talonos.blightbuster.tileentity.DawnMachineSpoutTileEntity;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigBlocks;
-
-import java.util.Random;
 
 public class BlockDawnMachineInput extends BlockMultiblock {
 

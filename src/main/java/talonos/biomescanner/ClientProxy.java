@@ -1,10 +1,10 @@
 package talonos.biomescanner;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import talonos.biomescanner.client.TileEntityGaugeRenderer;
+import talonos.biomescanner.client.TileEntityMapperRenderer;
 import talonos.biomescanner.tileentity.TileEntityGauge;
 import talonos.biomescanner.tileentity.TileEntityIslandMapper;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import talonos.biomescanner.client.TileEntityMapperRenderer;
 
 public class ClientProxy extends CommonProxy
 {

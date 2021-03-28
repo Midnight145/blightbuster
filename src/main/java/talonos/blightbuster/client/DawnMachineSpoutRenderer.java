@@ -1,13 +1,11 @@
 package talonos.blightbuster.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.texture.TextureManager;
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
-import org.lwjgl.opengl.GL11;
 import talonos.blightbuster.tileentity.DawnMachineSpoutTileEntity;
 import talonos.blightbuster.tileentity.dawnmachine.DawnMachineResource;
 import thaumcraft.api.aspects.Aspect;
