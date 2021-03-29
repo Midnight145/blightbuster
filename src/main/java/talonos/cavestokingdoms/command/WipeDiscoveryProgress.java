@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentTranslation;
 import talonos.cavestokingdoms.client.pages.orediscovery.OreDiscoveryRegistry;
 import talonos.cavestokingdoms.network.CavesToKingdomsNetwork;
-import talonos.cavestokingdoms.network.packets.AddAllDiscoveriesPacket;
 import talonos.cavestokingdoms.network.packets.WipeDiscoveryProgressPacket;
 
 public class WipeDiscoveryProgress extends CommandBase {

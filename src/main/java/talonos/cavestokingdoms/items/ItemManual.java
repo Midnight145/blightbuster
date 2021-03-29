@@ -1,15 +1,12 @@
 package talonos.cavestokingdoms.items;
 
+import java.util.List;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.*;
-
-import java.util.List;
-
-import talonos.cavestokingdoms.CavesToKindgoms;
-import talonos.cavestokingdoms.lib.DEFS;
-import tconstruct.library.TConstructRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import mantle.Mantle;
 import mantle.books.BookData;
 import mantle.client.gui.GuiManual;
@@ -21,6 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import talonos.cavestokingdoms.CavesToKindgoms;
+import talonos.cavestokingdoms.lib.DEFS;
 
 public class ItemManual extends ItemOreManual
 {

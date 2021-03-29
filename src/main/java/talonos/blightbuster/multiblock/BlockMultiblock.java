@@ -1,17 +1,14 @@
 package talonos.blightbuster.multiblock;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import org.apache.commons.lang3.tuple.Pair;
-import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.multiblock.entries.MultiblockEntry;
 import thaumcraft.common.Thaumcraft;
-
-import java.util.Random;
 
 public abstract class BlockMultiblock extends Block {
     private Multiblock multiblock;

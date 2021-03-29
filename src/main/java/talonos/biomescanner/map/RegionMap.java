@@ -1,15 +1,16 @@
 package talonos.biomescanner.map;
 
-import net.minecraft.nbt.NBTTagCompound;
-import talonos.biomescanner.BiomeScanner;
-import talonos.biomescanner.map.event.UpdateCompletionEvent;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
+
+import net.minecraft.nbt.NBTTagCompound;
+import talonos.biomescanner.BiomeScanner;
+import talonos.biomescanner.map.event.UpdateCompletionEvent;
 
 public class RegionMap {
 

@@ -1,6 +1,8 @@
 package talonos.blightbuster.tileentity;
 
-import codechicken.lib.math.MathHelper;
+import java.util.List;
+import java.util.Locale;
+
 import cofh.api.energy.IEnergyReceiver;
 import cofh.api.energy.IEnergyStorage;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -8,8 +10,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -34,13 +39,14 @@ import thaumcraft.common.blocks.BlockFluxGoo;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.entities.EntityFallingTaint;
-import thaumcraft.common.entities.monster.*;
-import thaumcraft.common.lib.utils.Utils;
+import thaumcraft.common.entities.monster.EntityTaintChicken;
+import thaumcraft.common.entities.monster.EntityTaintCow;
+import thaumcraft.common.entities.monster.EntityTaintCreeper;
+import thaumcraft.common.entities.monster.EntityTaintPig;
+import thaumcraft.common.entities.monster.EntityTaintSheep;
+import thaumcraft.common.entities.monster.EntityTaintSporeSwarmer;
+import thaumcraft.common.entities.monster.EntityTaintVillager;
 import thaumcraft.common.tiles.TileNode;
-
-import javax.vecmath.Vector3d;
-import java.util.List;
-import java.util.Locale;
 
 public class DawnMachineTileEntity extends TileEntity implements IAspectSource, IAspectContainer, IEnergyReceiver, IEnergyStorage {
 
@@ -64,8 +70,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     private int lastCleanseX = Integer.MAX_VALUE;
     private int lastCleanseZ = Integer.MAX_VALUE;
 
-    private double blinkProgress = 0;
-
     private AspectList internalAspectList = new AspectList();
 
     private boolean hasInitializedChunkloading = false;
@@ -77,13 +81,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     @Override
     public void updateEntity() {
 
-        if (getWorldObj().getIndirectPowerLevelTo(xCoord, yCoord, zCoord, 1) > 0)
+        if (getWorldObj().getIndirectPowerLevelTo(xCoord, yCoord, zCoord, 1) > 0) {
             return;
+        }
 
         if (getWorldObj().isRemote) {
-            if (currentRf <= FULLRED_RF)
-                blinkProgress += 1.0;
-
             return;
         }
 
@@ -92,8 +94,9 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             hasInitializedChunkloading = true;
         }
 
-        if (aerCooldownRemaining > 0)
+        if (aerCooldownRemaining > 0) {
             aerCooldownRemaining--;
+        }
 
         int cleanseLength = haveEnoughFor(DawnMachineResource.MACHINA) ? 4 : 12;
 
@@ -114,14 +117,16 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                     }
                 }
 
-                if (cleanseLength == 4)
+                if (cleanseLength == 4) {
                     spend(DawnMachineResource.MACHINA);
+                }
 
                 executeCleanse(secondaryBlocks);
                 ticksSinceLastCleanse++;
                 break;
             }
-        } else {
+        } 
+        else {
             ticksSinceLastCleanse++;
         }
     }
@@ -806,6 +811,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         tag.setInteger("CurrentRF", currentRf);
     }
 
+    public void pairDawnCharger(NBTTagCompound tag) {
+    	this.writeToNBT(tag);
+    }
+    
     protected void signalUpdate() {
         this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
         markDirty();

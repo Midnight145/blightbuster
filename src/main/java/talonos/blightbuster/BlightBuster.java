@@ -1,15 +1,14 @@
 package talonos.blightbuster;
 
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import net.minecraftforge.common.ForgeChunkManager;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import net.minecraftforge.common.ForgeChunkManager;
+import net.minecraftforge.common.MinecraftForge;
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.entities.EntitySilverPotion;
 import talonos.blightbuster.handlers.PurityFocusEventHandler;
@@ -25,7 +24,7 @@ public class BlightBuster
 	
 	public static final String MODID = "blightbuster";
 	public static final String MODNAME = "BlightBuster";
-    public static final String VERSION = "1.2.19";
+    public static final String VERSION = "1.2.21";
     public static final String DEPS = "before:UndergroundBiomes;after:ThermalFoundation;after:appliedenergistics2;after:Thaumcraft";
 	public static final String COMMONPROXYLOCATION = "talonos."+MODID+".CommonProxy";
 	public static final String CLIENTPROXYLOCATION = "talonos."+MODID+".ClientProxy";

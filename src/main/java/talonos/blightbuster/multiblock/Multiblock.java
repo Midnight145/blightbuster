@@ -1,10 +1,11 @@
 package talonos.blightbuster.multiblock;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import talonos.blightbuster.multiblock.entries.IMultiblockEntryState;
 import talonos.blightbuster.multiblock.entries.MultiblockEntry;
 

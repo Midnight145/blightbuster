@@ -1,9 +1,10 @@
 package talonos.blightbuster.blocks;
 
+import java.util.Random;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
@@ -15,8 +16,6 @@ import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.multiblock.BlockMultiblock;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigBlocks;
-
-import java.util.Random;
 
 public class BlockDawnMachineDummy extends BlockMultiblock {
 

@@ -1,13 +1,13 @@
 package talonos.blightbuster.network.handlers;
 
+import java.util.Random;
+
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.client.Minecraft;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.network.packets.SpawnCleanseParticlesPacket;
-
-import java.util.Random;
 
 public class SpawnCleanseParticleHandler implements IMessageHandler<SpawnCleanseParticlesPacket, IMessage> {
     @Override

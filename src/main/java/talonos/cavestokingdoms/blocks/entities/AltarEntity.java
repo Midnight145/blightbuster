@@ -1,6 +1,5 @@
 package talonos.cavestokingdoms.blocks.entities;
 
-import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 
 public class AltarEntity extends TileEntity

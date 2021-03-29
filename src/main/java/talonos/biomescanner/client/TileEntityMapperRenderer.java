@@ -1,5 +1,7 @@
 package talonos.biomescanner.client;
 
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -8,8 +10,6 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
 import talonos.biomescanner.BiomeScanner;
 import talonos.biomescanner.map.MapScanner;
 import talonos.biomescanner.tileentity.TileEntityIslandMapper;

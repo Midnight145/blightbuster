@@ -1,10 +1,9 @@
 package talonos.biomescanner.map.event;
 
+import java.util.Map;
+
 import cpw.mods.fml.common.eventhandler.Event;
 import talonos.biomescanner.map.Zone;
-
-import java.util.List;
-import java.util.Map;
 
 public class UpdateCompletionEvent extends Event {
     private Map<Zone, Float> updateZones;

@@ -1,7 +1,6 @@
 package talonos.biomescanner.tileentity;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;

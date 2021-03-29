@@ -1,5 +1,6 @@
 package talonos.blightbuster.handlers;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityChicken;
@@ -9,7 +10,6 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import thaumcraft.common.config.Config;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class PurityFocusEventHandler 
 {

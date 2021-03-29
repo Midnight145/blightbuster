@@ -9,8 +9,6 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IAspectContainer;
 import thaumcraft.api.aspects.IEssentiaTransport;
 
-import java.util.HashMap;
-
 public class DawnMachineSpoutTileEntity extends TileEntity implements IEssentiaTransport, IAspectContainer {
 
     public DawnMachineSpoutTileEntity() {

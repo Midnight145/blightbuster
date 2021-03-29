@@ -1,13 +1,13 @@
 package talonos.cavestokingdoms.client.pages.orediscovery;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import mantle.client.gui.GuiManual;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -20,16 +20,11 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 import talonos.cavestokingdoms.client.pages.orediscovery.entries.IDiscoveryEntry;
 import talonos.cavestokingdoms.client.pages.orediscovery.entries.ItemDiscoveryEntry;
 import talonos.cavestokingdoms.client.pages.orediscovery.entries.OreDictionaryDiscoveryEntry;
 import talonos.cavestokingdoms.network.CavesToKingdomsNetwork;
 import talonos.cavestokingdoms.network.packets.AddDiscoveryPacket;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 
 public class OreDiscoveryRegistry {
     private static OreDiscoveryRegistry instance = null;

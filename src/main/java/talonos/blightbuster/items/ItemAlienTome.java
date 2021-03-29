@@ -1,32 +1,25 @@
 package talonos.blightbuster.items;
 
+import java.util.Set;
+
 import cpw.mods.fml.common.registry.GameRegistry;
-import exterminatorJeff.undergroundBiomes.api.UBAPIHook;
-import exterminatorJeff.undergroundBiomes.api.UBStrataColumn;
 import exterminatorJeff.undergroundBiomes.api.UBStrataColumnProvider;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.layer.IntCache;
 import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
-import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.lib.WarpEvents;
 import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.playerdata.PacketAspectPool;
 import thaumcraft.common.lib.research.ResearchManager;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class ItemAlienTome extends Item
 {

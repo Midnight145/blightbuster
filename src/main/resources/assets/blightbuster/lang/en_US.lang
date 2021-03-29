@@ -4,6 +4,7 @@ tile.blightbuster_dawnMachineBuffer.name=Dawn Machine
 tile.blightbuster_dawnMachine.name=Dawn Machine
 tile.blightbuster_cyberTotem.name=Cyber Totem
 tile.blightbuster_offering.name=Offering of Dawn
+tile.blightbuster_dawnCharger.name=Dawn Charger
 
 item.blightbuster_purityFocus.name=Wand Focus: Purity
 item.blightbuster_silverPotion.name=Silverleaf Splash Potion
@@ -20,6 +21,9 @@ tc.research_page.PURITYFOCUS.1=You have found a way to infuse the properties of 
 tc.research_name.DAWNTOTEM=Totems of Dawn
 tc.research_text.DAWNTOTEM=The start of a glorious new era!
 tc.research_page.DAWNTOTEM.1=By infusing ethereal blooms into a silverwood log, you have created the totem of dawn. It is the greatest magical protection against taint you have yet devised. Boasting an area much larger than a bloom, this totem also excels in keeping the edges of its area free of taint. It may take slightly longer to completely clean an area, however.
+tc.research_name.DAWNCHARGER=Dawn Charger
+tc.research_text.DAWNCHARGER=Magical RF Transfer
+tc.research_page.DAWNCHARGER.1=Combining Silverwood Logs with an energy cell frame and infusing it with magic creates a new device, functioning similar to a tesseract. When placed on top of any RF-transferring block, it will wirelessly transfer RF to any Dawn Machine your wand is bound to. Simply right click the Dawn Charger with your wand to bind it.
 
 blightbuster.researchnote=The alien grimoire reveals secret thaumaturgic knowledge!
 
@@ -30,3 +34,5 @@ gui.offering.noPairing=This wand isn't attuned to a Dawn Machine.
 gui.offering.wrongDimension=You cannot transport a Dawn Machine across dimensions.
 gui.offering.pairingDestroyed=The attuned Dawn Machine has been moved or destroyed.
 gui.offering.clearArea=Clear the area around the offering.
+
+gui.charger.pairSuccessful=Your wand attunes to the Dawn Charger.

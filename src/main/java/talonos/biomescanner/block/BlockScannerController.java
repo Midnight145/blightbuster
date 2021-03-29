@@ -1,5 +1,8 @@
 package talonos.biomescanner.block;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -9,14 +12,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 import talonos.biomescanner.BSStrings;
 import talonos.biomescanner.BiomeScanner;
 import talonos.biomescanner.map.MapScanner;
-import talonos.biomescanner.tileentity.TileEntityGauge;
 import talonos.biomescanner.tileentity.TileEntityIslandMapper;
 import talonos.biomescanner.tileentity.TileEntityIslandScanner;
 

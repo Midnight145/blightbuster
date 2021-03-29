@@ -2,21 +2,10 @@ package talonos.blightbuster.entities;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import java.util.Iterator;
-import java.util.List;
-
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -24,7 +13,6 @@ import talonos.blightbuster.network.BlightbusterNetwork;
 import thaumcraft.common.blocks.BlockFluxGoo;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.lib.utils.Utils;
 
 public class EntitySilverPotion extends EntityThrowable
 {

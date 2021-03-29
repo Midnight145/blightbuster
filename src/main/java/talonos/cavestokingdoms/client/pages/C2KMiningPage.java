@@ -1,5 +1,18 @@
 package talonos.cavestokingdoms.client.pages;
 
+import static mantle.lib.CoreRepo.logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import iguanaman.iguanatweakstconstruct.util.HarvestLevels;
 import net.minecraft.client.renderer.RenderHelper;
@@ -7,20 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import talonos.cavestokingdoms.client.pages.orediscovery.OreDiscoveryPage;
-
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static mantle.lib.CoreRepo.logger;
 
 public class C2KMiningPage extends OreDiscoveryPage
 {

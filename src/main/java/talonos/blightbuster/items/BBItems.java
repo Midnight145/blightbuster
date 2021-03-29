@@ -1,6 +1,7 @@
 package talonos.blightbuster.items;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 
 public class BBItems 
 {
@@ -9,6 +10,7 @@ public class BBItems
     public static Item worldTainter;
     public static Item worldSuperTainter;
     public static Item worldOreKiller;
+    public static ItemBlock dawnChargerItem;
 
 	public static void init() 
 	{

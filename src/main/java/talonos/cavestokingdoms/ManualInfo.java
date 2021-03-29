@@ -1,19 +1,19 @@
 package talonos.cavestokingdoms;
 
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.InputStream;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import mantle.books.*;
-import net.minecraft.util.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import mantle.books.BookData;
+import mantle.books.BookDataStore;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import talonos.cavestokingdoms.lib.DEFS;
-
-import java.io.InputStream;
-
-import javax.xml.parsers.*;
 
 public class ManualInfo
 {

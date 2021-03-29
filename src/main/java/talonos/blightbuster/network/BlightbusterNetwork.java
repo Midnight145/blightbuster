@@ -3,13 +3,11 @@ package talonos.blightbuster.network;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.channel.ChannelHandler;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -20,11 +18,9 @@ import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.network.handlers.BiomeChangeHandler;
 import talonos.blightbuster.network.handlers.SpawnCleanseParticleHandler;
 import talonos.blightbuster.network.handlers.UpdateClientMapHandler;
-import talonos.blightbuster.network.packets.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import talonos.blightbuster.network.packets.BiomeChangePacket;
+import talonos.blightbuster.network.packets.SpawnCleanseParticlesPacket;
+import talonos.blightbuster.network.packets.UpdateMapPacket;
 
 @ChannelHandler.Sharable
 public class BlightbusterNetwork {

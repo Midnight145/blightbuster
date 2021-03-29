@@ -1,16 +1,7 @@
 package talonos.blightbuster.network.packets;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import talonos.blightbuster.network.BlightbusterNetwork;
-import thaumcraft.common.Thaumcraft;
-import thaumcraft.common.lib.utils.Utils;
 
 public class BiomeChangePacket implements IMessage {
     private int x;

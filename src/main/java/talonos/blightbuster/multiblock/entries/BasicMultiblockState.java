@@ -2,7 +2,6 @@ package talonos.blightbuster.multiblock.entries;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import thaumcraft.common.lib.utils.Utils;
 
 public class BasicMultiblockState implements IMultiblockEntryState {
 

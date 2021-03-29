@@ -1,10 +1,10 @@
 package talonos.blightbuster;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import talonos.blightbuster.client.DawnMachineControllerRenderer;
 import talonos.blightbuster.client.DawnMachineSpoutRenderer;
 import talonos.blightbuster.entities.EntitySilverPotion;

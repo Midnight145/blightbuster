@@ -1,30 +1,22 @@
 package talonos.blightbuster.blocks;
 
+import java.util.Random;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.multiblock.BlockMultiblock;
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import thaumcraft.common.Thaumcraft;
-import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.tiles.TileArcaneFurnace;
-
-import java.util.Random;
 
 public class BlockDawnMachine extends BlockMultiblock {
 

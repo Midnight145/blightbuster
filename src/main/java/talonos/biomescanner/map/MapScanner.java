@@ -1,5 +1,14 @@
 package talonos.biomescanner.map;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
 import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -7,7 +16,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,12 +28,6 @@ import talonos.biomescanner.map.event.UpdateMapEvent;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.network.packets.UpdateMapPacket;
 import thaumcraft.common.config.ConfigBlocks;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.*;
 
 public class MapScanner {
     public static MapScanner instance = new MapScanner();

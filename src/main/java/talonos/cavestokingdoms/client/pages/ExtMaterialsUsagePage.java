@@ -3,26 +3,20 @@ package talonos.cavestokingdoms.client.pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import iguanaman.iguanatweakstconstruct.util.HarvestLevels;
 import mantle.client.pages.BookPage;
-import mantle.lib.client.MantleClientRegistry;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-
-import net.minecraftforge.common.util.EnumHelper;
-import org.lwjgl.opengl.*;
-import org.w3c.dom.*;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import tconstruct.library.TConstructRegistry;
-import tconstruct.library.crafting.PatternBuilder;
-import tconstruct.library.tools.ToolMaterial;
 
 public class ExtMaterialsUsagePage extends BookPage
 {

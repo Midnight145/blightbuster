@@ -1,9 +1,9 @@
 package talonos.cavestokingdoms.proxies;
 
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import talonos.cavestokingdoms.blocks.entities.AltarEntity;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy 
 {

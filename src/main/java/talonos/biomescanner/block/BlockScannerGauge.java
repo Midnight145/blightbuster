@@ -7,8 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import talonos.biomescanner.BSStrings;
 import talonos.biomescanner.BiomeScanner;

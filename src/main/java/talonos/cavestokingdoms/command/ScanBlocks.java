@@ -1,5 +1,13 @@
 package talonos.cavestokingdoms.command;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.HashMap;
+
+import org.apache.commons.io.FileUtils;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -10,10 +18,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import org.apache.commons.io.FileUtils;
-
-import java.io.*;
-import java.util.HashMap;
 
 public class ScanBlocks extends CommandBase {
     @Override

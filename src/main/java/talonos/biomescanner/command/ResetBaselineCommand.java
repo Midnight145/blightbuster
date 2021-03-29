@@ -1,15 +1,14 @@
 package talonos.biomescanner.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import talonos.biomescanner.map.MapScanner;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ResetBaselineCommand implements ICommand {
     private List aliases = new ArrayList(2);
