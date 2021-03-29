@@ -141,6 +141,7 @@ public class AddedResearch
 		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 1, BBBlock.dawnMachineInput, -1, "cavestokingdoms");
 		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 1, BBBlock.dawnMachineBuffer, -1, "cavestokingdoms");
 		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 2, BBBlock.offering, -1, "cavestokingdoms");
+		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 3,  BBBlock.dawnCharger, 0, "cavestokingdoms");
 	}
 
 }

@@ -18,17 +18,8 @@ public class DawnCharger extends BBBlock {
         this.setBlockName(BlightBuster.MODID + "_" + BBStrings.dawnChargerName);
         this.setStepSound(soundTypeMetal);
         this.setBlockTextureName("blightbuster:dawnCharger");
-        GameRegistry.registerBlock(this, DawnChargerItem.class, BBStrings.dawnChargerName);
+        GameRegistry.registerBlock(this, BBStrings.dawnChargerName);
     }
-    
-    @Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase living, ItemStack stack) {
-    	DawnChargerTileEntity tile = (DawnChargerTileEntity) world.getTileEntity(x, y, z);
-    	if (stack.stackTagCompound != null) {
-        	tile.setEnergyStored(stack.stackTagCompound.getInteger("Energy"));
-    	}
-    	tile.setEnergyStored(0);
-	}
     
     @Override
     public boolean hasTileEntity(int meta)

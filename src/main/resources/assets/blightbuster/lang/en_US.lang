@@ -34,3 +34,5 @@ gui.offering.noPairing=This wand isn't attuned to a Dawn Machine.
 gui.offering.wrongDimension=You cannot transport a Dawn Machine across dimensions.
 gui.offering.pairingDestroyed=The attuned Dawn Machine has been moved or destroyed.
 gui.offering.clearArea=Clear the area around the offering.
+
+gui.charger.pairSuccessful=Your wand attunes to the Dawn Charger.

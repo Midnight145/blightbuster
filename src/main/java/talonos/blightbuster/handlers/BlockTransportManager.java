@@ -123,8 +123,6 @@ public class BlockTransportManager {
             return true;
         if (tileEntity instanceof IEssentiaTransport)
             return true;
-        if (tileEntity instanceof DawnChargerTileEntity) 
-        	return true;
         
         return false;
     }

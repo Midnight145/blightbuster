@@ -73,6 +73,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     private AspectList internalAspectList = new AspectList();
 
     private boolean hasInitializedChunkloading = false;
+    
+    private boolean chargerPaired = false;
 
     public DawnMachineTileEntity() {
 
@@ -81,13 +83,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     @Override
     public void updateEntity() {
 
-        if (getWorldObj().getIndirectPowerLevelTo(xCoord, yCoord, zCoord, 1) > 0)
+        if (getWorldObj().getIndirectPowerLevelTo(xCoord, yCoord, zCoord, 1) > 0) {
             return;
+        }
 
         if (getWorldObj().isRemote) {
-            if (currentRf <= FULLRED_RF) {
-			}
-
             return;
         }
 
@@ -96,8 +96,9 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             hasInitializedChunkloading = true;
         }
 
-        if (aerCooldownRemaining > 0)
+        if (aerCooldownRemaining > 0) {
             aerCooldownRemaining--;
+        }
 
         int cleanseLength = haveEnoughFor(DawnMachineResource.MACHINA) ? 4 : 12;
 
@@ -118,14 +119,16 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                     }
                 }
 
-                if (cleanseLength == 4)
+                if (cleanseLength == 4) {
                     spend(DawnMachineResource.MACHINA);
+                }
 
                 executeCleanse(secondaryBlocks);
                 ticksSinceLastCleanse++;
                 break;
             }
-        } else {
+        } 
+        else {
             ticksSinceLastCleanse++;
         }
     }
@@ -810,6 +813,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         tag.setInteger("CurrentRF", currentRf);
     }
 
+    public void pairDawnCharger(NBTTagCompound tag) {
+    	this.writeToNBT(tag);
+    }
+    
     protected void signalUpdate() {
         this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
         markDirty();
@@ -850,4 +857,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
         return Vec3.createVectorHelper(right.xCoord + red, right.yCoord + green, right.zCoord + blue);
     }
+
+	public void setChargerPaired(boolean paired) {
+		chargerPaired = paired;
+	}
 }
