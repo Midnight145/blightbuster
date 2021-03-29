@@ -73,8 +73,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     private AspectList internalAspectList = new AspectList();
 
     private boolean hasInitializedChunkloading = false;
-    
-    private boolean chargerPaired = false;
 
     public DawnMachineTileEntity() {
 
@@ -857,8 +855,4 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
         return Vec3.createVectorHelper(right.xCoord + red, right.yCoord + green, right.zCoord + blue);
     }
-
-	public void setChargerPaired(boolean paired) {
-		chargerPaired = paired;
-	}
 }

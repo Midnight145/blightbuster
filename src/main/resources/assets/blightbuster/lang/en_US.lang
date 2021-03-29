@@ -23,7 +23,7 @@ tc.research_text.DAWNTOTEM=The start of a glorious new era!
 tc.research_page.DAWNTOTEM.1=By infusing ethereal blooms into a silverwood log, you have created the totem of dawn. It is the greatest magical protection against taint you have yet devised. Boasting an area much larger than a bloom, this totem also excels in keeping the edges of its area free of taint. It may take slightly longer to completely clean an area, however.
 tc.research_name.DAWNCHARGER=Dawn Charger
 tc.research_text.DAWNCHARGER=Magical RF Transfer
-tc.research_page.DAWNCHARGER.1=The ritual infuses a diamond into the energy cell, giving you a safe way to pump RF into the Dawn Machine. The Offering of Dawn resonates with the infused diamond, confirming the Dawn Machine will be transported safely, avoiding the risky effects of mixing power with magic. Your first attempts led to the cell being destroyed in the process, though you found that the magical properties of the Primal Charm helped combat that.
+tc.research_page.DAWNCHARGER.1=Combining Silverwood Logs with an energy cell frame and infusing it with magic creates a new device, functioning similar to a tesseract. When placed on top of any RF-transferring block, it will wirelessly transfer RF to any Dawn Machine your wand is bound to. Simply right click the Dawn Charger with your wand to bind it.
 
 blightbuster.researchnote=The alien grimoire reveals secret thaumaturgic knowledge!
 

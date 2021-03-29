@@ -14,7 +14,7 @@ import talonos.blightbuster.tileentity.DawnChargerTileEntity;
 public class DawnCharger extends BBBlock {
     public DawnCharger() {
         super(Material.wood);
-        this.setHardness(10.0f);
+        this.setHardness(5.0f);
         this.setBlockName(BlightBuster.MODID + "_" + BBStrings.dawnChargerName);
         this.setStepSound(soundTypeMetal);
         this.setBlockTextureName("blightbuster:dawnCharger");

@@ -13,7 +13,6 @@ import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.multiblock.BlockMultiblock;
 import talonos.blightbuster.multiblock.entries.MultiblockEntry;
 import talonos.blightbuster.tileentity.DawnChargerTileEntity;
-import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.IWandTriggerManager;
@@ -55,8 +54,7 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
                 if (convertedBlock instanceof BlockMultiblock) {
                     TileEntity controller = ((BlockMultiblock)convertedBlock).getMultiblockController(world, x, y, z);
                     if (controller != null) {
-                        if (world.isRemote)
-                            return false;
+                        if (world.isRemote) { return false; }
 
                         if (!isWandPaired(wand, controller.getWorldObj().provider.dimensionId, controller.xCoord, controller.yCoord, controller.zCoord)) {
                             pairDawnMachineToWand(world, wand, controller.getWorldObj().provider.dimensionId, controller.xCoord, controller.yCoord, controller.zCoord);
@@ -69,8 +67,7 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
 
                 break;
             case 2:
-                if (world.isRemote)
-                    return false;
+                if (world.isRemote) { return false; }
 
                 NBTTagCompound wandTag = wand.getTagCompound();
                 if (wandTag == null) {
@@ -101,8 +98,9 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
                 for (int clearY = 0; clearY < 5; clearY++) {
                     for (int clearX = -2; clearX <= 2; clearX++) {
                         for (int clearZ = -2; clearZ <= 2; clearZ++) {
-                            if (clearY == 0 && clearX == 0 && clearZ == 0)
+                            if (clearY == 0 && clearX == 0 && clearZ == 0) {
                                 continue;
+                            }
 
                             if (!world.isAirBlock(x+clearX, y+clearY, z+clearZ)) {
                                 Block clearBlock = world.getBlock(x + clearX, y + clearY, z + clearZ);
@@ -119,15 +117,13 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
 
                 if (result) {
                     TileEntity controller = world.getTileEntity(x, y+1, z);
-                    NBTTagCompound chargerTag = wand.stackTagCompound.getCompoundTag("DawnCharger");
                     pairDawnMachineToWand(world, wand, controller.getWorldObj().provider.dimensionId, controller.xCoord, controller.yCoord, controller.zCoord);
-                    moveDawnCharger(world, wand, controller.getWorldObj());
+                    moveDawnCharger(controller.getWorldObj(), wand) ;
                 }
                 
                 break;
             case 3:
-                if (world.isRemote)
-                    return false;
+                if (world.isRemote) { return false; }
                 
                 if (!ResearchManager.isResearchComplete(player.getCommandSenderName(), "DAWNCHARGER")) {
                 	return false;
@@ -141,7 +137,7 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
         return false;
     }
 
-    private void moveDawnCharger(World world, ItemStack wand, World worldObj) {
+    private void moveDawnCharger(World world, ItemStack wand) {
 		NBTTagCompound wandTag = wand.getTagCompound();
 		if (wandTag.getTag("DawnCharger") == null) {
 			return;
@@ -167,28 +163,6 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
         }
 
         NBTTagCompound dawnMachineTag = wandTag.getCompoundTag("DawnMachine");
-        if (dawnMachineTag.getInteger("Dimension") != dimension)
-            return false;
-        if (dawnMachineTag.getInteger("X") != x)
-            return false;
-        if (dawnMachineTag.getInteger("Y") != y)
-            return false;
-        if (dawnMachineTag.getInteger("Z") != z)
-            return false;
-        return true;
-    }
-    
-    private boolean isWandPairedToCharger(ItemStack wand, int dimension, int x, int y, int z) {
-        if (wand.getTagCompound() == null)
-            return false;
-
-        NBTTagCompound wandTag = wand.getTagCompound();
-
-        if (!wandTag.hasKey("DawnCharger")) {
-            return false;
-        }
-
-        NBTTagCompound dawnMachineTag = wandTag.getCompoundTag("DawnCharger");
         if (dawnMachineTag.getInteger("Dimension") != dimension)
             return false;
         if (dawnMachineTag.getInteger("X") != x)
@@ -277,7 +251,6 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
                 return false;
             }
         }
-
         return false;
     }
 }

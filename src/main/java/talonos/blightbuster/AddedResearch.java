@@ -36,25 +36,15 @@ public class AddedResearch
 				'L', new ItemStack(ConfigBlocks.blockMagicalLeaves, 1, 1),
 				'F', new ItemStack(Items.glass_bottle)
 				});
-		
-		
+
 		ShapedArcaneRecipe purityFocusRecipe = ThaumcraftApi.addArcaneCraftingRecipe("PURITYFOCUS", new ItemStack(BBItems.purityFocus), new AspectList().add(Aspect.WATER, 5).add(Aspect.ORDER, 8), new Object[] {
-			"SQS",
-			"QFQ",
-			"SQS",
-			'S', new ItemStack(ConfigItems.itemShard, 1, 4),
-			'Q', new ItemStack(Items.quartz),
-			'F', new ItemStack(ConfigBlocks.blockCustomPlant, 1, 4)
-			});
-		
-		
-		InfusionRecipe dawnChargerRecipe = ThaumcraftApi.addInfusionCraftingRecipe("DAWNCHARGER", new ItemStack(BBBlock.dawnCharger), 6, 
-				new AspectList().add(Aspect.ENERGY, 40).add(Aspect.METAL, 24).add(Aspect.VOID, 24).add(Aspect.MAGIC, 48), 
-				new ItemStack(TEBlocks.blockCell, 1, 4), 
-				new ItemStack[] {
-						new ItemStack(ConfigItems.itemResource, 1, 15), new ItemStack(Items.diamond, 1, 1), new ItemStack(ConfigItems.itemResource, 1, 15), new ItemStack(Items.diamond, 1, 1)
+				"SQS",
+				"QFQ",
+				"SQS",
+				'S', new ItemStack(ConfigItems.itemShard, 1, 4),
+				'Q', new ItemStack(Items.quartz),
+				'F', new ItemStack(ConfigBlocks.blockCustomPlant, 1, 4)
 				});
-		
 		
 		InfusionRecipe dawnTotemRecipe = ThaumcraftApi.addInfusionCraftingRecipe("DAWNTOTEM", new ItemStack(BBBlock.dawnTotem), 6,
 				new AspectList().add(Aspect.AURA, 16).add(Aspect.HEAL, 32).add(Aspect.LIFE, 48)
@@ -64,6 +54,15 @@ public class AddedResearch
 			         new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 3), new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 3), 
 			         new ItemStack(ConfigBlocks.blockCrystal, 1, 4)});
 		
+		ShapedArcaneRecipe dawnChargerRecipe = ThaumcraftApi.addArcaneCraftingRecipe("DAWNCHARGER", 
+				new ItemStack(BBBlock.dawnCharger), 
+				new AspectList().add(Aspect.WATER, 25).add(Aspect.ORDER, 25).add(Aspect.ENTROPY, 25).add(Aspect.FIRE, 25).add(Aspect.EARTH, 25).add(Aspect.AIR, 25), new Object[] {
+				"SSS",
+				"SLS",
+				"SSS",
+				'S', new ItemStack(ConfigBlocks.blockMagicalLog, 1, 1),
+				'L', new ItemStack(TEBlocks.blockFrame, 1, 7),
+			});
 		
 		ResearchItem silverPotResearch = new ResearchItem(
 				"SILVERPOTION", 
@@ -141,7 +140,7 @@ public class AddedResearch
 		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 1, BBBlock.dawnMachineInput, -1, "cavestokingdoms");
 		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 1, BBBlock.dawnMachineBuffer, -1, "cavestokingdoms");
 		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 2, BBBlock.offering, -1, "cavestokingdoms");
-		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 3,  BBBlock.dawnCharger, 0, "cavestokingdoms");
+		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 3, BBBlock.dawnCharger, -1, "cavestokingdoms");
 	}
 
 }
