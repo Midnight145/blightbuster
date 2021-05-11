@@ -1,5 +1,6 @@
 package talonos.blightbuster;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import cofh.thermalexpansion.block.TEBlocks;
@@ -16,6 +17,8 @@ import thaumcraft.api.research.ResearchPage;
 import thaumcraft.api.wands.WandTriggerRegistry;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
+import tuhljin.automagy.items.ModItems;
+import fox.spiteful.forbidden.DarkAspects;
 
 public class AddedResearch 
 {
@@ -59,6 +62,16 @@ public class AddedResearch
 			         new ItemStack(ConfigBlocks.blockCustomPlant, 1, 4), new ItemStack(ConfigBlocks.blockCustomPlant, 1, 4), 
 			         new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 3), new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 3), 
 			         new ItemStack(ConfigBlocks.blockCrystal, 1, 4)});
+		
+		InfusionRecipe emberHeartRecipe = ThaumcraftApi.addInfusionCraftingRecipe("NETHERMIND", new ItemStack(ModItems.netherHeart), 6, 
+				new AspectList().add(DarkAspects.NETHER, 16).add(Aspect.EXCHANGE, 16).add(Aspect.MAGIC, 32).add(DarkAspects.WRATH, 16), 
+				new ItemStack(Items.ghast_tear), // center item
+				new ItemStack[] { // items in recipe
+					new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_rod), 
+					new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_rod),
+					new ItemStack(Blocks.netherrack), new ItemStack(Blocks.netherrack),
+					new ItemStack(Blocks.obsidian), new ItemStack(Blocks.obsidian)
+				});
 		
 		ShapedArcaneRecipe dawnChargerRecipe = ThaumcraftApi.addArcaneCraftingRecipe("DAWNCHARGER", 
 				new ItemStack(BBBlock.dawnCharger), 
@@ -121,6 +134,8 @@ public class AddedResearch
 		dawnTotemResearch.setParents(new String[] { "SILVERPOTION" , "PURITYFOCUS"});
 		dawnTotemResearch.registerResearchItem();
 
+		
+		
 		ResearchItem dawnChargerResearch = new ResearchItem (
 				"DAWNCHARGER",
 				"ALCHEMY",
