@@ -17,7 +17,8 @@ public class DawnCharger extends BBBlock {
         this.setHardness(5.0f);
         this.setBlockName(BlightBuster.MODID + "_" + BBStrings.dawnChargerName);
         this.setStepSound(soundTypeMetal);
-        this.setBlockTextureName("blightbuster:dawnCharger");
+		this.setCreativeTab(CreativeTabs.tabBlock);
+        this.setBlockTextureName("blightbuster:dawnChargerDeactivated");
         GameRegistry.registerBlock(this, BBStrings.dawnChargerName);
     }
     

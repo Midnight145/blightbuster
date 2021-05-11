@@ -17,12 +17,6 @@ public class DawnChargerTileEntity extends TileEntity implements IEnergyHandler 
 
 	@Override
 	public void updateEntity() {
-//		if (!dawnMachinePaired) {
-//			if (!(this.getWorldObj().getTileEntity(dawnMachineCoords[0], dawnMachineCoords[1], dawnMachineCoords[2]) == null)) {
-//				dawnMachinePaired = true;
-//			}
-//		}
-//		if (dawnMachinePaired) {
 			if (dawnMachine == null) {
 				return;
 			}
@@ -37,7 +31,10 @@ public class DawnChargerTileEntity extends TileEntity implements IEnergyHandler 
 				
 				int amount = handler.getEnergyStored(ForgeDirection.UP);
 				int extract = dawnMachine.receiveEnergy(amount, true);
-				int actual = handler.extractEnergy(ForgeDirection.UP, extract, false);		
+				int actual = handler.extractEnergy(ForgeDirection.UP, extract, false);	
+				if (actual != 0) {
+					this.getWorldObj().getBlock(xCoord, yCoord, zCoord).setBlockTextureName("dawnChargerActivated");
+				}
 
 				dawnMachine.receiveEnergy(actual, false);
 				signalUpdate();

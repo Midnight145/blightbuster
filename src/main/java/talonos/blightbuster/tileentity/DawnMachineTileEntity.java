@@ -389,7 +389,12 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             Block replaceBlock = Blocks.dirt;
             if (doHerbaCheck) {
                 spend(DawnMachineResource.HERBA);
-                replaceBlock = Blocks.grass;
+                if (getWorldObj().getBiomeGenForCoords(x, z).biomeID == 14 || getWorldObj().getBiomeGenForCoords(x, z).biomeID == 15) {
+                	replaceBlock = Blocks.mycelium;
+                }
+                else {
+                	replaceBlock = Blocks.grass;
+                }
             }
 
             getWorldObj().setBlock(x, y, z, replaceBlock);

@@ -52,14 +52,14 @@ public class BlightBuster
     public void init(FMLInitializationEvent event)
     {
         BlightbusterNetwork.init();
-    	MinecraftForge.EVENT_BUS.register(new PurityFocusEventHandler());
+    	MinecraftForge.EVENT_BUS.register(new PurityFocusEventHandler()); // adds event handler
         FMLCommonHandler.instance().bus().register(new PurityFocusEventHandler());
 
-        chunkLoader = new DawnMachineChunkLoader();
-        ForgeChunkManager.setForcedChunkLoadingCallback(this, chunkLoader);
+        chunkLoader = new DawnMachineChunkLoader(); // creates chunk loader
+        ForgeChunkManager.setForcedChunkLoadingCallback(this, chunkLoader); // adds chunkloader to forge
 
         if (ThEApi.instance() != null)
-            ThEApi.instance().transportPermissions().addAspectContainerTileToInjectPermissions(DawnMachineSpoutTileEntity.class, 32);
+            ThEApi.instance().transportPermissions().addAspectContainerTileToInjectPermissions(DawnMachineSpoutTileEntity.class, 32); // adds Dawn Machine spout entity to Thaumic Energistics
     }
  
     @Mod.EventHandler
