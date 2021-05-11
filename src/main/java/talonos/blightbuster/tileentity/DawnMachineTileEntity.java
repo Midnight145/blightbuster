@@ -341,12 +341,12 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
                     //Default to oak
                     int treeType = 0;
-                    if (biomeName.contains("jungle"))
-                        treeType = 3; //Jungle tree
-                    else if (biomeName.contains("taiga") || biomeName.contains("tundra"))
-                        treeType = 2; //Spruce trees
+                    if (biomeName.contains("taiga") || biomeName.contains("tundra"))
+                        treeType = 1; //Spruce trees
                     else if (biomeName.contains("birch"))
-                        treeType = 1; //Birch trees
+                        treeType = 2; //Birch trees
+                    else if (biomeName.contains("jungle"))
+                        treeType = 3; //Jungle tree
                     else if (biomeName.contains("savanna"))
                         treeType = 4; //Acacia trees
                     else if (biomeName.contains("roof"))
