@@ -31,13 +31,18 @@ public class AddedResearch
 		});*/
 		//ResearchCategories.registerCategory("ANTITAINT, arg1, arg2);
 		
-		ShapedArcaneRecipe silverPotRecipe = ThaumcraftApi.addArcaneCraftingRecipe("SILVERPOTION", new ItemStack(BBItems.silverPotion, 6), new AspectList().add(Aspect.WATER, 15).add(Aspect.ORDER, 24), new Object[] {
-				"FLF",
-				'L', new ItemStack(ConfigBlocks.blockMagicalLeaves, 1, 1),
-				'F', new ItemStack(Items.glass_bottle)
+		// Creates the silverleaf potion recipe
+		ShapedArcaneRecipe silverPotRecipe = ThaumcraftApi.addArcaneCraftingRecipe("SILVERPOTION", new ItemStack(BBItems.silverPotion, 6), 
+				new AspectList().add(Aspect.WATER, 15).add(Aspect.ORDER, 24), // aspects, requires 15 aqua and 24 ordo
+				new Object[] {
+				"FLF", // recipe pattern
+				'L', new ItemStack(ConfigBlocks.blockMagicalLeaves, 1, 1), // Silverwood leaves
+				'F', new ItemStack(Items.glass_bottle) // glass bottle
 				});
 
-		ShapedArcaneRecipe purityFocusRecipe = ThaumcraftApi.addArcaneCraftingRecipe("PURITYFOCUS", new ItemStack(BBItems.purityFocus), new AspectList().add(Aspect.WATER, 5).add(Aspect.ORDER, 8), new Object[] {
+		ShapedArcaneRecipe purityFocusRecipe = ThaumcraftApi.addArcaneCraftingRecipe("PURITYFOCUS", new ItemStack(BBItems.purityFocus), 
+				new AspectList().add(Aspect.WATER, 5).add(Aspect.ORDER, 8), 
+				new Object[] {
 				"SQS",
 				"QFQ",
 				"SQS",
@@ -49,7 +54,8 @@ public class AddedResearch
 		InfusionRecipe dawnTotemRecipe = ThaumcraftApi.addInfusionCraftingRecipe("DAWNTOTEM", new ItemStack(BBBlock.dawnTotem), 6,
 				new AspectList().add(Aspect.AURA, 16).add(Aspect.HEAL, 32).add(Aspect.LIFE, 48)
 				                .add(Aspect.LIGHT, 16).add(Aspect.ARMOR, 32).add(Aspect.ORDER, 48), 
-				new ItemStack(ConfigBlocks.blockMagicalLog,1,1), new ItemStack[] {
+				new ItemStack(ConfigBlocks.blockMagicalLog,1,1), // center item, silverwood log
+				new ItemStack[] { // items in recipe
 			         new ItemStack(ConfigBlocks.blockCustomPlant, 1, 4), new ItemStack(ConfigBlocks.blockCustomPlant, 1, 4), 
 			         new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 3), new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 3), 
 			         new ItemStack(ConfigBlocks.blockCrystal, 1, 4)});
@@ -65,21 +71,21 @@ public class AddedResearch
 			});
 		
 		ResearchItem silverPotResearch = new ResearchItem(
-				"SILVERPOTION", 
-				"ALCHEMY", 
-				new AspectList().add(Aspect.WATER, 3).add(Aspect.HEAL, 6).add(Aspect.TAINT, 3).add(Aspect.PLANT, 3), 
-				-1, -4, 2,
-				new ItemStack(BBItems.silverPotion));
+				"SILVERPOTION", // research name
+				"ALCHEMY", // thaumonomicon page
+				new AspectList().add(Aspect.WATER, 3).add(Aspect.HEAL, 6).add(Aspect.TAINT, 3).add(Aspect.PLANT, 3), // aspects in research
+				-1, -4, 2, // location in thaumonomicon
+				new ItemStack(BBItems.silverPotion)); // research icon 
 		
 		silverPotResearch.setPages(new ResearchPage[] { 
-				new ResearchPage("tc.research_page.SILVERPOTION.1"),
-				new ResearchPage(silverPotRecipe)
+				new ResearchPage("tc.research_page.SILVERPOTION.1"), // page in language file
+				new ResearchPage(silverPotRecipe) // page for recipe
 			}
 		);
 		
-		silverPotResearch.setConcealed();
-		silverPotResearch.setParents(new String[] { "ETHEREALBLOOM" });
-		silverPotResearch.registerResearchItem();
+		silverPotResearch.setConcealed(); // sets as hidden in thaumonomicon
+		silverPotResearch.setParents(new String[] { "ETHEREALBLOOM" }); // sets requirements for research
+		silverPotResearch.registerResearchItem(); // actually registers it
 		
 		ResearchItem purityFocusResearch = new ResearchItem(
 				"PURITYFOCUS", 
@@ -134,6 +140,8 @@ public class AddedResearch
 		
 		TalonosWandTriggerManager wandTrigger = new TalonosWandTriggerManager();
 		
+		// Registers wand triggers, eg. on right click
+		// First parameter is the trigger, second parameter is the event number, third is the block, fourth is the block metadata, fifth is the mod id
 		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 0, BBBlock.cyberTotem, -1, "cavestokingdoms");
 		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 0, ConfigBlocks.blockMagicalLog, 1, "cavestokingdoms");
 		WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 1, BBBlock.dawnMachine, -1, "cavestokingdoms");

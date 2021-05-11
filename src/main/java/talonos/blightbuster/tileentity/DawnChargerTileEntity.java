@@ -17,35 +17,29 @@ public class DawnChargerTileEntity extends TileEntity implements IEnergyHandler 
 
 	@Override
 	public void updateEntity() {
-//		if (!dawnMachinePaired) {
-//			if (!(this.getWorldObj().getTileEntity(dawnMachineCoords[0], dawnMachineCoords[1], dawnMachineCoords[2]) == null)) {
-//				dawnMachinePaired = true;
-//			}
-//		}
-//		if (dawnMachinePaired) {
-			if (dawnMachine == null) {
+		if (dawnMachine == null) {
+			return;
+		}
+		TileEntity te = this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
+		if (te instanceof IEnergyHandler) {
+			IEnergyHandler handler = (IEnergyHandler) te;
+			
+			if (handler instanceof TileCellCreative) {
+				dawnMachine.receiveEnergy(dawnMachine.getMaxEnergyStored(), false);
 				return;
 			}
-			TileEntity te = this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
-			if (te instanceof IEnergyHandler) {
-				IEnergyHandler handler = (IEnergyHandler) te;
-				
-				if (handler instanceof TileCellCreative) {
-					dawnMachine.receiveEnergy(dawnMachine.getMaxEnergyStored(), false);
-					return;
-				}
-				
-				int amount = handler.getEnergyStored(ForgeDirection.UP);
-				int extract = dawnMachine.receiveEnergy(amount, true);
-				int actual = handler.extractEnergy(ForgeDirection.UP, extract, false);		
+			
+			int amount = handler.getEnergyStored(ForgeDirection.UP);
+			int extract = dawnMachine.receiveEnergy(amount, true);
+			int actual = handler.extractEnergy(ForgeDirection.UP, extract, false);	
+			if (actual != 0) {
+				this.getWorldObj().getBlock(xCoord, yCoord, zCoord).setBlockTextureName("dawnChargerActivated");
+			}
 
-				dawnMachine.receiveEnergy(actual, false);
-				signalUpdate();
-			}	
-		}		
-//	}
-
-
+			dawnMachine.receiveEnergy(actual, false);
+			signalUpdate();
+		}	
+	}		
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
