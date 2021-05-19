@@ -70,7 +70,8 @@ public class AddedResearch
 					new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_rod), 
 					new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_rod),
 					new ItemStack(Blocks.netherrack), new ItemStack(Blocks.netherrack),
-					new ItemStack(Blocks.obsidian), new ItemStack(Blocks.obsidian)
+					new ItemStack(Blocks.obsidian), new ItemStack(Blocks.obsidian),
+					new ItemStack(Items.leather)
 				});
 		
 		ShapedArcaneRecipe dawnChargerRecipe = ThaumcraftApi.addArcaneCraftingRecipe("DAWNCHARGER", 
