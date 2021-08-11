@@ -171,43 +171,45 @@ public class ItemPurityFocus extends ItemFocusBasic {
     }
 
     private void cleanUpLand(int x, int z, World world, ItemStack itemStack, EntityPlayer p) {
+    	boolean flag = false; // this is used to check if there *is* any block needing to be removed in the check to see if the original biome is also magicalforest or eerie
         if (!p.worldObj.isRemote) {
+            for (int y = 0; y < 256; y++) {
+                if (world.getBlock(x, y, z) == ConfigBlocks.blockTaintFibres) {
+                    world.setBlock(x, y, z, Blocks.air);
+                    flag = true;
+                }
+                if (world.getBlock(x, y, z) == ConfigBlocks.blockTaint) {
+                    if (world.getBlockMetadata(x, y, z) == 0) {
+                        world.setBlock(x, y, z, ConfigBlocks.blockFluxGoo, ((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(), 3);
+                    } else if (world.getBlockMetadata(x, y, z) == 1) {
+                        world.setBlock(x, y, z, Blocks.dirt);
+                    } else {
+                        world.setBlock(x, y, z, Blocks.air);
+                    }
+                    flag = true;
+                }
+            }
             if (((world.getBiomeGenForCoords(x, z).biomeID == Config.biomeTaintID) ||
                     (world.getBiomeGenForCoords(x, z).biomeID == Config.biomeEerieID) ||
                     (world.getBiomeGenForCoords(x, z).biomeID == Config.biomeMagicalForestID))) {
                 ItemWandCasting wand = (ItemWandCasting) itemStack.getItem();
                 BiomeGenBase[] biomesForGeneration = null;
                 biomesForGeneration = world.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x, z, 1, 1);
+                
+
+                
                 if ((biomesForGeneration != null) && (biomesForGeneration[0] != null)) {
-                	
-                	if (biomesForGeneration[0].biomeID == Config.biomeEerieID && world.getBiomeGenForCoords(x, z).biomeID == Config.biomeEerieID) {
-                		// do something
-                		return;
+                	if (!flag) {
+	                	if (biomesForGeneration[0].biomeID == Config.biomeEerieID && world.getBiomeGenForCoords(x, z).biomeID == Config.biomeEerieID) {
+	                		return;
+	                	}
+	                	else if (biomesForGeneration[0].biomeID == Config.biomeMagicalForestID && world.getBiomeGenForCoords(x, z).biomeID == Config.biomeMagicalForestID) {
+	                		return;
+	                	}
                 	}
-                	
-                	else if (biomesForGeneration[0].biomeID == Config.biomeMagicalForestID && world.getBiomeGenForCoords(x, z).biomeID == Config.biomeMagicalForestID) {
-                		// do something
-                		return;
-                	}
-                	
-                	
                     wand.consumeAllVis(itemStack, p, getVisCost(itemStack), true, false);
             		BlightbusterNetwork.setBiomeAt(world, x, z, biomesForGeneration[0]);
                 	
-                }
-            }
-        }
-        for (int y = 0; y < 256; y++) {
-            if (world.getBlock(x, y, z) == ConfigBlocks.blockTaintFibres) {
-                world.setBlock(x, y, z, Blocks.air);
-            }
-            if (world.getBlock(x, y, z) == ConfigBlocks.blockTaint) {
-                if (world.getBlockMetadata(x, y, z) == 0) {
-                    world.setBlock(x, y, z, ConfigBlocks.blockFluxGoo, ((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(), 3);
-                } else if (world.getBlockMetadata(x, y, z) == 1) {
-                    world.setBlock(x, y, z, Blocks.dirt);
-                } else {
-                    world.setBlock(x, y, z, Blocks.air);
                 }
             }
         }

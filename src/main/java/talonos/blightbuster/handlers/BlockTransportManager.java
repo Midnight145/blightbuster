@@ -2,16 +2,12 @@ package talonos.blightbuster.handlers;
 
 import java.util.ArrayList;
 
-import cofh.api.energy.IEnergyConnection;
-import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyStorage;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import talonos.blightbuster.blocks.BBBlock;
-import talonos.blightbuster.tileentity.DawnChargerTileEntity;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
 import thaumcraft.api.aspects.IEssentiaTransport;
 
