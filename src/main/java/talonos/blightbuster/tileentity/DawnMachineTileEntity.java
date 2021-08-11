@@ -2,6 +2,7 @@ package talonos.blightbuster.tileentity;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import cofh.api.energy.IEnergyReceiver;
 import cofh.api.energy.IEnergyStorage;
@@ -73,9 +74,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     private AspectList internalAspectList = new AspectList();
 
     private boolean hasInitializedChunkloading = false;
+    Random rand;
 
     public DawnMachineTileEntity() {
-
+    	rand = new Random(System.currentTimeMillis());
     }
 
     @Override
@@ -355,6 +357,30 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                     getWorldObj().setBlock(lastCleanseX+x, topBlock + 1, lastCleanseZ+z, Blocks.sapling, treeType, 3);
                     spend(DawnMachineResource.ARBOR);
                 }
+                
+                if (foundTopBlock) {
+                    BiomeGenBase biome = getWorldObj().getBiomeGenForCoords(lastCleanseX+x, lastCleanseZ+z);
+                    String biomeName = biome.biomeName.toLowerCase(Locale.ENGLISH);
+
+                    //Default to oak
+                    if (biomeName.contains("desert")) {
+                    	int chance = rand.nextInt(200) + 1;
+                    	boolean block = rand.nextBoolean();
+                    	if (chance == 200) {
+                    		if (block) {
+                                getWorldObj().setBlock(lastCleanseX+x, topBlock + 1, lastCleanseZ+z, Blocks.cactus);
+                    		}
+                    		else {
+                                getWorldObj().setBlock(lastCleanseX+x, topBlock + 1, lastCleanseZ+z, ConfigBlocks.blockCustomPlant, 3, 3);
+
+                    		}
+                    	}
+                        spend(DawnMachineResource.ARBOR);
+                    }
+
+ 
+                }
+                
             }
         }
 
