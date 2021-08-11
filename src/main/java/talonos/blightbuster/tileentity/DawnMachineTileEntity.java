@@ -361,8 +361,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                 if (foundTopBlock) {
                     BiomeGenBase biome = getWorldObj().getBiomeGenForCoords(lastCleanseX+x, lastCleanseZ+z);
                     String biomeName = biome.biomeName.toLowerCase(Locale.ENGLISH);
-
-                    //Default to oak
+                    
                     if (biomeName.contains("desert")) {
                     	int chance = rand.nextInt(200) + 1;
                     	boolean block = rand.nextBoolean();
@@ -372,13 +371,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                     		}
                     		else {
                                 getWorldObj().setBlock(lastCleanseX+x, topBlock + 1, lastCleanseZ+z, ConfigBlocks.blockCustomPlant, 3, 3);
-
                     		}
+                            spend(DawnMachineResource.ARBOR);
                     	}
-                        spend(DawnMachineResource.ARBOR);
                     }
-
- 
                 }
                 
             }
