@@ -13,3 +13,5 @@ libs/
 deps/
 target/
 CavesToKingdoms/
+gradlew*
+gradle/
