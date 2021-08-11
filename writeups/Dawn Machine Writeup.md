@@ -1,3 +1,15 @@
+# Dawn Machine
+
+I've gotten a few questions since starting to maintain BlightBuster about how the Dawn Machine actually works, specifically the numbers behind it.
+This is a writeup on how the basics of it work, including the aspects, numbers behind it, and the majority of the code.
+
+<span style="font-size:20px">Table of Contents</span>
+1. [Aspects](#aspects)
+2. [Numbers](#numbers)  
+3. [Code](#code)
+
+<br>
+
 ## Aspects
 
 | Keyword    | Meaning                                                                                                                                                                  |
@@ -34,6 +46,8 @@
 | Arbor    | Whenever it plants a sapling                                                  |
 | Herba    | Whenever it plants grass                                                      |
 
+<br>
+
 ## Numbers
 - Internal RF: 128,000
 - Max RF Input: N/A
@@ -50,6 +64,8 @@
 | Ordo     | 64                  |
 | Arbor    | 128                 |
 | Herba    | 256                 |
+
+<br>
 
 ## Code
 <span style="font-size:20px">This does not document every function relating to the Dawn Machine, just the ones I deemed most important to explaining how it works.</span>
@@ -107,7 +123,7 @@ Important Functions:
 	- If there is Vacuous essentia, it will continue
 	- If there is not, it will place Flux goo
 3. Similarly to the last one, it will do the same with Falling Crusted Taint
-4. It goes on to call [cleanseBiome](#function-cleansebiome), [cleanseBlocks()](#function-cleanseblocks), and (if there is enough Sano) [cleanseMobs()](#function-cleansemobs)
+4. It goes on to call [cleanseBiome()](#function-cleansebiome), [cleanseBlocks()](#function-cleanseblocks), and (if there is enough Sano) [cleanseMobs()](#function-cleansemobs)
 
 ### Function hasAnythingToCleanseHere()
 1. It will check if the current biome is Tainted Lands, Eerie, or Magical Forest. If it is, it will return true.
