@@ -57,7 +57,13 @@ public class OreDiscoveryRegistry {
         registerDiscovery("gravel","discover.cavestokingdoms.gravel");
         registerDiscovery("netherrack","discover.cavestokingdoms.netherrack");
         registerDiscovery("obsidian","discover.cavestokingdoms.obsidian");
-
+        
+        //Register Wood. Finally.
+        registerDiscovery("logWood", "discover.cavestokingdoms.wood");
+        registerDiscovery("plankWood", "discover.cavestokingdoms.wood");
+        registerDiscovery("logWood", "discover.cavestokingdoms.wood");
+        registerDiscovery("woodLog", "discover.cavestokingdoms.wood");
+        
         //Some things lack oredict entries.
         registerDiscovery(GameRegistry.findItem("ExtraUtilities","bedrockiumIngot"), "discover.cavestokingdoms.bedrockium");
         registerDiscovery(GameRegistry.findItem("Natura","bloodwood"), 0, "discover.cavestokingdoms.bloodwood");
