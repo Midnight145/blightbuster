@@ -179,6 +179,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
                     flag = true;
                 }
                 if (world.getBlock(x, y, z) == ConfigBlocks.blockTaint) {
+                	if (world.getBlockMetadata(x, y, z) == 2) { return; } // Flesh blocks. WHAT THE FUCK THAUMCRAFT
                     if (world.getBlockMetadata(x, y, z) == 0) {
                         world.setBlock(x, y, z, ConfigBlocks.blockFluxGoo, ((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(), 3);
                     } else if (world.getBlockMetadata(x, y, z) == 1) {
