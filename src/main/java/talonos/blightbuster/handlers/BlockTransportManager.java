@@ -1,6 +1,7 @@
 package talonos.blightbuster.handlers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -12,7 +13,13 @@ import thaumcraft.api.aspects.IEssentiaContainerItem;
 import thaumcraft.api.aspects.IEssentiaTransport;
 
 public class BlockTransportManager {
-
+	private static final Block[] capturableBlocks = { 
+			BBBlock.dawnMachineInput, 
+			BBBlock.dawnMachineBuffer, 
+			BBBlock.dawnMachine, 
+			Blocks.lever, 
+			Blocks.redstone_block
+	};
     private static class BlockData {
         private int offsetX;
         private int offsetY;
@@ -109,7 +116,7 @@ public class BlockTransportManager {
     }
 
     protected boolean shouldCaptureBlock(Block block) {
-        return (block == BBBlock.dawnMachineInput || block == BBBlock.dawnMachineBuffer || block == BBBlock.dawnMachine);
+    	return Arrays.asList(capturableBlocks).contains(block);
     }
 
     protected boolean shouldCaptureTileEntity(TileEntity tileEntity) {
