@@ -96,7 +96,7 @@ public class MapScanner {
         try {
             NBTTagCompound loadedData = CompressedStreamTools.readCompressed(new FileInputStream(loadFile));
             return readNBT(loadedData, forceLoad);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }

@@ -17,6 +17,7 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -26,6 +27,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.IFluidTank;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.network.packets.SpawnCleanseParticlesPacket;
@@ -48,32 +54,59 @@ import thaumcraft.common.entities.monster.EntityTaintSheep;
 import thaumcraft.common.entities.monster.EntityTaintSporeSwarmer;
 import thaumcraft.common.entities.monster.EntityTaintVillager;
 import thaumcraft.common.tiles.TileNode;
+import vazkii.botania.api.mana.spark.ISparkAttachable;
+import vazkii.botania.api.mana.spark.ISparkEntity;
+import WayofTime.alchemicalWizardry.AlchemicalWizardry;
 
-public class DawnMachineTileEntity extends TileEntity implements IAspectSource, IAspectContainer, IEnergyReceiver, IEnergyStorage {
+public class DawnMachineTileEntity extends TileEntity implements 
+IAspectSource, IAspectContainer, IEnergyReceiver, IEnergyStorage,
+ISparkAttachable, 
+IFluidTank, IFluidHandler {
+	
+	// FLUID INTEGRATION (Blood Magic)
+	
+	private static final int MAX_BLOOD = 10000;
+	private static final Fluid blood = AlchemicalWizardry.lifeEssenceFluid;
+	private FluidStack fluid = new FluidStack(blood, 0);
+	private FluidTankInfo tankInfo = new FluidTankInfo(this.getFluid(), MAX_BLOOD);
+	private FluidTankInfo[] tankInfoArray = {tankInfo};
 
-    private int currentRf = 0;
-    public static final int MAX_RF = 128000;
+	// BOTANIA INTEGRATION
+	
+	private static final int MAX_MANA = 100000;
+	private int currentMana = 0;
+	
+	// RF INTEGRATION
+	
+    public static final int DEAD_RF = 150; // Used in talonos.blightbuster.client.DawnMachineControllerRenderer
+    protected static final int MAX_RF = 128000;
     protected static final int FULLGREEN_RF = 80000;
     protected static final int FULLYELLOW_RF = 40000;
     protected static final int FULLRED_RF = 20000;
-    public static final int DEAD_RF = 150;
     protected static final Vec3 COLOR_GREEN = Vec3.createVectorHelper(0, 0.9, 0);
     protected static final Vec3 COLOR_YELLOW = Vec3.createVectorHelper(0.9, 0.9, 0);
     protected static final Vec3 COLOR_RED = Vec3.createVectorHelper(0.9, 0, 0);
+    private int currentRf = 0;
 
+    // THAUMCRAFT INTEGRATION
+    
+    private AspectList internalAspectList = new AspectList();
+
+    // aer fields
+    
     private boolean aerIsActive = false;
     private int aerCooldownRemaining = 0;
     public static final int AER_COOLDOWN = 20 * 30;
     private boolean spendAer = false;
+    private boolean hasInitializedChunkloading = false;
+
 
     private int ticksSinceLastCleanse = 0;
 
-    private int lastCleanseX = Integer.MAX_VALUE;
-    private int lastCleanseZ = Integer.MAX_VALUE;
+    private int lastCleanseX = Integer.MAX_VALUE; // last cleansed x coord
+    private int lastCleanseZ = Integer.MAX_VALUE; // last cleansed z coord
 
-    private AspectList internalAspectList = new AspectList();
-
-    private boolean hasInitializedChunkloading = false;
+    // Used for generating coordinates
     Random rand;
 
     public DawnMachineTileEntity() {
@@ -82,7 +115,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     @Override
     public void updateEntity() {
-
+    	if (!(currentMana >= MAX_MANA)) {
+    		recieveMana(1000);
+    	}
+    	
+    	
         if (getWorldObj().getIndirectPowerLevelTo(xCoord, yCoord, zCoord, 1) > 0) {
             return;
         }
@@ -506,15 +543,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     }
 
     public boolean haveEnoughFor(DawnMachineResource resource) {
-        int energyCost = resource.getEnergyCost();
 
-        boolean halfEssentia = false;
-        if (currentRf >= energyCost)
-            halfEssentia = true;
+        int discountMultiplier = getDiscount(resource);
 
         int cost = resource.getAspectCost();
-        if (halfEssentia)
-            cost /= 2;
+        cost /= discountMultiplier;
 
         return internalAspectList.getAmount(resource.getAspect()) >= cost;
     }
@@ -522,22 +555,36 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     public void spend(DawnMachineResource resource) {
         if (!haveEnoughFor(resource))
             return;
-
-        int energyCost = resource.getEnergyCost();
-        boolean halfEssentia = false;
-        if (currentRf >= energyCost) {
-            halfEssentia = true;
-            currentRf -= energyCost;
-        }
-
+        
+        int discountMultiplier = getDiscount(resource);
         int cost = resource.getAspectCost();
-        if (halfEssentia)
-            cost /= 2;
+        cost /= discountMultiplier;
 
         internalAspectList.remove(resource.getAspect(), cost);
         signalUpdate();
     }
-
+    
+    private int getDiscount(DawnMachineResource resource) {
+        int energyCost = resource.getEnergyCost();
+        int manaCost = resource.getManaCost();
+        int bloodCost = resource.getBloodCost();
+        int discountMultiplier = 1;
+        
+        if (currentRf >= resource.getEnergyCost()) {
+        	discountMultiplier *= 2;
+        	currentRf -= energyCost;
+        }
+        if (currentMana >= manaCost) {
+        	discountMultiplier *= 2;
+        	currentMana -= manaCost;
+        }
+        if (fluid.amount >= bloodCost) {
+        	discountMultiplier *= 2;
+        	fluid.amount -= bloodCost;
+        }
+        return discountMultiplier;
+    }
+    
     private void setUpAerRange() {
         boolean aerChunkLoadingActive = BlightBuster.instance.chunkLoader.getAerStatus(getWorldObj(), xCoord, yCoord, zCoord);
         boolean canAffordAer = haveEnoughFor(DawnMachineResource.AER);
@@ -652,98 +699,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         lastCleanseZ -= (lastCleanseZ % 2);
     }
 
-    @Override
-    public AspectList getAspects() {
-        AspectList aspectList = new AspectList();
-
-        for (DawnMachineResource resource : DawnMachineResource.values()) {
-            int value = internalAspectList.getAmount(resource.getAspect());
-            value /= resource.getValueMultiplier();
-            aspectList.add(resource.getAspect(), value);
-        }
-
-        return aspectList;
-    }
-
-    @Override
-    public void setAspects(AspectList aspectList) {
-        //Ehhhhh
-    }
-
-    @Override
-    public boolean doesContainerAccept(Aspect aspect) {
-        return DawnMachineResource.getResourceFromAspect(aspect) != null;
-    }
-
-    @Override
-    public int addToContainer(Aspect aspect, int i) {
-        DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
-
-        if (relevantResource == null)
-            return i;
-
-        int currentValue = internalAspectList.getAmount(aspect);
-        int remainingRoom = relevantResource.getMaximumValue() - currentValue;
-
-        int essentiaRemaining = remainingRoom / relevantResource.getValueMultiplier();
-
-        if (essentiaRemaining > 0) {
-            int essentiaToMove = Math.min(i, essentiaRemaining);
-            i -= essentiaToMove;
-            internalAspectList.add(aspect, essentiaToMove * relevantResource.getValueMultiplier());
-            signalUpdate();
-        }
-
-        return i;
-    }
-
-    @Override
-    public boolean takeFromContainer(Aspect aspect, int i) {
-
-        //This container is input-only, we're working here!
-        return false;
-    }
-
-    @Override
-    public boolean takeFromContainer(AspectList aspectList) {
-        //This contianer is input-only, we're working here!
-        return false;
-    }
-
-    @Override
-    public boolean doesContainerContainAmount(Aspect aspect, int i) {
-        if (i == 0)
-            return true;
-
-        DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
-
-        if (relevantResource == null)
-            return false;
-
-        int currentValue = internalAspectList.getAmount(aspect) / relevantResource.getValueMultiplier();
-
-        return (currentValue >= i);
-    }
-
-    @Override
-    public boolean doesContainerContain(AspectList aspectList) {
-        boolean successful = true;
-        for (Aspect aspect : aspectList.getAspects())
-            successful = doesContainerContainAmount(aspect, aspectList.getAmount(aspect)) && successful;
-
-        return successful;
-    }
-
-    @Override
-    public int containerContains(Aspect aspect) {
-        DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
-
-        if (relevantResource == null)
-            return 0;
-
-        return internalAspectList.getAmount(aspect) / relevantResource.getValueMultiplier();
-    }
-
     public boolean needsMore(Aspect aspect) {
         DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
 
@@ -751,64 +706,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             return false;
 
         return (relevantResource.getMaximumValue() - internalAspectList.getAmount(aspect)) >= relevantResource.getValueMultiplier();
-    }
-
-    @Override
-    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        if (from != ForgeDirection.DOWN)
-            return 0;
-
-        int room = MAX_RF - currentRf;
-
-        int actualReceive = Math.min(maxReceive, room);
-
-        if (!simulate)
-            currentRf += actualReceive;
-
-        signalUpdate();
-
-        return actualReceive;
-    }
-
-    @Override
-    public int getEnergyStored(ForgeDirection from) {
-        if (from != ForgeDirection.DOWN)
-            return 0;
-
-        return currentRf;
-    }
-
-    @Override
-    public int getMaxEnergyStored(ForgeDirection from) {
-        if (from != ForgeDirection.DOWN)
-            return 0;
-
-        return MAX_RF;
-    }
-
-    @Override
-    public boolean canConnectEnergy(ForgeDirection from) {
-        return (from == ForgeDirection.DOWN);
-    }
-
-    @Override
-    public int receiveEnergy(int maxReceive, boolean simulate) {
-        return receiveEnergy(ForgeDirection.DOWN, maxReceive, simulate);
-    }
-
-    @Override
-    public int extractEnergy(int maxExtract, boolean simulate) {
-        return 0;
-    }
-
-    @Override
-    public int getEnergyStored() {
-        return currentRf;
-    }
-
-    @Override
-    public int getMaxEnergyStored() {
-        return MAX_RF;
     }
 
     @Override
@@ -882,4 +779,257 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
         return Vec3.createVectorHelper(right.xCoord + red, right.yCoord + green, right.zCoord + blue);
     }
+
+    // THAUMCRAFT INTEGRATION (IAspectContainer)
+    
+    @Override
+    public AspectList getAspects() {
+        AspectList aspectList = new AspectList();
+
+        for (DawnMachineResource resource : DawnMachineResource.values()) {
+            int value = internalAspectList.getAmount(resource.getAspect());
+            value /= resource.getValueMultiplier();
+            aspectList.add(resource.getAspect(), value);
+        }
+
+        return aspectList;
+    }
+
+    @Override
+    public void setAspects(AspectList aspectList) {
+        //Ehhhhh
+    }
+
+    @Override
+    public boolean doesContainerAccept(Aspect aspect) {
+        return DawnMachineResource.getResourceFromAspect(aspect) != null;
+    }
+
+    @Override
+    public int addToContainer(Aspect aspect, int i) {
+        DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
+
+        if (relevantResource == null)
+            return i;
+
+        int currentValue = internalAspectList.getAmount(aspect);
+        int remainingRoom = relevantResource.getMaximumValue() - currentValue;
+
+        int essentiaRemaining = remainingRoom / relevantResource.getValueMultiplier();
+
+        if (essentiaRemaining > 0) {
+            int essentiaToMove = Math.min(i, essentiaRemaining);
+            i -= essentiaToMove;
+            internalAspectList.add(aspect, essentiaToMove * relevantResource.getValueMultiplier());
+            signalUpdate();
+        }
+
+        return i;
+    }
+
+    @Override
+    public boolean takeFromContainer(Aspect aspect, int i) {
+        //This container is input-only, we're working here!
+        return false;
+    }
+
+    @Override
+    public boolean takeFromContainer(AspectList aspectList) {
+        //This contianer is input-only, we're working here!
+        return false;
+    }
+
+    @Override
+    public boolean doesContainerContainAmount(Aspect aspect, int i) {
+        if (i == 0)
+            return true;
+
+        DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
+
+        if (relevantResource == null)
+            return false;
+
+        int currentValue = internalAspectList.getAmount(aspect) / relevantResource.getValueMultiplier();
+
+        return (currentValue >= i);
+    }
+
+    @Override
+    public boolean doesContainerContain(AspectList aspectList) {
+        boolean successful = true;
+        for (Aspect aspect : aspectList.getAspects())
+            successful = doesContainerContainAmount(aspect, aspectList.getAmount(aspect)) && successful;
+
+        return successful;
+    }
+
+    @Override
+    public int containerContains(Aspect aspect) {
+        DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
+
+        if (relevantResource == null)
+            return 0;
+
+        return internalAspectList.getAmount(aspect) / relevantResource.getValueMultiplier();
+    }
+    
+    // RF INTEGRATION
+    
+    @Override
+    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+        if (from != ForgeDirection.DOWN)
+            return 0;
+
+        int room = MAX_RF - currentRf;
+
+        int actualReceive = Math.min(maxReceive, room);
+
+        if (!simulate)
+            currentRf += actualReceive;
+
+        signalUpdate();
+
+        return actualReceive;
+    }
+
+    @Override
+    public int getEnergyStored(ForgeDirection from) {
+        if (from != ForgeDirection.DOWN)
+            return 0;
+
+        return currentRf;
+    }
+
+    @Override
+    public int getMaxEnergyStored(ForgeDirection from) {
+        if (from != ForgeDirection.DOWN)
+            return 0;
+
+        return MAX_RF;
+    }
+
+    @Override
+    public boolean canConnectEnergy(ForgeDirection from) {
+        return (from == ForgeDirection.DOWN);
+    }
+
+    @Override
+    public int receiveEnergy(int maxReceive, boolean simulate) {
+        return receiveEnergy(ForgeDirection.DOWN, maxReceive, simulate);
+    }
+
+    @Override
+    public int extractEnergy(int maxExtract, boolean simulate) { return 0; }
+
+    @Override
+    public int getEnergyStored() { return currentRf; }
+
+    @Override
+    public int getMaxEnergyStored() { return MAX_RF; }
+    
+    // FLUID INTEGRATION (BLOOD MAGIC)
+
+    //IFluidTank
+    
+	@Override
+	public FluidStack getFluid() { return fluid; }
+
+	@Override
+	public int getFluidAmount() { return fluid.amount; }
+
+	@Override
+	public int getCapacity() { return MAX_BLOOD; }
+
+	@Override
+	public FluidTankInfo getInfo() { return tankInfo; }
+
+	@Override
+	public int fill(FluidStack paramFluidStack, boolean paramBoolean) {
+		if (paramFluidStack.getFluid().getID() == blood.getID()) {
+			int change = Math.max(Math.min(MAX_BLOOD - fluid.amount, paramFluidStack.amount), 0);
+			if (paramBoolean) {
+				this.fluid.amount += change;
+			}
+			return change;
+		}
+		return 0;
+	}
+
+	@Override
+	public FluidStack drain(int paramInt, boolean paramBoolean) { return null; }
+
+	// IFluidHandler
+	
+	@Override
+	public int fill(ForgeDirection paramForgeDirection, FluidStack paramFluidStack, boolean paramBoolean) {
+		if (paramFluidStack.getFluid().getID() == blood.getID()) {
+			int change = Math.max(Math.min(MAX_BLOOD - fluid.amount, paramFluidStack.amount), 0);
+			if (paramBoolean) {
+				this.fluid.amount += change;
+			}
+			return change;
+		}
+		return 0;
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection paramForgeDirection, FluidStack paramFluidStack, boolean paramBoolean) { return null; }
+
+	@Override
+	public FluidStack drain(ForgeDirection paramForgeDirection, int paramInt, boolean paramBoolean) { return null; }
+
+	@Override
+	public boolean canFill(ForgeDirection paramForgeDirection, Fluid paramFluid) { return true; }
+
+	@Override
+	public boolean canDrain(ForgeDirection paramForgeDirection, Fluid paramFluid) { return false; }
+
+	@Override
+	public FluidTankInfo[] getTankInfo(ForgeDirection paramForgeDirection) { return tankInfoArray; }
+	
+	// BOTANIA INTEGRATION
+	
+	//IManaReceiver
+	
+	@Override
+	public boolean isFull() { return currentMana >= MAX_MANA; }
+
+	@Override
+	public void recieveMana(int mana) {
+		this.currentMana = Math.max(0, Math.min(MAX_MANA, this.currentMana + mana));
+		worldObj.func_147453_f(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord)); // i have no idea what this does
+	}
+
+	@Override
+	public boolean canRecieveManaFromBursts() { return false; }
+
+	// ISparkAttachable
+	
+	@Override
+	public boolean canAttachSpark(ItemStack stack) { return true; }
+
+	@Override
+	public void attachSpark(ISparkEntity entity) {}
+
+	@Override
+	public ISparkEntity getAttachedSpark() {
+		// Code used from the TA Plate in Botania
+		List<ISparkEntity> sparks = worldObj.getEntitiesWithinAABB(ISparkEntity.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1, zCoord, xCoord + 1, yCoord + 2, zCoord + 1));
+		if(sparks.size() == 1) {
+			Entity e = (Entity) sparks.get(0);
+			return (ISparkEntity) e;
+		}
+
+		return null;
+	}
+
+	@Override
+	public boolean areIncomingTranfersDone() { return currentMana >= MAX_MANA; }
+	
+	public int getAvailableSpaceForMana() { return MAX_MANA - currentMana; }
+	
+	// IManaBlock
+	
+	@Override
+	public int getCurrentMana() { return currentMana; }
 }

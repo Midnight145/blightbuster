@@ -58,10 +58,9 @@ public class OreDiscoveryRegistry {
         registerDiscovery("netherrack","discover.cavestokingdoms.netherrack");
         registerDiscovery("obsidian","discover.cavestokingdoms.obsidian");
         
-        //Register Wood. Finally.
+        //Register Wood. Finally
         registerDiscovery("logWood", "discover.cavestokingdoms.wood");
         registerDiscovery("plankWood", "discover.cavestokingdoms.wood");
-        registerDiscovery("logWood", "discover.cavestokingdoms.wood");
         registerDiscovery("woodLog", "discover.cavestokingdoms.wood");
         
         //Some things lack oredict entries.

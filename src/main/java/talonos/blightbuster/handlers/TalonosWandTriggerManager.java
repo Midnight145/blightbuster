@@ -94,14 +94,16 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
                     player.addChatMessage(new ChatComponentTranslation("gui.offering.pairingDestroyed"));
                     return false;
                 }
-
                 for (int clearY = 0; clearY < 5; clearY++) {
                     for (int clearX = -2; clearX <= 2; clearX++) {
                         for (int clearZ = -2; clearZ <= 2; clearZ++) {
                             if (clearY == 0 && clearX == 0 && clearZ == 0) {
                                 continue;
                             }
-
+                            if (player.getPlayerCoordinates().posX == x + clearX && player.getPlayerCoordinates().posY == y + clearY && player.getPlayerCoordinates().posZ == z + clearZ) { 
+                            	player.addChatMessage(new ChatComponentTranslation("gui.offering.movePlayer"));
+                            	return false;
+                            }
                             if (!world.isAirBlock(x+clearX, y+clearY, z+clearZ)) {
                                 Block clearBlock = world.getBlock(x + clearX, y + clearY, z + clearZ);
                                 if (!clearBlock.getMaterial().isReplaceable()) {
