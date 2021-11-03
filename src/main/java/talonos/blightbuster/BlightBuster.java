@@ -11,6 +11,7 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.entities.EntitySilverPotion;
+import talonos.blightbuster.handlers.FoodHandler;
 import talonos.blightbuster.handlers.PurityFocusEventHandler;
 import talonos.blightbuster.items.BBItems;
 import talonos.blightbuster.network.BlightbusterNetwork;
@@ -41,7 +42,7 @@ public class BlightBuster
 	@Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        instance = this;
+		instance = this;
 		BBBlock.init();
 		BBItems.init();
 		proxy.registerTileEntities();
@@ -52,11 +53,13 @@ public class BlightBuster
     public void init(FMLInitializationEvent event)
     {
         BlightbusterNetwork.init();
-    	MinecraftForge.EVENT_BUS.register(new PurityFocusEventHandler()); // adds event handler
+        
+        MinecraftForge.EVENT_BUS.register(new PurityFocusEventHandler()); // adds event handler
         FMLCommonHandler.instance().bus().register(new PurityFocusEventHandler());
 
         chunkLoader = new DawnMachineChunkLoader(); // creates chunk loader
         ForgeChunkManager.setForcedChunkLoadingCallback(this, chunkLoader); // adds chunkloader to forge
+        FoodHandler foodHandler = new FoodHandler();
 
         if (ThEApi.instance() != null)
             ThEApi.instance().transportPermissions().addAspectContainerTileToInjectPermissions(DawnMachineSpoutTileEntity.class, 32); // adds Dawn Machine spout entity to Thaumic Energistics
