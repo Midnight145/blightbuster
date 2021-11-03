@@ -11,6 +11,7 @@ public class BBItems
     public static Item worldSuperTainter;
     public static Item worldOreKiller;
     public static ItemBlock dawnChargerItem;
+    public static Item nodeConverter;
 
 	public static void init() 
 	{
@@ -20,6 +21,7 @@ public class BBItems
 		worldOreKiller = new ItemWorldOreKiller();
 		worldSuperTainter = new ItemSuperTestWorldTainter();
 		worldSuperTainter = new ItemAlienTome();
+		nodeConverter = new ItemNodeConverter();
 	}
 }
 
