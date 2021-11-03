@@ -570,7 +570,7 @@ IFluidTank, IFluidHandler {
         int bloodCost = resource.getBloodCost();
         int discountMultiplier = 1;
         
-        if (currentRf >= resource.getEnergyCost()) {
+        if (currentRf >= energyCost) {
         	discountMultiplier *= 2;
         	currentRf -= energyCost;
         }
@@ -835,7 +835,7 @@ IFluidTank, IFluidHandler {
 
     @Override
     public boolean takeFromContainer(AspectList aspectList) {
-        //This contianer is input-only, we're working here!
+        //This container is input-only, we're working here!
         return false;
     }
 
