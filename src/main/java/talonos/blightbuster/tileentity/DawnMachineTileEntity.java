@@ -1,5 +1,9 @@
 package talonos.blightbuster.tileentity;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -25,7 +29,9 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -63,6 +69,7 @@ IAspectSource, IAspectContainer, IEnergyReceiver, IEnergyStorage,
 ISparkAttachable, 
 IFluidTank, IFluidHandler {
 	
+
 	// FLUID INTEGRATION (Blood Magic)
 	
 	private static final int MAX_BLOOD = 10000;
@@ -87,6 +94,11 @@ IFluidTank, IFluidHandler {
     protected static final Vec3 COLOR_YELLOW = Vec3.createVectorHelper(0.9, 0.9, 0);
     protected static final Vec3 COLOR_RED = Vec3.createVectorHelper(0.9, 0, 0);
     private int currentRf = 0;
+    
+    private int chunkX;
+    private int chunkZ;
+    private int lastScannedChunk;
+    private final int MAP_WIDTH_CHUNKS = 110;
 
     // THAUMCRAFT INTEGRATION
     
@@ -106,16 +118,55 @@ IFluidTank, IFluidHandler {
     private int lastCleanseX = Integer.MAX_VALUE; // last cleansed x coord
     private int lastCleanseZ = Integer.MAX_VALUE; // last cleansed z coord
 
+    static private HashMap<Class<?>, Constructor<?>> taint_purified_constructors = null;
+	
+	static {
+	    final Class<?>[] taintedEntities = {
+				EntityTaintSheep.class, 
+				EntityTaintChicken.class, 
+				EntityTaintCow.class, 
+				EntityTaintPig.class, 
+				EntityTaintVillager.class, 
+				EntityTaintCreeper.class};
+	    
+		final Class<?>[] purifiedEntities = {
+				EntitySheep.class,
+				EntityChicken.class,
+				EntityCow.class,
+				EntityPig.class,
+				EntityVillager.class,
+				EntityCreeper.class
+		};
+		Constructor<?>[] purifiedConstructors = new Constructor<?>[6];
+	    
+		
+    	for (int i = 0; i < taintedEntities.length; i++) {
+    		try {
+    			taint_purified_constructors.put(taintedEntities[i], purifiedEntities[i].getConstructor((Class[]) new Object[] {World.class}));
+			} catch (Exception e) { e.printStackTrace(); }
+    	}
+	}
+	
+    
     // Used for generating coordinates
     Random rand;
 
     public DawnMachineTileEntity() {
     	rand = new Random(System.currentTimeMillis());
+
     }
 
     @Override
     public void updateEntity() {
-    	if (!(currentMana >= MAX_MANA)) {
+        if (getWorldObj().isRemote) {
+            return;
+        }
+        int chunkX = (lastScannedChunk % (MAP_WIDTH_CHUNKS/5))*5;
+        int chunkZ = (lastScannedChunk / (MAP_WIDTH_CHUNKS/5))*1;
+
+        Chunk chunk = getWorldObj().getChunkFromChunkCoords(chunkX, chunkZ);
+    	
+        if (!(currentMana >= MAX_MANA)) {
     		recieveMana(1000);
     	}
     	
@@ -124,12 +175,10 @@ IFluidTank, IFluidHandler {
             return;
         }
 
-        if (getWorldObj().isRemote) {
-            return;
-        }
+
 
         if (!hasInitializedChunkloading) {
-            BlightBuster.instance.chunkLoader.newDawnMachine(getWorldObj(), xCoord, yCoord, zCoord);
+            BlightBuster.instance.chunkLoader.newDawnMachine(getWorldObj(), chunkX * 16, 1, chunkZ * 16);
             hasInitializedChunkloading = true;
         }
 
@@ -143,72 +192,61 @@ IFluidTank, IFluidHandler {
 
         if (ticksSinceLastCleanse == 0) {
             setUpAerRange();
+	        if (cleanseLength == 4) {
+	            spend(DawnMachineResource.MACHINA);
+	        }
 
-            for (int i = 0; i < 5; i++) {
-                int secondaryBlocks = getNewCleanseCoords();
-
-                boolean anythingToDo = hasAnythingToCleanseHere(secondaryBlocks);
-
-                if (!anythingToDo) {
-                    if (haveEnoughFor(DawnMachineResource.COGNITIO)) {
-                        spend(DawnMachineResource.COGNITIO);
-                        continue;
-                    }
-                }
-
-                if (cleanseLength == 4) {
-                    spend(DawnMachineResource.MACHINA);
-                }
-
-                executeCleanse(secondaryBlocks);
-                ticksSinceLastCleanse++;
-                break;
-            }
+            executeCleanse(chunk);
+            generateNewCoords();
+            ticksSinceLastCleanse++;
+            
         } 
         else {
             ticksSinceLastCleanse++;
         }
     }
 
-    protected void executeCleanse(int secondaryBlocks) {
+    private void generateNewCoords() {
+		// TODO Auto-generated method stub
+		if (chunkX < MAP_WIDTH_CHUNKS) {
+			chunkX++;
+		} else {
+			chunkX = 0;
+			chunkZ++;
+		}
+		if (chunkZ >= MAP_WIDTH_CHUNKS) {
+			chunkZ = 0;
+		}
+	}
+
+	protected void executeCleanse(Chunk chunk) {
         if (spendAer) {
             spendAer = false;
             spend(DawnMachineResource.AER);
         }
-
-        for (Object entityObj : getWorldObj().getEntitiesWithinAABB(EntityTaintSporeSwarmer.class, AxisAlignedBB.getBoundingBox(lastCleanseX, 0, lastCleanseZ, lastCleanseX+2, 255, lastCleanseZ+2))) {
-            Entity entity = (Entity)entityObj;
-            if (haveEnoughFor(DawnMachineResource.IGNIS)) {
-                spend(DawnMachineResource.IGNIS);
-
-                if (haveEnoughFor(DawnMachineResource.VACUOS))
-                    spend(DawnMachineResource.VACUOS);
-                else
-                    getWorldObj().setBlock((int)entity.posX, (int)entity.posY, (int)entity.posZ, ConfigBlocks.blockFluxGoo, ((BlockFluxGoo)ConfigBlocks.blockFluxGoo).getQuanta(), 3);
-                entity.setDead();
-            }
+        List<Entity>[] entityLists = chunk.entityLists;
+        for (List<Entity> list : entityLists) {
+	        for (Entity entity : list) {
+	        	if (entity instanceof EntityTaintSporeSwarmer || entity instanceof EntityFallingTaint) {
+		            if (haveEnoughFor(DawnMachineResource.IGNIS)) {
+		                spend(DawnMachineResource.IGNIS);
+		
+		                if (haveEnoughFor(DawnMachineResource.VACUOS)) {
+		                    spend(DawnMachineResource.VACUOS);
+		                }
+		                else {
+		                    getWorldObj().setBlock((int)entity.posX, (int)entity.posY, (int)entity.posZ, ConfigBlocks.blockFluxGoo, ((BlockFluxGoo)ConfigBlocks.blockFluxGoo).getQuanta(), 3);
+		                }
+	                    entity.setDead();
+		            }
+	        	}
+	        }
         }
-
-        for (Object entityObj : getWorldObj().getEntitiesWithinAABB(EntityFallingTaint.class, AxisAlignedBB.getBoundingBox(lastCleanseX, 0, lastCleanseZ, lastCleanseX+2, 255, lastCleanseZ+2))) {
-            if (haveEnoughFor(DawnMachineResource.IGNIS)) {
-                Entity entity = (Entity)entityObj;
-                spend(DawnMachineResource.IGNIS);
-
-                if (haveEnoughFor(DawnMachineResource.VACUOS))
-                    spend(DawnMachineResource.VACUOS);
-                else
-                    getWorldObj().setBlock((int) entity.posX, (int) entity.posY, (int) entity.posZ, ConfigBlocks.blockFluxGoo, ((BlockFluxGoo)ConfigBlocks.blockFluxGoo).getQuanta(), 3);
-
-                entity.setDead();
-            }
+        cleanseBiome(chunk);
+        boolean didUseIgnis = cleanseBlocks(chunk);
+        if (haveEnoughFor(DawnMachineResource.SANO)) {
+            cleanseMobs(chunk);
         }
-
-        cleanseBiome(secondaryBlocks);
-
-        boolean didUseIgnis = cleanseBlocks();
-
-        if (haveEnoughFor(DawnMachineResource.SANO))
-            cleanseMobs();
 
         BlightbusterNetwork.sendToNearbyPlayers(new SpawnCleanseParticlesPacket(lastCleanseX, lastCleanseZ, didUseIgnis, true), worldObj.provider.dimensionId, lastCleanseX, 128.0f, lastCleanseZ, 150);
     }
@@ -282,61 +320,32 @@ IFluidTank, IFluidHandler {
         return false;
     }
 
-    protected void cleanseBiome(int secondaryBlocks) {
-        boolean canVacuos = haveEnoughFor(DawnMachineResource.VACUOS);
-        for (int z = -1; z <= 2; z++) {
-            for (int x = -1; x <= 2; x++) {
-                if (z < 0 && (secondaryBlocks & 0x4) == 0)
-                    continue;
-                if (z > 1 && (secondaryBlocks & 0x8) == 0)
-                    continue;
-                if (x < 0 && (secondaryBlocks & 0x1) == 0)
-                    continue;
-                if (x > 1 && (secondaryBlocks & 0x2) == 0)
-                    continue;
-
+    protected void cleanseBiome(Chunk chunk) {
+		BiomeGenBase[] genBiomes = null;
+		for (int x = 0; x < 16; x++) {
+			for (int z = 0; z < 16; z++) {
+				
+                genBiomes = getWorldObj().getWorldChunkManager().loadBlockGeneratorData(genBiomes, chunk.xPosition * 16+x, chunk.zPosition+z, 1, 1);
                 BiomeGenBase biome = getWorldObj().getBiomeGenForCoords(lastCleanseX+x, lastCleanseZ+z);
                 if (biome.biomeID == Config.biomeTaintID ||
                         biome.biomeID == Config.biomeEerieID ||
                         biome.biomeID == Config.biomeMagicalForestID) {
 
-                    BiomeGenBase[] genBiomes = null;
-                    genBiomes = getWorldObj().getWorldChunkManager().loadBlockGeneratorData(genBiomes, lastCleanseX+x, lastCleanseZ+z, 1, 1);
                     if (genBiomes != null && genBiomes.length > 0 && genBiomes[0] != null) {
-                    	
-                    	if (genBiomes[0].biomeID == Config.biomeEerieID && getWorldObj().getBiomeGenForCoords(x, z).biomeID == Config.biomeEerieID);
-                    	else if (genBiomes[0].biomeID == Config.biomeMagicalForestID && getWorldObj().getBiomeGenForCoords(x, z).biomeID == Config.biomeMagicalForestID);
-                    	else {
-                    		BlightbusterNetwork.setBiomeAt(getWorldObj(), lastCleanseX+x, lastCleanseZ+z, genBiomes[0]);
-                    	}
+                    		BlightbusterNetwork.setBiomeAt(getWorldObj(), chunk.xPosition * 16+x, chunk.zPosition+z, genBiomes[0]);
                     }
                 }
-
-                if (!canVacuos)
-                    continue;
-
-                if (x < 0 || z < 0 || x > 1 || z > 1) {
-                    for (int y = 0; y < 255; y++) {
-                        Block block = getWorldObj().getBlock(lastCleanseX+x, y, lastCleanseZ+z);
-                        if (block == ConfigBlocks.blockFluxGoo) {
-                            getWorldObj().setBlock(lastCleanseX+x, y, lastCleanseZ+z, Blocks.air);
-                            spend(DawnMachineResource.VACUOS);
-                            canVacuos = haveEnoughFor(DawnMachineResource.VACUOS);
-
-                            if (!canVacuos)
-                                break;
-                        }
-                    }
-                }
-            }
-        }
+			}
+		}
     }
 
-    protected boolean cleanseBlocks() {
+    protected boolean cleanseBlocks(Chunk chunk) {
         boolean haveUsedIgnis = false;
-
-        for (int x = 0; x <= 1; x++) {
-            for (int z = 0; z <= 1; z++) {
+    	
+    	for (int x = 0; x < 16; x++) {
+    		for (int z = 0; z < 16; z++) {
+    			// entire chunk
+    			
                 // - Ignis is used to cleanse tainted blocks
                 // - Vacuos will remove crusted taint blocks when ignis acts on them, instead of converting to flux goo
                 // - Herba will convert the top dirt block to grass/top tainted soil block to grass instead of dirt
@@ -348,14 +357,13 @@ IFluidTank, IFluidHandler {
                 //Get the y-value of the block herba might want to act on
                 boolean foundTopBlock = false;
                 int topBlock = -1;
-
                 //We do the cleanse from top to bottom and every time we find crusted taint, we count how many consecutive
                 //ones we cleanse.  When we find something that isn't crusted taint, after cleansing it, we plant a sapling on
                 //it if there was enough crusted taint above it
                 int columnCrustedTaint = 0;
                 for (int y = 255; y >= 0; y--) {
-                    Block block = getWorldObj().getBlock(lastCleanseX+x, y, lastCleanseZ+z);
-                    int meta = getWorldObj().getBlockMetadata(lastCleanseX+x, y, lastCleanseZ+z);
+                    Block block = chunk.getBlock(x, y, z);
+                    int meta = chunk.getBlockMetadata(x, y, z);
 
                     boolean thisIsCrustedTaint = (block == ConfigBlocks.blockTaint && meta == 0);
 
@@ -375,6 +383,8 @@ IFluidTank, IFluidHandler {
                 }
 
                 if (columnCrustedTaint >= 3 && foundTopBlock) {
+                	
+                	// TODO: Use chunk instead of getWorldObj()
                     BiomeGenBase biome = getWorldObj().getBiomeGenForCoords(lastCleanseX+x, lastCleanseZ+z);
                     String biomeName = biome.biomeName.toLowerCase(Locale.ENGLISH);
 
@@ -391,6 +401,7 @@ IFluidTank, IFluidHandler {
                     else if (biomeName.contains("roof"))
                         treeType = 5;
 
+                    // TODO: use chunk instead of getWorldObj if possible
                     getWorldObj().setBlock(lastCleanseX+x, topBlock + 1, lastCleanseZ+z, Blocks.sapling, treeType, 3);
                     spend(DawnMachineResource.ARBOR);
                 }
@@ -413,7 +424,6 @@ IFluidTank, IFluidHandler {
                     	}
                     }
                 }
-                
             }
         }
 
@@ -498,34 +508,21 @@ IFluidTank, IFluidHandler {
         return false;
     }
 
-    protected void cleanseMobs() {
-        List entities = getWorldObj().getEntitiesWithinAABB(ITaintedMob.class, AxisAlignedBB.getBoundingBox(lastCleanseX, 0, lastCleanseZ, lastCleanseX + 2, 256, lastCleanseZ + 2));
-
-        for (Object entityObj : entities) {
-            if (entityObj instanceof EntityTaintSheep)
-            {
-                spend(DawnMachineResource.SANO);
-                cleanseSingleMob((Entity)entityObj, new EntitySheep(getWorldObj()));
-            } else if (entityObj instanceof EntityTaintChicken) {
-                spend(DawnMachineResource.SANO);
-                cleanseSingleMob((Entity)entityObj, new EntityChicken(getWorldObj()));
-            } else if (entityObj instanceof EntityTaintCow) {
-                spend(DawnMachineResource.SANO);
-                cleanseSingleMob((Entity)entityObj, new EntityCow(getWorldObj()));
-            } else if (entityObj instanceof EntityTaintPig) {
-                spend(DawnMachineResource.SANO);
-                cleanseSingleMob((Entity)entityObj, new EntityPig(getWorldObj()));
-            } else if (entityObj instanceof EntityTaintVillager) {
-                spend(DawnMachineResource.SANO);
-                cleanseSingleMob((Entity)entityObj, new EntityVillager(getWorldObj()));
-            } else if (entityObj instanceof EntityTaintCreeper) {
-                spend(DawnMachineResource.SANO);
-                cleanseSingleMob((Entity)entityObj, new EntityCreeper(getWorldObj()));
-            }
-
-            if (!haveEnoughFor(DawnMachineResource.SANO))
-                return;
-        }
+    protected void cleanseMobs(Chunk chunk) {
+		List<Entity>[] entityLists = chunk.entityLists;
+		for (List<Entity> list : entityLists) {
+		    for (Object entityObj : list) {
+			    if (DawnMachineTileEntity.taint_purified_constructors.containsKey(entityObj.getClass())) {
+			        spend(DawnMachineResource.SANO);
+			        try {
+						cleanseSingleMob((Entity)entityObj, (EntityLivingBase) taint_purified_constructors.get(entityObj.getClass()).newInstance(getWorldObj()));
+					} catch (Exception e) {}
+			    }
+			    if (!haveEnoughFor(DawnMachineResource.SANO)) {
+			        return;
+			    }
+			}
+		}
     }
 
     private void cleanseSingleMob(Entity tainted, EntityLivingBase cleansed) {
@@ -585,6 +582,8 @@ IFluidTank, IFluidHandler {
         return discountMultiplier;
     }
     
+    
+    // rewrite
     private void setUpAerRange() {
         boolean aerChunkLoadingActive = BlightBuster.instance.chunkLoader.getAerStatus(getWorldObj(), xCoord, yCoord, zCoord);
         boolean canAffordAer = haveEnoughFor(DawnMachineResource.AER);
@@ -603,6 +602,7 @@ IFluidTank, IFluidHandler {
         }
     }
 
+    // rewrite
     private int getNewCleanseCoords() {
         int chunkX = xCoord / 16;
         int chunkZ = zCoord / 16;
