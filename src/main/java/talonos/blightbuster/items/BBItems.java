@@ -12,6 +12,7 @@ public class BBItems
     public static Item worldOreKiller;
     public static ItemBlock dawnChargerItem;
     public static Item nodeConverter;
+    public static Item tunerFocus;
 
 	public static void init() 
 	{
@@ -22,6 +23,8 @@ public class BBItems
 		worldSuperTainter = new ItemSuperTestWorldTainter();
 		worldSuperTainter = new ItemAlienTome();
 		nodeConverter = new ItemNodeConverter();
+//		tunerFocus = new ItemTunerFocus();
+		
 	}
 }
 

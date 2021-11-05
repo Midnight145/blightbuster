@@ -49,7 +49,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
         setCreativeTab(Thaumcraft.tabTC);
         setTextureName(BlightBuster.MODID + ":" + BBStrings.purityFocusName);
     }
-
+    @Override
     public String getSortingHelper(ItemStack itemstack) {
         return "PU" + super.getSortingHelper(itemstack);
     }

@@ -6,7 +6,6 @@ import java.util.List;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -27,10 +26,8 @@ import thaumcraft.common.items.wands.ItemWandCasting;
 
 public class ItemTunerFocus extends ItemFocusBasic {
 
-	static HashMap<String, String> mode_dict;
-	static HashMap<String, String> mode_chat;
-	private final String NBT_TAG_MODE = "tunerMode";
-	private final String NBT_TAG_CHUNKS = "tunerChunks";
+	static HashMap<String, String> mode_dict = new HashMap<String, String>();
+	static HashMap<String, String> mode_chat = new HashMap<String, String>();
 	
 	static {
 		mode_dict.put("NW", "SE");
@@ -39,6 +36,9 @@ public class ItemTunerFocus extends ItemFocusBasic {
 		mode_chat.put("NW", "Set mode to northwest.");
 		mode_chat.put("NW", "Set mode to southeast.");
 	}
+	
+	private final String NBT_TAG_MODE = "tunerMode";
+	private final String NBT_TAG_CHUNKS = "tunerChunks";
 	
 	public ItemTunerFocus() {
         setUnlocalizedName(BlightBuster.MODID + "_" + BBStrings.tunerFocusName);
@@ -50,10 +50,13 @@ public class ItemTunerFocus extends ItemFocusBasic {
     private static final AspectList cost = new AspectList().add(Aspect.ORDER, 5);
 
     public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer p, MovingObjectPosition mop) {
+    	if (!p.worldObj.isRemote ) { return itemstack; }
     	NBTTagCompound orig = itemstack.getTagCompound();
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
         
-        if (!orig.hasKey(NBT_TAG_MODE)) { setMode("NW", itemstack); }
+        if (!orig.hasKey(NBT_TAG_MODE)) { 
+        	setMode("NW", itemstack);
+    	}
     	
         if (p.isSneaking()) {
     		changeMode(itemstack);
@@ -97,8 +100,9 @@ public class ItemTunerFocus extends ItemFocusBasic {
     	
 		int[] nw_coords = chunks.getIntArray("NW");
 		int[] se_coords = chunks.getIntArray("SE");
-		((DawnMachineTileEntity) tile).NW_chunk = nw_coords;
-		((DawnMachineTileEntity) tile).SE_chunk = se_coords;
+		tile.NW_chunk = nw_coords;
+		tile.SE_chunk = se_coords;
+		tile.isActive = true;
     }
     
     private NBTTagCompound setCoords(NBTTagCompound tag, int[] coords) {
@@ -111,21 +115,22 @@ public class ItemTunerFocus extends ItemFocusBasic {
     
     private void setMode(String string, ItemStack itemstack) {
 		// TODO Auto-generated method stub
-    	NBTTagCompound orig = itemstack.getTagCompound();
-    	orig.setString(NBT_TAG_MODE, string);
-    	itemstack.writeToNBT(orig);
+    	NBTTagCompound tag = new NBTTagCompound();
+    	tag.setString(NBT_TAG_MODE, string);
+    	itemstack.writeToNBT(tag);
 		
 	}
     private void changeMode(ItemStack itemstack) {
     	NBTTagCompound orig = itemstack.getTagCompound();
-    	orig.setString(NBT_TAG_MODE, mode_dict.get(orig.getString(NBT_TAG_MODE)));
-    	itemstack.writeToNBT(orig);
+    	NBTTagCompound tag = new NBTTagCompound();
+    	tag.setString(NBT_TAG_MODE, mode_dict.get(orig.getString(NBT_TAG_MODE)));
+    	itemstack.writeToNBT(tag);
     }
 
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister register) {
-//        this.itemIcon = register.registerIcon(this.getIconString());
-//        this.icon = register.registerIcon(this.getIconString());
+        this.itemIcon = register.registerIcon(this.getIconString());
+        this.icon = register.registerIcon(this.getIconString());
     }
 
     @Override
@@ -142,8 +147,7 @@ public class ItemTunerFocus extends ItemFocusBasic {
 	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean par4) {
 		// TODO Auto-generated method stub
     	
-    	tooltip.add("Mode: " + (stack.getTagCompound().getString(NBT_TAG_MODE) != null ? stack.getTagCompound().getString(NBT_TAG_MODE) : ""));
+    	tooltip.add("Mode: " + (stack.getTagCompound() != null ? (stack.getTagCompound().getString(NBT_TAG_MODE) != null ? stack.getTagCompound().getString(NBT_TAG_MODE) : "") : ""));
 		super.addInformation(stack, player, tooltip, par4);
 	}
-
 }

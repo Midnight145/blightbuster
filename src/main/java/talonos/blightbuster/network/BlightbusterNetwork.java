@@ -58,8 +58,9 @@ public class BlightbusterNetwork {
 
     @SubscribeEvent
     public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.player instanceof  EntityPlayerMP)
-            MapScanner.instance.sendEntireMap((EntityPlayerMP) event.player);
+        if (event.player instanceof  EntityPlayerMP) {
+			MapScanner.instance.sendEntireMap((EntityPlayerMP) event.player);
+		}
     }
 
     public static void sendToAllPlayers(IMessage packet) {
@@ -78,6 +79,7 @@ public class BlightbusterNetwork {
         if(biome != null) {
             if (!world.isRemote || world.getChunkProvider().chunkExists(x >> 4, z >> 4)) {
                 Chunk chunk = world.getChunkFromBlockCoords(x, z);
+                System.out.println("setBiomeAt: " + chunk.xPosition + " " + chunk.zPosition);
                 byte[] array = chunk.getBiomeArray();
                 array[(z & 15) << 4 | x & 15] = (byte) (biome.biomeID & 255);
                 chunk.setBiomeArray(array);
