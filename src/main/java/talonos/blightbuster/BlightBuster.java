@@ -6,10 +6,12 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import talonos.blightbuster.blocks.BBBlock;
+import talonos.blightbuster.commands.CommandDawnQueue;
 import talonos.blightbuster.entities.EntitySilverPotion;
 import talonos.blightbuster.handlers.FoodHandler;
 import talonos.blightbuster.handlers.PurityFocusEventHandler;
@@ -62,7 +64,9 @@ public class BlightBuster
         FoodHandler foodHandler = new FoodHandler();
 
         if (ThEApi.instance() != null)
-            ThEApi.instance().transportPermissions().addAspectContainerTileToInjectPermissions(DawnMachineSpoutTileEntity.class, 32); // adds Dawn Machine spout entity to Thaumic Energistics
+		 {
+			ThEApi.instance().transportPermissions().addAspectContainerTileToInjectPermissions(DawnMachineSpoutTileEntity.class, 32); // adds Dawn Machine spout entity to Thaumic Energistics
+		}
     }
  
     @Mod.EventHandler
@@ -70,5 +74,11 @@ public class BlightBuster
     {
     	AddedResearch.initResearch();
         proxy.registerRenderers();
+    }
+    
+    @Mod.EventHandler
+    public static void serverLoad(FMLServerStartingEvent event)
+    {
+        event.registerServerCommand(new CommandDawnQueue());
     }
 }

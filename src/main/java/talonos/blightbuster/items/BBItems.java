@@ -23,7 +23,6 @@ public class BBItems
 		worldSuperTainter = new ItemSuperTestWorldTainter();
 		worldSuperTainter = new ItemAlienTome();
 		nodeConverter = new ItemNodeConverter();
-//		tunerFocus = new ItemTunerFocus();
 		
 	}
 }

@@ -64,9 +64,7 @@ IAspectSource, IAspectContainer, IEnergyReceiver, IEnergyStorage,
 ISparkAttachable, 
 IFluidTank, IFluidHandler {
 	
-	public int[] NW_chunk;
-	public int[] SE_chunk;
-	public boolean isActive = true;
+	public static DawnMachineTileEntity INSTANCE = null;
 
 	// FLUID INTEGRATION (Blood Magic)
 	
@@ -76,10 +74,14 @@ IFluidTank, IFluidHandler {
 	private FluidTankInfo tankInfo = new FluidTankInfo(this.getFluid(), MAX_BLOOD);
 	private FluidTankInfo[] tankInfoArray = {tankInfo};
 
+	// END FLUID INTEGRATION
+	
 	// BOTANIA INTEGRATION
 	
 	private static final int MAX_MANA = 100000;
 	private int currentMana = 0;
+	
+	// END BOTANIA INTEGRATION
 	
 	// RF INTEGRATION
 	
@@ -93,30 +95,39 @@ IFluidTank, IFluidHandler {
     protected static final Vec3 COLOR_RED = Vec3.createVectorHelper(0.9, 0, 0);
     private int currentRf = 0;
     
-
+    // END RF INTEGRATION
     
     // THAUMCRAFT INTEGRATION
     
     private AspectList internalAspectList = new AspectList();
 
-    // aer fields
+    // END THAUMCRAFT INTEGRATION
     
+    // aer fields
     private boolean aerIsActive = false;
     private int aerCooldownRemaining = 0;
     public static final int AER_COOLDOWN = 20 * 30;
     private boolean spendAer = false;
     private boolean hasInitializedChunkloading = false;
 
-    public int chunkX;
-    public int chunkZ;
-    public final int MAP_WIDTH_CHUNKS = 112;
+    
+    // Current chunk being cleaned
+    public int chunkX = 0; 
+    public int chunkZ = 1; // Starts at 1 because map starts at 1
+    
+    
+    // Last cleansed chunk
+    public int lastChunkX = 0;
+    public int lastChunkZ = 1;
+    
+    // Map size
+    public final int MAP_WIDTH_CHUNKS = 112; // Map size
 	public final int MAP_HEIGHT_CHUNKS = 135;
     
     private int ticksSinceLastCleanse = 0;
 
-    public int lastChunkX = 0; // last cleansed x coord
-    public int lastChunkZ = 1; // last cleansed z coord
-
+    // Used in cleanseSingleMob for nicer purifying of animals
+    // Class<?> is tainted mob, constructor is the purified version
     static private HashMap<Class<?>, Constructor<?>> taint_purified_constructors = new HashMap<Class<?>, Constructor<?>>();
 	
 	static {
@@ -136,8 +147,6 @@ IFluidTank, IFluidHandler {
 				EntityVillager.class,
 				EntityCreeper.class
 		};
-		Constructor<?>[] purifiedConstructors = new Constructor<?>[6];
-	    
 		
     	for (int i = 0; i < taintedEntities.length; i++) {
     		try {
@@ -147,32 +156,34 @@ IFluidTank, IFluidHandler {
 	}
 	
     
-    // Used for generating coordinates
+    // Used for generating coordinates and desert chance placement
     Random rand;
 
     public DawnMachineTileEntity() {
     	rand = new Random(System.currentTimeMillis());
-
+    	INSTANCE = this;
     }
+    
+    // Takes chunk coords x, z and returns chunk. Taken from BlightbusterNetwork.java. 
+    // Don't know why I had to use this, doing it manually wouldn't work.
     public static Chunk getChunk(World world, int x, int z) {
     	x *= 16;
     	z *= 16;
     	if (world.isRemote || world.getChunkProvider().chunkExists(x >> 4, z >> 4)) {
             Chunk chunk = world.getChunkFromBlockCoords(x, z);
-            System.out.println("getChunk: " + chunk.xPosition + " " + chunk.zPosition);
             return chunk;
     	}
     	return null;
     }
 
     @Override
-     // 13, 2
     public void updateEntity() {
 
     	if (getWorldObj().isRemote) {
     		return;
     	}
     	
+    	// Check for redstone signal
         if (getWorldObj().getIndirectPowerLevelTo(xCoord, yCoord, zCoord, 1) > 0) {
             return;
         }
@@ -189,6 +200,7 @@ IFluidTank, IFluidHandler {
             aerCooldownRemaining--;
         }
 
+        // Determines cleanse speed in ticks
         int cleanseLength = haveEnoughFor(DawnMachineResource.MACHINA) ? 4 : 12;
 
         ticksSinceLastCleanse %= cleanseLength;
@@ -196,6 +208,7 @@ IFluidTank, IFluidHandler {
         if (ticksSinceLastCleanse == 0) {
             getNewCleanseCoords();
             Chunk chunk = getChunk(worldObj, chunkX, chunkZ);
+            System.out.println("Current Chunk: " + chunkX + " " + chunkZ);
             if (chunk != null) {
                 setUpAerRange();
     	        if (cleanseLength == 4) {
@@ -217,6 +230,8 @@ IFluidTank, IFluidHandler {
             spendAer = false;
             spend(DawnMachineResource.AER);
         }
+        // TODO: THIS WILL CRASH
+        // TODO: Loop needs to be like cleanseMobs
         List<Entity>[] entityLists = chunk.entityLists;
         for (List<Entity> list : entityLists) {
 	        for (Entity entity : list) {
@@ -238,13 +253,15 @@ IFluidTank, IFluidHandler {
         cleanseBiome(chunk);
         boolean didUseIgnis = cleanseBlocks(chunk);
         if (haveEnoughFor(DawnMachineResource.SANO)) {
-//            cleanseMobs(chunk);
+            cleanseMobs(chunk);
         }
 
 //        BlightbusterNetwork.sendToNearbyPlayers(new SpawnCleanseParticlesPacket(lastCleanseX, lastCleanseZ, didUseIgnis, true), worldObj.provider.dimensionId, lastCleanseX, 128.0f, lastCleanseZ, 150);
     }
- // TODO: getEntitiesWithinAABBForEntity
-	 // TODO: getEntitiesOfTypeWithinAAAB
+	
+	
+	// TODO: getEntitiesWithinAABBForEntity
+	// TODO: getEntitiesOfTypeWithinAAAB
     protected boolean hasAnythingToCleanseHere(int secondaryBlocks) {
         //Can cleanse biome?
 //        for (int z = -1; z <= 2; z++) {
@@ -314,32 +331,41 @@ IFluidTank, IFluidHandler {
         return true;
     }
 
+    // TODO: Get biome array of original map, swap out tainted for purified
     protected void cleanseBiome(Chunk chunk) {
 		BiomeGenBase[] genBiomes = null;
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				
-                genBiomes = getWorldObj().getWorldChunkManager().loadBlockGeneratorData(genBiomes, chunk.xPosition * 16+x, chunk.zPosition+z, 1, 1);
-                BiomeGenBase biome = getWorldObj().getBiomeGenForCoords(x, z);
+				int[] coords = getBlockCoordsFromChunk(chunk, x, z);
+                genBiomes = getWorldObj().getWorldChunkManager().loadBlockGeneratorData(genBiomes, coords[0], coords[1], 1, 1);
+                BiomeGenBase biome = getWorldObj().getBiomeGenForCoords(coords[0], coords[1]);
                 if (biome.biomeID == Config.biomeTaintID ||
                         biome.biomeID == Config.biomeEerieID ||
                         biome.biomeID == Config.biomeMagicalForestID) {
 
                     if (genBiomes != null && genBiomes.length > 0 && genBiomes[0] != null) {
-                    		BlightbusterNetwork.setBiomeAt(getWorldObj(), chunk.xPosition * 16+x, chunk.zPosition+z, genBiomes[0]);
+                    		BlightbusterNetwork.setBiomeAt(getWorldObj(), coords[0], coords[1], genBiomes[0]);
                     }
                 }
 			}
 		}
     }
 
+    // Adds chunk x, z coordinate to get "true" coordinate in relation to the map, not the chunk
+    public int[] getBlockCoordsFromChunk(Chunk chunk, int x, int z) {
+    	return new int[] { chunk.xPosition * 16 + x, chunk.zPosition * 16 + z };
+    }
+    
     protected boolean cleanseBlocks(Chunk chunk) {
 
         boolean haveUsedIgnis = false;
     	
+        // iterates over entire chunk
     	for (int x = 0; x < 16; x++) {
     		for (int z = 0; z < 16; z++) {
-    			// entire chunk
+    			// get the map coords
+                int[] coords = getBlockCoordsFromChunk(chunk, x, z);
+
     			
                 // - Ignis is used to cleanse tainted blocks
                 // - Vacuos will remove crusted taint blocks when ignis acts on them, instead of converting to flux goo
@@ -371,10 +397,10 @@ IFluidTank, IFluidHandler {
                         topBlock = y;
                     }
 
-                    boolean didUseIgnis = cleanseSingleBlock(x, y, z, block, meta, canHerba && foundTopBlock && y == topBlock);
+                    boolean didUseIgnis = cleanseSingleBlock(coords[0], y, coords[1], block, meta, canHerba && foundTopBlock && y == topBlock);
                     haveUsedIgnis = didUseIgnis || haveUsedIgnis;
 
-                    if (didUseIgnis && getWorldObj().getBlock(x, y, z) != Blocks.dirt) {
+                    if (didUseIgnis && getWorldObj().getBlock(coords[0], y, coords[1]) != Blocks.dirt) {
                         foundTopBlock = false;
                     }
                 }
@@ -400,7 +426,8 @@ IFluidTank, IFluidHandler {
 					}
 
                     // TODO: use chunk instead of getWorldObj if possible
-                    getWorldObj().setBlock(x, topBlock + 1, z, Blocks.sapling, treeType, 3);
+
+                    getWorldObj().setBlock(coords[0], topBlock + 1, coords[1], Blocks.sapling, treeType, 3);
                     spend(DawnMachineResource.ARBOR);
                 }
                 
@@ -413,10 +440,10 @@ IFluidTank, IFluidHandler {
                     	boolean block = rand.nextBoolean();
                     	if (chance == 200) {
                     		if (block) {
-                                getWorldObj().setBlock(x, topBlock + 1, z, Blocks.cactus);
+                                getWorldObj().setBlock(coords[0], topBlock + 1, coords[1], Blocks.cactus);
                     		}
                     		else {
-                                getWorldObj().setBlock(x, topBlock + 1, z, ConfigBlocks.blockCustomPlant, 3, 3);
+                                getWorldObj().setBlock(coords[0], topBlock + 1, coords[1], ConfigBlocks.blockCustomPlant, 3, 3);
                     		}
                             spend(DawnMachineResource.ARBOR);
                     	}
@@ -509,12 +536,12 @@ IFluidTank, IFluidHandler {
     protected void cleanseMobs(Chunk chunk) {
 
 		List<Entity>[] entityLists = chunk.entityLists.clone();
-		for (List<Entity> list : entityLists) {
-		    for (Object entityObj : list) {
-			    if (DawnMachineTileEntity.taint_purified_constructors.containsKey(entityObj.getClass())) {
+		for (int i = 0; i < entityLists.length; i++) {
+			for (int j = 0; j < entityLists[i].size(); j++) {
+				if (DawnMachineTileEntity.taint_purified_constructors.containsKey(chunk.entityLists[i].get(j).getClass())) {
 			        spend(DawnMachineResource.SANO);
 			        try {
-						cleanseSingleMob((Entity)entityObj, (EntityLivingBase) taint_purified_constructors.get(entityObj.getClass()).newInstance(getWorldObj()));
+						cleanseSingleMob((Entity)chunk.entityLists[i].get(j), (EntityLivingBase) taint_purified_constructors.get(chunk.entityLists[i].get(j).getClass()).newInstance(getWorldObj()));
 					} catch (Exception e) {}
 			    }
 			    if (!haveEnoughFor(DawnMachineResource.SANO)) {
@@ -612,8 +639,11 @@ IFluidTank, IFluidHandler {
     }
 
     private void generateScanlineCoords() {
-        lastChunkX = chunkX;
+        // reset last scanned chunk
+    	lastChunkX = chunkX;
         lastChunkZ = chunkZ;
+        
+        // check bounds, increment if possible, otherwise set to zero
         if (lastChunkX >= MAP_WIDTH_CHUNKS) {
             chunkX = 0;
         } else {
@@ -628,8 +658,8 @@ IFluidTank, IFluidHandler {
     }
 
     private void generateRandomCoords() {
-        chunkX = rand.nextInt(MAP_WIDTH_CHUNKS);
-        chunkZ = rand.nextInt(MAP_HEIGHT_CHUNKS);
+        chunkX = rand.nextInt(MAP_WIDTH_CHUNKS + 1);
+        chunkZ = rand.nextInt(MAP_HEIGHT_CHUNKS + 1);
     }
 
     public boolean needsMore(Aspect aspect) {
