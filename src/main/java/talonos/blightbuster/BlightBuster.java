@@ -11,7 +11,6 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import talonos.blightbuster.blocks.BBBlock;
-import talonos.blightbuster.commands.CommandDawnQueue;
 import talonos.blightbuster.entities.EntitySilverPotion;
 import talonos.blightbuster.handlers.FoodHandler;
 import talonos.blightbuster.handlers.PurityFocusEventHandler;
@@ -42,8 +41,7 @@ public class BlightBuster
     public DawnMachineChunkLoader chunkLoader = null;
 	
 	@Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
 		instance = this;
 		BBBlock.init();
 		BBItems.init();
@@ -52,13 +50,11 @@ public class BlightBuster
     }
  
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
         BlightbusterNetwork.init();
         
         MinecraftForge.EVENT_BUS.register(new PurityFocusEventHandler()); // adds event handler
         FMLCommonHandler.instance().bus().register(new PurityFocusEventHandler());
-
         chunkLoader = new DawnMachineChunkLoader(); // creates chunk loader
         ForgeChunkManager.setForcedChunkLoadingCallback(this, chunkLoader); // adds chunkloader to forge
         FoodHandler foodHandler = new FoodHandler();
@@ -70,15 +66,12 @@ public class BlightBuster
     }
  
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
+    public void postInit(FMLPostInitializationEvent event) {
     	AddedResearch.initResearch();
         proxy.registerRenderers();
     }
     
     @Mod.EventHandler
-    public static void serverLoad(FMLServerStartingEvent event)
-    {
-        event.registerServerCommand(new CommandDawnQueue());
+    public static void serverLoad(FMLServerStartingEvent event) {
     }
 }

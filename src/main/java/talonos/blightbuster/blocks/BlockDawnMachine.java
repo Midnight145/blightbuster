@@ -36,7 +36,8 @@ public class BlockDawnMachine extends BlockMultiblock {
         GameRegistry.registerBlock(this, this.getUnlocalizedName());
     }
 
-    public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6) {
+    @Override
+	public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6) {
         if (par5 == 1) {
             if (par1World.isRemote) {
                 Thaumcraft.proxy.blockSparkle(par1World, par2, par3, par4, 16736256, 5);
@@ -85,6 +86,6 @@ public class BlockDawnMachine extends BlockMultiblock {
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         super.breakBlock(world, x, y, z, block, meta);
 
-        BlightBuster.instance.chunkLoader.eliminateDawnMachine();
+//        BlightBuster.instance.chunkLoader.eliminateDawnMachine();
     }
 }
