@@ -3,7 +3,7 @@ package talonos.blightbuster.tileentity.dawnmachine;
 import thaumcraft.api.aspects.Aspect;
 
 public enum DawnMachineResource {
-			// aspect			   mult     cost   max   rf     mana  blood   u     v
+			// aspect			   mult     cost   max        rf     mana  blood   u     v
 			// Aspect, mult * 4 so you can halve three times
     SANO     (Aspect.HEAL,      512  * 4,  2 * 4, 16384 * 4, 16,    0,      0,   0.6f, 0.5f),
     IGNIS    (Aspect.FIRE,      2048 * 4,  2 * 4, 65536 * 4, 4,     0,      0,   0,    0.5f),

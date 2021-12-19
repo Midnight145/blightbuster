@@ -11,8 +11,8 @@ import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.tileentity.DawnChargerTileEntity;
 
-public class DawnCharger extends BBBlock {
-    public DawnCharger() {
+public class BlockDawnCharger extends BBBlock {
+    public BlockDawnCharger() {
         super(Material.wood);
         this.setHardness(5.0f);
         this.setBlockName(BlightBuster.MODID + "_" + BBStrings.dawnChargerName);

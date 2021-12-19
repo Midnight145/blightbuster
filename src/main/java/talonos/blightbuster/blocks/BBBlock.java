@@ -49,7 +49,7 @@ public class BBBlock extends Block
         dawnMachine = new BlockDawnMachine();
         cyberTotem = new BlockCyberTotem();
         offering = new BlockOffering();
-        dawnCharger = new DawnCharger();
+        dawnCharger = new BlockDawnCharger();
 
         dawnMachineMultiblock.init();
 	}
