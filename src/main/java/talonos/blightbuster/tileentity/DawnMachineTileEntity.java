@@ -4,7 +4,6 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -19,9 +18,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -44,6 +45,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
+import noppes.npcs.entity.EntityCustomNpc;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.network.packets.SpawnCleanseParticlesPacket;
@@ -78,6 +80,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	private FluidStack fluid = new FluidStack(blood, 0);
 	private FluidTankInfo tankInfo = new FluidTankInfo(this.getFluid(), MAX_BLOOD);
 	private FluidTankInfo[] tankInfoArray = { this.tankInfo };
+	int bloodLastTick = 0;
 
 	// END FLUID INTEGRATION
 
@@ -144,7 +147,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	// Used in cleanseSingleMob for nicer purifying of animals
 	// Class<?> is tainted mob, constructor is the purified version
 	static private HashMap<Class<?>, Constructor<?>> taint_purified_constructors = new HashMap<Class<?>, Constructor<?>>();
-	static private HashSet<Long> cleansedChunks = new HashSet<Long>();
+//	static private HashSet<Long> cleansedChunks = new HashSet<Long>();
+	static private HashMap<Long, CleansedChunk> cleansedChunks = new HashMap<Long, CleansedChunk>();
 
 	private boolean firstTick = true, doInit = true;
 
@@ -197,6 +201,14 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		// Check for redstone signal
 		if ((this.getWorldObj().getIndirectPowerLevelTo(this.xCoord, this.yCoord, this.zCoord, 1) > 0)) {
 			return;
+		}
+
+		for (CleansedChunk chunk : cleansedChunks.values()) {
+			chunk.exists = this.isChunkLoaded(chunk.x, chunk.z);
+			if (!chunk.exists && chunk.lastTick != chunk.exists) {
+				chunk.isDirty = true;
+			}
+			chunk.lastTick = chunk.exists;
 		}
 
 		if (!(this.currentMana >= MAX_MANA)) {
@@ -270,12 +282,21 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 				}
 				int[] newChunkCoords = { this.chunkX + OFFSETS[i][0], this.chunkZ + OFFSETS[i][1] };
 				long hash = this.getHash(newChunkCoords[0], newChunkCoords[1]);
-				if (cleansedChunks.contains(hash)) {
-					if (this.isChunkLoaded(newChunkCoords[0], newChunkCoords[1])) {
-						Chunk chunk_ = getChunk(this.worldObj, newChunkCoords[0], newChunkCoords[1]);
-						if (chunk_ != null && this.hasAnythingToCleanseHere(chunk_)) {
-							this.executeCleanse(chunk);
-						}
+//				if (cleansedChunks.contains(hash)) {
+//					if (this.isChunkLoaded(newChunkCoords[0], newChunkCoords[1])) {
+//						Chunk chunk_ = getChunk(this.worldObj, newChunkCoords[0], newChunkCoords[1]);
+//						if (chunk_ != null && this.hasAnythingToCleanseHere(chunk_)) {
+//							this.executeCleanse(chunk);
+//						}
+//					}
+//				}
+
+				CleansedChunk cchunk = cleansedChunks.get(hash);
+				if (cchunk != null && cchunk.isDirty && cchunk.exists) {
+					Chunk chunk_ = getChunk(this.worldObj, newChunkCoords[0], newChunkCoords[1]);
+					if (chunk_ != null && this.hasAnythingToCleanseHere(chunk_)) {
+						this.executeCleanse(chunk);
+						cchunk.isDirty = false;
 					}
 				}
 			}
@@ -285,9 +306,22 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		else {
 			this.ticksSinceLastCleanse++;
 		}
+
 	}
 
 	// CLEANSING FUNCTIONS
+
+	protected class CleansedChunk {
+		CleansedChunk(int x, int z) {
+			this.x = x;
+			this.z = z;
+		}
+
+		int x, z;
+		boolean isDirty = false;
+		boolean lastTick = false;
+		boolean exists = false;
+	}
 
 	protected void executeCleanse(Chunk chunk) {
 		// TODO: THIS WILL CRASH
@@ -319,9 +353,9 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		if (this.haveEnoughFor(DawnMachineResource.SANO)) {
 			this.cleanseMobs(chunk);
 		}
-		cleansedChunks.add(this.getHash(this.chunkX, this.chunkZ));
+//		cleansedChunks.add(this.getHash(this.chunkX, this.chunkZ));
+		cleansedChunks.put(this.getHash(this.chunkX, this.chunkZ), new CleansedChunk(this.chunkX, this.chunkZ));
 
-		// TODO: either rewrite or remove
 		this.sendParticlePackets(didUseIgnis);
 	}
 
@@ -489,7 +523,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 				if (columnCrustedTaint >= 3 && foundTopBlock) {
 
-					// TODO: Use chunk instead of getWorldObj()
 					BiomeGenBase biome = this.getWorldObj().getBiomeGenForCoords(coords[0], coords[1]);
 					String biomeName = biome.biomeName.toLowerCase(Locale.ENGLISH);
 
@@ -638,15 +671,38 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		List<Entity>[] entityLists = chunk.entityLists.clone();
 		for (int i = 0; i < entityLists.length; i++) {
 			for (int j = 0; j < entityLists[i].size(); j++) {
+				boolean spend = false;
 				if (DawnMachineTileEntity.taint_purified_constructors
 						.containsKey(chunk.entityLists[i].get(j).getClass())) {
-					this.spend(DawnMachineResource.SANO);
+					spend = true;
 					try {
 						this.cleanseSingleMob((Entity) chunk.entityLists[i].get(j),
 								(EntityLivingBase) taint_purified_constructors
 										.get(chunk.entityLists[i].get(j).getClass()).newInstance(this.getWorldObj()));
 					} catch (Exception e) {
 					}
+				}
+
+				Entity entity = (Entity) chunk.entityLists[i].get(j);
+				if (entity instanceof EntityCustomNpc) {
+					EntityCustomNpc npc = (EntityCustomNpc) entity;
+
+					if (npc.linkedName.equals("TaintedOcelot")) {
+						this.cleanseSingleMob(entity, new EntityOcelot(entity.worldObj));
+						spend = true;
+					}
+					else if (npc.linkedName.equals("TaintedWolf")) {
+						this.cleanseSingleMob(entity, new EntityWolf(entity.worldObj));
+						spend = true;
+					}
+					else if (npc.linkedName.equals("TaintedTownsfolk")) {
+						this.cleanseSingleMob(entity, new EntityVillager(entity.worldObj));
+						spend = true;
+					}
+				}
+
+				if (spend) {
+					this.spend(DawnMachineResource.SANO);
 				}
 				if (!this.haveEnoughFor(DawnMachineResource.SANO)) {
 					return;
@@ -664,9 +720,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		cleansed.worldObj.removeEntity(tainted);
 	}
 
-	// END CLEANSING FUNCTIONS // END CLEANSING FUNCTIONS// COORD GENERATION
-
-	// TODO: fix
+	// END CLEANSING FUNCTIONS
 
 	// COORD GENERATION
 
@@ -675,9 +729,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		this.lastChunkX = this.chunkX;
 		this.lastChunkZ = this.chunkZ;
 
-//		boolean haveEnoughForAer = this.haveEnoughFor(DawnMachineResource.AER,
-//				this.getAerCost(this.chunkX, this.chunkZ));
-		boolean haveEnoughForAer = true; // TODO: remove, debug
+		boolean haveEnoughForAer = this.haveEnoughFor(DawnMachineResource.AER,
+				this.getAerCost(this.chunkX, this.chunkZ));
 
 		if (this.haveEnoughFor(DawnMachineResource.ORDO)) {
 			this.spend(DawnMachineResource.ORDO);
@@ -711,7 +764,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		this.chunkZ = coords[1];
 	}
 
-	// TODO: Make coordinates spiral out
 	private int[][] generateScanlineAerCoords() {
 		List<int[]> coords = new ArrayList<int[]>();
 		coords.add(this.getDawnMachineChunkCoords());
@@ -807,14 +859,20 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 	private void spendAer() {
 		int aerCost = this.getAerCost(this.chunkX, this.chunkZ);
-//		this.spend(DawnMachineResource.AER, aerCost);
-		this.spend(DawnMachineResource.AER, 0); // TODO: remove, debugging purposes
+		this.spend(DawnMachineResource.AER, aerCost);
+//		this.spend(DawnMachineResource.AER, 1); // TODO: remove, debugging purposes
 	}
 
 	public int getAerCost(int x, int z) {
-		int cost = (int) Math.ceil((this.dawnMachineChunkCoords[1] - z) * (this.dawnMachineChunkCoords[1] - z)
-				+ (this.dawnMachineChunkCoords[0] - x) * (this.dawnMachineChunkCoords[0] - x));
+		int cost = (int) Math // sqrt again for balancing
+				.sqrt(this.distanceFormula(this.dawnMachineChunkCoords[0], x, this.dawnMachineChunkCoords[1], z));
+
+//		return 1; // TODO: remove, debugging purposes
 		return cost <= 1 ? 2 : cost;
+	}
+
+	public double distanceFormula(int x, int x1, int z, int z1) {
+		return Math.sqrt(((x - x1) * (x - x1)) + ((z - z1) * (z - z1)));
 	}
 
 	private int getDiscount(DawnMachineResource resource, boolean simulate) {
@@ -832,9 +890,17 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 		// this sucks
 		if (!simulate) {
+			int oldBlood = this.fluid.amount;
+			int oldMana = this.currentMana;
 			this.currentRF = enoughRF > 0 ? this.currentRF - energyCost : this.currentRF;
 			this.currentMana = enoughMana > 0 ? this.currentMana - manaCost : this.currentMana;
 			this.fluid.amount = enoughBlood > 0 ? this.fluid.amount - bloodCost : this.fluid.amount;
+			if (enoughBlood == 1) {
+				System.out.println("Enough for Blood\nOld: " + oldBlood + "\nNew: " + this.fluid.amount);
+			}
+			if (enoughMana == 1) {
+				System.out.println("Enough for Mana\nOld: " + oldMana + "\nNew: " + this.currentMana);
+			}
 		}
 
 		return discountMultiplier;
@@ -1149,10 +1215,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	public FluidTankInfo getInfo() { return this.tankInfo; }
 
 	@Override
-	public int fill(FluidStack paramFluidStack, boolean paramBoolean) {
-		if (paramFluidStack.getFluid().getID() == blood.getID()) {
-			int change = Math.max(Math.min(MAX_BLOOD - this.fluid.amount, paramFluidStack.amount), 0);
-			if (paramBoolean) {
+	public int fill(FluidStack fluidstack, boolean simulate) {
+		if (fluidstack.getFluid().getID() == blood.getID()) {
+			int change = Math.max(Math.min(MAX_BLOOD - this.fluid.amount, fluidstack.amount), 0);
+			if (!simulate) {
 				this.fluid.amount += change;
 			}
 			return change;
@@ -1161,50 +1227,52 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	}
 
 	@Override
-	public FluidStack drain(int paramInt, boolean paramBoolean) {
+	public FluidStack drain(int amount, boolean simulate) {
 		return null;
 	}
 
 	// IFluidHandler
 
 	@Override
-	public int fill(ForgeDirection paramForgeDirection, FluidStack paramFluidStack, boolean paramBoolean) {
-		if (paramFluidStack.getFluid().getID() == blood.getID()) {
-			int change = Math.max(Math.min(MAX_BLOOD - this.fluid.amount, paramFluidStack.amount), 0);
-			if (paramBoolean) {
-				this.fluid.amount += change;
-			}
-			return change;
-		}
-		return 0;
+	public int fill(ForgeDirection direction, FluidStack fluidstack, boolean simulate) {
+		return this.fill(fluidstack, simulate);
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection paramForgeDirection, FluidStack paramFluidStack, boolean paramBoolean) {
+	public FluidStack drain(ForgeDirection direction, FluidStack fluidstack, boolean simulate) {
 		return null;
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection paramForgeDirection, int paramInt, boolean paramBoolean) {
+	public FluidStack drain(ForgeDirection direction, int amount, boolean simulate) {
 		return null;
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection paramForgeDirection, Fluid paramFluid) {
+	public boolean canFill(ForgeDirection direction, Fluid fluid) {
 		return true;
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection paramForgeDirection, Fluid paramFluid) {
+	public boolean canDrain(ForgeDirection direction, Fluid fluid) {
 		return false;
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection paramForgeDirection) {
+	public FluidTankInfo[] getTankInfo(ForgeDirection direction) {
 		return this.tankInfoArray;
 	}
 
 	// END FLUID INTEGRATION
+
+	// BLOODMAGIC INTEGRATION
+
+	public int addBlood(int bloodAmount, boolean simulate) {
+		FluidStack blood = new FluidStack(DawnMachineTileEntity.blood, bloodAmount);
+		return this.fill(blood, simulate);
+	}
+
+	// END BLOOGMAGIC INTEGRATION
 
 	// BOTANIA INTEGRATION
 
