@@ -16,6 +16,7 @@ import talonos.blightbuster.handlers.FoodHandler;
 import talonos.blightbuster.handlers.PurityFocusEventHandler;
 import talonos.blightbuster.items.BBItems;
 import talonos.blightbuster.network.BlightbusterNetwork;
+import talonos.blightbuster.rituals.RitualDawnMachine;
 import talonos.blightbuster.tileentity.DawnMachineSpoutTileEntity;
 import talonos.blightbuster.tileentity.dawnmachine.DawnMachineChunkLoader;
 import thaumicenergistics.api.ThEApi;
@@ -34,8 +35,7 @@ public class BlightBuster {
 	public static CommonProxy proxy;
 
 	public static BlightBuster instance;
-
-	public DawnMachineChunkLoader chunkLoader = null;
+	private DawnMachineChunkLoader dawnMachineChunkLoader;
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -52,17 +52,13 @@ public class BlightBuster {
 
 		MinecraftForge.EVENT_BUS.register(new PurityFocusEventHandler()); // adds event handler
 		FMLCommonHandler.instance().bus().register(new PurityFocusEventHandler());
-		this.chunkLoader = new DawnMachineChunkLoader(); // creates chunk loader
-		ForgeChunkManager.setForcedChunkLoadingCallback(this, this.chunkLoader); // adds chunkloader to forge
 		FoodHandler foodHandler = new FoodHandler();
+		this.dawnMachineChunkLoader = new DawnMachineChunkLoader(); // creates chunk loader
+		ForgeChunkManager.setForcedChunkLoadingCallback(this, this.dawnMachineChunkLoader); // adds chunkloader to forge
 
 		if (ThEApi.instance() != null) {
-			ThEApi.instance().transportPermissions()
-					.addAspectContainerTileToInjectPermissions(DawnMachineSpoutTileEntity.class, 32); // adds Dawn
-																										// Machine spout
-																										// entity to
-																										// Thaumic
-																										// Energistics
+			ThEApi.instance().transportPermissions() // adds Dawn Machine spout entity to Thaumic Energistics
+					.addAspectContainerTileToInjectPermissions(DawnMachineSpoutTileEntity.class, 32);
 		}
 	}
 
@@ -70,6 +66,7 @@ public class BlightBuster {
 	public void postInit(FMLPostInitializationEvent event) {
 		AddedResearch.initResearch();
 		proxy.registerRenderers();
+		RitualDawnMachine.init();
 	}
 
 	@Mod.EventHandler
