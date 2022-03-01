@@ -9,6 +9,7 @@ tile.blightbuster_dawnCharger.name=Dawn Charger
 item.blightbuster_purityFocus.name=Wand Focus: Purity
 item.blightbuster_silverPotion.name=Silverleaf Splash Potion
 item.blightbuster_worldTainter.name=World Tainter
+item.blightbuster_chunkTainter.name=Chunk Tainter
 item.blightbuster_worldOreKiller.name=Ore Killer
 item.blightbuster_researchnote.name=Translated Alien Grimoire
 
@@ -37,3 +38,5 @@ gui.offering.clearArea=Clear the area around the offering.
 gui.offering.movePlayer=Please move away from the offering.
 
 gui.charger.pairSuccessful=Your wand attunes to the Dawn Charger.
+
+gui.ritual.missingBlooms=You remember what the Dark One said...Place Ethereal Blooms on top of the pillars.
