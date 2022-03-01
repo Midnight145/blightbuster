@@ -21,20 +21,26 @@ public class RitualDawnMachine extends RitualEffect {
 	DawnMachineTileEntity dawnMachine;
 	int[][] bloomOffsets = new int[][] { { 7, 3, 0 }, { -7, 3, 0 }, { 5, 3, -5 }, { 5, 3, 5 }, { 0, 3, 7 },
 			{ 0, 3, -7 }, { -5, 3, -5 }, { -5, 3, 5 } };
+	boolean going = false;
 
 	@Override
 	public boolean startRitual(IMasterRitualStone ritualStone, EntityPlayer player) {
-		for (int[] offset : this.bloomOffsets) {
-			if (!this.checkBloomExists(ritualStone, offset)) {
-				player.addChatMessage(new ChatComponentTranslation("gui.ritual.missingBlooms"));
-				return false;
-			}
+
+		if (!this.checkBlooms(ritualStone)) {
+			player.addChatMessage(new ChatComponentTranslation("gui.ritual.missingBlooms"));
+			return false;
 		}
+		this.going = true;
 		return true;
 	}
 
 	@Override
 	public void performEffect(IMasterRitualStone ritualStone) {
+		this.going = this.checkBlooms(ritualStone);
+		if (!this.going) {
+			return;
+		}
+
 		String owner = ritualStone.getOwner();
 
 		int currentEssence = SoulNetworkHandler.getCurrentEssence(owner);
@@ -42,15 +48,15 @@ public class RitualDawnMachine extends RitualEffect {
 		int x = ritualStone.getXCoord();
 		int y = ritualStone.getYCoord();
 		int z = ritualStone.getZCoord();
+		if (world.getTileEntity(x, y + 2, z) instanceof DawnMachineTileEntity) {
+			this.dawnMachine = (DawnMachineTileEntity) world.getTileEntity(x, y + 2, z);
 
-		if (!(world.getTileEntity(x, y + 2, z) instanceof DawnMachineTileEntity)) {
+		}
+		else {
 			return;
 		}
-		else if (this.dawnMachine == null) {
-			this.dawnMachine = (DawnMachineTileEntity) world.getTileEntity(x, y + 2, z);
-		}
 
-		int bloodToAdd = Math.max(currentEssence, this.getCostPerRefresh());
+		int bloodToAdd = Math.min(currentEssence, this.getCostPerRefresh());
 		int actuallyAdd = this.dawnMachine.addBlood(bloodToAdd, true);
 		if (currentEssence < actuallyAdd) {
 			SoulNetworkHandler.causeNauseaToPlayer(owner);
@@ -152,6 +158,16 @@ public class RitualDawnMachine extends RitualEffect {
 				new AlchemyCircleRenderer(
 						new ResourceLocation("alchemicalwizardry:textures/models/SimpleTransCircle.png"), 0, 0, 0, 255,
 						0, 0.501, 0.501, 0, 1.5, true));
+	}
+
+	public boolean checkBlooms(IMasterRitualStone ritualStone) {
+		for (int[] offset : this.bloomOffsets) {
+			if (!this.checkBloomExists(ritualStone, offset)) {
+
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
