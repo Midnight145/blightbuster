@@ -895,12 +895,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 			this.currentRF = enoughRF > 0 ? this.currentRF - energyCost : this.currentRF;
 			this.currentMana = enoughMana > 0 ? this.currentMana - manaCost : this.currentMana;
 			this.fluid.amount = enoughBlood > 0 ? this.fluid.amount - bloodCost : this.fluid.amount;
-			if (enoughBlood == 1) {
-				System.out.println("Enough for Blood\nOld: " + oldBlood + "\nNew: " + this.fluid.amount);
-			}
-			if (enoughMana == 1) {
-				System.out.println("Enough for Mana\nOld: " + oldMana + "\nNew: " + this.currentMana);
-			}
 		}
 
 		return discountMultiplier;
@@ -996,6 +990,9 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 		this.internalAspectList.readFromNBT(tag.getCompoundTag("Essentia"));
 		this.currentRF = tag.getInteger("CurrentRF");
+
+		this.fluid.amount = tag.getInteger("Blood");
+		this.currentMana = tag.getInteger("Mana");
 	}
 
 	@Override
@@ -1012,6 +1009,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		tag.setInteger("Index", this.index);
 		tag.setInteger("AerIndex", this.aerIndex);
 		tag.setInteger("CurrentRF", this.currentRF);
+		tag.setInteger("Blood", this.fluid.amount);
+		tag.setInteger("Mana", this.fluid.amount);
 	}
 
 	@Override
