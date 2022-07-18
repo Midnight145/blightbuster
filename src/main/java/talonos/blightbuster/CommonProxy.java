@@ -5,6 +5,7 @@ import talonos.blightbuster.tileentity.DawnChargerTileEntity;
 import talonos.blightbuster.tileentity.DawnMachineSpoutTileEntity;
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import talonos.blightbuster.tileentity.DawnTotemEntity;
+import talonos.blightbuster.tileentity.NodeResetterTileEntity;
 import talonos.blightbuster.tileentity.TileEntityChestFinder;
 
 public class CommonProxy {
@@ -14,6 +15,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(DawnMachineTileEntity.class, "DawnMachine");
 		GameRegistry.registerTileEntity(DawnChargerTileEntity.class, "DawnCharger");
 		GameRegistry.registerTileEntity(TileEntityChestFinder.class, "ChestFinder");
+		GameRegistry.registerTileEntity(NodeResetterTileEntity.class, "NodeResetter");
 	}
 
 	public void registerRenderers() {}
