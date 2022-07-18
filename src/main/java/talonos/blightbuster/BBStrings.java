@@ -16,4 +16,5 @@ public class BBStrings {
 	public static final String offeringName = "offering";
 	public static final String dawnChargerName = "dawnCharger";
 	public static final String dawnChargerItemName = "dawnChargerItem";
+	public static final String boundRingName = "boundRing";
 }
