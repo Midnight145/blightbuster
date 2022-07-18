@@ -13,6 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.entities.EntitySilverPotion;
 import talonos.blightbuster.handlers.FoodHandler;
+import talonos.blightbuster.handlers.MooshroomSpawnEventHandler;
 import talonos.blightbuster.handlers.PurityFocusEventHandler;
 import talonos.blightbuster.items.BBItems;
 import talonos.blightbuster.network.BlightbusterNetwork;
@@ -53,6 +54,7 @@ public class BlightBuster {
 		MinecraftForge.EVENT_BUS.register(new PurityFocusEventHandler()); // adds event handler
 		FMLCommonHandler.instance().bus().register(new PurityFocusEventHandler());
 		FoodHandler foodHandler = new FoodHandler();
+		MooshroomSpawnEventHandler spawnHandler = new MooshroomSpawnEventHandler();
 		this.dawnMachineChunkLoader = new DawnMachineChunkLoader(); // creates chunk loader
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this.dawnMachineChunkLoader); // adds chunkloader to forge
 
@@ -67,6 +69,7 @@ public class BlightBuster {
 		AddedResearch.initResearch();
 		proxy.registerRenderers();
 		RitualDawnMachine.init();
+
 	}
 
 	@Mod.EventHandler
