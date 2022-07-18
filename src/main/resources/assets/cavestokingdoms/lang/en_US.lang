@@ -12,9 +12,12 @@ item.cavestokingdoms:basicManual.6.name=Research Journal Fragment
 item.cavestokingdoms:basicManual.7.name=Crazed Journal Scrap
 item.cavestokingdoms:basicManual.8.name=Tattered Research Journal
 item.cavestokingdoms:basicManual.9.name=Ominous Journal Scrap
+item.cavestokingdoms:basicManual.12.name=The Beginning
+item.cavestokingdoms:basicManual.13.name=The End
 blightfallmanual.geology=By Ayumu Nagasawa
 blightfallmanual.ben=By Archmage Xillith
 blightfallmanual.taint=By Dagomawr the Scribe
+blightfallmanual.sarah=By The King
 
 
 ubc.cavestokingdoms.cinnabar=Cinnabar

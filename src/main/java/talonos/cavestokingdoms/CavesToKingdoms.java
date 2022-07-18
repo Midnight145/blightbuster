@@ -19,12 +19,12 @@ import talonos.cavestokingdoms.network.CavesToKingdomsNetwork;
 import talonos.cavestokingdoms.proxies.CommonProxy;
 
 @Mod(modid = DEFS.MODID, name = DEFS.MODNAME, version = DEFS.VERSION, dependencies = DEFS.DEPS)
-public class CavesToKindgoms
+public class CavesToKingdoms
 {
 	@SidedProxy(clientSide = DEFS.CLIENTPROXYLOCATION, serverSide = DEFS.COMMONPROXYLOCATION)
 	public static CommonProxy proxy;
 	
-	public static CavesToKindgoms instance;
+	public static CavesToKingdoms instance;
 	
 	public static ManualInfo manualInfo;
 	
