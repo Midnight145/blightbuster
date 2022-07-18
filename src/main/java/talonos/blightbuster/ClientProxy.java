@@ -12,21 +12,17 @@ import talonos.blightbuster.items.BBItems;
 import talonos.blightbuster.tileentity.DawnMachineSpoutTileEntity;
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 
-public class ClientProxy extends CommonProxy
-{
-    @Override
-    public void registerRenderers() 
-    {
-    	super.registerRenderers();	
-        
-        RenderingRegistry.registerEntityRenderingHandler(EntitySilverPotion.class, new RenderSnowball(BBItems.silverPotion));
-        RenderManager.instance.entityRenderMap.put(EntitySilverPotion.class, new RenderSnowball(BBItems.silverPotion));
-        ClientRegistry.bindTileEntitySpecialRenderer(DawnMachineTileEntity.class, new DawnMachineControllerRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(DawnMachineSpoutTileEntity.class, new DawnMachineSpoutRenderer());
-    }
+public class ClientProxy extends CommonProxy {
+	@Override
+	public void registerRenderers() {
+		super.registerRenderers();
 
-    @Override
-    public double getBestCleanseSpawnHeight() {
-        return Minecraft.getMinecraft().thePlayer.posY;
-    }
+		RenderingRegistry.registerEntityRenderingHandler(EntitySilverPotion.class, new RenderSnowball(BBItems.silverPotion));
+		RenderManager.instance.entityRenderMap.put(EntitySilverPotion.class, new RenderSnowball(BBItems.silverPotion));
+		ClientRegistry.bindTileEntitySpecialRenderer(DawnMachineTileEntity.class, new DawnMachineControllerRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(DawnMachineSpoutTileEntity.class, new DawnMachineSpoutRenderer());
+	}
+
+	@Override
+	public double getBestCleanseSpawnHeight() { return Minecraft.getMinecraft().thePlayer.posY; }
 }

@@ -29,14 +29,11 @@ public class BlightbusterNetwork {
 
 	public static void init() {
 		INSTANCE.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(BlightBuster.MODID);
-		INSTANCE.networkWrapper.registerMessage(SpawnCleanseParticleHandler.class, SpawnCleanseParticlesPacket.class, 0,
-				Side.CLIENT);
+		INSTANCE.networkWrapper.registerMessage(SpawnCleanseParticleHandler.class, SpawnCleanseParticlesPacket.class, 0, Side.CLIENT);
 		INSTANCE.networkWrapper.registerMessage(UpdateClientMapHandler.class, UpdateMapPacket.class, 1, Side.CLIENT);
 		INSTANCE.networkWrapper.registerMessage(BiomeChangeHandler.class, BiomeChangePacket.class, 2, Side.CLIENT);
 
-		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-			MapScanner.instance.bus().register(INSTANCE);
-		}
+		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) { MapScanner.instance.bus().register(INSTANCE); }
 
 		FMLCommonHandler.instance().bus().register(INSTANCE);
 	}
@@ -59,9 +56,7 @@ public class BlightbusterNetwork {
 
 	@SubscribeEvent
 	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		if (event.player instanceof EntityPlayerMP) {
-			MapScanner.instance.sendEntireMap((EntityPlayerMP) event.player);
-		}
+		if (event.player instanceof EntityPlayerMP) { MapScanner.instance.sendEntireMap((EntityPlayerMP) event.player); }
 	}
 
 	public static void sendToAllPlayers(IMessage packet) {
@@ -85,9 +80,7 @@ public class BlightbusterNetwork {
 				chunk.setBiomeArray(array);
 			}
 
-			if (!world.isRemote) {
-				sendToAllPlayers(new BiomeChangePacket(x, z, (short) biome.biomeID));
-			}
+			if (!world.isRemote) { sendToAllPlayers(new BiomeChangePacket(x, z, (short) biome.biomeID)); }
 		}
 	}
 }

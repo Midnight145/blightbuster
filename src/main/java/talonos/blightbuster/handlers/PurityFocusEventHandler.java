@@ -11,17 +11,15 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import thaumcraft.common.config.Config;
 
-public class PurityFocusEventHandler 
-{
-	//called when the player right-clicks on an entity
+public class PurityFocusEventHandler {
+	// called when the player right-clicks on an entity
 	@SubscribeEvent
-	public void onEntityDrop(LivingDropsEvent event) 
-	{
-		if (event.entity instanceof EntityLivingBase)
-		{
-			EntityLivingBase entity = (EntityLivingBase)event.entity;
-			if ((entity.isPotionActive(Config.potionTaintPoisonID)) && (entity instanceof EntityCow || entity instanceof EntitySheep || entity instanceof EntityChicken || entity instanceof EntityCreeper || entity instanceof EntityVillager || entity instanceof EntityPig))
-			{
+	public void onEntityDrop(LivingDropsEvent event) {
+		if (event.entity instanceof EntityLivingBase) {
+			EntityLivingBase entity = (EntityLivingBase) event.entity;
+			if ((entity.isPotionActive(Config.potionTaintPoisonID))
+					&& (entity instanceof EntityCow || entity instanceof EntitySheep || entity instanceof EntityChicken
+							|| entity instanceof EntityCreeper || entity instanceof EntityVillager || entity instanceof EntityPig)) {
 				entity.capturedDrops.clear();
 			}
 		}

@@ -9,12 +9,12 @@ import talonos.cavestokingdoms.network.packets.WipeDiscoveryProgressPacket;
 
 public class WipeDiscoveryProgressHandler implements IMessageHandler<WipeDiscoveryProgressPacket, IMessage> {
 
-    public WipeDiscoveryProgressHandler() {}
+	public WipeDiscoveryProgressHandler() {}
 
-    @Override
-    public IMessage onMessage(WipeDiscoveryProgressPacket message, MessageContext ctx) {
-        OreDiscoveryRegistry.getInstance().clearDiscoveries(CavesToKingdoms.proxy.getPlayerFromContext(ctx).getEntityData());
+	@Override
+	public IMessage onMessage(WipeDiscoveryProgressPacket message, MessageContext ctx) {
+		OreDiscoveryRegistry.getInstance().clearDiscoveries(CavesToKingdoms.proxy.getPlayerFromContext(ctx).getEntityData());
 
-        return null;
-    }
+		return null;
+	}
 }

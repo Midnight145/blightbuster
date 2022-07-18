@@ -160,9 +160,7 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 	@SideOnly(Side.CLIENT)
 	public void onRenderTick(TickEvent.RenderTickEvent event) {
 		if (BiomeScanner.disableEverything) { return; }
-		if (Minecraft.getMinecraft().theWorld != null) {
-			BiomeMapColors.updateFlash(Minecraft.getMinecraft().theWorld.getWorldTime());
-		}
+		if (Minecraft.getMinecraft().theWorld != null) { BiomeMapColors.updateFlash(Minecraft.getMinecraft().theWorld.getWorldTime()); }
 	}
 
 	@SubscribeEvent
@@ -189,8 +187,7 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 	private void scanSomeChunks(World worldObj) {
 		int chunkX = (this.lastScannedChunk % (mapWidthChunks / 5)) * 5;
 		int chunkZ = (this.lastScannedChunk / (mapWidthChunks / 5)) * 1;
-		BiomeGenBase[] biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(null, chunkX * 16,
-				chunkZ * 16, 80, 16);
+		BiomeGenBase[] biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(null, chunkX * 16, chunkZ * 16, 80, 16);
 		List<Zone> updatedZones = new LinkedList<Zone>();
 
 		for (int xInChunk = 0; xInChunk < 80; xInChunk += 2) {
@@ -252,12 +249,11 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 			Block southeast = worldObj.getBlock(x + 1, y, z + 1);
 			int southeastMeta = worldObj.getBlockMetadata(x + 1, y, z + 1);
 
-			if (northwest == ConfigBlocks.blockTaint && northwestMeta != 2
-					|| (northeast == ConfigBlocks.blockTaint && northeastMeta != 2)
+			if (northwest == ConfigBlocks.blockTaint && northwestMeta != 2 || (northeast == ConfigBlocks.blockTaint && northeastMeta != 2)
 					|| (southwest == ConfigBlocks.blockTaint && southwestMeta != 2)
-					|| (southeast == ConfigBlocks.blockTaint && southeastMeta != 2)
-					|| northwest == ConfigBlocks.blockTaintFibres || northeast == ConfigBlocks.blockTaintFibres
-					|| southwest == ConfigBlocks.blockTaintFibres || southeast == ConfigBlocks.blockTaintFibres) {
+					|| (southeast == ConfigBlocks.blockTaint && southeastMeta != 2) || northwest == ConfigBlocks.blockTaintFibres
+					|| northeast == ConfigBlocks.blockTaintFibres || southwest == ConfigBlocks.blockTaintFibres
+					|| southeast == ConfigBlocks.blockTaintFibres) {
 				return true;
 			}
 		}

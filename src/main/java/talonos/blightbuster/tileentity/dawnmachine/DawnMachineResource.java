@@ -6,17 +6,16 @@ public enum DawnMachineResource {
 
 	// Aspect, mult * 4 so you can halve three times
 	// machina, ordo, cognitio * 256 because they were essentially 256 times cheaper
-	//        aspect               mult       cost         max     rf     mana  blood   u     v
-	SANO     (Aspect.HEAL,      512  * 4,  2 * 4,       16384 * 4, 16,    250,   12,   0.6f, 0.5f),
-	IGNIS    (Aspect.FIRE,      2048 * 4,  2 * 4,       65536 * 4, 4,     250,   12,   0,    0.5f),
-	AER      (Aspect.AIR,       128  * 4,  2 * 4,       4096  * 4, 63,    750,   37,   0,    0),
-	COGNITIO (Aspect.MIND,      128  * 4,  2 * 256 * 4, 4096  * 4, 63,    500,   25,   0.6f, 0),
-	MACHINA  (Aspect.MECHANISM, 128  * 4,  2 * 256 * 4, 4096  * 4, 63,    500,   25,   0.2f, 0.5f),
-	AURAM    (Aspect.AURA,      1    * 4,  4 * 4,       32    * 4, 16000, 100,   50,   0.4f, 0),
-	VACUOS   (Aspect.VOID,      512  * 4,  2 * 4,       16384 * 4, 16,    250,   12,   0.8f, 0.5f),
-	ORDO     (Aspect.ORDER,     128  * 4,  2 * 256 * 4, 4096  * 4, 63,    750,   37,   0.4f, 0.5f),
-	ARBOR    (Aspect.TREE,      256  * 4,  2 * 4,       8192  * 4, 32,    500,   25,   0.2f, 0),
-	HERBA    (Aspect.PLANT,     512  * 4,  2 * 4,       16384 * 4, 16,    250,   12,   0.8f, 0);
+	// aspect mult cost max rf mana blood u v
+	SANO(Aspect.HEAL, 512 * 4, 2 * 4, 16384 * 4, 16, 250, 12, 0.6f, 0.5f),
+	IGNIS(Aspect.FIRE, 2048 * 4, 2 * 4, 65536 * 4, 4, 250, 12, 0, 0.5f), AER(Aspect.AIR, 128 * 4, 2 * 4, 4096 * 4, 63, 750, 37, 0, 0),
+	COGNITIO(Aspect.MIND, 128 * 4, 2 * 256 * 4, 4096 * 4, 63, 500, 25, 0.6f, 0),
+	MACHINA(Aspect.MECHANISM, 128 * 4, 2 * 256 * 4, 4096 * 4, 63, 500, 25, 0.2f, 0.5f),
+	AURAM(Aspect.AURA, 1 * 4, 4 * 4, 32 * 4, 16000, 100, 50, 0.4f, 0),
+	VACUOS(Aspect.VOID, 512 * 4, 2 * 4, 16384 * 4, 16, 250, 12, 0.8f, 0.5f),
+	ORDO(Aspect.ORDER, 128 * 4, 2 * 256 * 4, 4096 * 4, 63, 750, 37, 0.4f, 0.5f),
+	ARBOR(Aspect.TREE, 256 * 4, 2 * 4, 8192 * 4, 32, 500, 25, 0.2f, 0),
+	HERBA(Aspect.PLANT, 512 * 4, 2 * 4, 16384 * 4, 16, 250, 12, 0.8f, 0);
 
 	private Aspect aspect;
 	private int valueMultiplier;
@@ -28,8 +27,8 @@ public enum DawnMachineResource {
 	private float u;
 	private float v;
 
-	DawnMachineResource(Aspect aspect, int valueMultiplier, int cost, int maximumValue, int rfDiscountCost,
-			int manaDiscountCost, int bloodDiscountCost, float u, float v) {
+	DawnMachineResource(Aspect aspect, int valueMultiplier, int cost, int maximumValue, int rfDiscountCost, int manaDiscountCost,
+			int bloodDiscountCost, float u, float v) {
 		this.aspect = aspect;
 		this.valueMultiplier = valueMultiplier;
 		this.cost = cost;

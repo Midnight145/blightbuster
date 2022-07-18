@@ -43,9 +43,7 @@ public class BlockDawnMachine extends BlockMultiblock {
 	@Override
 	public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6) {
 		if (par5 == 1) {
-			if (par1World.isRemote) {
-				Thaumcraft.proxy.blockSparkle(par1World, par2, par3, par4, 16736256, 5);
-			}
+			if (par1World.isRemote) { Thaumcraft.proxy.blockSparkle(par1World, par2, par3, par4, 16736256, 5); }
 			return true;
 		}
 		return super.onBlockEventReceived(par1World, par2, par3, par4, par5, par6);
@@ -98,13 +96,10 @@ public class BlockDawnMachine extends BlockMultiblock {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what,
-			float these, float are) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what, float these, float are) {
 		DawnMachineTileEntity tileEntity = (DawnMachineTileEntity) world.getTileEntity(x, y, z);
 
-		if (tileEntity == null) {
-			return false;
-		}
+		if (tileEntity == null) { return false; }
 
 		ItemStack playerItem = player.getCurrentEquippedItem();
 

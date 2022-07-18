@@ -28,16 +28,12 @@ public class TileEntityChestFinder extends TileEntity {
 
 	@Override
 	public void updateEntity() {
-		if (this.isInvalid) {
-			return;
-		}
+		if (this.isInvalid) { return; }
 		if (!this.hasInitializedChunkloading) {
 			this.initalizeChunkloading();
 			return;
 		}
-		if (!this.isChunkLoaded(this.chunkX, this.chunkZ)) {
-			this.loadChunk();
-		}
+		if (!this.isChunkLoaded(this.chunkX, this.chunkZ)) { this.loadChunk(); }
 		if (!this.worldObj.getChunkProvider().chunkExists(this.chunkX, this.chunkZ)) {
 			this.waiting = true;
 			return;
@@ -48,18 +44,16 @@ public class TileEntityChestFinder extends TileEntity {
 			for (Object entityObj : list) {
 				Entity entity = (Entity) entityObj;
 				if (entity instanceof EntityMinecartContainer) {
-					System.out.println("Minecart Chest found! Coords: " + (int) entity.posX + ", " + (int) entity.posY
-							+ ", " + (int) entity.posZ);
+					System.out.println(
+							"Minecart Chest found! Coords: " + (int) entity.posX + ", " + (int) entity.posY + ", " + (int) entity.posZ);
 					EntityMinecartContainer minecart = (EntityMinecartContainer) entity;
 					for (int i = 0; i < minecart.getSizeInventory(); i++) {
 						ItemStack stack = minecart.getStackInSlot(i);
-						if (stack == null) {
-							continue;
-						}
+						if (stack == null) { continue; }
 						if (stack.getItem() instanceof Broadsword) {
 
-							System.out.println("Broadsword Found! Coords: " + (int) entity.posX + ", "
-									+ (int) entity.posY + ", " + (int) entity.posZ);
+							System.out.println(
+									"Broadsword Found! Coords: " + (int) entity.posX + ", " + (int) entity.posY + ", " + (int) entity.posZ);
 							minecart.setInventorySlotContents(i, null);
 
 							System.out.println("Broadsword deleted.");
@@ -79,16 +73,12 @@ public class TileEntityChestFinder extends TileEntity {
 						continue;
 
 					}
-					if (!(tileEntity instanceof TileEntityChest)) {
-						continue;
-					}
+					if (!(tileEntity instanceof TileEntityChest)) { continue; }
 					System.out.println("Chest found! Coords: " + blockX + ", " + y + ", " + blockZ);
 					TileEntityChest chest = (TileEntityChest) tileEntity;
 					for (int i = 0; i < chest.getSizeInventory(); i++) {
 						ItemStack stack = chest.getStackInSlot(i);
-						if (stack == null) {
-							continue;
-						}
+						if (stack == null) { continue; }
 						if (stack.getItem() instanceof Boneana) {
 
 							System.out.println("Broadsword Found! Coords: " + blockX + ", " + y + ", " + blockZ);
@@ -119,8 +109,7 @@ public class TileEntityChestFinder extends TileEntity {
 	}
 
 	private void initalizeChunkloading() {
-		this.chunkTicket = ForgeChunkManager.requestTicket(BlightBuster.instance, this.getWorldObj(),
-				ForgeChunkManager.Type.NORMAL);
+		this.chunkTicket = ForgeChunkManager.requestTicket(BlightBuster.instance, this.getWorldObj(), ForgeChunkManager.Type.NORMAL);
 		this.chunkTicket.getModData().setString("id", "ChestFinder");
 		ForgeChunkManager.forceChunk(this.chunkTicket, new ChunkCoordIntPair(0, 0));
 		this.hasInitializedChunkloading = true;
@@ -136,17 +125,13 @@ public class TileEntityChestFinder extends TileEntity {
 
 	private boolean isChunkLoaded(int x, int z) {
 		for (ChunkCoordIntPair coords : this.chunkTicket.getChunkList()) {
-			if (coords.chunkXPos == x && coords.chunkZPos == z) {
-				return true;
-			}
+			if (coords.chunkXPos == x && coords.chunkZPos == z) { return true; }
 		}
 		return false;
 	}
 
 	public void forceChunkLoading(Ticket ticket) {
-		if (this.chunkTicket == null) {
-			this.chunkTicket = ticket;
-		}
+		if (this.chunkTicket == null) { this.chunkTicket = ticket; }
 	}
 
 	@Override

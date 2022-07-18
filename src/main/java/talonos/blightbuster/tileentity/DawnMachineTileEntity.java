@@ -71,8 +71,8 @@ import thaumcraft.common.tiles.TileNode;
 import vazkii.botania.api.mana.spark.ISparkAttachable;
 import vazkii.botania.api.mana.spark.ISparkEntity;
 
-public class DawnMachineTileEntity extends TileEntity implements IAspectSource, IAspectContainer, IEnergyReceiver,
-		IEnergyStorage, ISparkAttachable, IFluidTank, IFluidHandler {
+public class DawnMachineTileEntity extends TileEntity
+		implements IAspectSource, IAspectContainer, IEnergyReceiver, IEnergyStorage, ISparkAttachable, IFluidTank, IFluidHandler {
 
 	// FLUID INTEGRATION (Blood Magic)
 	private static final int MAX_BLOOD = 100000;
@@ -128,8 +128,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	private int ticksSinceLastCleanse = 0;
 
 	// Offsets for all adjacent chunks, used to check if still clean
-	public static final int[][] OFFSETS = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 },
-			{ 1, 1 } };
+	public static final int[][] OFFSETS = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } };
 	int[] dawnMachineChunkCoords = null;
 	int[][] scanlineCoords = null;
 	int[][] scanlineAerCoords = null;
@@ -153,16 +152,15 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	private boolean firstTick = true, doInit = true;
 
 	static {
-		final Class<?>[] taintedEntities = { EntityTaintSheep.class, EntityTaintChicken.class, EntityTaintCow.class,
-				EntityTaintPig.class, EntityTaintVillager.class, EntityTaintCreeper.class };
+		final Class<?>[] taintedEntities = { EntityTaintSheep.class, EntityTaintChicken.class, EntityTaintCow.class, EntityTaintPig.class,
+				EntityTaintVillager.class, EntityTaintCreeper.class };
 
 		final Class<?>[] purifiedEntities = { EntitySheep.class, EntityChicken.class, EntityCow.class, EntityPig.class,
 				EntityVillager.class, EntityCreeper.class };
 
 		for (int i = 0; i < taintedEntities.length; i++) {
 			try {
-				taint_purified_constructors.put(taintedEntities[i],
-						purifiedEntities[i].getConstructor(new Class[] { World.class }));
+				taint_purified_constructors.put(taintedEntities[i], purifiedEntities[i].getConstructor(new Class[] { World.class }));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -189,31 +187,21 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 			this.scanlineAerCoords = this.generateScanlineAerCoords();
 			this.doInit = false;
 		}
-		if (this.getWorldObj().isRemote) {
-			return;
-		}
+		if (this.getWorldObj().isRemote) { return; }
 
 		this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
-		if (this.dawnMachineTicket == null || !this.hasInitializedChunkloading) {
-			this.initalizeChunkloading();
-		}
+		if (this.dawnMachineTicket == null || !this.hasInitializedChunkloading) { this.initalizeChunkloading(); }
 
 		// Check for redstone signal
-		if ((this.getWorldObj().getIndirectPowerLevelTo(this.xCoord, this.yCoord, this.zCoord, 1) > 0)) {
-			return;
-		}
+		if ((this.getWorldObj().getIndirectPowerLevelTo(this.xCoord, this.yCoord, this.zCoord, 1) > 0)) { return; }
 
 		for (CleansedChunk chunk : cleansedChunks.values()) {
 			chunk.exists = this.isChunkLoaded(chunk.x, chunk.z);
-			if (!chunk.exists && chunk.lastTick != chunk.exists) {
-				chunk.isDirty = true;
-			}
+			if (!chunk.exists && chunk.lastTick != chunk.exists) { chunk.isDirty = true; }
 			chunk.lastTick = chunk.exists;
 		}
 
-		if (!(this.currentMana >= MAX_MANA)) {
-			this.recieveMana(1000);
-		}
+		if (!(this.currentMana >= MAX_MANA)) { this.recieveMana(1000); }
 		if (this.dawnMachineBlockCoords[0] != this.xCoord || this.dawnMachineBlockCoords[1] != this.zCoord) {
 			this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
 			this.dawnMachineBlockCoords = new int[] { this.xCoord, this.zCoord };
@@ -265,20 +253,14 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 				count++;
 			}
 
-			if (cleanseLength == 4) {
-				this.spend(DawnMachineResource.MACHINA);
-			}
+			if (cleanseLength == 4) { this.spend(DawnMachineResource.MACHINA); }
 			this.executeCleanse(chunk);
 
 			for (int i = 0; i < 8; i++) {
 				for (Object entity : this.getWorldObj().playerEntities) {
 					EntityPlayer player = null;
-					if (entity instanceof EntityPlayer) {
-						player = (EntityPlayer) entity;
-					}
-					if (player == null) {
-						return;
-					}
+					if (entity instanceof EntityPlayer) { player = (EntityPlayer) entity; }
+					if (player == null) { return; }
 				}
 				int[] newChunkCoords = { this.chunkX + OFFSETS[i][0], this.chunkZ + OFFSETS[i][1] };
 				long hash = this.getHash(newChunkCoords[0], newChunkCoords[1]);
@@ -338,9 +320,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 							this.spend(DawnMachineResource.VACUOS);
 						}
 						else {
-							this.getWorldObj().setBlock((int) entity.posX, (int) entity.posY, (int) entity.posZ,
-									ConfigBlocks.blockFluxGoo, ((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(),
-									3);
+							this.getWorldObj().setBlock((int) entity.posX, (int) entity.posY, (int) entity.posZ, ConfigBlocks.blockFluxGoo,
+									((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(), 3);
 						}
 						entity.setDead();
 					}
@@ -350,9 +331,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 		this.cleanseBiome(chunk);
 		boolean didUseIgnis = this.cleanseBlocks(chunk);
-		if (this.haveEnoughFor(DawnMachineResource.SANO)) {
-			this.cleanseMobs(chunk);
-		}
+		if (this.haveEnoughFor(DawnMachineResource.SANO)) { this.cleanseMobs(chunk); }
 //		cleansedChunks.add(this.getHash(this.chunkX, this.chunkZ));
 		cleansedChunks.put(this.getHash(this.chunkX, this.chunkZ), new CleansedChunk(this.chunkX, this.chunkZ));
 
@@ -363,10 +342,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
 				BlightbusterNetwork.sendToNearbyPlayers(
-						new SpawnCleanseParticlesPacket(this.lastChunkX * 16 + x, this.lastChunkZ * 16 + z, didUseIgnis,
-								true),
-						this.worldObj.provider.dimensionId, this.lastChunkX * 16 + x, 128.0F, this.lastChunkZ * 16 + z,
-						150);
+						new SpawnCleanseParticlesPacket(this.lastChunkX * 16 + x, this.lastChunkZ * 16 + z, didUseIgnis, true),
+						this.worldObj.provider.dimensionId, this.lastChunkX * 16 + x, 128.0F, this.lastChunkZ * 16 + z, 150);
 			}
 		}
 	}
@@ -377,13 +354,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		for (int z = 0; z <= 16; z++) {
 			for (int x = 0; x <= 16; x++) {
 				int[] coords = this.getBlockCoordsFromChunk(chunk, x, z);
-				origBiome = this.getWorldObj().getWorldChunkManager().loadBlockGeneratorData(origBiome, coords[0],
-						coords[1], 1, 1);
+				origBiome = this.getWorldObj().getWorldChunkManager().loadBlockGeneratorData(origBiome, coords[0], coords[1], 1, 1);
 				BiomeGenBase biome = this.getWorldObj().getBiomeGenForCoords(coords[0], coords[1]);
 				if (biome.biomeID == Config.biomeTaintID && origBiome[0].biomeID != Config.biomeTaintID
 						|| biome.biomeID == Config.biomeEerieID && origBiome[0].biomeID != Config.biomeEerieID
-						|| biome.biomeID == Config.biomeMagicalForestID
-								&& origBiome[0].biomeID != Config.biomeMagicalForestID) {
+						|| biome.biomeID == Config.biomeMagicalForestID && origBiome[0].biomeID != Config.biomeMagicalForestID) {
 					return true;
 				}
 			}
@@ -392,9 +367,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		if (this.haveEnoughFor(DawnMachineResource.SANO)) {
 			for (List<Entity> list : chunk.entityLists) {
 				for (Entity entity : list) {
-					if (entity instanceof ITaintedMob) {
-						return true;
-					}
+					if (entity instanceof ITaintedMob) { return true; }
 				}
 			}
 		}
@@ -404,9 +377,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 				int[] coords = this.getBlockCoordsFromChunk(chunk, x, z);
 				int herbaTopBlock = -1;
 				boolean canHerba = this.haveEnoughFor(DawnMachineResource.HERBA);
-				if (canHerba) {
-					herbaTopBlock = this.getWorldObj().getTopSolidOrLiquidBlock(coords[0], coords[1]);
-				}
+				if (canHerba) { herbaTopBlock = this.getWorldObj().getTopSolidOrLiquidBlock(coords[0], coords[1]); }
 
 				boolean canIgnis = this.haveEnoughFor(DawnMachineResource.IGNIS);
 				boolean canVacuos = this.haveEnoughFor(DawnMachineResource.VACUOS);
@@ -417,26 +388,14 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 						Block block = this.getWorldObj().getBlock(coords[0], i, coords[1]);
 						int meta = this.getWorldObj().getBlockMetadata(coords[0], i, coords[1]);
 
-						if (canIgnis && block == ConfigBlocks.blockTaintFibres) {
-							return true;
-						}
-						if (canIgnis && block == ConfigBlocks.blockTaint && meta != 2) {
-							return true;
-						}
-						if (canVacuos && block == ConfigBlocks.blockFluxGoo) {
-							return true;
-						}
-						if (canHerba && i == herbaTopBlock && block == Blocks.dirt) {
-							return true;
-						}
+						if (canIgnis && block == ConfigBlocks.blockTaintFibres) { return true; }
+						if (canIgnis && block == ConfigBlocks.blockTaint && meta != 2) { return true; }
+						if (canVacuos && block == ConfigBlocks.blockFluxGoo) { return true; }
+						if (canHerba && i == herbaTopBlock && block == Blocks.dirt) { return true; }
 						if (canAura && block == ConfigBlocks.blockAiry) {
 							if (meta == 0) {
 								TileNode node = (TileNode) this.getWorldObj().getTileEntity(coords[0], i, coords[1]);
-								if (node != null) {
-									if (node.getNodeType() == NodeType.TAINTED) {
-										return true;
-									}
-								}
+								if (node != null) { if (node.getNodeType() == NodeType.TAINTED) { return true; } }
 							}
 						}
 					}
@@ -452,8 +411,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
 				int[] coords = this.getBlockCoordsFromChunk(chunk, x, z);
-				genBiomes = this.getWorldObj().getWorldChunkManager().loadBlockGeneratorData(genBiomes, coords[0],
-						coords[1], 1, 1);
+				genBiomes = this.getWorldObj().getWorldChunkManager().loadBlockGeneratorData(genBiomes, coords[0], coords[1], 1, 1);
 				BiomeGenBase biome = this.getWorldObj().getBiomeGenForCoords(coords[0], coords[1]);
 				if (biome.biomeID == Config.biomeTaintID || biome.biomeID == Config.biomeEerieID
 						|| biome.biomeID == Config.biomeMagicalForestID) {
@@ -516,9 +474,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 							canHerba && foundTopBlock && y == topBlock);
 					haveUsedIgnis = didUseIgnis || haveUsedIgnis;
 
-					if (didUseIgnis && this.getWorldObj().getBlock(coords[0], y, coords[1]) != Blocks.dirt) {
-						foundTopBlock = false;
-					}
+					if (didUseIgnis && this.getWorldObj().getBlock(coords[0], y, coords[1]) != Blocks.dirt) { foundTopBlock = false; }
 				}
 
 				if (columnCrustedTaint >= 3 && foundTopBlock) {
@@ -540,9 +496,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 					else if (biomeName.contains("savanna")) {
 						treeType = 4; // Acacia trees
 					}
-					else if (biomeName.contains("roof")) {
-						treeType = 5;
-					}
+					else if (biomeName.contains("roof")) { treeType = 5; }
 
 					this.getWorldObj().setBlock(coords[0], topBlock + 1, coords[1], Blocks.sapling, treeType, 3);
 					this.spend(DawnMachineResource.ARBOR);
@@ -562,8 +516,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 									this.getWorldObj().setBlock(coords[0], topBlock + 1, coords[1], Blocks.cactus);
 								}
 								else {
-									this.getWorldObj().setBlock(coords[0], topBlock + 1, coords[1],
-											ConfigBlocks.blockCustomPlant, 3, 3); // cinderpearl
+									this.getWorldObj().setBlock(coords[0], topBlock + 1, coords[1], ConfigBlocks.blockCustomPlant, 3, 3); // cinderpearl
 								}
 								this.spend(DawnMachineResource.ARBOR);
 							}
@@ -647,8 +600,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 			return false;
 		}
 
-		if (this.haveEnoughFor(DawnMachineResource.AURAM)
-				&& GameRegistry.findUniqueIdentifierFor(block).modId.equals("Thaumcraft")) {
+		if (this.haveEnoughFor(DawnMachineResource.AURAM) && GameRegistry.findUniqueIdentifierFor(block).modId.equals("Thaumcraft")) {
 			TileEntity tile = this.getWorldObj().getTileEntity(x, y, z);
 
 			if (tile != null && tile instanceof TileNode) {
@@ -672,13 +624,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		for (int i = 0; i < entityLists.length; i++) {
 			for (int j = 0; j < entityLists[i].size(); j++) {
 				boolean spend = false;
-				if (DawnMachineTileEntity.taint_purified_constructors
-						.containsKey(chunk.entityLists[i].get(j).getClass())) {
+				if (DawnMachineTileEntity.taint_purified_constructors.containsKey(chunk.entityLists[i].get(j).getClass())) {
 					spend = true;
 					try {
-						this.cleanseSingleMob((Entity) chunk.entityLists[i].get(j),
-								(EntityLivingBase) taint_purified_constructors
-										.get(chunk.entityLists[i].get(j).getClass()).newInstance(this.getWorldObj()));
+						this.cleanseSingleMob((Entity) chunk.entityLists[i].get(j), (EntityLivingBase) taint_purified_constructors
+								.get(chunk.entityLists[i].get(j).getClass()).newInstance(this.getWorldObj()));
 					} catch (Exception e) {
 					}
 				}
@@ -701,12 +651,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 					}
 				}
 
-				if (spend) {
-					this.spend(DawnMachineResource.SANO);
-				}
-				if (!this.haveEnoughFor(DawnMachineResource.SANO)) {
-					return;
-				}
+				if (spend) { this.spend(DawnMachineResource.SANO); }
+				if (!this.haveEnoughFor(DawnMachineResource.SANO)) { return; }
 			}
 		}
 	}
@@ -729,8 +675,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		this.lastChunkX = this.chunkX;
 		this.lastChunkZ = this.chunkZ;
 
-		boolean haveEnoughForAer = this.haveEnoughFor(DawnMachineResource.AER,
-				this.getAerCost(this.chunkX, this.chunkZ));
+		boolean haveEnoughForAer = this.haveEnoughFor(DawnMachineResource.AER, this.getAerCost(this.chunkX, this.chunkZ));
 
 		if (this.haveEnoughFor(DawnMachineResource.ORDO)) {
 			this.spend(DawnMachineResource.ORDO);
@@ -739,25 +684,19 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		else {
 			this.generateRandomCoords(haveEnoughForAer);
 		}
-		if (haveEnoughForAer) {
-			this.spendAer();
-		}
+		if (haveEnoughForAer) { this.spendAer(); }
 	}
 
 	private void getNextScanlineCoords(boolean haveEnoughForAer) {
 		int[] coords;
 		if (haveEnoughForAer) {
 			this.index++;
-			if (this.index == this.scanlineAerCoords.length) {
-				this.index = 0;
-			} // bounds checking
+			if (this.index == this.scanlineAerCoords.length) { this.index = 0; } // bounds checking
 			coords = this.scanlineAerCoords[this.index];
 		}
 		else {
 			this.aerIndex++;
-			if (this.aerIndex == this.scanlineCoords.length) {
-				this.aerIndex = 0;
-			}
+			if (this.aerIndex == this.scanlineCoords.length) { this.aerIndex = 0; }
 			coords = this.scanlineCoords[this.aerIndex];
 		}
 		this.chunkX = coords[0];
@@ -779,14 +718,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		while (found_corners != 4) {
 			int[] current = { currentLocX, currentLocZ };
 
-			if (currentLocX >= 0 && currentLocX <= 112 && currentLocZ >= 1 && currentLocZ <= 135) {
-				coords.add(current);
-			}
+			if (currentLocX >= 0 && currentLocX <= 112 && currentLocZ >= 1 && currentLocZ <= 135) { coords.add(current); }
 
 			boolean found = this.doesContain(corners, current);
-			if (found) {
-				found_corners++;
-			}
+			if (found) { found_corners++; }
 
 			currentLocX += dx;
 			currentLocZ += dz;
@@ -808,9 +743,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 	private boolean doesContain(List<int[]> corners, int[] coords) {
 		for (int[] corner : corners) {
-			if (Arrays.equals(corner, coords)) {
-				return true;
-			}
+			if (Arrays.equals(corner, coords)) { return true; }
 		}
 		return false;
 	}
@@ -917,9 +850,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	}
 
 	public void spend(DawnMachineResource resource, int cost) {
-		if (!this.haveEnoughFor(resource)) {
-			return;
-		}
+		if (!this.haveEnoughFor(resource)) { return; }
 
 		int discountMultiplier = this.getDiscount(resource, false);
 		cost /= discountMultiplier;
@@ -936,12 +867,9 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	public boolean needsMore(Aspect aspect) {
 		DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
 
-		if (relevantResource == null) {
-			return false;
-		}
+		if (relevantResource == null) { return false; }
 
-		return (relevantResource.getMaximumValue() - this.internalAspectList.getAmount(aspect)) >= relevantResource
-				.getValueMultiplier();
+		return (relevantResource.getMaximumValue() - this.internalAspectList.getAmount(aspect)) >= relevantResource.getValueMultiplier();
 	}
 
 	// END ASPECT MANAGEMENT
@@ -1064,9 +992,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	public int addToContainer(Aspect aspect, int i) {
 		DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
 
-		if (relevantResource == null) {
-			return i;
-		}
+		if (relevantResource == null) { return i; }
 
 		int currentValue = this.internalAspectList.getAmount(aspect);
 		int remainingRoom = relevantResource.getMaximumValue() - currentValue;
@@ -1097,15 +1023,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 	@Override
 	public boolean doesContainerContainAmount(Aspect aspect, int i) {
-		if (i == 0) {
-			return true;
-		}
+		if (i == 0) { return true; }
 
 		DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
 
-		if (relevantResource == null) {
-			return false;
-		}
+		if (relevantResource == null) { return false; }
 
 		int currentValue = this.internalAspectList.getAmount(aspect) / relevantResource.getValueMultiplier();
 
@@ -1126,9 +1048,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	public int containerContains(Aspect aspect) {
 		DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
 
-		if (relevantResource == null) {
-			return 0;
-		}
+		if (relevantResource == null) { return 0; }
 
 		return this.internalAspectList.getAmount(aspect) / relevantResource.getValueMultiplier();
 	}
@@ -1139,17 +1059,13 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		if (from != ForgeDirection.DOWN) {
-			return 0;
-		}
+		if (from != ForgeDirection.DOWN) { return 0; }
 
 		int room = MAX_RF - this.currentRF;
 
 		int actualReceive = Math.min(maxReceive, room);
 
-		if (!simulate) {
-			this.currentRF += actualReceive;
-		}
+		if (!simulate) { this.currentRF += actualReceive; }
 
 		this.signalUpdate();
 
@@ -1158,18 +1074,14 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 	@Override
 	public int getEnergyStored(ForgeDirection from) {
-		if (from != ForgeDirection.DOWN) {
-			return 0;
-		}
+		if (from != ForgeDirection.DOWN) { return 0; }
 
 		return this.currentRF;
 	}
 
 	@Override
 	public int getMaxEnergyStored(ForgeDirection from) {
-		if (from != ForgeDirection.DOWN) {
-			return 0;
-		}
+		if (from != ForgeDirection.DOWN) { return 0; }
 
 		return MAX_RF;
 	}
@@ -1217,9 +1129,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	public int fill(FluidStack fluidstack, boolean simulate) {
 		if (fluidstack.getFluid().getID() == blood.getID()) {
 			int change = Math.max(Math.min(MAX_BLOOD - this.fluid.amount, fluidstack.amount), 0);
-			if (!simulate) {
-				this.fluid.amount += change;
-			}
+			if (!simulate) { this.fluid.amount += change; }
 			return change;
 		}
 		return 0;
@@ -1283,8 +1193,13 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	@Override
 	public void recieveMana(int mana) {
 		this.currentMana = Math.max(0, Math.min(MAX_MANA, this.currentMana + mana));
-		this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord,
-				this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord)); // i have no idea what this does
+		this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord, this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord)); // i
+																																			// have
+																																			// no
+																																			// idea
+																																			// what
+																																			// this
+																																			// does
 	}
 
 	@Override
@@ -1306,8 +1221,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	public ISparkEntity getAttachedSpark() {
 		// Code used from the TA Plate in Botania
 		List<ISparkEntity> sparks = this.worldObj.getEntitiesWithinAABB(ISparkEntity.class,
-				AxisAlignedBB.getBoundingBox(this.xCoord, this.yCoord + 1, this.zCoord, this.xCoord + 1,
-						this.yCoord + 2, this.zCoord + 1));
+				AxisAlignedBB.getBoundingBox(this.xCoord, this.yCoord + 1, this.zCoord, this.xCoord + 1, this.yCoord + 2, this.zCoord + 1));
 		if (sparks.size() == 1) {
 			Entity e = (Entity) sparks.get(0);
 			return (ISparkEntity) e;
@@ -1333,45 +1247,34 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	// CHUNKLOADING FUNCTIONS
 
 	private void initalizeChunkloading() {
-		this.dawnMachineTicket = ForgeChunkManager.requestTicket(BlightBuster.instance, this.getWorldObj(),
-				ForgeChunkManager.Type.NORMAL);
+		this.dawnMachineTicket = ForgeChunkManager.requestTicket(BlightBuster.instance, this.getWorldObj(), ForgeChunkManager.Type.NORMAL);
 		this.dawnMachineTicket.getModData().setString("id", "DawnMachine");
 		int[] dawnMachineCoords = this.getDawnMachineChunkCoords();
-		ForgeChunkManager.forceChunk(this.dawnMachineTicket,
-				new ChunkCoordIntPair(dawnMachineCoords[0], dawnMachineCoords[1]));
+		ForgeChunkManager.forceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(dawnMachineCoords[0], dawnMachineCoords[1]));
 		this.hasInitializedChunkloading = true;
 	}
 
 	private void loadChunk() {
-		if (Arrays.equals(new int[] { this.chunkX, this.chunkZ }, this.getDawnMachineChunkCoords())) {
-			return;
-		}
+		if (Arrays.equals(new int[] { this.chunkX, this.chunkZ }, this.getDawnMachineChunkCoords())) { return; }
 		ForgeChunkManager.forceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
 	}
 
 	private void unloadChunk() {
-		if (Arrays.equals(new int[] { this.chunkX, this.chunkZ }, this.getDawnMachineChunkCoords())) {
-			return;
-		}
+		if (Arrays.equals(new int[] { this.chunkX, this.chunkZ }, this.getDawnMachineChunkCoords())) { return; }
 		ForgeChunkManager.unforceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
 	}
 
 	private boolean isChunkLoaded(int x, int z) {
 		for (ChunkCoordIntPair coords : this.dawnMachineTicket.getChunkList()) {
-			if (coords.chunkXPos == x && coords.chunkZPos == z) {
-				return true;
-			}
+			if (coords.chunkXPos == x && coords.chunkZPos == z) { return true; }
 		}
 		return false;
 	}
 
 	public void forceChunkLoading(Ticket ticket) {
-		if (this.dawnMachineTicket == null) {
-			this.dawnMachineTicket = ticket;
-		}
+		if (this.dawnMachineTicket == null) { this.dawnMachineTicket = ticket; }
 		int[] dawnMachineCoords = this.getDawnMachineChunkCoords();
-		ForgeChunkManager.forceChunk(this.dawnMachineTicket,
-				new ChunkCoordIntPair(dawnMachineCoords[0], dawnMachineCoords[1]));
+		ForgeChunkManager.forceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(dawnMachineCoords[0], dawnMachineCoords[1]));
 	}
 
 	@Override

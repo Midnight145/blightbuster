@@ -16,9 +16,7 @@ public class DawnChargerTileEntity extends TileEntity implements IEnergyHandler 
 
 	@Override
 	public void updateEntity() {
-		if (this.dawnMachine == null) {
-			return;
-		}
+		if (this.dawnMachine == null) { return; }
 	}
 
 	@Override
@@ -28,9 +26,7 @@ public class DawnChargerTileEntity extends TileEntity implements IEnergyHandler 
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		if (this.dawnMachine == null) {
-			return 0;
-		}
+		if (this.dawnMachine == null) { return 0; }
 		return this.dawnMachine.receiveEnergy(from, maxReceive, simulate);
 	}
 
@@ -77,8 +73,8 @@ public class DawnChargerTileEntity extends TileEntity implements IEnergyHandler 
 		this.dawnMachineCoords[1] = tag.getCompoundTag("DawnMachine").getInteger("Y");
 		this.dawnMachineCoords[2] = tag.getCompoundTag("DawnMachine").getInteger("Z");
 		this.dawnMachineCoords[3] = tag.getCompoundTag("DawnMachine").getInteger("Dimension");
-		this.dawnMachine = (DawnMachineTileEntity) this.getWorldObj().getTileEntity(this.dawnMachineCoords[0],
-				this.dawnMachineCoords[1], this.dawnMachineCoords[2]);
+		this.dawnMachine = (DawnMachineTileEntity) this.getWorldObj().getTileEntity(this.dawnMachineCoords[0], this.dawnMachineCoords[1],
+				this.dawnMachineCoords[2]);
 		this.writeToNBT(tag);
 	}
 }

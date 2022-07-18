@@ -9,12 +9,12 @@ import talonos.cavestokingdoms.network.packets.AddAllDiscoveriesPacket;
 
 public class AddAllDiscoveriesHandler implements IMessageHandler<AddAllDiscoveriesPacket, IMessage> {
 
-    public AddAllDiscoveriesHandler(){}
+	public AddAllDiscoveriesHandler() {}
 
-    @Override
-    public IMessage onMessage(AddAllDiscoveriesPacket message, MessageContext ctx) {
-        OreDiscoveryRegistry.getInstance().addAllDiscoveries(CavesToKingdoms.proxy.getPlayerFromContext(ctx).getEntityData());
+	@Override
+	public IMessage onMessage(AddAllDiscoveriesPacket message, MessageContext ctx) {
+		OreDiscoveryRegistry.getInstance().addAllDiscoveries(CavesToKingdoms.proxy.getPlayerFromContext(ctx).getEntityData());
 
-        return null;
-    }
+		return null;
+	}
 }

@@ -12,25 +12,23 @@ import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.tileentity.DawnChargerTileEntity;
 
 public class BlockDawnCharger extends BBBlock {
-    public BlockDawnCharger() {
-        super(Material.wood);
-        this.setHardness(5.0f);
-        this.setBlockName(BlightBuster.MODID + "_" + BBStrings.dawnChargerName);
-        this.setStepSound(soundTypeMetal);
+	public BlockDawnCharger() {
+		super(Material.wood);
+		this.setHardness(5.0f);
+		this.setBlockName(BlightBuster.MODID + "_" + BBStrings.dawnChargerName);
+		this.setStepSound(soundTypeMetal);
 		this.setCreativeTab(CreativeTabs.tabBlock);
-        this.setBlockTextureName("blightbuster:dawnChargerDeactivated");
-        GameRegistry.registerBlock(this, BBStrings.dawnChargerName);
-    }
-    
-    @Override
-    public boolean hasTileEntity(int meta)
-    {
-        return true;
-    }
- 
-    @Override
-    public TileEntity createTileEntity(World world, int meta)
-    {
-        return new DawnChargerTileEntity();
-    }
+		this.setBlockTextureName("blightbuster:dawnChargerDeactivated");
+		GameRegistry.registerBlock(this, BBStrings.dawnChargerName);
+	}
+
+	@Override
+	public boolean hasTileEntity(int meta) {
+		return true;
+	}
+
+	@Override
+	public TileEntity createTileEntity(World world, int meta) {
+		return new DawnChargerTileEntity();
+	}
 }

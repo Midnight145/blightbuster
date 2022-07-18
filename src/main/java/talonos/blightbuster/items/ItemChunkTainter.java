@@ -69,9 +69,7 @@ public class ItemChunkTainter extends Item {
 						}
 						// Maybe replace other blocks with taint blocks.
 						if (toRandomlyReplace.contains(theWorld.getBlock(xLoc, yLoc, zLoc))) {
-							if (theWorld.rand.nextBoolean()) {
-								theWorld.setBlock(xLoc, yLoc, zLoc, ConfigBlocks.blockTaintFibres);
-							}
+							if (theWorld.rand.nextBoolean()) { theWorld.setBlock(xLoc, yLoc, zLoc, ConfigBlocks.blockTaintFibres); }
 						}
 					}
 				}

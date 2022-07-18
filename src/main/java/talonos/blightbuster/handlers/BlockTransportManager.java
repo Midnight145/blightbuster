@@ -13,8 +13,8 @@ import thaumcraft.api.aspects.IEssentiaContainerItem;
 import thaumcraft.api.aspects.IEssentiaTransport;
 
 public class BlockTransportManager {
-	private static final Block[] capturableBlocks = { BBBlock.dawnMachineInput, BBBlock.dawnMachineBuffer,
-			BBBlock.dawnMachine, Blocks.lever, Blocks.redstone_block,
+	private static final Block[] capturableBlocks = { BBBlock.dawnMachineInput, BBBlock.dawnMachineBuffer, BBBlock.dawnMachine,
+			Blocks.lever, Blocks.redstone_block,
 
 	};
 
@@ -26,8 +26,7 @@ public class BlockTransportManager {
 		private int metadata;
 		private NBTTagCompound tileEntityData;
 
-		public BlockData(int offsetX, int offsetY, int offsetZ, Block block, int metadata,
-				NBTTagCompound tileEntityData) {
+		public BlockData(int offsetX, int offsetY, int offsetZ, Block block, int metadata, NBTTagCompound tileEntityData) {
 			this.offsetX = offsetX;
 			this.offsetY = offsetY;
 			this.offsetZ = offsetZ;
@@ -67,9 +66,7 @@ public class BlockTransportManager {
 			for (int x = -2; x <= 2; x++) {
 				for (int z = -2; z <= 2; z++) {
 					BlockData block = this.getBlockData(world, originX, originY, originZ, x, y, z);
-					if (block != null) {
-						blockData.add(block);
-					}
+					if (block != null) { blockData.add(block); }
 				}
 			}
 		}
@@ -77,13 +74,10 @@ public class BlockTransportManager {
 		return blockData;
 	}
 
-	protected BlockData getBlockData(World world, int originX, int originY, int originZ, int offsetX, int offsetY,
-			int offsetZ) {
+	protected BlockData getBlockData(World world, int originX, int originY, int originZ, int offsetX, int offsetY, int offsetZ) {
 		Block block = world.getBlock(originX + offsetX, originY + offsetY, originZ + offsetZ);
 		TileEntity te = world.getTileEntity(originX + offsetX, originY + offsetY, originZ + offsetZ);
-		if (!this.shouldCaptureBlock(block) && !this.shouldCaptureTileEntity(te)) {
-			return null;
-		}
+		if (!this.shouldCaptureBlock(block) && !this.shouldCaptureTileEntity(te)) { return null; }
 
 		NBTTagCompound tileEntityData = null;
 
@@ -118,8 +112,7 @@ public class BlockTransportManager {
 		int dataSize = data.size();
 		for (int i = 0; i < dataSize; i++) {
 			BlockData block = data.get(i);
-			this.generateBlock(world, genX + block.getOffsetX(), genY + block.getOffsetY(), genZ + block.getOffsetZ(),
-					block);
+			this.generateBlock(world, genX + block.getOffsetX(), genY + block.getOffsetY(), genZ + block.getOffsetZ(), block);
 		}
 	}
 
@@ -128,15 +121,9 @@ public class BlockTransportManager {
 	}
 
 	protected boolean shouldCaptureTileEntity(TileEntity tileEntity) {
-		if (tileEntity == null) {
-			return false;
-		}
-		if (tileEntity instanceof IEssentiaContainerItem) {
-			return true;
-		}
-		if (tileEntity instanceof IEssentiaTransport) {
-			return true;
-		}
+		if (tileEntity == null) { return false; }
+		if (tileEntity instanceof IEssentiaContainerItem) { return true; }
+		if (tileEntity instanceof IEssentiaTransport) { return true; }
 
 		return false;
 	}
@@ -155,9 +142,7 @@ public class BlockTransportManager {
 			teTag.setInteger("y", y);
 			teTag.setInteger("z", z);
 			TileEntity te = world.getTileEntity(x, y, z);
-			if (te != null) {
-				te.readFromNBT(teTag);
-			}
+			if (te != null) { te.readFromNBT(teTag); }
 		}
 	}
 }

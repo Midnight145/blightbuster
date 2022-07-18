@@ -19,46 +19,41 @@ import talonos.cavestokingdoms.network.CavesToKingdomsNetwork;
 import talonos.cavestokingdoms.proxies.CommonProxy;
 
 @Mod(modid = DEFS.MODID, name = DEFS.MODNAME, version = DEFS.VERSION, dependencies = DEFS.DEPS)
-public class CavesToKingdoms
-{
+public class CavesToKingdoms {
 	@SidedProxy(clientSide = DEFS.CLIENTPROXYLOCATION, serverSide = DEFS.COMMONPROXYLOCATION)
 	public static CommonProxy proxy;
-	
+
 	public static CavesToKingdoms instance;
-	
+
 	public static ManualInfo manualInfo;
-	
+
 	@Mod.EventHandler
-    public static void preInit(FMLPreInitializationEvent event)
-    {
+	public static void preInit(FMLPreInitializationEvent event) {
 		CtKBlock.init();
 		CtKItems.init();
 		proxy.registerTileEntities();
-    	UBCIntegration.init(event);
-    }
- 
-    @Mod.EventHandler
-    public static void init(FMLInitializationEvent event)
-    {
-    	MinecraftForge.EVENT_BUS.register(new OrbEventHandler());
-        CavesToKingdomsNetwork.init();
+		UBCIntegration.init(event);
+	}
 
-        manualInfo = new ManualInfo();
-    }
+	@Mod.EventHandler
+	public static void init(FMLInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(new OrbEventHandler());
+		CavesToKingdomsNetwork.init();
 
-    @Mod.EventHandler
-    public static void serverLoad(FMLServerStartingEvent event)
-    {
-        event.registerServerCommand(new ListShaftMaterials());
-        event.registerServerCommand(new DiscoverAll());
-        event.registerServerCommand(new WipeDiscoveryProgress());
-        event.registerServerCommand(new ScanBlocks());
-    }
- 
-    @Mod.EventHandler
-    public static void postInit(FMLPostInitializationEvent event)
-    {
-        proxy.registerRenderers();
-        OreDiscoveryRegistry.getInstance(); //Constructs and therefore loads all discovery registry stuff.
-    }
+		manualInfo = new ManualInfo();
+	}
+
+	@Mod.EventHandler
+	public static void serverLoad(FMLServerStartingEvent event) {
+		event.registerServerCommand(new ListShaftMaterials());
+		event.registerServerCommand(new DiscoverAll());
+		event.registerServerCommand(new WipeDiscoveryProgress());
+		event.registerServerCommand(new ScanBlocks());
+	}
+
+	@Mod.EventHandler
+	public static void postInit(FMLPostInitializationEvent event) {
+		proxy.registerRenderers();
+		OreDiscoveryRegistry.getInstance(); // Constructs and therefore loads all discovery registry stuff.
+	}
 }

@@ -68,8 +68,7 @@ public class BiomeScanner {
 		Configuration config = new Configuration(configFile);
 
 		boolean useBaselineFile = config.get(Configuration.CATEGORY_GENERAL, "useBaselineFile", false).getBoolean();
-		String baselineFileName = config.get(Configuration.CATEGORY_GENERAL, "baselineFileName", "baseline.dat")
-				.getString();
+		String baselineFileName = config.get(Configuration.CATEGORY_GENERAL, "baselineFileName", "baseline.dat").getString();
 		disableEverything = config.get(Configuration.CATEGORY_GENERAL, "disableEverything", false).getBoolean();
 		config.save();
 

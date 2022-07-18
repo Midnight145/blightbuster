@@ -83,8 +83,7 @@ public class BlockScannerController extends BSBlock implements ITileEntityProvid
 	}
 
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ,
-			int metadata) {
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
 		MapScanner.instance.chunkX = Math.floorDiv(x, 16);
 		MapScanner.instance.chunkZ = Math.floorDiv(z, 16);
 		MapScanner.instance.world = world;
@@ -106,8 +105,7 @@ public class BlockScannerController extends BSBlock implements ITileEntityProvid
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
-			float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (ForgeDirection.VALID_DIRECTIONS[side] == ForgeDirection.UP) {
 			if (!world.isRemote) {
 				if (MapScanner.instance.isActive()) {
@@ -133,8 +131,6 @@ public class BlockScannerController extends BSBlock implements ITileEntityProvid
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int side) {
-		if (world.getTileEntity(x, y, z) != null) {
-			((TileEntityIslandScanner) world.getTileEntity(x, y, z)).unregister();
-		}
+		if (world.getTileEntity(x, y, z) != null) { ((TileEntityIslandScanner) world.getTileEntity(x, y, z)).unregister(); }
 	}
 }

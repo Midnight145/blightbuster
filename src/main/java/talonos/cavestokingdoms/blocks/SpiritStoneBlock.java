@@ -11,11 +11,9 @@ import net.minecraft.world.World;
 import talonos.cavestokingdoms.extendedproperties.PlayerOrbsGotten;
 import talonos.cavestokingdoms.lib.DEFS;
 
-public class SpiritStoneBlock extends CtKBlock
-{
-	public SpiritStoneBlock()
-	{
-		this.setBlockName(DEFS.MODID+"_"+DEFS.SpiritStoneBlockName);
+public class SpiritStoneBlock extends CtKBlock {
+	public SpiritStoneBlock() {
+		this.setBlockName(DEFS.MODID + "_" + DEFS.SpiritStoneBlockName);
 		this.setBlockUnbreakable();
 		this.setResistance(6000000.0F);
 		this.setStepSound(soundTypePiston);
@@ -23,32 +21,27 @@ public class SpiritStoneBlock extends CtKBlock
 		this.setBlockTextureName("bedrock");
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		GameRegistry.registerBlock(this, this.getUnlocalizedName());
-    	this.setLightLevel(0.75F);
+		this.setLightLevel(0.75F);
 	}
-	
-    /**
-     * Overrides the registerBlockIcon method.
-     * This method handles all the textures.
-     * Call registerIcon() and pass it a
-     * Format: [modid]:[blockname]
-     * @param iconRegister
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister)
-    {
-        this.blockIcon = iconRegister.registerIcon(DEFS.MODID+":"+DEFS.SpiritStoneBlockName);
-    }
-	
+
+	/**
+	 * Overrides the registerBlockIcon method.
+	 * This method handles all the textures.
+	 * Call registerIcon() and pass it a
+	 * Format: [modid]:[blockname]
+	 * 
+	 * @param iconRegister
+	 */
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int huh, float i, float dont, float even)
-	{
-		if (!world.isRemote)
-		{
-			if (PlayerOrbsGotten.get(player).hasOrb())
-			{
-				return false;
-			}
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		this.blockIcon = iconRegister.registerIcon(DEFS.MODID + ":" + DEFS.SpiritStoneBlockName);
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int huh, float i, float dont, float even) {
+		if (!world.isRemote) {
+			if (PlayerOrbsGotten.get(player).hasOrb()) { return false; }
 			world.setBlock(x, y, z, Blocks.obsidian);
 			PlayerOrbsGotten.get(player).giveOrb();
 		}

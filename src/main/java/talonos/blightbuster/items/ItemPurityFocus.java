@@ -68,9 +68,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
 		ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
 		int potency = wand.getFocusEnlarge(itemstack) + 1;
 
-		if (!wand.consumeAllVis(itemstack, p, this.getBigVisCost(potency), false, false)) {
-			return itemstack;
-		}
+		if (!wand.consumeAllVis(itemstack, p, this.getBigVisCost(potency), false, false)) { return itemstack; }
 
 		Entity pointedEntity = EntityUtils.getPointedEntity(p.worldObj, p, 0.0D, 32.0D, 32.0F);
 		if (pointedEntity != null && !world.isRemote) {
@@ -177,16 +175,14 @@ public class ItemPurityFocus extends ItemFocusBasic {
 		// new entity copies original entity location
 		convertTo.copyLocationAndAnglesFrom(original);
 		// original entity spawns new entity into the world
-		if (!original.worldObj.isRemote) {
-			original.worldObj.spawnEntityInWorld(convertTo);
-		}
+		if (!original.worldObj.isRemote) { original.worldObj.spawnEntityInWorld(convertTo); }
 		// new entity removes the old entity
 		convertTo.worldObj.removeEntity(original);
 	}
 
 	private AspectList getBigVisCost(int potency) {
-		AspectList toReturn = new AspectList().add(Aspect.EARTH, 10 * (potency * 2 + 1) * (potency * 2 + 1))
-				.add(Aspect.ORDER, 15 * (potency * 2 + 1) * (potency * 2 + 1));
+		AspectList toReturn = new AspectList().add(Aspect.EARTH, 10 * (potency * 2 + 1) * (potency * 2 + 1)).add(Aspect.ORDER,
+				15 * (potency * 2 + 1) * (potency * 2 + 1));
 		return toReturn;
 	}
 
@@ -200,12 +196,9 @@ public class ItemPurityFocus extends ItemFocusBasic {
 					flag = true;
 				}
 				if (world.getBlock(x, y, z) == ConfigBlocks.blockTaint) {
-					if (world.getBlockMetadata(x, y, z) == 2) {
-						return;
-					} // Flesh blocks. WHAT THE FUCK THAUMCRAFT
+					if (world.getBlockMetadata(x, y, z) == 2) { return; } // Flesh blocks. WHAT THE FUCK THAUMCRAFT
 					if (world.getBlockMetadata(x, y, z) == 0) {
-						world.setBlock(x, y, z, ConfigBlocks.blockFluxGoo,
-								((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(), 3);
+						world.setBlock(x, y, z, ConfigBlocks.blockFluxGoo, ((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(), 3);
 					}
 					else if (world.getBlockMetadata(x, y, z) == 1) {
 						world.setBlock(x, y, z, Blocks.dirt);
@@ -221,8 +214,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
 					|| (world.getBiomeGenForCoords(x, z).biomeID == Config.biomeMagicalForestID))) {
 				ItemWandCasting wand = (ItemWandCasting) itemStack.getItem();
 				BiomeGenBase[] biomesForGeneration = null;
-				biomesForGeneration = world.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x, z, 1,
-						1);
+				biomesForGeneration = world.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x, z, 1, 1);
 
 				if ((biomesForGeneration != null) && (biomesForGeneration[0] != null)) {
 					if (!flag) {

@@ -19,8 +19,8 @@ import thaumcraft.common.tiles.TileEtherealBloom;
 
 public class RitualDawnMachine extends RitualEffect {
 	DawnMachineTileEntity dawnMachine;
-	int[][] bloomOffsets = new int[][] { { 7, 3, 0 }, { -7, 3, 0 }, { 5, 3, -5 }, { 5, 3, 5 }, { 0, 3, 7 },
-			{ 0, 3, -7 }, { -5, 3, -5 }, { -5, 3, 5 } };
+	int[][] bloomOffsets = new int[][] { { 7, 3, 0 }, { -7, 3, 0 }, { 5, 3, -5 }, { 5, 3, 5 }, { 0, 3, 7 }, { 0, 3, -7 }, { -5, 3, -5 },
+			{ -5, 3, 5 } };
 	boolean going = false;
 
 	@Override
@@ -37,9 +37,7 @@ public class RitualDawnMachine extends RitualEffect {
 	@Override
 	public void performEffect(IMasterRitualStone ritualStone) {
 		this.going = this.checkBlooms(ritualStone);
-		if (!this.going) {
-			return;
-		}
+		if (!this.going) { return; }
 
 		String owner = ritualStone.getOwner();
 
@@ -155,9 +153,8 @@ public class RitualDawnMachine extends RitualEffect {
 
 	public static void init() {
 		Rituals.registerRitual("BBDawnMachineRitual", 1, 10000, new RitualDawnMachine(), "Ritual of the New Dawn",
-				new AlchemyCircleRenderer(
-						new ResourceLocation("alchemicalwizardry:textures/models/SimpleTransCircle.png"), 0, 0, 0, 255,
-						0, 0.501, 0.501, 0, 1.5, true));
+				new AlchemyCircleRenderer(new ResourceLocation("alchemicalwizardry:textures/models/SimpleTransCircle.png"), 0, 0, 0, 255, 0,
+						0.501, 0.501, 0, 1.5, true));
 	}
 
 	public boolean checkBlooms(IMasterRitualStone ritualStone) {

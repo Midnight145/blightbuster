@@ -3,793 +3,882 @@
 <!-- This is going to be the modular tools guide book. -->
 
 <book>
-   <page type="intro">
-      <text>Materials - The Modular Tools Edition.
-A Guide to Material Properties
-
-By Ayumu Nagasawa</text>
-   </page>
-
-   <page type="text">
-      <text>This book contains statistics and information on all materials known to be compatible with Dr. Diyo's modular tools. It is essentially an updated version of the now dated Materials and You, Vol 2 written by Skyla.
-
-As with other books, parts of it are locked. To unlock a page, simply acquire the suggested material.</text>
-   </page>
-
-   <!-- Wood Materials -->
-   <!-- Stone Materials -->
-   <!-- Familiar Metals -->
-   <!-- Alien Metals -->
-   <!-- Artifical "Magic" Materials -->
-   <!-- Nether Metals -->
-   <!-- End Materials -->
-   <!-- Alloys -->
-   <!-- Slime Materials -->
-   <!-- Gem Materials -->
-   <!-- Bizzare Materials -->
-
-   <page type="c2kContentsPage"> <text>Table of Contents</text>
-      <link>
-         <text>Basic Info</text>
-         <icon>minecraft:paper</icon>
-         <jump>3</jump>
-      </link>
-      <link>
-         <text>Wood materials</text>
-         <icon>minecraft:planks</icon>
-         <jump>3</jump>
-      </link>
-      <link>
-         <text>Stone materials</text>
-         <icon>minecraft:cobblestone</icon>
-         <jump>5</jump>
-      </link>
-      <link>
-         <text>Normal Metals</text>
-         <icon>minecraft:iron_ingot</icon>
-         <jump>5</jump>
-      </link>
-      <link>
-         <text>Alien Metals</text>
-         <icon>Metallurgy:prometheum.ingot</icon>
-         <jump>5</jump>
-      </link>
-      <link>
-         <text>"Magic" Metals</text>
-         <icon>Thaumcraft:ItemResource:2</icon>
-         <jump>5</jump>
-      </link>
-      <link>
-         <text>Nether Metals</text>
-         <icon>TConstruct:materials:3</icon>
-         <jump>5</jump>
-      </link>
-   </page>
-
-   <page type="c2kContentsPage"> <text>Table of Contents (Cont)</text>
-      <link>
-         <text>End Metals</text>
-         <icon>Metallurgy:eximite.ingot</icon>
-         <jump>5</jump>
-      </link>
-      <link>
-         <text>Alloyed Metals</text>
-         <icon>TConstruct:materials:13</icon>
-         <jump>5</jump>
-      </link>
-      <link>
-         <text>Slime-Based Materials</text>
-         <icon>TConstruct:materials:1</icon>
-         <jump>5</jump>
-      </link>
-      <link>
-         <text>Gem-Based Materials</text>
-         <icon>customnpcs:npcRuby</icon>
-         <jump>5</jump>
-      </link>
-      <link>
-         <text>Unorthodox Materials</text>
-         <icon>minecraft:paper</icon>
-         <jump>5</jump>
-      </link>
-   </page>
-
-   <page type="sectionpage">
-      <title>Material Traits</title>
-      <text>Some materials have traits that augment their natural uses.
-
-- Reinforced: 10% chance per level of not using durability
-- Stonebound: The tool mines faster as it wears out, but does less damage
-- Jagged: The tool does more damage as it wears out, but mines slower
-- Writable: One extra modifier per piece
-- Tasty: Sometimes drops food items</text>
-   </page>
-
-   <page type="sectionpage">
-      <title>Material Statistics:</title>
-      <text>Materials have more possible attributes than
-when Skyla wrote his seminal work.
-
-- Harvest level: The maximum hardness a
-  tool can mine.
-- Durability: How many times the material
-  can be used before breaking.
-- Handle Mod: Tools with this as a handle
-  multiply their durability by this amount.
-- Mining Speed: How quickly the tool mines
-  materials it is effective against.
-- Attack Damage: How much extra damage this
-  tool does when attacking
-- XP Required: How much XP this material
-  requires to level up.</text>
-   </page>
-
-   <!-- Wood Materials -->
-
-   <page type="c2kModularToolsPage">
-      <title>Wood</title>
-      <icon>minecraft:planks</icon>
-      <text>The lowliest of tool materials. Decent as a handle and levels pretty fast, but otherwise completely sub-par.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Ghostwood</title>
-      <requires>discover.cavestokingdoms.ghostwood</requires>
-      <requiresIcon>Natura:tree:2</requiresIcon>
-      <icon>Natura:planks:2</icon>
-      <text>Can't hold an edge, but mines fast and lasts well as a handle. Levels up faster than slime-based materials.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Darkwood</title>
-      <requires>discover.cavestokingdoms.darkwood</requires>
-      <requiresIcon>Natura:Dark Tree</requiresIcon>
-      <icon>Natura:planks:11</icon>
-      <text>A very hard wood. Comparable to copper, but slightly worse in every way except handle utility and levelling speed.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Fusewood</title>
-      <requires>discover.cavestokingdoms.fusewood</requires>
-      <requiresIcon>Natura:Dark Tree:1</requiresIcon>
-      <icon>Natura:planks:12</icon>
-      <ore>Natura:Dark Tree:1</ore>
-      <text>A very hard wood. Statistics identical to iron, but with a faster levelling speed and better use as a handle.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Bloodwood</title>
-      <requires>discover.cavestokingdoms.bloodwood</requires>
-      <requiresIcon>Natura:bloodwood</requiresIcon>
-      <icon>Natura:planks:4</icon>
-      <ore>Natura:bloodwood</ore>
-      <text>A amazingly hard wood. Only slightly less durable than steel. Also better as a handle, but levels more slowly.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Cactus</title>
-      <requires>discover.cavestokingdoms.cactus</requires>
-      <requiresIcon>minecraft:cactus</requiresIcon>
-      <icon>minecraft:cactus</icon>
-      <text>Nicknamed the "Desert Wood". Mines much faster and is over twice as durable wood. Levels slowly, but not as slow as stone.</text>
-   </page>
-
-   <!-- Stone Materials -->
-
-   <page type="c2kModularToolsPage">
-      <title>Stone</title>
-      <icon>minecraft:cobblestone</icon>
-      <text>A basic, terrestrial, low-tech tool material. Levels and mines slowly, can harvest few types of materials, and is bad as a handle.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Flint</title>
-      <requires>discover.cavestokingdoms.gravel</requires>
-      <requiresIcon>minecraft:gravel</requiresIcon>
-      <icon>minecraft:flint</icon>
-      <text>More durable than stone, but worse as a handle. Can harvest more materials than stone.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Netherrack</title>
-      <requires>discover.cavestokingdoms.netherrack</requires>
-      <requiresIcon>minecraft:netherrack</requiresIcon>
-      <icon>minecraft:netherrack</icon>
-      <text>Less durable than stone, but levels faster, harvests slightly more, and mines twice as fast.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Certus Quartz</title>
-      <requires>discover.cavestokingdoms.certusquartz</requires>
-      <requiresIcon>appliedenergistics2:item.ItemMultiMaterial</requiresIcon>
-      <icon>appliedenergistics2:item.ItemMultiMaterial</icon>
-      <text>Better than stone in every way.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Nether Quartz</title>
-      <requires>discover.cavestokingdoms.netherquartz</requires>
-      <requiresIcon>minecraft:quartz_ore</requiresIcon>
-      <icon>minecraft:quartz</icon>
-      <text>Better than certus quartz in every way. Faster than most metals. Levels quickly. Still not great as a handle.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Obsidian</title>
-      <requires>discover.cavestokingdoms.obsidian</requires>
-      <requiresIcon>minecraft:obsidian</requiresIcon>
-      <icon>minecraft:obsidian</icon>
-      <text>Low durability, but fast and has a high level of "Reinforced." Can harvest many blocks. Good for bindings.</text>
-   </page>
-
-   <!-- Familiar Metals -->
-
-   <page type="c2kModularToolsPage">
-      <title>Copper</title>
-      <requires>discover.cavestokingdoms.copper</requires>
-      <requiresIcon>Metallurgy:base.ore</requiresIcon>
-      <icon>TConstruct:materials:9</icon>
-      <text>A common terrestrial metal; extremely rare on this planet. Inferior to iron in every way, and levels quite slowly to boot.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Iron</title>
-      <requires>discover.cavestokingdoms.iron</requires>
-      <requiresIcon>minecraft:iron_ore</requiresIcon>
-      <icon>minecraft:iron_ingot</icon>
-      <text>The base by which all other metals are compared. Good all-around terrestrial metal.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Nickel</title>
-      <requires>discover.cavestokingdoms.nickel</requires>
-      <requiresIcon>ThermalFoundation:Ore:4</requiresIcon>
-      <icon>ThermalFoundation:material:68</icon>
-      <text>Informally known as "Ferrous". A brittle but hard tech metal. High mining level and mining speed, but prone to breakage.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Lead</title>
-      <requires>discover.cavestokingdoms.lead</requires>
-      <requiresIcon>ThermalFoundation:Ore:3</requiresIcon>
-      <icon>ThermalFoundation:material:67</icon>
-      <text>A soft, heavy tech metal. Abnormally low mining level and mining speed, abnormally high durability.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Silver</title>
-      <requires>discover.cavestokingdoms.silver</requires>
-      <requiresIcon>Metallurgy:precious.ore:1</requiresIcon>
-      <icon>ThermalFoundation:material:66</icon>
-      <text>A weak terrestrial metal better suited for ornamentation than tools. Better than brass in every way.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Platinum</title>
-      <requires>discover.cavestokingdoms.platinum</requires>
-      <requiresIcon>Metallurgy:precious.ore:2</requiresIcon>
-      <icon>ThermalFoundation:material:69</icon>
-      <text>A weak terrestrial alloy better suited for ornamentation than tools. Like electrum, but mines faster and levels nearly twice as quickly. High harvest level.</text>
-   </page>
-
-   <!-- Alien Metals -->
-
-   <page type="c2kModularToolsPage">
-      <title>Prometheum</title>
-      <requires>discover.cavestokingdoms.prometheum</requires>
-      <requiresIcon>Metallurgy:fantasy.ore:0</requiresIcon>
-      <icon>Metallurgy:prometheum.ingot</icon>
-      <text>A rather soft alien metal. Mines slowly, but is more durable than iron and levels up more quickly.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Deep Iron</title>
-      <requires>discover.cavestokingdoms.deepiron</requires>
-      <requiresIcon>Metallurgy:fantasy.ore:1</requiresIcon>
-      <icon>Metallurgy:deep.iron.ingot</icon>
-      <text>An alien variant of iron. Softer, weaker, and slower but it levels up much more quickly.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Oureclase</title>
-      <requires>discover.cavestokingdoms.oureclase</requires>
-      <requiresIcon>Metallurgy:fantasy.ore:4</requiresIcon>
-      <icon>Metallurgy:oureclase.ingot</icon>
-      <text>A mediocre alien metal. Can mine everything that bronze can, but is worse in every way except levelling speed.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Mithril</title>
-      <requires>discover.cavestokingdoms.mithril</requires>
-      <requiresIcon>Metallurgy:fantasy.ore:7</requiresIcon>
-      <icon>Metallurgy:mithril.ingot</icon>
-      <text>A good alien metal, roughly comparable to alumite. It's less reinforced, but mines more and levels up much faster.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Orichalcum</title>
-      <requires>discover.cavestokingdoms.orichalcum</requires>
-      <requiresIcon>Metallurgy:fantasy.ore:11</requiresIcon>
-      <icon>Metallurgy:orichalcum.ingot</icon>
-      <text>A great alien metal better than any known terrestrial metal. Like Manyullyn, but slightly less durable and levels very slowly.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Adamantine</title>
-      <requires>discover.cavestokingdoms.adamantine</requires>
-      <requiresIcon>Metallurgy:fantasy.ore:13</requiresIcon>
-      <icon>Metallurgy:adamantine.ingot</icon>
-      <text>An amazing alien metal better than any metal known to homeworld. Faster, harder, more reinforced, and faster levelling than manyullyn.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Atlarus</title>
-      <requires>discover.cavestokingdoms.atlarus</requires>
-      <requiresIcon>Metallurgy:fantasy.ore:14</requiresIcon>
-      <icon>Metallurgy:atlarus.ingot</icon>
-      <text>An amazing alien metal better than any metal known to homeworld. Better than Adamantine in almost every way; it lacks the reinforced trait.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Carmot</title>
-      <requires>discover.cavestokingdoms.carmot</requires>
-      <requiresIcon>Metallurgy:fantasy.ore:6</requiresIcon>
-      <icon>Metallurgy:carmot.ingot</icon>
-      <text>A highly enchantable alien metal. When making modular tools with it, they level very fast.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Astral Silver</title>
-      <requires>discover.cavestokingdoms.astralsilver</requires>
-      <requiresIcon>Metallurgy:fantasy.ore:5</requiresIcon>
-      <icon>Metallurgy:astral.silver.ingot</icon>
-      <text>An alien variant of Silver. Mines faster, levels much faster, and can mine more things, but is only marginally more durable.</text>
-   </page>
-
-   <!-- Artifical "Magic" metals -->
-
-   <page type="c2kModularToolsPage">
-      <title>Thaumium</title>
-      <requires>discover.cavestokingdoms.thaumium</requires>
-      <requiresIcon>Thaumcraft:ItemResource:2</requiresIcon>
-      <icon>Thaumcraft:ItemResource:2</icon>
-      <text>An artificially created alien metal. Can mine everything that iron can, but is slower and less durable. Its best feature is that it allows for an extra modifier slot.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Void Metal</title>
-      <requires>discover.cavestokingdoms.voidmetal</requires>
-      <requiresIcon>Thaumcraft:ItemResource:16</requiresIcon>
-      <icon>Thaumcraft:ItemResource:16</icon>
-      <text>A strange metal that repairs itself. Possibly biological in nature? Scientists seem uncomfortable working with it.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Manasteel</title>
-      <requires>discover.cavestokingdoms.manasteel</requires>
-      <requiresIcon>Botania:manaResource:0</requiresIcon>
-      <icon>Botania:manaResource:0</icon>
-      <text>A strange, easily worked metal that seems to repair itself only under certain unknown conditions.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Terrasteel</title>
-      <requires>discover.cavestokingdoms.terrasteel</requires>
-      <requiresIcon>Botania:manaResource:4</requiresIcon>
-      <icon>Botania:manaResource:4</icon>
-      <text>A supremely durable yet easily worked metal. All reports of successfully damaging it turn out to be mysteriously false.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Elementium</title>
-      <requires>discover.cavestokingdoms.elementium</requires>
-      <requiresIcon>Botania:manaResource:7</requiresIcon>
-      <icon>Botania:manaResource:7</icon>
-      <text>A strange metal that never responds to tests the same way twice. It seems soft when worked but durable once used as a tool.</text>
-   </page>
-
-   <!-- Nether Metals -->
-
-   <page type="c2kModularToolsPage">
-      <title>Cobalt</title>
-      <requires>discover.cavestokingdoms.cobalt</requires>
-      <requiresIcon>TConstruct:SearedBrick:1</requiresIcon>
-      <icon>TConstruct:materials:3</icon>
-      <text>A common nether metal known to homeworld. It levels quickly and is faster than any other terrestrial metal.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Ardite</title>
-      <requires>discover.cavestokingdoms.ardite</requires>
-      <requiresIcon>TConstruct:SearedBrick:2</requiresIcon>
-      <icon>TConstruct:materials:4</icon>
-      <text>A common nether metal known to homeworld. It makes an excellent handle.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Ignatius</title>
-      <requires>discover.cavestokingdoms.ignatius</requires>
-      <requiresIcon>Metallurgy:nether.ore</requiresIcon>
-      <icon>Metallurgy:ignatius.ingot</icon>
-      <text>A strange nether stone. Its dust can be used as fuel.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Shadow Iron</title>
-      <requires>discover.cavestokingdoms.shadowiron</requires>
-      <requiresIcon>Metallurgy:nether.ore:1</requiresIcon>
-      <icon>Metallurgy:shadow.iron.ingot</icon>
-      <text>An alien variant of iron. It's four times as durable, but slower and is very hard to level up.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Kalendrite</title>
-      <requires>discover.cavestokingdoms.kalendrite</requires>
-      <requiresIcon>Metallurgy:nether.ore:7</requiresIcon>
-      <icon>Metallurgy:kalendrite.ingot</icon>
-      <text>A rare alien nether metal. Comparable to alumite, but twice as durable, slower, and levels more quickly.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Midasium</title>
-      <requires>discover.cavestokingdoms.midasium</requires>
-      <requiresIcon>Metallurgy:nether.ore:3</requiresIcon>
-      <icon>Metallurgy:midasium.ingot</icon>
-      <text>A strange alien nether metal. Mixing its dust with any other metal dust turns it to gold.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Ceruclase</title>
-      <requires>discover.cavestokingdoms.ceruclase</requires>
-      <requiresIcon>Metallurgy:nether.ore:5</requiresIcon>
-      <icon>Metallurgy:ceruclase.ingot</icon>
-      <text>An alien nether metal. Very similar in properties to steel, but it can mine slightly more things.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Vyroxeres</title>
-      <requires>discover.cavestokingdoms.vyroxeres</requires>
-      <requiresIcon>Metallurgy:nether.ore:4</requiresIcon>
-      <icon>Metallurgy:vyroxeres.ingot</icon>
-      <text>A strange alien nether metal that emits constant radiation.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Vulcanite</title>
-      <requires>discover.cavestokingdoms.vulcanite</requires>
-      <requiresIcon>Metallurgy:nether.ore:8</requiresIcon>
-      <icon>Metallurgy:vulcanite.ingot</icon>
-      <text>An unusual alien nether metal. Can mine everything Manyullyn can, just very slowly. It is much more durable, however.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Sanguinite</title>
-      <requires>discover.cavestokingdoms.sanguinite</requires>
-      <requiresIcon>Metallurgy:nether.ore:9</requiresIcon>
-      <icon>Metallurgy:sanguinite.ingot</icon>
-      <text>An amazing alien nether metal. Incredibly durable, but mines blocks slowly. It can mine most anything.</text>
-   </page>
-
-   <!-- End Materials -->
-
-   <page type="c2kModularToolsPage">
-      <title>Eximite</title>
-      <requires>discover.cavestokingdoms.eximite</requires>
-      <requiresIcon>Metallurgy:ender.ore:0</requiresIcon>
-      <icon>Metallurgy:eximite.ingot</icon>
-      <text>A rare alien metal found in pockets of endstone. Mines more than Alumite can, and is better than alumite in nearly every way, including being twice as durable.</text>
-   </page>
-
-   <!-- Alloys -->
-
-   <page type="c2kModularToolsPage">
-      <title>Bronze</title>
-      <requires>discover.cavestokingdoms.bronze</requires>
-      <requiresIcon>TConstruct:materials:13</requiresIcon>
-      <icon>TConstruct:materials:13</icon>
-      <text>An alloyed metal slightly superior to iron. A good (though highly rare) stepping stone to obtaining gold.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Invar</title>
-      <requires>discover.cavestokingdoms.invar</requires>
-      <requiresIcon>ThermalFoundation:material:72</requiresIcon>
-      <icon>ThermalFoundation:material:72</icon>
-      <text>A tech alloy that does not change size when heated. Better than iron, but worse than steel. High reinforced level, but hard to level up.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Steel</title>
-      <requires>discover.cavestokingdoms.steel</requires>
-      <requiresIcon>TConstruct:materials:16</requiresIcon>
-      <icon>TConstruct:materials:16</icon>
-      <text>A higher tech version of iron, better in every way.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Brass</title>
-      <requires>discover.cavestokingdoms.brass</requires>
-      <requiresIcon>Metallurgy:brass.ingot</requiresIcon>
-      <icon>Metallurgy:brass.ingot</icon>
-      <text>A weak terrestrial alloy better suited for ornamentation than tools. Has a high mining speed and levels quickly, however.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Angmallen</title>
-      <requires>discover.cavestokingdoms.angmallen</requires>
-      <requiresIcon>Metallurgy:angmallen.ingot</requiresIcon>
-      <icon>Metallurgy:angmallen.ingot</icon>
-      <text>A mediocre terrestrial alloy of iron and gold. Less durable than iron, but levels much faster.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Hepatizon</title>
-      <requires>discover.cavestokingdoms.hepatizon</requires>
-      <requiresIcon>Metallurgy:hepatizon.ingot</requiresIcon>
-      <icon>Metallurgy:hepatizon.ingot</icon>
-      <text>A recently rediscovered ancient precious alloy. Nine times as durable as silver, and levels faster to boot.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Electrum</title>
-      <requires>discover.cavestokingdoms.electrum</requires>
-      <requiresIcon>Metallurgy:electrum.ingot</requiresIcon>
-      <icon>Metallurgy:electrum.ingot</icon>
-      <text>A weak terrestrial alloy better suited for ornamentation than tools. Better than silver in every way.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Damascus Steel</title>
-      <requires>discover.cavestokingdoms.damascussteel</requires>
-      <requiresIcon>Metallurgy:damascus.steel.ingot</requiresIcon>
-      <icon>Metallurgy:damascus.steel.ingot</icon>
-      <text>A rediscovered ancient form of steel that naturally forms carbon nano-tubes. Extremely sharp, but more brittle and slower than normal steel.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Alumite</title>
-      <requires>discover.cavestokingdoms.alumite</requires>
-      <requiresIcon>TConstruct:materials:15</requiresIcon>
-      <icon>TConstruct:materials:15</icon>
-      <text>Alloy of iron, obsidian, and aluminum. Comparable to steel, but easier to make and levels up more slowly.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Manyullyn</title>
-      <requires>discover.cavestokingdoms.manyullyn</requires>
-      <requiresIcon>TConstruct:materials:5</requiresIcon>
-      <icon>TConstruct:materials:5</icon>
-      <text>The best metal known to homeworld; an alloy of two powerful nether metals. The gold standard against which any competing metal must exceed.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Pokefennium</title>
-      <requires>discover.cavestokingdoms.pokefennium</requires>
-      <requiresIcon>ExtraTiC:funStuffIngot:1</requiresIcon>
-      <icon>ExtraTiC:funStuffIngot:1</icon>
-      <text>A recently invented biometallurgic alloy. Can mine many rare alien minerals, but is comparitively weak and very hard to level up.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Fairy</title>
-      <requires>discover.cavestokingdoms.fairy</requires>
-      <requiresIcon>ExtraTiC:funStuffIngot</requiresIcon>
-      <icon>ExtraTiC:funStuffIngot</icon>
-      <text>A recently invented biometallurgic alloy. Comparable to Manyullyn, but about 1/4th the durability, levels more than twice as fast, and mines more quickly.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>PigIron</title>
-      <requires>discover.cavestokingdoms.pigiron</requires>
-      <requiresIcon>TConstruct:materials:34</requiresIcon>
-      <icon>TConstruct:materials:34</icon>
-      <text>A horrifying biometallurgic alloy invented while Dr. Diyo was intoxicated. When striking opponents, has a chance of dropping bacon. You monster.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Enderium</title>
-      <requires>discover.cavestokingdoms.enderium</requires>
-      <requiresIcon>ThermalFoundation:material:76</requiresIcon>
-      <icon>ThermalFoundation:material:76</icon>
-      <text>A soft, pulsating alloy made from ender pearls. Takes a fantastically sharp edge... but has a hard time keeping it.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Signalum</title>
-      <requires>discover.cavestokingdoms.signalum</requires>
-      <requiresIcon>ThermalFoundation:material:74</requiresIcon>
-      <icon>ThermalFoundation:material:74</icon>
-      <text>An artificial alloy made from copper. Known to conduct redstone quite well. Like copper, but twice as durable and levels twice as fast.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Lumium</title>
-      <requires>discover.cavestokingdoms.lumium</requires>
-      <requiresIcon>ThermalFoundation:material:75</requiresIcon>
-      <icon>ThermalFoundation:material:75</icon>
-      <text>A synthetic, glowing metal not normally used in tools. Levels extremely fast, but...</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Black Steel</title>
-      <requires>discover.cavestokingdoms.blacksteel</requires>
-      <requiresIcon>Metallurgy:black.steel.ingot</requiresIcon>
-      <icon>Metallurgy:black.steel.ingot</icon>
-      <text>An alien variant of steel. Weaker, slower, but far easier to level up than terrestrial steel.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Haderoth</title>
-      <requires>discover.cavestokingdoms.haderoth</requires>
-      <requiresIcon>Metallurgy:haderoth.ingot</requiresIcon>
-      <icon>Metallurgy:haderoth.ingot</icon>
-      <text>Alien alloy of Mithril and Rubracium, and better in every way. Much more durable than alumite, but lacks the reinforced trait.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Tartarite</title>
-      <requires>discover.cavestokingdoms.tartarite</requires>
-      <requiresIcon>Metallurgy:tartarite.ingot</requiresIcon>
-      <icon>Metallurgy:tartarite.ingot</icon>
-      <text>A combination of alien metals and homeworld's metallurgic knowledge. Widely considered to be the ultimate metal.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Celenegil</title>
-      <requires>discover.cavestokingdoms.celenegil</requires>
-      <requiresIcon>Metallurgy:celenegil.ingot</requiresIcon>
-      <icon>Metallurgy:celenegil.ingot</icon>
-      <text>A amazingly enchantable alien alloy. The most enchantable thing known to man. Levels up five times as quickly as iron!</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Quicksilver</title>
-      <requires>discover.cavestokingdoms.quicksilver</requires>
-      <requiresIcon>Metallurgy:quicksilver.ingot</requiresIcon>
-      <icon>Metallurgy:quicksilver.ingot</icon>
-      <text>An alloy of Mithril and Silver.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Inolashite</title>
-      <requires>discover.cavestokingdoms.inolashite</requires>
-      <requiresIcon>Metallurgy:inolashite.ingot</requiresIcon>
-      <icon>Metallurgy:inolashite.ingot</icon>
-      <text>An alloy of two alien nether metals. The alloying process makes it better in every way, except for its use as a handle.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Shadow Steel</title>
-      <requires>discover.cavestokingdoms.shadowsteel</requires>
-      <requiresIcon>Metallurgy:shadow.steel.ingot</requiresIcon>
-      <icon>Metallurgy:shadow.steel.ingot</icon>
-      <text>An alien variant of steel. Incredibly durable. Hard to level up, but much easier than shadow iron.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Amordrine</title>
-      <requires>discover.cavestokingdoms.amordrine</requires>
-      <requiresIcon>Metallurgy:amordrine.ingot</requiresIcon>
-      <icon>Metallurgy:amordrine.ingot</icon>
-      <text>An alloy of platinum with an alien nether metal. Better in every way than platinum, including mining and levelling speed.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Desichalkos</title>
-      <requires>discover.cavestokingdoms.desichalkos</requires>
-      <requiresIcon>Metallurgy:desichalkos.ingot</requiresIcon>
-      <icon>Metallurgy:desichalkos.ingot</icon>
-      <text>An alloy of two rare alien metals found in pockets of endstone. Better than anything developed on homeworld. More durable than adamantine, and levels faster, too.</text>
-   </page>
-
-   <!-- Slime Materials -->
-
-   <page type="c2kModularToolsPage">
-      <title>Slime</title>
-      <requires>discover.cavestokingdoms.greenslime</requires>
-      <requiresIcon>minecraft:slime_ball</requiresIcon>
-      <icon>TConstruct:materials:1</icon>
-      <text>Soft and Springy. It seems to last a long time.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>BlueSlime</title>
-      <requires>discover.cavestokingdoms.blueslime</requires>
-      <requiresIcon>TConstruct:strangeFood</requiresIcon>
-      <icon>TConstruct:materials:17</icon>
-      <text>Softer and Springier. It seems to last forever! Makes an exellent handle.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Pink Slime</title>
-      <requires>discover.cavestokingdoms.pinkslime</requires>
-      <requiresIcon>MineFactoryReloaded:pinkslime</requiresIcon>
-      <icon>MineFactoryReloaded:pinkslime:1</icon>
-      <text>The ultimate slime; the most durable material in existence. Makes fantastic handles, but like other slimes, it mines slowly.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Glue</title>
-      <requires>discover.cavestokingdoms.glue</requires>
-      <requiresIcon>TConstruct:materials:36</requiresIcon>
-      <icon>TConstruct:materials:36</icon>
-      <text>Bindings made of glue help tools hold together. Anything else made of glue is a really bad idea.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Plastic</title>
-      <requires>discover.cavestokingdoms.plastic</requires>
-      <requiresIcon>MineFactoryReloaded:rubber.raw</requiresIcon>
-      <icon>MineFactoryReloaded:plastic.sheet:0</icon>
-      <text>A highly durable material with a low mining level. Almost incapable of levelling.</text>
-   </page>
-
-   <!-- Gem Materials -->
-
-   <page type="c2kModularToolsPage">
-      <title>Ruby</title>
-      <requires>discover.cavestokingdoms.ruby</requires>
-      <requiresIcon>customnpcs:npcRuby</requiresIcon>
-      <icon>customnpcs:npcRuby</icon>
-      <text>A rare gem. Unusually high attack damage.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Peridot</title>
-      <requires>discover.cavestokingdoms.peridot</requires>
-      <requiresIcon>ExtraTiC:chunk:165</requiresIcon>
-      <icon>ExtraTiC:chunk:165</icon>
-      <text>A rare gem. Unusually high Mining Speed</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Sapphire</title>
-      <requires>discover.cavestokingdoms.sapphire</requires>
-      <requiresIcon>customnpcs:npcSaphire</requiresIcon>
-      <icon>customnpcs:npcSaphire</icon>
-      <text>A rare gem. Unusually high durability.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Amethyst</title>
-      <requires>discover.cavestokingdoms.amethyst</requires>
-      <requiresIcon>customnpcs:npcAmethyst</requiresIcon>
-      <icon>customnpcs:npcAmethyst</icon>
-      <text>A gem like diamond but used to make modular tools. Tools made with Amethyst are as good as diamond historically was.</text>
-   </page>
-
-   <!-- Bizzare Materials -->
-
-   <page type="c2kModularToolsPage">
-      <title>Paper</title>
-      <requires>discover.cavestokingdoms.reeds</requires>
-      <requiresIcon>minecraft:reeds</requiresIcon>
-      <icon>minecraft:paper</icon>
-      <text>A very weak material. It's only redeeming feature is its ability to grant items extra modifier slots.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Cardboard</title>
-      <requires>discover.cavestokingdoms.reeds</requires>
-      <requiresIcon>minecraft:reeds</requiresIcon>
-      <icon>betterstorage:cardboardSheet</icon>
-      <text>Better than paper in every way, except it lacks "writable". Which basically makes it worse in every way.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Bone</title>
-      <requires>discover.cavestokingdoms.bonemeal</requires>
-      <requiresIcon>minecraft:dye:15</requiresIcon>
-      <icon>minecraft:bone</icon>
-      <text>Less durable than stone, but mines and levels much faster. Also great as a handle.</text>
-   </page>
-
-   <page type="c2kModularToolsPage">
-      <title>Bedrockium</title>
-      <requires>discover.cavestokingdoms.bedrockium</requires>
-      <requiresIcon>ExtraUtilities:bedrockiumIngot</requiresIcon>
-      <icon>ExtraUtilities:bedrockiumIngot</icon>
-      <text>An amazingly tough metal. That's all that's good about it.</text>
-   </page>
+	<page type="intro">
+		<text>Materials - The Modular Tools Edition.
+			A Guide to Material Properties
+
+			By Ayumu Nagasawa</text>
+	</page>
+
+	<page type="text">
+		<text>This book contains statistics and information on all materials
+			known to be compatible with Dr. Diyo's modular tools. It is
+			essentially an updated version of the now dated Materials and You,
+			Vol 2 written by Skyla.
+
+			As with other books, parts of it are locked. To unlock a page, simply
+			acquire the suggested material.</text>
+	</page>
+
+	<!-- Wood Materials -->
+	<!-- Stone Materials -->
+	<!-- Familiar Metals -->
+	<!-- Alien Metals -->
+	<!-- Artifical "Magic" Materials -->
+	<!-- Nether Metals -->
+	<!-- End Materials -->
+	<!-- Alloys -->
+	<!-- Slime Materials -->
+	<!-- Gem Materials -->
+	<!-- Bizzare Materials -->
+
+	<page type="c2kContentsPage">
+		<text>Table of Contents</text>
+		<link>
+			<text>Basic Info</text>
+			<icon>minecraft:paper</icon>
+			<jump>3</jump>
+		</link>
+		<link>
+			<text>Wood materials</text>
+			<icon>minecraft:planks</icon>
+			<jump>3</jump>
+		</link>
+		<link>
+			<text>Stone materials</text>
+			<icon>minecraft:cobblestone</icon>
+			<jump>5</jump>
+		</link>
+		<link>
+			<text>Normal Metals</text>
+			<icon>minecraft:iron_ingot</icon>
+			<jump>5</jump>
+		</link>
+		<link>
+			<text>Alien Metals</text>
+			<icon>Metallurgy:prometheum.ingot</icon>
+			<jump>5</jump>
+		</link>
+		<link>
+			<text>"Magic" Metals</text>
+			<icon>Thaumcraft:ItemResource:2</icon>
+			<jump>5</jump>
+		</link>
+		<link>
+			<text>Nether Metals</text>
+			<icon>TConstruct:materials:3</icon>
+			<jump>5</jump>
+		</link>
+	</page>
+
+	<page type="c2kContentsPage">
+		<text>Table of Contents (Cont)</text>
+		<link>
+			<text>End Metals</text>
+			<icon>Metallurgy:eximite.ingot</icon>
+			<jump>5</jump>
+		</link>
+		<link>
+			<text>Alloyed Metals</text>
+			<icon>TConstruct:materials:13</icon>
+			<jump>5</jump>
+		</link>
+		<link>
+			<text>Slime-Based Materials</text>
+			<icon>TConstruct:materials:1</icon>
+			<jump>5</jump>
+		</link>
+		<link>
+			<text>Gem-Based Materials</text>
+			<icon>customnpcs:npcRuby</icon>
+			<jump>5</jump>
+		</link>
+		<link>
+			<text>Unorthodox Materials</text>
+			<icon>minecraft:paper</icon>
+			<jump>5</jump>
+		</link>
+	</page>
+
+	<page type="sectionpage">
+		<title>Material Traits</title>
+		<text>Some materials have traits that augment their natural uses.
+
+			- Reinforced: 10% chance per level of not using durability
+			- Stonebound: The tool mines faster as it wears out, but does less
+			damage
+			- Jagged: The tool does more damage as it wears out, but mines slower
+			- Writable: One extra modifier per piece
+			- Tasty: Sometimes drops food items</text>
+	</page>
+
+	<page type="sectionpage">
+		<title>Material Statistics:</title>
+		<text>Materials have more possible attributes than
+			when Skyla wrote his seminal work.
+
+			- Harvest level: The maximum hardness a
+			tool can mine.
+			- Durability: How many times the material
+			can be used before breaking.
+			- Handle Mod: Tools with this as a handle
+			multiply their durability by this amount.
+			- Mining Speed: How quickly the tool mines
+			materials it is effective against.
+			- Attack Damage: How much extra damage this
+			tool does when attacking
+			- XP Required: How much XP this material
+			requires to level up.</text>
+	</page>
+
+	<!-- Wood Materials -->
+
+	<page type="c2kModularToolsPage">
+		<title>Wood</title>
+		<icon>minecraft:planks</icon>
+		<text>The lowliest of tool materials. Decent as a handle and levels
+			pretty fast, but otherwise completely sub-par.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Ghostwood</title>
+		<requires>discover.cavestokingdoms.ghostwood</requires>
+		<requiresIcon>Natura:tree:2</requiresIcon>
+		<icon>Natura:planks:2</icon>
+		<text>Can't hold an edge, but mines fast and lasts well as a handle.
+			Levels up faster than slime-based materials.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Darkwood</title>
+		<requires>discover.cavestokingdoms.darkwood</requires>
+		<requiresIcon>Natura:Dark Tree</requiresIcon>
+		<icon>Natura:planks:11</icon>
+		<text>A very hard wood. Comparable to copper, but slightly worse in
+			every way except handle utility and levelling speed.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Fusewood</title>
+		<requires>discover.cavestokingdoms.fusewood</requires>
+		<requiresIcon>Natura:Dark Tree:1</requiresIcon>
+		<icon>Natura:planks:12</icon>
+		<ore>Natura:Dark Tree:1</ore>
+		<text>A very hard wood. Statistics identical to iron, but with a
+			faster levelling speed and better use as a handle.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Bloodwood</title>
+		<requires>discover.cavestokingdoms.bloodwood</requires>
+		<requiresIcon>Natura:bloodwood</requiresIcon>
+		<icon>Natura:planks:4</icon>
+		<ore>Natura:bloodwood</ore>
+		<text>A amazingly hard wood. Only slightly less durable than steel.
+			Also better as a handle, but levels more slowly.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Cactus</title>
+		<requires>discover.cavestokingdoms.cactus</requires>
+		<requiresIcon>minecraft:cactus</requiresIcon>
+		<icon>minecraft:cactus</icon>
+		<text>Nicknamed the "Desert Wood". Mines much faster and is over twice
+			as durable wood. Levels slowly, but not as slow as stone.</text>
+	</page>
+
+	<!-- Stone Materials -->
+
+	<page type="c2kModularToolsPage">
+		<title>Stone</title>
+		<icon>minecraft:cobblestone</icon>
+		<text>A basic, terrestrial, low-tech tool material. Levels and mines
+			slowly, can harvest few types of materials, and is bad as a handle.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Flint</title>
+		<requires>discover.cavestokingdoms.gravel</requires>
+		<requiresIcon>minecraft:gravel</requiresIcon>
+		<icon>minecraft:flint</icon>
+		<text>More durable than stone, but worse as a handle. Can harvest more
+			materials than stone.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Netherrack</title>
+		<requires>discover.cavestokingdoms.netherrack</requires>
+		<requiresIcon>minecraft:netherrack</requiresIcon>
+		<icon>minecraft:netherrack</icon>
+		<text>Less durable than stone, but levels faster, harvests slightly
+			more, and mines twice as fast.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Certus Quartz</title>
+		<requires>discover.cavestokingdoms.certusquartz</requires>
+		<requiresIcon>appliedenergistics2:item.ItemMultiMaterial</requiresIcon>
+		<icon>appliedenergistics2:item.ItemMultiMaterial</icon>
+		<text>Better than stone in every way.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Nether Quartz</title>
+		<requires>discover.cavestokingdoms.netherquartz</requires>
+		<requiresIcon>minecraft:quartz_ore</requiresIcon>
+		<icon>minecraft:quartz</icon>
+		<text>Better than certus quartz in every way. Faster than most metals.
+			Levels quickly. Still not great as a handle.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Obsidian</title>
+		<requires>discover.cavestokingdoms.obsidian</requires>
+		<requiresIcon>minecraft:obsidian</requiresIcon>
+		<icon>minecraft:obsidian</icon>
+		<text>Low durability, but fast and has a high level of "Reinforced."
+			Can harvest many blocks. Good for bindings.</text>
+	</page>
+
+	<!-- Familiar Metals -->
+
+	<page type="c2kModularToolsPage">
+		<title>Copper</title>
+		<requires>discover.cavestokingdoms.copper</requires>
+		<requiresIcon>Metallurgy:base.ore</requiresIcon>
+		<icon>TConstruct:materials:9</icon>
+		<text>A common terrestrial metal; extremely rare on this planet.
+			Inferior to iron in every way, and levels quite slowly to boot.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Iron</title>
+		<requires>discover.cavestokingdoms.iron</requires>
+		<requiresIcon>minecraft:iron_ore</requiresIcon>
+		<icon>minecraft:iron_ingot</icon>
+		<text>The base by which all other metals are compared. Good all-around
+			terrestrial metal.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Nickel</title>
+		<requires>discover.cavestokingdoms.nickel</requires>
+		<requiresIcon>ThermalFoundation:Ore:4</requiresIcon>
+		<icon>ThermalFoundation:material:68</icon>
+		<text>Informally known as "Ferrous". A brittle but hard tech metal.
+			High mining level and mining speed, but prone to breakage.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Lead</title>
+		<requires>discover.cavestokingdoms.lead</requires>
+		<requiresIcon>ThermalFoundation:Ore:3</requiresIcon>
+		<icon>ThermalFoundation:material:67</icon>
+		<text>A soft, heavy tech metal. Abnormally low mining level and mining
+			speed, abnormally high durability.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Silver</title>
+		<requires>discover.cavestokingdoms.silver</requires>
+		<requiresIcon>Metallurgy:precious.ore:1</requiresIcon>
+		<icon>ThermalFoundation:material:66</icon>
+		<text>A weak terrestrial metal better suited for ornamentation than
+			tools. Better than brass in every way.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Platinum</title>
+		<requires>discover.cavestokingdoms.platinum</requires>
+		<requiresIcon>Metallurgy:precious.ore:2</requiresIcon>
+		<icon>ThermalFoundation:material:69</icon>
+		<text>A weak terrestrial alloy better suited for ornamentation than
+			tools. Like electrum, but mines faster and levels nearly twice as
+			quickly. High harvest level.</text>
+	</page>
+
+	<!-- Alien Metals -->
+
+	<page type="c2kModularToolsPage">
+		<title>Prometheum</title>
+		<requires>discover.cavestokingdoms.prometheum</requires>
+		<requiresIcon>Metallurgy:fantasy.ore:0</requiresIcon>
+		<icon>Metallurgy:prometheum.ingot</icon>
+		<text>A rather soft alien metal. Mines slowly, but is more durable
+			than iron and levels up more quickly.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Deep Iron</title>
+		<requires>discover.cavestokingdoms.deepiron</requires>
+		<requiresIcon>Metallurgy:fantasy.ore:1</requiresIcon>
+		<icon>Metallurgy:deep.iron.ingot</icon>
+		<text>An alien variant of iron. Softer, weaker, and slower but it
+			levels up much more quickly.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Oureclase</title>
+		<requires>discover.cavestokingdoms.oureclase</requires>
+		<requiresIcon>Metallurgy:fantasy.ore:4</requiresIcon>
+		<icon>Metallurgy:oureclase.ingot</icon>
+		<text>A mediocre alien metal. Can mine everything that bronze can, but
+			is worse in every way except levelling speed.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Mithril</title>
+		<requires>discover.cavestokingdoms.mithril</requires>
+		<requiresIcon>Metallurgy:fantasy.ore:7</requiresIcon>
+		<icon>Metallurgy:mithril.ingot</icon>
+		<text>A good alien metal, roughly comparable to alumite. It's less
+			reinforced, but mines more and levels up much faster.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Orichalcum</title>
+		<requires>discover.cavestokingdoms.orichalcum</requires>
+		<requiresIcon>Metallurgy:fantasy.ore:11</requiresIcon>
+		<icon>Metallurgy:orichalcum.ingot</icon>
+		<text>A great alien metal better than any known terrestrial metal.
+			Like Manyullyn, but slightly less durable and levels very slowly.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Adamantine</title>
+		<requires>discover.cavestokingdoms.adamantine</requires>
+		<requiresIcon>Metallurgy:fantasy.ore:13</requiresIcon>
+		<icon>Metallurgy:adamantine.ingot</icon>
+		<text>An amazing alien metal better than any metal known to homeworld.
+			Faster, harder, more reinforced, and faster levelling than manyullyn.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Atlarus</title>
+		<requires>discover.cavestokingdoms.atlarus</requires>
+		<requiresIcon>Metallurgy:fantasy.ore:14</requiresIcon>
+		<icon>Metallurgy:atlarus.ingot</icon>
+		<text>An amazing alien metal better than any metal known to homeworld.
+			Better than Adamantine in almost every way; it lacks the reinforced
+			trait.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Carmot</title>
+		<requires>discover.cavestokingdoms.carmot</requires>
+		<requiresIcon>Metallurgy:fantasy.ore:6</requiresIcon>
+		<icon>Metallurgy:carmot.ingot</icon>
+		<text>A highly enchantable alien metal. When making modular tools with
+			it, they level very fast.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Astral Silver</title>
+		<requires>discover.cavestokingdoms.astralsilver</requires>
+		<requiresIcon>Metallurgy:fantasy.ore:5</requiresIcon>
+		<icon>Metallurgy:astral.silver.ingot</icon>
+		<text>An alien variant of Silver. Mines faster, levels much faster,
+			and can mine more things, but is only marginally more durable.</text>
+	</page>
+
+	<!-- Artifical "Magic" metals -->
+
+	<page type="c2kModularToolsPage">
+		<title>Thaumium</title>
+		<requires>discover.cavestokingdoms.thaumium</requires>
+		<requiresIcon>Thaumcraft:ItemResource:2</requiresIcon>
+		<icon>Thaumcraft:ItemResource:2</icon>
+		<text>An artificially created alien metal. Can mine everything that
+			iron can, but is slower and less durable. Its best feature is that it
+			allows for an extra modifier slot.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Void Metal</title>
+		<requires>discover.cavestokingdoms.voidmetal</requires>
+		<requiresIcon>Thaumcraft:ItemResource:16</requiresIcon>
+		<icon>Thaumcraft:ItemResource:16</icon>
+		<text>A strange metal that repairs itself. Possibly biological in
+			nature? Scientists seem uncomfortable working with it.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Manasteel</title>
+		<requires>discover.cavestokingdoms.manasteel</requires>
+		<requiresIcon>Botania:manaResource:0</requiresIcon>
+		<icon>Botania:manaResource:0</icon>
+		<text>A strange, easily worked metal that seems to repair itself only
+			under certain unknown conditions.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Terrasteel</title>
+		<requires>discover.cavestokingdoms.terrasteel</requires>
+		<requiresIcon>Botania:manaResource:4</requiresIcon>
+		<icon>Botania:manaResource:4</icon>
+		<text>A supremely durable yet easily worked metal. All reports of
+			successfully damaging it turn out to be mysteriously false.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Elementium</title>
+		<requires>discover.cavestokingdoms.elementium</requires>
+		<requiresIcon>Botania:manaResource:7</requiresIcon>
+		<icon>Botania:manaResource:7</icon>
+		<text>A strange metal that never responds to tests the same way twice.
+			It seems soft when worked but durable once used as a tool.</text>
+	</page>
+
+	<!-- Nether Metals -->
+
+	<page type="c2kModularToolsPage">
+		<title>Cobalt</title>
+		<requires>discover.cavestokingdoms.cobalt</requires>
+		<requiresIcon>TConstruct:SearedBrick:1</requiresIcon>
+		<icon>TConstruct:materials:3</icon>
+		<text>A common nether metal known to homeworld. It levels quickly and
+			is faster than any other terrestrial metal.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Ardite</title>
+		<requires>discover.cavestokingdoms.ardite</requires>
+		<requiresIcon>TConstruct:SearedBrick:2</requiresIcon>
+		<icon>TConstruct:materials:4</icon>
+		<text>A common nether metal known to homeworld. It makes an excellent
+			handle.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Ignatius</title>
+		<requires>discover.cavestokingdoms.ignatius</requires>
+		<requiresIcon>Metallurgy:nether.ore</requiresIcon>
+		<icon>Metallurgy:ignatius.ingot</icon>
+		<text>A strange nether stone. Its dust can be used as fuel.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Shadow Iron</title>
+		<requires>discover.cavestokingdoms.shadowiron</requires>
+		<requiresIcon>Metallurgy:nether.ore:1</requiresIcon>
+		<icon>Metallurgy:shadow.iron.ingot</icon>
+		<text>An alien variant of iron. It's four times as durable, but slower
+			and is very hard to level up.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Kalendrite</title>
+		<requires>discover.cavestokingdoms.kalendrite</requires>
+		<requiresIcon>Metallurgy:nether.ore:7</requiresIcon>
+		<icon>Metallurgy:kalendrite.ingot</icon>
+		<text>A rare alien nether metal. Comparable to alumite, but twice as
+			durable, slower, and levels more quickly.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Midasium</title>
+		<requires>discover.cavestokingdoms.midasium</requires>
+		<requiresIcon>Metallurgy:nether.ore:3</requiresIcon>
+		<icon>Metallurgy:midasium.ingot</icon>
+		<text>A strange alien nether metal. Mixing its dust with any other
+			metal dust turns it to gold.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Ceruclase</title>
+		<requires>discover.cavestokingdoms.ceruclase</requires>
+		<requiresIcon>Metallurgy:nether.ore:5</requiresIcon>
+		<icon>Metallurgy:ceruclase.ingot</icon>
+		<text>An alien nether metal. Very similar in properties to steel, but
+			it can mine slightly more things.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Vyroxeres</title>
+		<requires>discover.cavestokingdoms.vyroxeres</requires>
+		<requiresIcon>Metallurgy:nether.ore:4</requiresIcon>
+		<icon>Metallurgy:vyroxeres.ingot</icon>
+		<text>A strange alien nether metal that emits constant radiation.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Vulcanite</title>
+		<requires>discover.cavestokingdoms.vulcanite</requires>
+		<requiresIcon>Metallurgy:nether.ore:8</requiresIcon>
+		<icon>Metallurgy:vulcanite.ingot</icon>
+		<text>An unusual alien nether metal. Can mine everything Manyullyn
+			can, just very slowly. It is much more durable, however.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Sanguinite</title>
+		<requires>discover.cavestokingdoms.sanguinite</requires>
+		<requiresIcon>Metallurgy:nether.ore:9</requiresIcon>
+		<icon>Metallurgy:sanguinite.ingot</icon>
+		<text>An amazing alien nether metal. Incredibly durable, but mines
+			blocks slowly. It can mine most anything.</text>
+	</page>
+
+	<!-- End Materials -->
+
+	<page type="c2kModularToolsPage">
+		<title>Eximite</title>
+		<requires>discover.cavestokingdoms.eximite</requires>
+		<requiresIcon>Metallurgy:ender.ore:0</requiresIcon>
+		<icon>Metallurgy:eximite.ingot</icon>
+		<text>A rare alien metal found in pockets of endstone. Mines more than
+			Alumite can, and is better than alumite in nearly every way,
+			including being twice as durable.</text>
+	</page>
+
+	<!-- Alloys -->
+
+	<page type="c2kModularToolsPage">
+		<title>Bronze</title>
+		<requires>discover.cavestokingdoms.bronze</requires>
+		<requiresIcon>TConstruct:materials:13</requiresIcon>
+		<icon>TConstruct:materials:13</icon>
+		<text>An alloyed metal slightly superior to iron. A good (though
+			highly rare) stepping stone to obtaining gold.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Invar</title>
+		<requires>discover.cavestokingdoms.invar</requires>
+		<requiresIcon>ThermalFoundation:material:72</requiresIcon>
+		<icon>ThermalFoundation:material:72</icon>
+		<text>A tech alloy that does not change size when heated. Better than
+			iron, but worse than steel. High reinforced level, but hard to level
+			up.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Steel</title>
+		<requires>discover.cavestokingdoms.steel</requires>
+		<requiresIcon>TConstruct:materials:16</requiresIcon>
+		<icon>TConstruct:materials:16</icon>
+		<text>A higher tech version of iron, better in every way.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Brass</title>
+		<requires>discover.cavestokingdoms.brass</requires>
+		<requiresIcon>Metallurgy:brass.ingot</requiresIcon>
+		<icon>Metallurgy:brass.ingot</icon>
+		<text>A weak terrestrial alloy better suited for ornamentation than
+			tools. Has a high mining speed and levels quickly, however.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Angmallen</title>
+		<requires>discover.cavestokingdoms.angmallen</requires>
+		<requiresIcon>Metallurgy:angmallen.ingot</requiresIcon>
+		<icon>Metallurgy:angmallen.ingot</icon>
+		<text>A mediocre terrestrial alloy of iron and gold. Less durable than
+			iron, but levels much faster.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Hepatizon</title>
+		<requires>discover.cavestokingdoms.hepatizon</requires>
+		<requiresIcon>Metallurgy:hepatizon.ingot</requiresIcon>
+		<icon>Metallurgy:hepatizon.ingot</icon>
+		<text>A recently rediscovered ancient precious alloy. Nine times as
+			durable as silver, and levels faster to boot.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Electrum</title>
+		<requires>discover.cavestokingdoms.electrum</requires>
+		<requiresIcon>Metallurgy:electrum.ingot</requiresIcon>
+		<icon>Metallurgy:electrum.ingot</icon>
+		<text>A weak terrestrial alloy better suited for ornamentation than
+			tools. Better than silver in every way.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Damascus Steel</title>
+		<requires>discover.cavestokingdoms.damascussteel</requires>
+		<requiresIcon>Metallurgy:damascus.steel.ingot</requiresIcon>
+		<icon>Metallurgy:damascus.steel.ingot</icon>
+		<text>A rediscovered ancient form of steel that naturally forms carbon
+			nano-tubes. Extremely sharp, but more brittle and slower than normal
+			steel.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Alumite</title>
+		<requires>discover.cavestokingdoms.alumite</requires>
+		<requiresIcon>TConstruct:materials:15</requiresIcon>
+		<icon>TConstruct:materials:15</icon>
+		<text>Alloy of iron, obsidian, and aluminum. Comparable to steel, but
+			easier to make and levels up more slowly.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Manyullyn</title>
+		<requires>discover.cavestokingdoms.manyullyn</requires>
+		<requiresIcon>TConstruct:materials:5</requiresIcon>
+		<icon>TConstruct:materials:5</icon>
+		<text>The best metal known to homeworld; an alloy of two powerful
+			nether metals. The gold standard against which any competing metal
+			must exceed.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Pokefennium</title>
+		<requires>discover.cavestokingdoms.pokefennium</requires>
+		<requiresIcon>ExtraTiC:funStuffIngot:1</requiresIcon>
+		<icon>ExtraTiC:funStuffIngot:1</icon>
+		<text>A recently invented biometallurgic alloy. Can mine many rare
+			alien minerals, but is comparitively weak and very hard to level up.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Fairy</title>
+		<requires>discover.cavestokingdoms.fairy</requires>
+		<requiresIcon>ExtraTiC:funStuffIngot</requiresIcon>
+		<icon>ExtraTiC:funStuffIngot</icon>
+		<text>A recently invented biometallurgic alloy. Comparable to
+			Manyullyn, but about 1/4th the durability, levels more than twice as
+			fast, and mines more quickly.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>PigIron</title>
+		<requires>discover.cavestokingdoms.pigiron</requires>
+		<requiresIcon>TConstruct:materials:34</requiresIcon>
+		<icon>TConstruct:materials:34</icon>
+		<text>A horrifying biometallurgic alloy invented while Dr. Diyo was
+			intoxicated. When striking opponents, has a chance of dropping bacon.
+			You monster.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Enderium</title>
+		<requires>discover.cavestokingdoms.enderium</requires>
+		<requiresIcon>ThermalFoundation:material:76</requiresIcon>
+		<icon>ThermalFoundation:material:76</icon>
+		<text>A soft, pulsating alloy made from ender pearls. Takes a
+			fantastically sharp edge... but has a hard time keeping it.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Signalum</title>
+		<requires>discover.cavestokingdoms.signalum</requires>
+		<requiresIcon>ThermalFoundation:material:74</requiresIcon>
+		<icon>ThermalFoundation:material:74</icon>
+		<text>An artificial alloy made from copper. Known to conduct redstone
+			quite well. Like copper, but twice as durable and levels twice as
+			fast.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Lumium</title>
+		<requires>discover.cavestokingdoms.lumium</requires>
+		<requiresIcon>ThermalFoundation:material:75</requiresIcon>
+		<icon>ThermalFoundation:material:75</icon>
+		<text>A synthetic, glowing metal not normally used in tools. Levels
+			extremely fast, but...</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Black Steel</title>
+		<requires>discover.cavestokingdoms.blacksteel</requires>
+		<requiresIcon>Metallurgy:black.steel.ingot</requiresIcon>
+		<icon>Metallurgy:black.steel.ingot</icon>
+		<text>An alien variant of steel. Weaker, slower, but far easier to
+			level up than terrestrial steel.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Haderoth</title>
+		<requires>discover.cavestokingdoms.haderoth</requires>
+		<requiresIcon>Metallurgy:haderoth.ingot</requiresIcon>
+		<icon>Metallurgy:haderoth.ingot</icon>
+		<text>Alien alloy of Mithril and Rubracium, and better in every way.
+			Much more durable than alumite, but lacks the reinforced trait.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Tartarite</title>
+		<requires>discover.cavestokingdoms.tartarite</requires>
+		<requiresIcon>Metallurgy:tartarite.ingot</requiresIcon>
+		<icon>Metallurgy:tartarite.ingot</icon>
+		<text>A combination of alien metals and homeworld's metallurgic
+			knowledge. Widely considered to be the ultimate metal.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Celenegil</title>
+		<requires>discover.cavestokingdoms.celenegil</requires>
+		<requiresIcon>Metallurgy:celenegil.ingot</requiresIcon>
+		<icon>Metallurgy:celenegil.ingot</icon>
+		<text>A amazingly enchantable alien alloy. The most enchantable thing
+			known to man. Levels up five times as quickly as iron!</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Quicksilver</title>
+		<requires>discover.cavestokingdoms.quicksilver</requires>
+		<requiresIcon>Metallurgy:quicksilver.ingot</requiresIcon>
+		<icon>Metallurgy:quicksilver.ingot</icon>
+		<text>An alloy of Mithril and Silver.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Inolashite</title>
+		<requires>discover.cavestokingdoms.inolashite</requires>
+		<requiresIcon>Metallurgy:inolashite.ingot</requiresIcon>
+		<icon>Metallurgy:inolashite.ingot</icon>
+		<text>An alloy of two alien nether metals. The alloying process makes
+			it better in every way, except for its use as a handle.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Shadow Steel</title>
+		<requires>discover.cavestokingdoms.shadowsteel</requires>
+		<requiresIcon>Metallurgy:shadow.steel.ingot</requiresIcon>
+		<icon>Metallurgy:shadow.steel.ingot</icon>
+		<text>An alien variant of steel. Incredibly durable. Hard to level up,
+			but much easier than shadow iron.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Amordrine</title>
+		<requires>discover.cavestokingdoms.amordrine</requires>
+		<requiresIcon>Metallurgy:amordrine.ingot</requiresIcon>
+		<icon>Metallurgy:amordrine.ingot</icon>
+		<text>An alloy of platinum with an alien nether metal. Better in every
+			way than platinum, including mining and levelling speed.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Desichalkos</title>
+		<requires>discover.cavestokingdoms.desichalkos</requires>
+		<requiresIcon>Metallurgy:desichalkos.ingot</requiresIcon>
+		<icon>Metallurgy:desichalkos.ingot</icon>
+		<text>An alloy of two rare alien metals found in pockets of endstone.
+			Better than anything developed on homeworld. More durable than
+			adamantine, and levels faster, too.</text>
+	</page>
+
+	<!-- Slime Materials -->
+
+	<page type="c2kModularToolsPage">
+		<title>Slime</title>
+		<requires>discover.cavestokingdoms.greenslime</requires>
+		<requiresIcon>minecraft:slime_ball</requiresIcon>
+		<icon>TConstruct:materials:1</icon>
+		<text>Soft and Springy. It seems to last a long time.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>BlueSlime</title>
+		<requires>discover.cavestokingdoms.blueslime</requires>
+		<requiresIcon>TConstruct:strangeFood</requiresIcon>
+		<icon>TConstruct:materials:17</icon>
+		<text>Softer and Springier. It seems to last forever! Makes an
+			exellent handle.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Pink Slime</title>
+		<requires>discover.cavestokingdoms.pinkslime</requires>
+		<requiresIcon>MineFactoryReloaded:pinkslime</requiresIcon>
+		<icon>MineFactoryReloaded:pinkslime:1</icon>
+		<text>The ultimate slime; the most durable material in existence.
+			Makes fantastic handles, but like other slimes, it mines slowly.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Glue</title>
+		<requires>discover.cavestokingdoms.glue</requires>
+		<requiresIcon>TConstruct:materials:36</requiresIcon>
+		<icon>TConstruct:materials:36</icon>
+		<text>Bindings made of glue help tools hold together. Anything else
+			made of glue is a really bad idea.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Plastic</title>
+		<requires>discover.cavestokingdoms.plastic</requires>
+		<requiresIcon>MineFactoryReloaded:rubber.raw</requiresIcon>
+		<icon>MineFactoryReloaded:plastic.sheet:0</icon>
+		<text>A highly durable material with a low mining level. Almost
+			incapable of levelling.</text>
+	</page>
+
+	<!-- Gem Materials -->
+
+	<page type="c2kModularToolsPage">
+		<title>Ruby</title>
+		<requires>discover.cavestokingdoms.ruby</requires>
+		<requiresIcon>customnpcs:npcRuby</requiresIcon>
+		<icon>customnpcs:npcRuby</icon>
+		<text>A rare gem. Unusually high attack damage.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Peridot</title>
+		<requires>discover.cavestokingdoms.peridot</requires>
+		<requiresIcon>ExtraTiC:chunk:165</requiresIcon>
+		<icon>ExtraTiC:chunk:165</icon>
+		<text>A rare gem. Unusually high Mining Speed</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Sapphire</title>
+		<requires>discover.cavestokingdoms.sapphire</requires>
+		<requiresIcon>customnpcs:npcSaphire</requiresIcon>
+		<icon>customnpcs:npcSaphire</icon>
+		<text>A rare gem. Unusually high durability.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Amethyst</title>
+		<requires>discover.cavestokingdoms.amethyst</requires>
+		<requiresIcon>customnpcs:npcAmethyst</requiresIcon>
+		<icon>customnpcs:npcAmethyst</icon>
+		<text>A gem like diamond but used to make modular tools. Tools made
+			with Amethyst are as good as diamond historically was.</text>
+	</page>
+
+	<!-- Bizzare Materials -->
+
+	<page type="c2kModularToolsPage">
+		<title>Paper</title>
+		<requires>discover.cavestokingdoms.reeds</requires>
+		<requiresIcon>minecraft:reeds</requiresIcon>
+		<icon>minecraft:paper</icon>
+		<text>A very weak material. It's only redeeming feature is its ability
+			to grant items extra modifier slots.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Cardboard</title>
+		<requires>discover.cavestokingdoms.reeds</requires>
+		<requiresIcon>minecraft:reeds</requiresIcon>
+		<icon>betterstorage:cardboardSheet</icon>
+		<text>Better than paper in every way, except it lacks "writable".
+			Which basically makes it worse in every way.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Bone</title>
+		<requires>discover.cavestokingdoms.bonemeal</requires>
+		<requiresIcon>minecraft:dye:15</requiresIcon>
+		<icon>minecraft:bone</icon>
+		<text>Less durable than stone, but mines and levels much faster. Also
+			great as a handle.</text>
+	</page>
+
+	<page type="c2kModularToolsPage">
+		<title>Bedrockium</title>
+		<requires>discover.cavestokingdoms.bedrockium</requires>
+		<requiresIcon>ExtraUtilities:bedrockiumIngot</requiresIcon>
+		<icon>ExtraUtilities:bedrockiumIngot</icon>
+		<text>An amazingly tough metal. That's all that's good about it.</text>
+	</page>
 
 </book>
