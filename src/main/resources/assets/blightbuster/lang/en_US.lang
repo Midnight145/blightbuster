@@ -12,6 +12,12 @@ item.blightbuster_worldTainter.name=World Tainter
 item.blightbuster_chunkTainter.name=Chunk Tainter
 item.blightbuster_worldOreKiller.name=Ore Killer
 item.blightbuster_researchnote.name=Translated Alien Grimoire
+item.blightbuster_boundRing.name=Bound Ring
+item.blightbuster_boundRing.0.name=Invisible Wings
+item.blightbuster_boundRing.1.name=Feathery Wings
+item.blightbuster_boundRing.2.name=Fairy Wings
+item.blightbuster_boundRing.3.name=Dragon Wings
+item.blightbuster_boundRing.4.name=Golden Wings
 
 tc.research_name.SILVERPOTION=Silverwood potions
 tc.research_text.SILVERPOTION=Spot cleaning taint!
