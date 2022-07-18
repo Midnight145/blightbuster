@@ -1,4 +1,4 @@
-node*
+node_info.json
 conf/
 libs*
 build
