@@ -4,16 +4,20 @@ import thaumcraft.api.aspects.Aspect;
 
 public enum DawnMachineResource {
 
+	// machina, ordo, cognitio costs * 32 because they were significantly cheaper
+	// They work per operation, not per block, so after moving to a chunkwise
+	// operation they only get used a fraction of the time
+	
 	// Aspect, mult * 4 so you can halve three times
-	// machina, ordo, cognitio * 256 because they were essentially 256 times cheaper
 	// aspect mult cost max rf mana blood u v
 	SANO(Aspect.HEAL, 512 * 4, 2 * 4, 16384 * 4, 16, 250, 12, 0.6f, 0.5f),
-	IGNIS(Aspect.FIRE, 2048 * 4, 2 * 4, 65536 * 4, 4, 250, 12, 0, 0.5f), AER(Aspect.AIR, 128 * 4, 2 * 4, 4096 * 4, 63, 750, 37, 0, 0),
-	COGNITIO(Aspect.MIND, 128 * 4, 2 * 256 * 4, 4096 * 4, 63, 500, 25, 0.6f, 0),
-	MACHINA(Aspect.MECHANISM, 128 * 4, 2 * 256 * 4, 4096 * 4, 63, 500, 25, 0.2f, 0.5f),
+	IGNIS(Aspect.FIRE, 2048 * 4, 2 * 4, 65536 * 4, 4, 250, 12, 0, 0.5f), 
+	AER(Aspect.AIR, 128 * 4, 2 * 4, 4096 * 4, 63, 750, 37, 0, 0),
+	COGNITIO(Aspect.MIND, 128 * 4, 2 * 32 * 4, 4096 * 4, 63, 500, 25, 0.6f, 0),
+	MACHINA(Aspect.MECHANISM, 128 * 4, 2 * 32 * 4, 4096 * 4, 63, 500, 25, 0.2f, 0.5f),
 	AURAM(Aspect.AURA, 1 * 4, 4 * 4, 32 * 4, 16000, 100, 50, 0.4f, 0),
 	VACUOS(Aspect.VOID, 512 * 4, 2 * 4, 16384 * 4, 16, 250, 12, 0.8f, 0.5f),
-	ORDO(Aspect.ORDER, 128 * 4, 2 * 256 * 4, 4096 * 4, 63, 750, 37, 0.4f, 0.5f),
+	ORDO(Aspect.ORDER, 128 * 4, 2 * 32 * 4, 4096 * 4, 63, 750, 37, 0.4f, 0.5f),
 	ARBOR(Aspect.TREE, 256 * 4, 2 * 4, 8192 * 4, 32, 500, 25, 0.2f, 0),
 	HERBA(Aspect.PLANT, 512 * 4, 2 * 4, 16384 * 4, 16, 250, 12, 0.8f, 0);
 
