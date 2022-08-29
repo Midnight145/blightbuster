@@ -50,15 +50,22 @@ public class NodeResetterTileEntity extends TileEntity {
 
 	@Override
 	public void updateEntity() {
-		if (this.index >= this.nodes.size()) { return; }
+		boolean saidDone = false;
+		if (this.index >= this.nodes.size()) {
+			if (saidDone) { return; }
+			System.out.println("Done!");
+			saidDone = true;
+			return;
+		}
 		if (this.isInvalid) { return; }
 		if (!this.hasInitializedChunkloading) {
 			this.initalizeChunkloading();
 			return;
 		}
 		NodeInfo node = this.nodes.get(this.index);
-		if (!this.isChunkLoaded(node.x, node.z)) { this.loadChunk(); }
-		if (!this.worldObj.getChunkProvider().chunkExists(node.x, node.z)) {
+		int[] coords = this.getChunkCoordsFromBlockCoords(node.x, node.z);
+		if (!this.isChunkLoaded(coords[0], coords[1])) { this.loadChunk(); }
+		if (!this.worldObj.getChunkProvider().chunkExists(coords[0], coords[1])) {
 			this.waiting = true;
 			return;
 		}
