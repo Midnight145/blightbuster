@@ -24,7 +24,7 @@ import talonos.cavestokingdoms.lib.DEFS;
 public class ItemManual extends ItemOreManual {
 	String name = "basicManual";
 
-	private static final int NUMBER_OF_MANUALS = 14;
+	private static final int NUMBER_OF_MANUALS = 15;
 
 	public ItemManual() {
 		super();
@@ -75,6 +75,8 @@ public class ItemManual extends ItemOreManual {
 			return CavesToKingdoms.manualInfo.sarah1;
 		case 13:
 			return CavesToKingdoms.manualInfo.sarah2;
+		case 14:
+			return CavesToKingdoms.manualInfo.dark;
 		default:
 			return CavesToKingdoms.manualInfo.mats1;
 		}
@@ -105,6 +107,9 @@ public class ItemManual extends ItemOreManual {
 		case 12:
 		case 13:
 			list.add("\u00a7o" + StatCollector.translateToLocal("blightfallmanual.sarah"));
+			break;
+		case 14:
+			list.add("\u00a7o" + StatCollector.translateToLocal("blightfallmanual.dark"));
 		}
 	}
 

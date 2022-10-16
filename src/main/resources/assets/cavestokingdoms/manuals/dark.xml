@@ -1,0 +1,26 @@
+<book>
+	<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/dark1.png</location>
+	</page>
+	<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/dark2.png</location>
+	</page>
+	<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/dark3.png</location>
+	</page>
+		<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/dark4.png</location>
+	</page>
+		<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/dark5.png</location>
+	</page>
+		<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/dark6.png</location>
+	</page>
+</book>

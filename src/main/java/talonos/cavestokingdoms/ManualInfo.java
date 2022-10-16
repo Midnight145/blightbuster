@@ -31,6 +31,7 @@ public class ManualInfo {
 	public BookData taint2 = new BookData();
 	public BookData sarah1 = new BookData();
 	public BookData sarah2 = new BookData();
+	public BookData dark = new BookData();
 
 	private Document mats0Doc;
 	private Document mats1Doc;
@@ -46,7 +47,8 @@ public class ManualInfo {
 	private Document taint2Doc;
 	private Document sarah1Doc;
 	private Document sarah2Doc;
-
+	private Document darkDoc;
+	
 	public ManualInfo() {
 		this.readManuals();
 		Side side = FMLCommonHandler.instance().getEffectiveSide();
@@ -92,6 +94,9 @@ public class ManualInfo {
 		d = this.sarah2Doc;
 		this.initManual(this.sarah2, "basicManual.13", "\u00a7o" + StatCollector.translateToLocal("manual1.tooltip"), d,
 				"tinker:tinkerbook_diary");
+		d = this.darkDoc;
+		this.initManual(this.dark, "basicManual.14", "\u00a7o" + StatCollector.translateToLocal("manual1.tooltip"), d, 
+				"tinker:tinkerbook_diary");
 	}
 
 	public BookData initManual(BookData data, String unlocName, String toolTip, Document xmlDoc, String itemImage) {
@@ -119,6 +124,7 @@ public class ManualInfo {
 		this.ben4doc = this.readManual("/assets/cavestokingdoms/manuals/xillith_4.xml", dbFactory);
 		this.sarah1Doc = this.readManual("/assets/cavestokingdoms/manuals/sarah_1.xml", dbFactory);
 		this.sarah2Doc = this.readManual("/assets/cavestokingdoms/manuals/sarah_2.xml", dbFactory);
+		this.darkDoc = this.readManual("/assets/cavestokingdoms/manuals/dark.xml", dbFactory);
 	}
 
 	Document readManual(String location, DocumentBuilderFactory dbFactory) {
