@@ -10,11 +10,7 @@ public class BBItems {
 	public static Item worldSuperTainter;
 	public static Item worldOreKiller;
 	public static ItemBlock dawnChargerItem;
-	public static Item nodeConverter;
-	public static Item tunerFocus;
-	public static Item chunkTainter;
 	public static Item boundRing;
-	public static Item biomeHelper;
 
 	public static void init() {
 		purityFocus = new ItemPurityFocus();
@@ -23,9 +19,6 @@ public class BBItems {
 		worldOreKiller = new ItemWorldOreKiller();
 		worldSuperTainter = new ItemSuperTestWorldTainter();
 		worldSuperTainter = new ItemAlienTome();
-		nodeConverter = new ItemNodeConverter();
-		chunkTainter = new ItemChunkTainter();
 		boundRing = new ItemBoundRing();
-		biomeHelper = new ItemBiomeHelper();
 	}
 }

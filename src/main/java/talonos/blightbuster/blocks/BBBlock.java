@@ -36,8 +36,6 @@ public class BBBlock extends Block {
 	public static Multiblock dawnMachineMultiblock;
 	public static Block offering;
 	public static Block dawnCharger;
-	public static Block chestFinder;
-	public static Block nodeResetter;
 
 	public static void init() {
 		dawnMachineMultiblock = new DawnMachineMultiblock();
@@ -49,8 +47,6 @@ public class BBBlock extends Block {
 		cyberTotem = new BlockCyberTotem();
 		offering = new BlockOffering();
 		dawnCharger = new BlockDawnCharger();
-		chestFinder = new BlockChestFinder();
-		nodeResetter = new BlockNodeResetter();
 
 		dawnMachineMultiblock.init();
 	}
