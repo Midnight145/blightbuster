@@ -5,24 +5,23 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
 
 public class AddDiscoveryPacket implements IMessage {
-    private String discoveryName;
+	private String discoveryName;
 
-    public AddDiscoveryPacket() {}
-    public AddDiscoveryPacket(String name) {
-        this.discoveryName = name;
-    }
+	public AddDiscoveryPacket() {}
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        this.discoveryName = ByteBufUtils.readUTF8String(buf);
-    }
+	public AddDiscoveryPacket(String name) {
+		this.discoveryName = name;
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf) {
-        ByteBufUtils.writeUTF8String(buf, this.discoveryName);
-    }
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		this.discoveryName = ByteBufUtils.readUTF8String(buf);
+	}
 
-    public String getDiscoveryName() {
-        return this.discoveryName;
-    }
+	@Override
+	public void toBytes(ByteBuf buf) {
+		ByteBufUtils.writeUTF8String(buf, this.discoveryName);
+	}
+
+	public String getDiscoveryName() { return this.discoveryName; }
 }

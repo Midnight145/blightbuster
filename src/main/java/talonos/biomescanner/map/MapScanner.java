@@ -19,284 +19,308 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.ISaveHandler;
+import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.event.world.WorldEvent;
 import talonos.biomescanner.BiomeScanner;
 import talonos.biomescanner.map.event.UpdateMapEvent;
+import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.network.packets.UpdateMapPacket;
 import thaumcraft.common.config.ConfigBlocks;
 
-public class MapScanner {
-    public static MapScanner instance = new MapScanner();
-    public static final int mapWidthChunks = 110;
-    public static final int blockWidth = 176;
-    public static final int blockHeight = 180;
+public class MapScanner implements ForgeChunkManager.LoadingCallback {
+	public static MapScanner instance = new MapScanner();
+	public int chunkX = -62, chunkZ = -64;
+	public World world;
+	public static final int mapWidthChunks = 110;
+	public static final int blockWidth = 176;
+	public static final int blockHeight = 180;
 
-    private RegionMap regionMap = new RegionMap();
-    private int lastScannedChunk = 0;
-    private byte[][] mapPixels = new byte[7*blockHeight][5*blockWidth];
-    private EventBus eventBus = new EventBus();
+	private ForgeChunkManager.Ticket ticket = null;
+	private boolean hasInitializedChunkloading = false;
 
-    public EventBus bus() { return eventBus; }
+	private RegionMap regionMap = new RegionMap();
+	private int lastScannedChunk = 0;
+	private byte[][] mapPixels = new byte[7 * blockHeight][5 * blockWidth];
+	private EventBus eventBus = new EventBus();
 
-    public MapScanner() {
-    }
+	public EventBus bus() {
+		return this.eventBus;
+	}
 
-    public void initMap() {
-        for (int y = 0; y < (7*blockHeight); y++) {
-            for (int x = 0; x < (5*blockWidth); x++) {
-                int usByte = 0 | this.mapPixels[y][x];
-                if (usByte < 64 || (usByte >= 128 && usByte < 192))
-                    this.mapPixels[y][x] = (byte)(usByte + 64);
-            }
-        }
-        bus().post(new UpdateMapEvent(0,0,5*blockWidth,7*blockHeight));
-    }
+	public MapScanner() {}
 
-    public RegionMap getRegionMap() { return regionMap; }
+	public void initMap() {
+		for (int y = 0; y < (7 * blockHeight); y++) {
+			for (int x = 0; x < (5 * blockWidth); x++) {
+				int usByte = 0 | this.mapPixels[y][x];
+				if (usByte < 64 || (usByte >= 128 && usByte < 192)) { this.mapPixels[y][x] = (byte) (usByte + 64); }
+			}
+		}
+		this.bus().post(new UpdateMapEvent(0, 0, 5 * blockWidth, 7 * blockHeight));
+	}
 
-    @SubscribeEvent
-    public void onWorldLoad(WorldEvent.Load event) {
-        if (event.world.provider.dimensionId == 0 && !event.world.isRemote) {
-            loadData(event.world.getSaveHandler());
-            bus().post(regionMap.getUpdateEvent(Arrays.asList(Zone.values())));
-        }
-    }
+	public RegionMap getRegionMap() { return this.regionMap; }
 
-    @SubscribeEvent
-    public void onWorldSave(WorldEvent.Save event) {
-        if (event.world.provider.dimensionId == 0 && !event.world.isRemote) {
-            saveData(new File(event.world.getSaveHandler().getWorldDirectory(), "scanner.dat"));
-        }
-    }
+	@SubscribeEvent
+	public void onWorldLoad(WorldEvent.Load event) {
+		this.world = event.world;
+		if (event.world.provider.dimensionId == 0 && !event.world.isRemote) {
+			this.loadData(event.world.getSaveHandler());
+			this.bus().post(this.regionMap.getUpdateEvent(Arrays.asList(Zone.values())));
+		}
+	}
 
-    private void loadData(ISaveHandler saveHandler) {
-        File worldScannerFile = new File(saveHandler.getWorldDirectory(), "scanner.dat");
-        if (loadDataFile(worldScannerFile))
-            return;
+	@SubscribeEvent
+	public void onWorldSave(WorldEvent.Save event) {
+		if (event.world.provider.dimensionId == 0 && !event.world.isRemote) {
+			this.saveData(new File(event.world.getSaveHandler().getWorldDirectory(), "scanner.dat"));
+		}
+	}
 
-        if (BiomeScanner.baselineFile != null && loadDataFile(BiomeScanner.baselineFile))
-            return;
+	private void loadData(ISaveHandler saveHandler) {
+		File worldScannerFile = new File(saveHandler.getWorldDirectory(), "scanner.dat");
+		if (this.loadDataFile(worldScannerFile)) { return; }
 
-        if (!loadDataFile(worldScannerFile, true))
-            fillRandomData();
-    }
+		if (BiomeScanner.baselineFile != null && this.loadDataFile(BiomeScanner.baselineFile)) { return; }
 
-    private boolean loadDataFile(File loadFile) {
-        return loadDataFile(loadFile, false);
-    }
+		if (!this.loadDataFile(worldScannerFile, true)) { this.fillRandomData(); }
+	}
 
-    private boolean loadDataFile(File loadFile, boolean forceLoad) {
-        if (!loadFile.exists())
-            return false;
+	private boolean loadDataFile(File loadFile) {
+		return this.loadDataFile(loadFile, false);
+	}
 
-        try {
-            NBTTagCompound loadedData = CompressedStreamTools.readCompressed(new FileInputStream(loadFile));
-            return readNBT(loadedData, forceLoad);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
+	private boolean loadDataFile(File loadFile, boolean forceLoad) {
+		if (!loadFile.exists()) { return false; }
 
-    private void saveData(File saveFile) {
-        NBTTagCompound compound = new NBTTagCompound();
-        writeNBT(compound);
-        try {
-            CompressedStreamTools.writeCompressed(compound, new FileOutputStream(saveFile));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
+		try {
+			NBTTagCompound loadedData = CompressedStreamTools.readCompressed(new FileInputStream(loadFile));
+			return this.readNBT(loadedData, forceLoad);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
 
-    private void fillRandomData() {
-        lastScannedChunk = 0;
-        Random r = new Random();
-        for (int y = 0; y < 7*blockHeight; y++) {
-            r.nextBytes(mapPixels[y]);
-        }
-    }
+	private void saveData(File saveFile) {
+		NBTTagCompound compound = new NBTTagCompound();
+		this.writeNBT(compound);
+		try {
+			CompressedStreamTools.writeCompressed(compound, new FileOutputStream(saveFile));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
 
-    private boolean readNBT(NBTTagCompound tag, boolean forceLoad) {
-        lastScannedChunk = tag.getInteger("LastScannedChunk");
-        NBTTagCompound dataTag = tag.getCompoundTag("Data");
-        for (int y = 0; y < 7*blockHeight; y++) {
-            mapPixels[y] = dataTag.getByteArray(Integer.toString(y));
-        }
+	private void fillRandomData() {
+		this.lastScannedChunk = 0;
+		Random r = new Random();
+		for (int y = 0; y < 7 * blockHeight; y++) {
+			r.nextBytes(this.mapPixels[y]);
+		}
+	}
 
-        if (regionMap.read(tag.getCompoundTag("RegionMap"))) {
-            if (forceLoad)
-                lastScannedChunk = 0;
-            else
-                return false;
-        }
+	private boolean readNBT(NBTTagCompound tag, boolean forceLoad) {
+		this.lastScannedChunk = tag.getInteger("LastScannedChunk");
+		NBTTagCompound dataTag = tag.getCompoundTag("Data");
+		for (int y = 0; y < 7 * blockHeight; y++) {
+			this.mapPixels[y] = dataTag.getByteArray(Integer.toString(y));
+		}
 
-        return true;
-    }
+		if (this.regionMap.read(tag.getCompoundTag("RegionMap"))) {
+			if (forceLoad) {
+				this.lastScannedChunk = 0;
+			}
+			else {
+				return false;
+			}
+		}
 
-    private void writeNBT(NBTTagCompound tag) {
-        tag.setInteger("LastScannedChunk", lastScannedChunk);
-        NBTTagCompound dataTag = new NBTTagCompound();
-        tag.setTag("Data", dataTag);
-        for (int y = 0; y < 7*blockHeight; y++) {
-            dataTag.setByteArray(Integer.toString(y), mapPixels[y]);
-        }
-        NBTTagCompound regionMapTag = new NBTTagCompound();
-        regionMap.write(regionMapTag);
-        tag.setTag("RegionMap", regionMapTag);
-    }
+		return true;
+	}
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void onRenderTick(TickEvent.RenderTickEvent event) {
-        if (BiomeScanner.disableEverything)
-            return;
-        if (Minecraft.getMinecraft().theWorld != null)
-            BiomeMapColors.updateFlash(Minecraft.getMinecraft().theWorld.getWorldTime());
-    }
+	private void writeNBT(NBTTagCompound tag) {
+		tag.setInteger("LastScannedChunk", this.lastScannedChunk);
+		NBTTagCompound dataTag = new NBTTagCompound();
+		tag.setTag("Data", dataTag);
+		for (int y = 0; y < 7 * blockHeight; y++) {
+			dataTag.setByteArray(Integer.toString(y), this.mapPixels[y]);
+		}
+		NBTTagCompound regionMapTag = new NBTTagCompound();
+		this.regionMap.write(regionMapTag);
+		tag.setTag("RegionMap", regionMapTag);
+	}
 
-    @SubscribeEvent
-    public void onWorldTick(TickEvent.WorldTickEvent event) {
-        if (BiomeScanner.disableEverything)
-            return;
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void onRenderTick(TickEvent.RenderTickEvent event) {
+		if (BiomeScanner.disableEverything) { return; }
+		if (Minecraft.getMinecraft().theWorld != null) { BiomeMapColors.updateFlash(Minecraft.getMinecraft().theWorld.getWorldTime()); }
+	}
 
-        if (event.phase == TickEvent.Phase.END)
-            return;
+	@SubscribeEvent
+	public void onWorldTick(TickEvent.WorldTickEvent event) {
+		if (!this.hasInitializedChunkloading && this.world != null) { this.initalizeChunkloading(); }
+		if (BiomeScanner.disableEverything) { return; }
 
-        if (event.world.provider.dimensionId == 0 && !event.world.isRemote) {
-            if (lastScannedChunk == 0) {
-                regionMap.wipeData();
-                bus().post(regionMap.getUpdateEvent(Arrays.asList(Zone.values())));
-                initMap();
-            }
+		if (event.phase == TickEvent.Phase.END) { return; }
 
-            if (lastScannedChunk != -1 && !event.world.isRemote) //If it's "on",
-                scanSomeChunks(event.world);
-        }
-    }
+		if (event.world.provider.dimensionId == 0 && !event.world.isRemote) {
+			if (this.lastScannedChunk == 0) {
+				this.regionMap.wipeData();
+				this.bus().post(this.regionMap.getUpdateEvent(Arrays.asList(Zone.values())));
+				this.initMap();
+			}
 
-    private void scanSomeChunks(World worldObj) {
-        int chunkX = (lastScannedChunk % (mapWidthChunks/5))*5;
-        int chunkZ = (lastScannedChunk / (mapWidthChunks/5))*1;
-        BiomeGenBase[] biomesForGeneration = worldObj.getWorldChunkManager()
-                .loadBlockGeneratorData(null, chunkX*16, chunkZ*16,
-                        80, 16);
-        List<Zone> updatedZones = new LinkedList<Zone>();
+			if (this.lastScannedChunk != -1 && !event.world.isRemote) {
+				if (!this.isChunkloaded()) { this.loadChunk(); }
+				this.scanSomeChunks(event.world);
+			}
+		}
+	}
 
-        for (int xInChunk = 0; xInChunk < 80; xInChunk += 2)
-        {
-            int x = chunkX * 16 + xInChunk;
-            for (int zInChunk = 0; zInChunk < 16; zInChunk += 2)
-            {
-                int z = chunkZ * 16 + zInChunk;
-                int biomeIndex = (zInChunk * 80)+xInChunk;
-                if ((biomesForGeneration != null)
-                        && (biomesForGeneration[biomeIndex] != null))
-                {
-                    int biomeID = biomesForGeneration[biomeIndex].biomeID;
-                    int color = BiomeMapColors.biomeLookup[biomeID];
+	private void scanSomeChunks(World worldObj) {
+		int chunkX = (this.lastScannedChunk % (mapWidthChunks / 5)) * 5;
+		int chunkZ = (this.lastScannedChunk / (mapWidthChunks / 5)) * 1;
+		BiomeGenBase[] biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(null, chunkX * 16, chunkZ * 16, 80, 16);
+		List<Zone> updatedZones = new LinkedList<Zone>();
 
-                    if (getTaintAt(x, z, worldObj))
-                    {
-                        color += 128;
-                        updatedZones.add(regionMap.incrementBlock(x,z,false));
-                    } else {
-                        updatedZones.add(regionMap.incrementBlock(x,z,true));
-                    }
+		for (int xInChunk = 0; xInChunk < 80; xInChunk += 2) {
+			int x = chunkX * 16 + xInChunk;
+			for (int zInChunk = 0; zInChunk < 16; zInChunk += 2) {
+				int z = chunkZ * 16 + zInChunk;
+				int biomeIndex = (zInChunk * 80) + xInChunk;
+				if ((biomesForGeneration != null) && (biomesForGeneration[biomeIndex] != null)) {
+					int biomeID = biomesForGeneration[biomeIndex].biomeID;
+					int color = BiomeMapColors.biomeLookup[biomeID];
 
-                    int newx = (mapWidthChunks * 16) - x - 1;
+					if (this.getTaintAt(x, z, worldObj)) {
+						color += 128;
+						updatedZones.add(this.regionMap.incrementBlock(x, z, false));
+					}
+					else {
+						updatedZones.add(this.regionMap.incrementBlock(x, z, true));
+					}
 
-                    int xPix = (newx / 2);
-                    int yPix = (z / 2);
-                    setColor(xPix, yPix, (byte)color);
+					int newx = (mapWidthChunks * 16) - x - 1;
 
-                }
-                else
-                {
-                    System.out.println("Error!");
-                    System.out.println(biomesForGeneration != null);
-                    System.out.println(biomesForGeneration[biomeIndex] != null);
-                }
-            }
-        }
+					int xPix = (newx / 2);
+					int yPix = (z / 2);
+					this.setColor(xPix, yPix, (byte) color);
 
-        bus().post(regionMap.getUpdateEvent(updatedZones));
+				}
+				else {
+					System.out.println("Error!");
+					System.out.println(biomesForGeneration != null);
+					System.out.println(biomesForGeneration[biomeIndex] != null);
+				}
+			}
+		}
 
-        int minX = ((mapWidthChunks * 8) - (chunkX * 8) - 40);
-        int minY = chunkZ * 8;
-        bus().post(new UpdateMapEvent(minX, minY, 40, 8));
-        lastScannedChunk++;
-        if (lastScannedChunk >= (22 * 135))
-        {
-            regionMap.updateData();
-            lastScannedChunk = -1;
-        }
-    }
+		this.bus().post(this.regionMap.getUpdateEvent(updatedZones));
 
-    private boolean getTaintAt(int x, int z, World worldObj)
-    {
-        for (int y = 0; y <= 255; y++)
-        {
-            Block northwest = worldObj.getBlock(x,y,z);
-            Block northeast = worldObj.getBlock(x+1, y, z);
-            Block southwest = worldObj.getBlock(x, y, z+1);
-            Block southeast = worldObj.getBlock(x+1, y, z+1);
-            if (northwest == ConfigBlocks.blockTaint
-                    || northeast == ConfigBlocks.blockTaint
-                    || southwest == ConfigBlocks.blockTaint
-                    || southeast == ConfigBlocks.blockTaint
-                    || northwest == ConfigBlocks.blockTaintFibres
-                    || northeast == ConfigBlocks.blockTaintFibres
-                    || southwest == ConfigBlocks.blockTaintFibres
-                    || southeast == ConfigBlocks.blockTaintFibres)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+		int minX = ((mapWidthChunks * 8) - (chunkX * 8) - 40);
+		int minY = chunkZ * 8;
+		this.bus().post(new UpdateMapEvent(minX, minY, 40, 8));
+		this.lastScannedChunk++;
+		if (this.lastScannedChunk >= (22 * 135)) {
+			this.regionMap.updateData();
+			this.lastScannedChunk = -1;
+			this.unloadChunk();
+		}
+	}
 
-    public boolean isActive() { return lastScannedChunk >= 0; }
-    public void activate() { lastScannedChunk = 0; }
+	private boolean getTaintAt(int x, int z, World worldObj) {
+		for (int y = 0; y <= 255; y++) {
+			Block northwest = worldObj.getBlock(x, y, z);
+			int northwestMeta = worldObj.getBlockMetadata(x, y, z);
 
-    public void setColor(int x, int y, byte color) {
-        this.mapPixels[y][x] = color;
-    }
+			Block northeast = worldObj.getBlock(x + 1, y, z);
+			int northeastMeta = worldObj.getBlockMetadata(x + 1, y, z);
 
-    public int getColor(int x, int y) {
-        byte b0 = this.mapPixels[y][x];
-        int b = b0 & 0xFF;
-        return BiomeMapColors.colors[b];
-    }
+			Block southwest = worldObj.getBlock(x, y, z + 1);
+			int southwestMeta = worldObj.getBlockMetadata(x, y, z + 1);
 
-    public byte getRawColorByte(int x, int y) {
-        return this.mapPixels[y][x];
-    }
+			Block southeast = worldObj.getBlock(x + 1, y, z + 1);
+			int southeastMeta = worldObj.getBlockMetadata(x + 1, y, z + 1);
 
-    public void updateFromNetwork(int minX, int minY, int width, int height, byte[] data) {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                setColor(x+minX, y+minY, data[(y*width)+x]);
-            }
-        }
+			if (northwest == ConfigBlocks.blockTaint && northwestMeta != 2 || (northeast == ConfigBlocks.blockTaint && northeastMeta != 2)
+					|| (southwest == ConfigBlocks.blockTaint && southwestMeta != 2)
+					|| (southeast == ConfigBlocks.blockTaint && southeastMeta != 2) || northwest == ConfigBlocks.blockTaintFibres
+					|| northeast == ConfigBlocks.blockTaintFibres || southwest == ConfigBlocks.blockTaintFibres
+					|| southeast == ConfigBlocks.blockTaintFibres) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-        bus().post(new UpdateMapEvent(minX, minY, width, height));
-    }
+	public boolean isActive() { return this.lastScannedChunk >= 0; }
 
-    public void sendEntireMap(EntityPlayerMP entityPlayer) {
-        int width = 5*blockWidth;
-        int height = 7*blockHeight;
+	public void activate() {
+		this.lastScannedChunk = 0;
+	}
 
-        byte[] data = new byte[width*height];
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                data[(y*width)+x] = MapScanner.instance.getRawColorByte(x, y);
-            }
-        }
+	public void setColor(int x, int y, byte color) {
+		this.mapPixels[y][x] = color;
+	}
 
-        BlightbusterNetwork.sendToPlayer(new UpdateMapPacket(0, 0, width, height, data), entityPlayer);
-    }
+	public int getColor(int x, int y) {
+		byte b0 = this.mapPixels[y][x];
+		int b = b0 & 0xFF;
+		return BiomeMapColors.colors[b];
+	}
+
+	public byte getRawColorByte(int x, int y) {
+		return this.mapPixels[y][x];
+	}
+
+	public void updateFromNetwork(int minX, int minY, int width, int height, byte[] data) {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				this.setColor(x + minX, y + minY, data[(y * width) + x]);
+			}
+		}
+
+		this.bus().post(new UpdateMapEvent(minX, minY, width, height));
+	}
+
+	public void sendEntireMap(EntityPlayerMP entityPlayer) {
+		int width = 5 * blockWidth;
+		int height = 7 * blockHeight;
+
+		byte[] data = new byte[width * height];
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				data[(y * width) + x] = MapScanner.instance.getRawColorByte(x, y);
+			}
+		}
+
+		BlightbusterNetwork.sendToPlayer(new UpdateMapPacket(0, 0, width, height, data), entityPlayer);
+	}
+
+	private void initalizeChunkloading() {
+		this.ticket = ForgeChunkManager.requestTicket(BlightBuster.instance, this.world, ForgeChunkManager.Type.NORMAL);
+		this.ticket.getModData().setString("id", "MapScanner");
+		this.hasInitializedChunkloading = true;
+	}
+
+	private void loadChunk() {
+		ForgeChunkManager.forceChunk(this.ticket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
+	}
+
+	private void unloadChunk() {
+		ForgeChunkManager.unforceChunk(this.ticket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
+	}
+
+	private boolean isChunkloaded() { return this.world.getChunkProvider().chunkExists(this.chunkX, this.chunkZ); }
+
+	@Override
+	public void ticketsLoaded(List<ForgeChunkManager.Ticket> tickets, World world) {}
+
 }

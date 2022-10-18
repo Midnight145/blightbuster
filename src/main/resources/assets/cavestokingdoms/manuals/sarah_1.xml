@@ -1,0 +1,22 @@
+<book>
+	<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/Sarah-1.png</location>
+	</page>
+	<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/Sarah-2.png</location>
+	</page>
+	<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/Sarah-3.png</location>
+	</page>
+	<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/Sarah-4.png</location>
+	</page>
+	<page type="picture">
+		<text></text>
+		<location>cavestokingdoms:textures/gui/Sarah-5.png</location>
+	</page>
+</book>

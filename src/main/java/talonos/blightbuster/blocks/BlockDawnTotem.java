@@ -15,33 +15,29 @@ import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.tileentity.DawnTotemEntity;
 
-public class BlockDawnTotem extends BBBlock
-{
-	public BlockDawnTotem(Material m)
-	{
+public class BlockDawnTotem extends BBBlock {
+	public BlockDawnTotem(Material m) {
 		super(m);
-		this.setBlockName(BlightBuster.MODID+"_"+ BBStrings.dawnTotemBlockName);
+		this.setBlockName(BlightBuster.MODID + "_" + BBStrings.dawnTotemBlockName);
 		this.setStepSound(soundTypeWood);
 		this.setBlockTextureName("dawnTotem");
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setLightLevel(.875f);
 		GameRegistry.registerBlock(this, this.getUnlocalizedName());
 	}
-	
-    @Override
-    public boolean hasTileEntity(int meta)
-    {
-        return true;
-    }
- 
-    @Override
-    public TileEntity createTileEntity(World world, int meta)
-    {
-        return new DawnTotemEntity();
-    }
-    
-    //Icon stuff:
-    
+
+	@Override
+	public boolean hasTileEntity(int meta) {
+		return true;
+	}
+
+	@Override
+	public TileEntity createTileEntity(World world, int meta) {
+		return new DawnTotemEntity();
+	}
+
+	// Icon stuff:
+
 	/* ICONS */
 	public static final int TOP_BOT = 0;
 	public static final int SIDES = 1;
@@ -51,24 +47,18 @@ public class BlockDawnTotem extends BBBlock
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister) 
-	{
+	public void registerBlockIcons(IIconRegister iconRegister) {
 		icons = new IIcon[2];
-		for (int x = 0; x < 2; x++)
-		{
-			icons[x] = iconRegister.registerIcon(BlightBuster.MODID+":"+BBStrings.dawnTotemBlockName+x);
+		for (int x = 0; x < 2; x++) {
+			icons[x] = iconRegister.registerIcon(BlightBuster.MODID + ":" + BBStrings.dawnTotemBlockName + x);
 		}
 		this.blockIcon = icons[0];
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) 
-	{
-		if (side == ForgeDirection.UP.ordinal()||side==ForgeDirection.DOWN.ordinal())
-		{
-			return icons[1];
-		}
-		return icons[0]; 
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+		if (side == ForgeDirection.UP.ordinal() || side == ForgeDirection.DOWN.ordinal()) { return icons[1]; }
+		return icons[0];
 	}
 }

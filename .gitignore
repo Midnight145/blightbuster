@@ -1,4 +1,4 @@
-node*
+node_info.json
 conf/
 libs*
 build
@@ -15,6 +15,5 @@ out/
 libs/
 deps/
 target/
-CavesToKingdoms/
 gradlew*
 gradle/
