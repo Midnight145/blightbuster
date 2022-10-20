@@ -1,5 +1,10 @@
 package talonos.blightbuster;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -40,6 +45,35 @@ public class BlightBuster {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		
+		// Clean up old TerrainControl configs
+		File check = new File("terraincontrol.dat");
+		if (!check.exists()) {
+			File saves = new File("saves");
+			for (File directory : saves.listFiles() ) {
+				if (directory.isDirectory()) {
+					File tc = new File(new File(directory, "TerrainControl"), "WorldBiomes");
+					try {
+						System.out.println("Deleting " + tc.getCanonicalPath());
+					} catch (IOException e1) {
+						System.out.println("Failed to delete " + tc.getName());
+					}
+					try {
+						FileUtils.deleteDirectory(tc);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.out.println("Failed to delete " + tc.getName());
+					}
+				}
+			}
+			try {
+				check.createNewFile();
+			} catch (IOException e) {
+				System.out.println("Failed to create terraincontrol.dat");
+				e.printStackTrace();
+			}
+		}
+		
 		instance = this;
 		BBBlock.init();
 		BBItems.init();
