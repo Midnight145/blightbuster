@@ -13,6 +13,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -36,10 +37,11 @@ public class ItemBoundRing extends ItemAngelRing implements ArmourUpgrade {
 
 	@Override
 	public void onArmourUpdate(World world, EntityPlayer player, ItemStack thisItemStack) {
+		if (!world.isRemote) { if (!this.sentPacket) { this.sendPacket(player.getDisplayName(), this.wingType); }}
 		if (world.isRemote) {
 			if (this.wingType == -1) { this.wingType = thisItemStack.getItemDamage(); }
 			if (!(flyingPlayers.contains(player.getDisplayName())) && this.shouldFly(player)) {
-				if (!this.sentPacket) { this.sendPacket(player.getDisplayName(), this.wingType); }
+
 				player.capabilities.allowFlying = true;
 				player.sendPlayerAbilities();
 				flyingPlayers.add(player.getDisplayName());
@@ -62,8 +64,8 @@ public class ItemBoundRing extends ItemAngelRing implements ArmourUpgrade {
 	@SubscribeEvent
 	public void canFly(LivingUpdateEvent event) {
 		if (event.entity.worldObj.isRemote) { return; }
-		if (!(event.entityLiving instanceof EntityPlayer)) { return; }
-		EntityPlayer player = (EntityPlayer) event.entityLiving;
+		if (!(event.entityLiving instanceof EntityPlayerMP)) { return; }
+		EntityPlayerMP player = (EntityPlayerMP) event.entityLiving;
 		if (this.shouldFly(player)) {
 			if (!(flyingPlayers.contains(player.getDisplayName()))) { flyingPlayers.add(player.getDisplayName()); }
 			if (!this.sentPacket) { this.sendPacket(player.getDisplayName(), this.wingType); }
