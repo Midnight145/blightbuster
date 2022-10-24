@@ -707,7 +707,6 @@ public class DawnMachineTileEntity extends TileEntity
 		List<int[]> coords = new ArrayList<int[]>();
 		coords.add(this.getDawnMachineChunkCoords());
 		int[] startCoords = this.getDawnMachineChunkCoords();
-		System.out.println(Arrays.toString(startCoords));
 		int startX = startCoords[0], startZ = startCoords[1];
 		int currentLocX = startX, currentLocZ = startZ;
 		int dx = 0, dz = -1;
