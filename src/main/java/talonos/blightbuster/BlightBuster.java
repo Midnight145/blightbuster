@@ -15,6 +15,8 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
+import noppes.npcs.CustomItems;
+import noppes.npcs.blocks.BlockBlood;
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.entities.EntitySilverPotion;
 import talonos.blightbuster.handlers.FoodHandler;
@@ -103,6 +105,9 @@ public class BlightBuster {
 		AddedResearch.initResearch();
 		proxy.registerRenderers();
 		RitualDawnMachine.init();
+		if (CustomItems.blood instanceof BlockBlood) { // take account for config being disabled
+			CustomItems.blood.setHardness(.5f);
+		}
 
 	}
 
