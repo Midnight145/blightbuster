@@ -711,7 +711,7 @@ public class DawnMachineTileEntity extends TileEntity
 		int currentLocX = startX, currentLocZ = startZ;
 		int dx = 0, dz = -1;
 		int found_corners = 0;
-		int[][] corner_array = { { 0, 1 }, { 112, 135 }, { 0, 135 }, { 112, 1 } };
+		int[][] corner_array = { { 0, 0 }, { 112, 135 }, { 0, 135 }, { 112, 0 } };
 		List<int[]> corners = Arrays.asList(corner_array);
 
 		while (found_corners != 4) {
