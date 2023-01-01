@@ -675,17 +675,38 @@ public class DawnMachineTileEntity extends TileEntity
 		this.lastChunkX = this.chunkX;
 		this.lastChunkZ = this.chunkZ;
 
-		boolean haveEnoughForAer = this.haveEnoughFor(DawnMachineResource.AER, this.getAerCost(this.chunkX, this.chunkZ));
-
+		boolean usedOrdo = false;
 		if (this.haveEnoughFor(DawnMachineResource.ORDO)) {
-			this.spend(DawnMachineResource.ORDO);
-			this.getNextScanlineCoords(haveEnoughForAer);
+		    usedOrdo = true;
+		    this.getNextScanlineCoords(true);
 		}
 		else {
-			this.generateRandomCoords(haveEnoughForAer);
+		    this.generateRandomCoords(true);
 		}
+
+		boolean haveEnoughForAer = this.haveEnoughFor(DawnMachineResource.AER, this.getAerCost(this.chunkX, this.chunkZ));
+
+		if(!haveEnoughForAer)
+		{
+		    if (usedOrdo) {
+			this.index--;
+			this.getNextScanlineCoords(false);
+		    }
+		    else {
+			this.generateRandomCoords(false);
+		    }
+		}
+
+		if (this.haveEnoughFor(DawnMachineResource.ORDO)) {
+		    this.spend(DawnMachineResource.ORDO);
+		    this.getNextScanlineCoords(haveEnoughForAer);
+		}
+		else {
+		    this.generateRandomCoords(haveEnoughForAer);
+		}
+		if (usedOrdo) { this.spend(DawnMachineResource.ORDO); }
 		if (haveEnoughForAer) { this.spendAer(); }
-	}
+	    }
 
 	private void getNextScanlineCoords(boolean haveEnoughForAer) {
 		int[] coords;
@@ -796,16 +817,10 @@ public class DawnMachineTileEntity extends TileEntity
 	}
 
 	public int getAerCost(int x, int z) {
-		int cost = (int) Math // sqrt again for balancing
-				.sqrt(this.distanceFormula(this.dawnMachineChunkCoords[0], x, this.dawnMachineChunkCoords[1], z));
-
-//		return 1; // TODO: remove, debugging purposes
-		return cost <= 1 ? 2 : cost;
-	}
-
-	public double distanceFormula(int x, int x1, int z, int z1) {
-		return Math.sqrt(((x - x1) * (x - x1)) + ((z - z1) * (z - z1)));
-	}
+        	// sqrt again for balancing
+        	int cost = (int) Math.sqrt(Math.hypot(this.dawnMachineChunkCoords[0] - x, this.dawnMachineChunkCoords[1] - z));
+        	return Math.max(cost, 8);
+    	}
 
 	private int getDiscount(DawnMachineResource resource, boolean simulate) {
 		int energyCost = resource.getEnergyCost();
@@ -818,7 +833,7 @@ public class DawnMachineTileEntity extends TileEntity
 
 		// just no
 
-		int discountMultiplier = 1 << enoughRF << enoughMana << enoughBlood;
+		int discountMultiplier = 1 << (enoughRF + enoughMana + enoughBlood);
 
 		// this sucks
 		if (!simulate) {
@@ -937,7 +952,7 @@ public class DawnMachineTileEntity extends TileEntity
 		tag.setInteger("AerIndex", this.aerIndex);
 		tag.setInteger("CurrentRF", this.currentRF);
 		tag.setInteger("Blood", this.fluid.amount);
-		tag.setInteger("Mana", this.fluid.amount);
+		tag.setInteger("Mana", this.currentMana);
 	}
 
 	@Override
@@ -1192,13 +1207,14 @@ public class DawnMachineTileEntity extends TileEntity
 	@Override
 	public void recieveMana(int mana) {
 		this.currentMana = Math.max(0, Math.min(MAX_MANA, this.currentMana + mana));
-		this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord, this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord)); // i
-																																			// have
-																																			// no
-																																			// idea
-																																			// what
-																																			// this
-																																			// does
+		// i
+		// have
+		// no
+		// idea
+		// what
+		// this
+		// does
+		this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord, this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord));
 	}
 
 	@Override
