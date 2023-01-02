@@ -43,22 +43,23 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 	private ForgeChunkManager.Ticket ticket = null;
 	private boolean hasInitializedChunkloading = false;
 
-	private RegionMap regionMap = new RegionMap();
+	private final RegionMap regionMap = new RegionMap();
 	private int lastScannedChunk = 0;
-	private byte[][] mapPixels = new byte[7 * blockHeight][5 * blockWidth];
-	private EventBus eventBus = new EventBus();
+	private final byte[][] mapPixels = new byte[7 * blockHeight][5 * blockWidth];
+	private final EventBus eventBus = new EventBus();
+	private boolean forced = false;
 
-	public EventBus bus() {
-		return this.eventBus;
-	}
+	public EventBus bus() { return this.eventBus; }
 
 	public MapScanner() {}
 
 	public void initMap() {
-		for (int y = 0; y < (7 * blockHeight); y++) {
-			for (int x = 0; x < (5 * blockWidth); x++) {
-				int usByte = 0 | this.mapPixels[y][x];
-				if (usByte < 64 || (usByte >= 128 && usByte < 192)) { this.mapPixels[y][x] = (byte) (usByte + 64); }
+		for (int y = 0; y < 7 * blockHeight; y++) {
+			for (int x = 0; x < 5 * blockWidth; x++) {
+				final int usByte = 0 | this.mapPixels[y][x];
+				if (usByte < 64 || usByte >= 128 && usByte < 192) {
+					this.mapPixels[y][x] = (byte) (usByte + 64);
+				}
 			}
 		}
 		this.bus().post(new UpdateMapEvent(0, 0, 5 * blockWidth, 7 * blockHeight));
@@ -83,43 +84,46 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 	}
 
 	private void loadData(ISaveHandler saveHandler) {
-		File worldScannerFile = new File(saveHandler.getWorldDirectory(), "scanner.dat");
-		if (this.loadDataFile(worldScannerFile)) { return; }
+		final File worldScannerFile = new File(saveHandler.getWorldDirectory(), "scanner.dat");
+		if (this.loadDataFile(worldScannerFile)
+				|| BiomeScanner.baselineFile != null && this.loadDataFile(BiomeScanner.baselineFile)) {
+			return;
+		}
 
-		if (BiomeScanner.baselineFile != null && this.loadDataFile(BiomeScanner.baselineFile)) { return; }
-
-		if (!this.loadDataFile(worldScannerFile, true)) { this.fillRandomData(); }
+		if (!this.loadDataFile(worldScannerFile, true)) {
+			this.fillRandomData();
+		}
 	}
 
-	private boolean loadDataFile(File loadFile) {
-		return this.loadDataFile(loadFile, false);
-	}
+	private boolean loadDataFile(File loadFile) { return this.loadDataFile(loadFile, false); }
 
 	private boolean loadDataFile(File loadFile, boolean forceLoad) {
 		if (!loadFile.exists()) { return false; }
 
 		try {
-			NBTTagCompound loadedData = CompressedStreamTools.readCompressed(new FileInputStream(loadFile));
+			final NBTTagCompound loadedData = CompressedStreamTools.readCompressed(new FileInputStream(loadFile));
 			return this.readNBT(loadedData, forceLoad);
-		} catch (Exception ex) {
+		}
+		catch (final Exception ex) {
 			ex.printStackTrace();
 			return false;
 		}
 	}
 
 	private void saveData(File saveFile) {
-		NBTTagCompound compound = new NBTTagCompound();
+		final NBTTagCompound compound = new NBTTagCompound();
 		this.writeNBT(compound);
 		try {
 			CompressedStreamTools.writeCompressed(compound, new FileOutputStream(saveFile));
-		} catch (IOException ex) {
+		}
+		catch (final IOException ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	private void fillRandomData() {
 		this.lastScannedChunk = 0;
-		Random r = new Random();
+		final Random r = new Random();
 		for (int y = 0; y < 7 * blockHeight; y++) {
 			r.nextBytes(this.mapPixels[y]);
 		}
@@ -127,18 +131,14 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 
 	private boolean readNBT(NBTTagCompound tag, boolean forceLoad) {
 		this.lastScannedChunk = tag.getInteger("LastScannedChunk");
-		NBTTagCompound dataTag = tag.getCompoundTag("Data");
+		final NBTTagCompound dataTag = tag.getCompoundTag("Data");
 		for (int y = 0; y < 7 * blockHeight; y++) {
 			this.mapPixels[y] = dataTag.getByteArray(Integer.toString(y));
 		}
 
 		if (this.regionMap.read(tag.getCompoundTag("RegionMap"))) {
-			if (forceLoad) {
-				this.lastScannedChunk = 0;
-			}
-			else {
-				return false;
-			}
+			if (!forceLoad) { return false; }
+			this.lastScannedChunk = 0;
 		}
 
 		return true;
@@ -146,12 +146,12 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 
 	private void writeNBT(NBTTagCompound tag) {
 		tag.setInteger("LastScannedChunk", this.lastScannedChunk);
-		NBTTagCompound dataTag = new NBTTagCompound();
+		final NBTTagCompound dataTag = new NBTTagCompound();
 		tag.setTag("Data", dataTag);
 		for (int y = 0; y < 7 * blockHeight; y++) {
 			dataTag.setByteArray(Integer.toString(y), this.mapPixels[y]);
 		}
-		NBTTagCompound regionMapTag = new NBTTagCompound();
+		final NBTTagCompound regionMapTag = new NBTTagCompound();
 		this.regionMap.write(regionMapTag);
 		tag.setTag("RegionMap", regionMapTag);
 	}
@@ -160,15 +160,17 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 	@SideOnly(Side.CLIENT)
 	public void onRenderTick(TickEvent.RenderTickEvent event) {
 		if (BiomeScanner.disableEverything) { return; }
-		if (Minecraft.getMinecraft().theWorld != null) { BiomeMapColors.updateFlash(Minecraft.getMinecraft().theWorld.getWorldTime()); }
+		if (Minecraft.getMinecraft().theWorld != null) {
+			BiomeMapColors.updateFlash(Minecraft.getMinecraft().theWorld.getWorldTime());
+		}
 	}
 
 	@SubscribeEvent
 	public void onWorldTick(TickEvent.WorldTickEvent event) {
-		if (!this.hasInitializedChunkloading && this.world != null) { this.initalizeChunkloading(); }
-		if (BiomeScanner.disableEverything) { return; }
-
-		if (event.phase == TickEvent.Phase.END) { return; }
+		if (!this.hasInitializedChunkloading && this.world != null) {
+			this.initalizeChunkloading();
+		}
+		if (BiomeScanner.disableEverything || event.phase == TickEvent.Phase.END) { return; }
 
 		if (event.world.provider.dimensionId == 0 && !event.world.isRemote) {
 			if (this.lastScannedChunk == 0) {
@@ -178,25 +180,28 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 			}
 
 			if (this.lastScannedChunk != -1 && !event.world.isRemote) {
-				if (!this.isChunkloaded()) { this.loadChunk(); }
+				if (!this.isChunkloaded()) {
+					this.loadChunk();
+				}
 				this.scanSomeChunks(event.world);
 			}
 		}
 	}
 
 	private void scanSomeChunks(World worldObj) {
-		int chunkX = (this.lastScannedChunk % (mapWidthChunks / 5)) * 5;
-		int chunkZ = (this.lastScannedChunk / (mapWidthChunks / 5)) * 1;
-		BiomeGenBase[] biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(null, chunkX * 16, chunkZ * 16, 80, 16);
-		List<Zone> updatedZones = new LinkedList<Zone>();
+		final int chunkX = this.lastScannedChunk % (mapWidthChunks / 5) * 5;
+		final int chunkZ = this.lastScannedChunk / (mapWidthChunks / 5) * 1;
+		final BiomeGenBase[] biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(null,
+				chunkX * 16, chunkZ * 16, 80, 16);
+		final List<Zone> updatedZones = new LinkedList<Zone>();
 
 		for (int xInChunk = 0; xInChunk < 80; xInChunk += 2) {
-			int x = chunkX * 16 + xInChunk;
+			final int x = chunkX * 16 + xInChunk;
 			for (int zInChunk = 0; zInChunk < 16; zInChunk += 2) {
-				int z = chunkZ * 16 + zInChunk;
-				int biomeIndex = (zInChunk * 80) + xInChunk;
-				if ((biomesForGeneration != null) && (biomesForGeneration[biomeIndex] != null)) {
-					int biomeID = biomesForGeneration[biomeIndex].biomeID;
+				final int z = chunkZ * 16 + zInChunk;
+				final int biomeIndex = zInChunk * 80 + xInChunk;
+				if (biomesForGeneration != null && biomesForGeneration[biomeIndex] != null) {
+					final int biomeID = biomesForGeneration[biomeIndex].biomeID;
 					int color = BiomeMapColors.biomeLookup[biomeID];
 
 					if (this.getTaintAt(x, z, worldObj)) {
@@ -207,10 +212,10 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 						updatedZones.add(this.regionMap.incrementBlock(x, z, true));
 					}
 
-					int newx = (mapWidthChunks * 16) - x - 1;
+					final int newx = mapWidthChunks * 16 - x - 1;
 
-					int xPix = (newx / 2);
-					int yPix = (z / 2);
+					final int xPix = newx / 2;
+					final int yPix = z / 2;
 					this.setColor(xPix, yPix, (byte) color);
 
 				}
@@ -224,11 +229,11 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 
 		this.bus().post(this.regionMap.getUpdateEvent(updatedZones));
 
-		int minX = ((mapWidthChunks * 8) - (chunkX * 8) - 40);
-		int minY = chunkZ * 8;
+		final int minX = mapWidthChunks * 8 - chunkX * 8 - 40;
+		final int minY = chunkZ * 8;
 		this.bus().post(new UpdateMapEvent(minX, minY, 40, 8));
 		this.lastScannedChunk++;
-		if (this.lastScannedChunk >= (22 * 135)) {
+		if (this.lastScannedChunk >= 22 * 135) {
 			this.regionMap.updateData();
 			this.lastScannedChunk = -1;
 			this.unloadChunk();
@@ -237,23 +242,24 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 
 	private boolean getTaintAt(int x, int z, World worldObj) {
 		for (int y = 0; y <= 255; y++) {
-			Block northwest = worldObj.getBlock(x, y, z);
-			int northwestMeta = worldObj.getBlockMetadata(x, y, z);
+			final Block northwest = worldObj.getBlock(x, y, z);
+			final int northwestMeta = worldObj.getBlockMetadata(x, y, z);
 
-			Block northeast = worldObj.getBlock(x + 1, y, z);
-			int northeastMeta = worldObj.getBlockMetadata(x + 1, y, z);
+			final Block northeast = worldObj.getBlock(x + 1, y, z);
+			final int northeastMeta = worldObj.getBlockMetadata(x + 1, y, z);
 
-			Block southwest = worldObj.getBlock(x, y, z + 1);
-			int southwestMeta = worldObj.getBlockMetadata(x, y, z + 1);
+			final Block southwest = worldObj.getBlock(x, y, z + 1);
+			final int southwestMeta = worldObj.getBlockMetadata(x, y, z + 1);
 
-			Block southeast = worldObj.getBlock(x + 1, y, z + 1);
-			int southeastMeta = worldObj.getBlockMetadata(x + 1, y, z + 1);
+			final Block southeast = worldObj.getBlock(x + 1, y, z + 1);
+			final int southeastMeta = worldObj.getBlockMetadata(x + 1, y, z + 1);
 
-			if (northwest == ConfigBlocks.blockTaint && northwestMeta != 2 || (northeast == ConfigBlocks.blockTaint && northeastMeta != 2)
-					|| (southwest == ConfigBlocks.blockTaint && southwestMeta != 2)
-					|| (southeast == ConfigBlocks.blockTaint && southeastMeta != 2) || northwest == ConfigBlocks.blockTaintFibres
-					|| northeast == ConfigBlocks.blockTaintFibres || southwest == ConfigBlocks.blockTaintFibres
-					|| southeast == ConfigBlocks.blockTaintFibres) {
+			if (northwest == ConfigBlocks.blockTaint && northwestMeta != 2
+					|| northeast == ConfigBlocks.blockTaint && northeastMeta != 2
+					|| southwest == ConfigBlocks.blockTaint && southwestMeta != 2
+					|| southeast == ConfigBlocks.blockTaint && southeastMeta != 2
+					|| northwest == ConfigBlocks.blockTaintFibres || northeast == ConfigBlocks.blockTaintFibres
+					|| southwest == ConfigBlocks.blockTaintFibres || southeast == ConfigBlocks.blockTaintFibres) {
 				return true;
 			}
 		}
@@ -262,28 +268,22 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 
 	public boolean isActive() { return this.lastScannedChunk >= 0; }
 
-	public void activate() {
-		this.lastScannedChunk = 0;
-	}
+	public void activate() { this.lastScannedChunk = 0; }
 
-	public void setColor(int x, int y, byte color) {
-		this.mapPixels[y][x] = color;
-	}
+	public void setColor(int x, int y, byte color) { this.mapPixels[y][x] = color; }
 
 	public int getColor(int x, int y) {
-		byte b0 = this.mapPixels[y][x];
-		int b = b0 & 0xFF;
+		final byte b0 = this.mapPixels[y][x];
+		final int b = b0 & 0xFF;
 		return BiomeMapColors.colors[b];
 	}
 
-	public byte getRawColorByte(int x, int y) {
-		return this.mapPixels[y][x];
-	}
+	public byte getRawColorByte(int x, int y) { return this.mapPixels[y][x]; }
 
 	public void updateFromNetwork(int minX, int minY, int width, int height, byte[] data) {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				this.setColor(x + minX, y + minY, data[(y * width) + x]);
+				this.setColor(x + minX, y + minY, data[y * width + x]);
 			}
 		}
 
@@ -291,13 +291,13 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 	}
 
 	public void sendEntireMap(EntityPlayerMP entityPlayer) {
-		int width = 5 * blockWidth;
-		int height = 7 * blockHeight;
+		final int width = 5 * blockWidth;
+		final int height = 7 * blockHeight;
 
-		byte[] data = new byte[width * height];
+		final byte[] data = new byte[width * height];
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				data[(y * width) + x] = MapScanner.instance.getRawColorByte(x, y);
+				data[y * width + x] = MapScanner.instance.getRawColorByte(x, y);
 			}
 		}
 
@@ -311,11 +311,15 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 	}
 
 	private void loadChunk() {
+		this.forced = true;
 		ForgeChunkManager.forceChunk(this.ticket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
 	}
 
 	private void unloadChunk() {
-		ForgeChunkManager.unforceChunk(this.ticket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
+		if (this.forced) {
+			this.forced = false;
+			ForgeChunkManager.unforceChunk(this.ticket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
+		}
 	}
 
 	private boolean isChunkloaded() { return this.world.getChunkProvider().chunkExists(this.chunkX, this.chunkZ); }
