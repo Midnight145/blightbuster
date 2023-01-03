@@ -697,13 +697,6 @@ public class DawnMachineTileEntity extends TileEntity
 		    }
 		}
 
-		if (this.haveEnoughFor(DawnMachineResource.ORDO)) {
-		    this.spend(DawnMachineResource.ORDO);
-		    this.getNextScanlineCoords(haveEnoughForAer);
-		}
-		else {
-		    this.generateRandomCoords(haveEnoughForAer);
-		}
 		if (usedOrdo) { this.spend(DawnMachineResource.ORDO); }
 		if (haveEnoughForAer) { this.spendAer(); }
 	    }
