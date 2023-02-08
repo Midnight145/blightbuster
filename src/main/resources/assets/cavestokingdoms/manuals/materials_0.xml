@@ -486,7 +486,7 @@ Class: Ranged Projectile Launcher</text>
 
 Effects:
 - 500 extra durability
-- NO EFFECT ON MINING LEVEL!
+- Raises to Hard Metal mining level.
 
 Type: Single-use
 Stackable: No</text>
@@ -503,7 +503,7 @@ Stackable: No</text>
 
 Effects:
 - 50% more durability
-- NO EFFECT ON MINING LEVEL!
+- Raises to Soft Metal mining level.
 
 Type: Single-use
 Stackable: No</text>
