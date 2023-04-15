@@ -15,7 +15,6 @@ import noppes.npcs.blocks.BlockBlood;
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.entities.EntitySilverPotion;
 import talonos.blightbuster.handlers.FoodHandler;
-import talonos.blightbuster.handlers.MooshroomSpawnEventHandler;
 import talonos.blightbuster.handlers.PurityFocusEventHandler;
 import talonos.blightbuster.items.BBItems;
 import talonos.blightbuster.network.BlightbusterNetwork;
@@ -29,7 +28,7 @@ public class BlightBuster {
 	
 	public static final String MODID = "blightbuster";
 	public static final String MODNAME = "BlightBuster";
-	public static final String VERSION = "2.0.5";
+	public static final String VERSION = "2.0.6";
 	public static final String DEPS = "before:UndergroundBiomes;after:ThermalFoundation;after:appliedenergistics2;after:Thaumcraft";
 	public static final String COMMONPROXYLOCATION = "talonos." + MODID + ".CommonProxy";
 	public static final String CLIENTPROXYLOCATION = "talonos." + MODID + ".ClientProxy";
@@ -56,7 +55,6 @@ public class BlightBuster {
 		MinecraftForge.EVENT_BUS.register(new PurityFocusEventHandler()); // adds event handler
 		FMLCommonHandler.instance().bus().register(new PurityFocusEventHandler());
 		final FoodHandler foodHandler = new FoodHandler();
-		final MooshroomSpawnEventHandler spawnHandler = new MooshroomSpawnEventHandler();
 		this.dawnMachineChunkLoader = new DawnMachineChunkLoader(); // creates chunk loader
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this.dawnMachineChunkLoader); // adds chunkloader to forge
 		
