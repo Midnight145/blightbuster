@@ -6,7 +6,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,7 +27,7 @@ public class BlightBuster {
 	
 	public static final String MODID = "blightbuster";
 	public static final String MODNAME = "BlightBuster";
-	public static final String VERSION = "2.0.6";
+	public static final String VERSION = "2.0.7";
 	public static final String DEPS = "before:UndergroundBiomes;after:ThermalFoundation;after:appliedenergistics2;after:Thaumcraft";
 	public static final String COMMONPROXYLOCATION = "talonos." + MODID + ".CommonProxy";
 	public static final String CLIENTPROXYLOCATION = "talonos." + MODID + ".ClientProxy";
@@ -57,10 +56,10 @@ public class BlightBuster {
 		final FoodHandler foodHandler = new FoodHandler();
 		this.dawnMachineChunkLoader = new DawnMachineChunkLoader(); // creates chunk loader
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this.dawnMachineChunkLoader); // adds chunkloader to forge
-		
+
 		if (ThEApi.instance() != null) {
 			ThEApi.instance().transportPermissions() // adds Dawn Machine spout entity to Thaumic Energistics
-					.addAspectContainerTileToInjectPermissions(DawnMachineSpoutTileEntity.class, 32);
+					.addAspectContainerTileToInjectPermissions(DawnMachineSpoutTileEntity.class, 320);
 		}
 	}
 	
@@ -74,7 +73,4 @@ public class BlightBuster {
 		}
 		
 	}
-	
-	@Mod.EventHandler
-	public static void serverLoad(FMLServerStartingEvent event) {}
 }
