@@ -68,8 +68,10 @@ import thaumcraft.common.entities.monster.EntityTaintSheep;
 import thaumcraft.common.entities.monster.EntityTaintSporeSwarmer;
 import thaumcraft.common.entities.monster.EntityTaintVillager;
 import thaumcraft.common.tiles.TileNode;
+import vazkii.botania.api.mana.IManaPool;
 import vazkii.botania.api.mana.spark.ISparkAttachable;
 import vazkii.botania.api.mana.spark.ISparkEntity;
+import vazkii.botania.api.mana.spark.SparkHelper;
 
 public class DawnMachineTileEntity extends TileEntity implements IAspectSource, IAspectContainer, IEnergyReceiver,
 		IEnergyStorage, ISparkAttachable, IFluidTank, IFluidHandler {
@@ -123,8 +125,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	public final int MAP_WIDTH_CHUNKS = 111;
 	public final int MAP_HEIGHT_CHUNKS = 136;
 
-	private final int dx = 0, dz = -1;
-
 	private int ticksSinceLastCleanse = 0;
 
 	// Offsets for all adjacent chunks, used to check if still clean
@@ -171,7 +171,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 	// Used for generating coordinates and desert chance placement
 	Random rand;
-	private boolean didClean;
 
 	public DawnMachineTileEntity() { this.rand = new Random(System.currentTimeMillis()); }
 
@@ -205,9 +204,24 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 			chunk.lastTick = chunk.exists;
 		}
 
-		if (!(this.currentMana >= MAX_MANA)) {
-			this.recieveMana(1000);
+		// Code from
+		// https://github.com/VazkiiMods/Botania/blob/1.7.10-final/src/main/java/vazkii/botania/common/block/tile/TileTerraPlate.java
+		final ISparkEntity spark = this.getAttachedSpark();
+		final List<ISparkEntity> sparkEntities = SparkHelper.getSparksAround(this.worldObj, this.xCoord + 0.5,
+				this.yCoord + 0.5, this.zCoord + 0.5);
+		for (final ISparkEntity otherSpark : sparkEntities) {
+			if (spark == otherSpark) {
+				continue;
+			}
+			
+			if (otherSpark.getAttachedTile() != null && otherSpark.getAttachedTile() instanceof IManaPool) {
+				otherSpark.registerTransfer(spark);
+			}
 		}
+		
+		// if (!(this.currentMana >= MAX_MANA)) {
+		// this.recieveMana(1000);
+		// }
 		if (this.dawnMachineBlockCoords[0] != this.xCoord || this.dawnMachineBlockCoords[1] != this.zCoord) {
 			this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
 			this.dawnMachineBlockCoords = new int[] { this.xCoord, this.zCoord };
@@ -307,8 +321,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	}
 
 	protected void executeCleanse(Chunk chunk) {
-		// TODO: THIS WILL CRASH
-		// TODO: Loop needs to be like cleanseMobs
 		final List<Entity>[] entityLists = chunk.entityLists;
 
 		for (final List<Entity> list : entityLists) {
@@ -402,7 +414,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 						if (canHerba && i == herbaTopBlock && block == Blocks.dirt) { return true; }
 						if (canAura && block == ConfigBlocks.blockAiry && meta == 0) {
 							final TileNode node = (TileNode) this.getWorldObj().getTileEntity(coords[0], i, coords[1]);
-							if ((node != null) && (node.getNodeType() == NodeType.TAINTED)) { return true; }
+							if (node != null && node.getNodeType() == NodeType.TAINTED) { return true; }
 						}
 					}
 				}
@@ -834,7 +846,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 	private void spendAer() {
 		final int aerCost = this.getAerCost(this.chunkX, this.chunkZ);
 		this.spend(DawnMachineResource.AER, aerCost);
-		// this.spend(DawnMachineResource.AER, 1); // TODO: remove, debugging purposes
 	}
 
 	public int getAerCost(int x, int z) {
@@ -849,18 +860,12 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		final int manaCost = resource.getManaCost();
 		final int bloodCost = resource.getBloodCost();
 
-		// why
 		final int enoughRF = this.currentRF >= energyCost ? 1 : 0, enoughMana = this.currentMana >= manaCost ? 1 : 0,
 				enoughBlood = this.fluid.amount >= bloodCost ? 1 : 0;
 
-		// just no
-
 		final int discountMultiplier = 1 << enoughRF + enoughMana + enoughBlood;
 
-		// this sucks
 		if (!simulate) {
-			final int oldBlood = this.fluid.amount;
-			final int oldMana = this.currentMana;
 			this.currentRF = enoughRF > 0 ? this.currentRF - energyCost : this.currentRF;
 			this.currentMana = enoughMana > 0 ? this.currentMana - manaCost : this.currentMana;
 			this.fluid.amount = enoughBlood > 0 ? this.fluid.amount - bloodCost : this.fluid.amount;
@@ -1254,7 +1259,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
 	@Override
 	public int getAvailableSpaceForMana() { return MAX_MANA - this.currentMana; }
-
+	
 	// IManaBlock
 
 	@Override
@@ -1322,12 +1327,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 			final double progress = (double) (this.currentRF - FULLRED_RF) / (double) (FULLYELLOW_RF - FULLRED_RF);
 			return this.interpColor(COLOR_YELLOW, COLOR_RED, progress);
 		}
-		else if (this.currentRF > DEAD_RF) {
-			return COLOR_RED;
-		}
-		else {
-			return null;
-		}
+		if (this.currentRF > DEAD_RF) { return COLOR_RED; }
+		return null;
 	}
 
 	protected Vec3 interpColor(Vec3 left, Vec3 right, double progress) {
