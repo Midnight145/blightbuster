@@ -165,7 +165,7 @@ public class DawnMachineSpoutTileEntity extends TileEntity implements IEssentiaT
 
 	@Override
 	public int addEssentia(Aspect aspect, int amount, ForgeDirection face) {
-		return canInputFrom(face) && getEssentiaType(forgeDirection) == aspect ? amount - addToContainer(aspect, amount) : 0;
+		return canInputFrom(face) && getEssentiaType(face) == aspect ? amount - addToContainer(aspect, amount) : 0;
 	}
 
 	@Override
