@@ -19,7 +19,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import talonos.biomescanner.block.BSBlock;
@@ -34,7 +33,7 @@ public class BiomeScanner {
 	
 	public static final String MODID = "biomescanner";
 	public static final String MODNAME = "Biome Scanner";
-	public static final String VERSION = "2.0.7";
+	public static final String VERSION = "2.0.8";
 	public static final String DEPS = "before:UndergroundBiomes;after:ThermalFoundation;after:appliedenergistics2;after:Thaumcraft";
 	public static final String COMMONPROXYLOCATION = "talonos." + MODID + ".CommonProxy";
 	public static final String CLIENTPROXYLOCATION = "talonos." + MODID + ".ClientProxy";
@@ -111,8 +110,7 @@ public class BiomeScanner {
 	public void init(FMLInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(MapScanner.instance);
 		MinecraftForge.EVENT_BUS.register(MapScanner.instance);
-		
-		ForgeChunkManager.setForcedChunkLoadingCallback(this, MapScanner.instance); // adds chunkloader to forge
+
 	}
 	
 	@Mod.EventHandler

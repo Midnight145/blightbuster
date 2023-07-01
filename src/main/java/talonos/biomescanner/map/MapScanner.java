@@ -19,20 +19,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.ISaveHandler;
-import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.event.world.WorldEvent;
 import talonos.biomescanner.BiomeScanner;
 import talonos.biomescanner.map.event.UpdateMapEvent;
-import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.network.packets.UpdateMapPacket;
 import thaumcraft.common.config.ConfigBlocks;
 
-public class MapScanner implements ForgeChunkManager.LoadingCallback {
+public class MapScanner {
 	public static MapScanner instance = new MapScanner();
 	public int chunkX = -62, chunkZ = -64;
 	public World world;
@@ -40,14 +37,10 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 	public static final int blockWidth = 176;
 	public static final int blockHeight = 180;
 
-	private ForgeChunkManager.Ticket ticket = null;
-	private boolean hasInitializedChunkloading = false;
-
 	private final RegionMap regionMap = new RegionMap();
 	private int lastScannedChunk = 0;
 	private final byte[][] mapPixels = new byte[7 * blockHeight][5 * blockWidth];
 	private final EventBus eventBus = new EventBus();
-	private boolean forced = false;
 
 	public EventBus bus() { return this.eventBus; }
 
@@ -167,9 +160,10 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 
 	@SubscribeEvent
 	public void onWorldTick(TickEvent.WorldTickEvent event) {
-		if (!this.hasInitializedChunkloading && this.world != null) {
-			this.initalizeChunkloading();
-		}
+		// if (!this.failedInitializedChunkloading && !this.hasInitializedChunkloading
+		// && this.world != null) {
+		// this.initalizeChunkloading();
+		// }
 		if (BiomeScanner.disableEverything || event.phase == TickEvent.Phase.END) { return; }
 
 		if (event.world.provider.dimensionId == 0 && !event.world.isRemote) {
@@ -180,9 +174,9 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 			}
 
 			if (this.lastScannedChunk != -1 && !event.world.isRemote) {
-				if (!this.isChunkloaded()) {
-					this.loadChunk();
-				}
+				// if (!this.isChunkloaded()) {
+				// this.loadChunk();
+				// }
 				this.scanSomeChunks(event.world);
 			}
 		}
@@ -236,7 +230,7 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 		if (this.lastScannedChunk >= 22 * 135) {
 			this.regionMap.updateData();
 			this.lastScannedChunk = -1;
-			this.unloadChunk();
+			// this.unloadChunk();
 		}
 	}
 
@@ -303,28 +297,4 @@ public class MapScanner implements ForgeChunkManager.LoadingCallback {
 
 		BlightbusterNetwork.sendToPlayer(new UpdateMapPacket(0, 0, width, height, data), entityPlayer);
 	}
-
-	private void initalizeChunkloading() {
-		this.ticket = ForgeChunkManager.requestTicket(BlightBuster.instance, this.world, ForgeChunkManager.Type.NORMAL);
-		this.ticket.getModData().setString("id", "MapScanner");
-		this.hasInitializedChunkloading = true;
-	}
-
-	private void loadChunk() {
-		this.forced = true;
-		ForgeChunkManager.forceChunk(this.ticket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
-	}
-
-	private void unloadChunk() {
-		if (this.forced) {
-			this.forced = false;
-			ForgeChunkManager.unforceChunk(this.ticket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
-		}
-	}
-
-	private boolean isChunkloaded() { return this.world.getChunkProvider().chunkExists(this.chunkX, this.chunkZ); }
-
-	@Override
-	public void ticketsLoaded(List<ForgeChunkManager.Ticket> tickets, World world) {}
-
 }
