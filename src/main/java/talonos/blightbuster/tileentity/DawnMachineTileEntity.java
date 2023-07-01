@@ -767,7 +767,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 		while (found_corners != 4) {
 			final int[] current = { currentLocX, currentLocZ };
 			
-			if (currentLocX >= 0 && currentLocX <= 112 && currentLocZ >= 1 && currentLocZ <= 135) {
+			if (currentLocX >= 0 && currentLocX <= 112 && currentLocZ >= 0 && currentLocZ <= 135) {
 				coords.add(current);
 			}
 			
