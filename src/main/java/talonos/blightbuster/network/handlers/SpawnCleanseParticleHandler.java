@@ -14,7 +14,7 @@ public class SpawnCleanseParticleHandler implements IMessageHandler<SpawnCleanse
 	public IMessage onMessage(SpawnCleanseParticlesPacket message, MessageContext ctx) {
 		double height = BlightBuster.proxy.getBestCleanseSpawnHeight();
 		Random r = new Random();
-
+		
 		int maxBlocks = message.isLargeArea() ? 1 : 0;
 		for (int x = 0; x <= maxBlocks; x++) {
 			for (int z = 0; z <= maxBlocks; z++) {
@@ -27,7 +27,7 @@ public class SpawnCleanseParticleHandler implements IMessageHandler<SpawnCleanse
 				}
 			}
 		}
-
+		
 		return null;
 	}
 }

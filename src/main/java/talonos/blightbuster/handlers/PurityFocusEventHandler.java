@@ -19,7 +19,8 @@ public class PurityFocusEventHandler {
 			EntityLivingBase entity = (EntityLivingBase) event.entity;
 			if ((entity.isPotionActive(Config.potionTaintPoisonID))
 					&& (entity instanceof EntityCow || entity instanceof EntitySheep || entity instanceof EntityChicken
-							|| entity instanceof EntityCreeper || entity instanceof EntityVillager || entity instanceof EntityPig)) {
+							|| entity instanceof EntityCreeper || entity instanceof EntityVillager
+							|| entity instanceof EntityPig)) {
 				entity.capturedDrops.clear();
 			}
 		}

@@ -12,16 +12,16 @@ public class GuiHandlerBadgePrinter implements IGuiHandler {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if (tileEntity instanceof TileEntityIslandScanner)
 			return new ContainerBadgePrinter(player.inventory, (TileEntityIslandScanner) tileEntity);
-
+		
 		return null;
 	}
-
+	
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if (tileEntity instanceof TileEntityIslandScanner)
 			return new GuiBadgePrinter(player.inventory, (TileEntityIslandScanner) tileEntity);
-
+		
 		return null;
 	}
 }

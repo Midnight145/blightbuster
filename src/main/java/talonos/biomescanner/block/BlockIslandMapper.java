@@ -15,7 +15,7 @@ import talonos.biomescanner.map.MapScanner;
 import talonos.biomescanner.tileentity.TileEntityIslandMapper;
 
 public class BlockIslandMapper extends BSBlock implements ITileEntityProvider {
-
+	
 	public BlockIslandMapper() {
 		this.setBlockName(BiomeScanner.MODID + "_" + BSStrings.blockIslandMapperName);
 		this.setBlockUnbreakable();
@@ -26,13 +26,13 @@ public class BlockIslandMapper extends BSBlock implements ITileEntityProvider {
 		this.setLightLevel(1.0f);
 		GameRegistry.registerBlock(this, this.getUnlocalizedName());
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon(BiomeScanner.MODID + ":" + BSStrings.bedrockBrickName);
 	}
-
+	
 	/**
 	 * Is this block (a) opaque and (b) a full 1m cube? This determines whether or
 	 * not to render the shared face of two
@@ -41,12 +41,10 @@ public class BlockIslandMapper extends BSBlock implements ITileEntityProvider {
 	 */
 	@Override
 	public boolean isOpaqueCube() { return false; }
-
+	
 	@Override
-	public TileEntity createNewTileEntity(World world, int iDunno) {
-		return new TileEntityIslandMapper();
-	}
-
+	public TileEntity createNewTileEntity(World world, int iDunno) { return new TileEntityIslandMapper(); }
+	
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int side) {
 		if (world.getTileEntity(x, y, z) != null)

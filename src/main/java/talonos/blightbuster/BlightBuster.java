@@ -56,7 +56,7 @@ public class BlightBuster {
 		final FoodHandler foodHandler = new FoodHandler();
 		this.dawnMachineChunkLoader = new DawnMachineChunkLoader(); // creates chunk loader
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this.dawnMachineChunkLoader); // adds chunkloader to forge
-
+		
 		if (ThEApi.instance() != null) {
 			ThEApi.instance().transportPermissions() // adds Dawn Machine spout entity to Thaumic Energistics
 					.addAspectContainerTileToInjectPermissions(DawnMachineSpoutTileEntity.class, 320);

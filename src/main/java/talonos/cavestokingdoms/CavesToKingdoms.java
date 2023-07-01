@@ -22,11 +22,11 @@ import talonos.cavestokingdoms.proxies.CommonProxy;
 public class CavesToKingdoms {
 	@SidedProxy(clientSide = DEFS.CLIENTPROXYLOCATION, serverSide = DEFS.COMMONPROXYLOCATION)
 	public static CommonProxy proxy;
-
+	
 	public static CavesToKingdoms instance;
-
+	
 	public static ManualInfo manualInfo;
-
+	
 	@Mod.EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
 		CtKBlock.init();
@@ -34,15 +34,15 @@ public class CavesToKingdoms {
 		proxy.registerTileEntities();
 		UBCIntegration.init(event);
 	}
-
+	
 	@Mod.EventHandler
 	public static void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new OrbEventHandler());
 		CavesToKingdomsNetwork.init();
-
+		
 		manualInfo = new ManualInfo();
 	}
-
+	
 	@Mod.EventHandler
 	public static void serverLoad(FMLServerStartingEvent event) {
 		event.registerServerCommand(new ListShaftMaterials());
@@ -50,7 +50,7 @@ public class CavesToKingdoms {
 		event.registerServerCommand(new WipeDiscoveryProgress());
 		event.registerServerCommand(new ScanBlocks());
 	}
-
+	
 	@Mod.EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
 		proxy.registerRenderers();

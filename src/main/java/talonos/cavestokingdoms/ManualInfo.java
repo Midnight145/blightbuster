@@ -16,7 +16,7 @@ import net.minecraft.util.StatCollector;
 import talonos.cavestokingdoms.lib.DEFS;
 
 public class ManualInfo {
-
+	
 	public BookData mats0 = new BookData();
 	public BookData mats1 = new BookData();
 	public BookData mats2 = new BookData();
@@ -32,7 +32,7 @@ public class ManualInfo {
 	public BookData sarah1 = new BookData();
 	public BookData sarah2 = new BookData();
 	public BookData dark = new BookData();
-
+	
 	private Document mats0Doc;
 	private Document mats1Doc;
 	private Document mats2Doc;
@@ -95,10 +95,10 @@ public class ManualInfo {
 		this.initManual(this.sarah2, "basicManual.13", "\u00a7o" + StatCollector.translateToLocal("manual1.tooltip"), d,
 				"tinker:tinkerbook_diary");
 		d = this.darkDoc;
-		this.initManual(this.dark, "basicManual.14", "\u00a7o" + StatCollector.translateToLocal("manual1.tooltip"), d, 
+		this.initManual(this.dark, "basicManual.14", "\u00a7o" + StatCollector.translateToLocal("manual1.tooltip"), d,
 				"tinker:tinkerbook_diary");
 	}
-
+	
 	public BookData initManual(BookData data, String unlocName, String toolTip, Document xmlDoc, String itemImage) {
 		// proxy.readManuals();
 		data.unlocalizedName = unlocName;
@@ -109,7 +109,7 @@ public class ManualInfo {
 		BookDataStore.addBook(data);
 		return data;
 	}
-
+	
 	public void readManuals() {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		this.mats0Doc = this.readManual("/assets/cavestokingdoms/manuals/materials_0.xml", dbFactory);
@@ -126,19 +126,20 @@ public class ManualInfo {
 		this.sarah2Doc = this.readManual("/assets/cavestokingdoms/manuals/sarah_2.xml", dbFactory);
 		this.darkDoc = this.readManual("/assets/cavestokingdoms/manuals/dark.xml", dbFactory);
 	}
-
+	
 	Document readManual(String location, DocumentBuilderFactory dbFactory) {
 		try {
 			InputStream stream = CavesToKingdoms.class.getResourceAsStream(location);
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(stream);
 			doc.getDocumentElement().normalize();
-
+			
 			return doc;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-
+	
 }

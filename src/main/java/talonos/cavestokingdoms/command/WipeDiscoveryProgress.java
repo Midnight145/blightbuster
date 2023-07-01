@@ -12,12 +12,10 @@ import talonos.cavestokingdoms.network.packets.WipeDiscoveryProgressPacket;
 public class WipeDiscoveryProgress extends CommandBase {
 	@Override
 	public String getCommandName() { return "oreDiscoveryWipe"; }
-
+	
 	@Override
-	public String getCommandUsage(ICommandSender p_71518_1_) {
-		return "/oreDiscoveryWipe";
-	}
-
+	public String getCommandUsage(ICommandSender p_71518_1_) { return "/oreDiscoveryWipe"; }
+	
 	@Override
 	public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_) {
 		if (p_71515_1_ instanceof EntityPlayer) {

@@ -23,7 +23,7 @@ public class SpiritStoneBlock extends CtKBlock {
 		GameRegistry.registerBlock(this, this.getUnlocalizedName());
 		this.setLightLevel(0.75F);
 	}
-
+	
 	/**
 	 * Overrides the registerBlockIcon method.
 	 * This method handles all the textures.
@@ -37,9 +37,10 @@ public class SpiritStoneBlock extends CtKBlock {
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		this.blockIcon = iconRegister.registerIcon(DEFS.MODID + ":" + DEFS.SpiritStoneBlockName);
 	}
-
+	
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int huh, float i, float dont, float even) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int huh, float i, float dont,
+			float even) {
 		if (!world.isRemote) {
 			if (PlayerOrbsGotten.get(player).hasOrb()) { return false; }
 			world.setBlock(x, y, z, Blocks.obsidian);

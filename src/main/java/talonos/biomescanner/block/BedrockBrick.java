@@ -9,7 +9,7 @@ import talonos.biomescanner.BSStrings;
 import talonos.biomescanner.BiomeScanner;
 
 public class BedrockBrick extends BSBlock {
-
+	
 	public BedrockBrick() {
 		this.setBlockName(BiomeScanner.MODID + "_" + BSStrings.bedrockBrickName);
 		this.setBlockUnbreakable();
@@ -19,7 +19,7 @@ public class BedrockBrick extends BSBlock {
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		GameRegistry.registerBlock(this, this.getUnlocalizedName());
 	}
-
+	
 	/**
 	 * Overrides the registerBlockIcon method.
 	 * This method handles all the textures.

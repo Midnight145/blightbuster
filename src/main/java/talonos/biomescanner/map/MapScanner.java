@@ -36,16 +36,16 @@ public class MapScanner {
 	public static final int mapWidthChunks = 110;
 	public static final int blockWidth = 176;
 	public static final int blockHeight = 180;
-
+	
 	private final RegionMap regionMap = new RegionMap();
 	private int lastScannedChunk = 0;
 	private final byte[][] mapPixels = new byte[7 * blockHeight][5 * blockWidth];
 	private final EventBus eventBus = new EventBus();
-
+	
 	public EventBus bus() { return this.eventBus; }
-
+	
 	public MapScanner() {}
-
+	
 	public void initMap() {
 		for (int y = 0; y < 7 * blockHeight; y++) {
 			for (int x = 0; x < 5 * blockWidth; x++) {
@@ -57,9 +57,9 @@ public class MapScanner {
 		}
 		this.bus().post(new UpdateMapEvent(0, 0, 5 * blockWidth, 7 * blockHeight));
 	}
-
+	
 	public RegionMap getRegionMap() { return this.regionMap; }
-
+	
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event) {
 		this.world = event.world;
@@ -68,31 +68,31 @@ public class MapScanner {
 			this.bus().post(this.regionMap.getUpdateEvent(Arrays.asList(Zone.values())));
 		}
 	}
-
+	
 	@SubscribeEvent
 	public void onWorldSave(WorldEvent.Save event) {
 		if (event.world.provider.dimensionId == 0 && !event.world.isRemote) {
 			this.saveData(new File(event.world.getSaveHandler().getWorldDirectory(), "scanner.dat"));
 		}
 	}
-
+	
 	private void loadData(ISaveHandler saveHandler) {
 		final File worldScannerFile = new File(saveHandler.getWorldDirectory(), "scanner.dat");
 		if (this.loadDataFile(worldScannerFile)
 				|| BiomeScanner.baselineFile != null && this.loadDataFile(BiomeScanner.baselineFile)) {
 			return;
 		}
-
+		
 		if (!this.loadDataFile(worldScannerFile, true)) {
 			this.fillRandomData();
 		}
 	}
-
+	
 	private boolean loadDataFile(File loadFile) { return this.loadDataFile(loadFile, false); }
-
+	
 	private boolean loadDataFile(File loadFile, boolean forceLoad) {
 		if (!loadFile.exists()) { return false; }
-
+		
 		try {
 			final NBTTagCompound loadedData = CompressedStreamTools.readCompressed(new FileInputStream(loadFile));
 			return this.readNBT(loadedData, forceLoad);
@@ -102,7 +102,7 @@ public class MapScanner {
 			return false;
 		}
 	}
-
+	
 	private void saveData(File saveFile) {
 		final NBTTagCompound compound = new NBTTagCompound();
 		this.writeNBT(compound);
@@ -113,7 +113,7 @@ public class MapScanner {
 			ex.printStackTrace();
 		}
 	}
-
+	
 	private void fillRandomData() {
 		this.lastScannedChunk = 0;
 		final Random r = new Random();
@@ -121,22 +121,22 @@ public class MapScanner {
 			r.nextBytes(this.mapPixels[y]);
 		}
 	}
-
+	
 	private boolean readNBT(NBTTagCompound tag, boolean forceLoad) {
 		this.lastScannedChunk = tag.getInteger("LastScannedChunk");
 		final NBTTagCompound dataTag = tag.getCompoundTag("Data");
 		for (int y = 0; y < 7 * blockHeight; y++) {
 			this.mapPixels[y] = dataTag.getByteArray(Integer.toString(y));
 		}
-
+		
 		if (this.regionMap.read(tag.getCompoundTag("RegionMap"))) {
 			if (!forceLoad) { return false; }
 			this.lastScannedChunk = 0;
 		}
-
+		
 		return true;
 	}
-
+	
 	private void writeNBT(NBTTagCompound tag) {
 		tag.setInteger("LastScannedChunk", this.lastScannedChunk);
 		final NBTTagCompound dataTag = new NBTTagCompound();
@@ -148,7 +148,7 @@ public class MapScanner {
 		this.regionMap.write(regionMapTag);
 		tag.setTag("RegionMap", regionMapTag);
 	}
-
+	
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onRenderTick(TickEvent.RenderTickEvent event) {
@@ -157,7 +157,7 @@ public class MapScanner {
 			BiomeMapColors.updateFlash(Minecraft.getMinecraft().theWorld.getWorldTime());
 		}
 	}
-
+	
 	@SubscribeEvent
 	public void onWorldTick(TickEvent.WorldTickEvent event) {
 		// if (!this.failedInitializedChunkloading && !this.hasInitializedChunkloading
@@ -165,14 +165,14 @@ public class MapScanner {
 		// this.initalizeChunkloading();
 		// }
 		if (BiomeScanner.disableEverything || event.phase == TickEvent.Phase.END) { return; }
-
+		
 		if (event.world.provider.dimensionId == 0 && !event.world.isRemote) {
 			if (this.lastScannedChunk == 0) {
 				this.regionMap.wipeData();
 				this.bus().post(this.regionMap.getUpdateEvent(Arrays.asList(Zone.values())));
 				this.initMap();
 			}
-
+			
 			if (this.lastScannedChunk != -1 && !event.world.isRemote) {
 				// if (!this.isChunkloaded()) {
 				// this.loadChunk();
@@ -181,14 +181,14 @@ public class MapScanner {
 			}
 		}
 	}
-
+	
 	private void scanSomeChunks(World worldObj) {
 		final int chunkX = this.lastScannedChunk % (mapWidthChunks / 5) * 5;
 		final int chunkZ = this.lastScannedChunk / (mapWidthChunks / 5) * 1;
 		final BiomeGenBase[] biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(null,
 				chunkX * 16, chunkZ * 16, 80, 16);
 		final List<Zone> updatedZones = new LinkedList<Zone>();
-
+		
 		for (int xInChunk = 0; xInChunk < 80; xInChunk += 2) {
 			final int x = chunkX * 16 + xInChunk;
 			for (int zInChunk = 0; zInChunk < 16; zInChunk += 2) {
@@ -197,7 +197,7 @@ public class MapScanner {
 				if (biomesForGeneration != null && biomesForGeneration[biomeIndex] != null) {
 					final int biomeID = biomesForGeneration[biomeIndex].biomeID;
 					int color = BiomeMapColors.biomeLookup[biomeID];
-
+					
 					if (this.getTaintAt(x, z, worldObj)) {
 						color += 128;
 						updatedZones.add(this.regionMap.incrementBlock(x, z, false));
@@ -205,13 +205,13 @@ public class MapScanner {
 					else {
 						updatedZones.add(this.regionMap.incrementBlock(x, z, true));
 					}
-
+					
 					final int newx = mapWidthChunks * 16 - x - 1;
-
+					
 					final int xPix = newx / 2;
 					final int yPix = z / 2;
 					this.setColor(xPix, yPix, (byte) color);
-
+					
 				}
 				else {
 					System.out.println("Error!");
@@ -220,9 +220,9 @@ public class MapScanner {
 				}
 			}
 		}
-
+		
 		this.bus().post(this.regionMap.getUpdateEvent(updatedZones));
-
+		
 		final int minX = mapWidthChunks * 8 - chunkX * 8 - 40;
 		final int minY = chunkZ * 8;
 		this.bus().post(new UpdateMapEvent(minX, minY, 40, 8));
@@ -233,21 +233,21 @@ public class MapScanner {
 			// this.unloadChunk();
 		}
 	}
-
+	
 	private boolean getTaintAt(int x, int z, World worldObj) {
 		for (int y = 0; y <= 255; y++) {
 			final Block northwest = worldObj.getBlock(x, y, z);
 			final int northwestMeta = worldObj.getBlockMetadata(x, y, z);
-
+			
 			final Block northeast = worldObj.getBlock(x + 1, y, z);
 			final int northeastMeta = worldObj.getBlockMetadata(x + 1, y, z);
-
+			
 			final Block southwest = worldObj.getBlock(x, y, z + 1);
 			final int southwestMeta = worldObj.getBlockMetadata(x, y, z + 1);
-
+			
 			final Block southeast = worldObj.getBlock(x + 1, y, z + 1);
 			final int southeastMeta = worldObj.getBlockMetadata(x + 1, y, z + 1);
-
+			
 			if (northwest == ConfigBlocks.blockTaint && northwestMeta != 2
 					|| northeast == ConfigBlocks.blockTaint && northeastMeta != 2
 					|| southwest == ConfigBlocks.blockTaint && southwestMeta != 2
@@ -259,42 +259,42 @@ public class MapScanner {
 		}
 		return false;
 	}
-
+	
 	public boolean isActive() { return this.lastScannedChunk >= 0; }
-
+	
 	public void activate() { this.lastScannedChunk = 0; }
-
+	
 	public void setColor(int x, int y, byte color) { this.mapPixels[y][x] = color; }
-
+	
 	public int getColor(int x, int y) {
 		final byte b0 = this.mapPixels[y][x];
 		final int b = b0 & 0xFF;
 		return BiomeMapColors.colors[b];
 	}
-
+	
 	public byte getRawColorByte(int x, int y) { return this.mapPixels[y][x]; }
-
+	
 	public void updateFromNetwork(int minX, int minY, int width, int height, byte[] data) {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				this.setColor(x + minX, y + minY, data[y * width + x]);
 			}
 		}
-
+		
 		this.bus().post(new UpdateMapEvent(minX, minY, width, height));
 	}
-
+	
 	public void sendEntireMap(EntityPlayerMP entityPlayer) {
 		final int width = 5 * blockWidth;
 		final int height = 7 * blockHeight;
-
+		
 		final byte[] data = new byte[width * height];
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				data[y * width + x] = MapScanner.instance.getRawColorByte(x, y);
 			}
 		}
-
+		
 		BlightbusterNetwork.sendToPlayer(new UpdateMapPacket(0, 0, width, height, data), entityPlayer);
 	}
 }

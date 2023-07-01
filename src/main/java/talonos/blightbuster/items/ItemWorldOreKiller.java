@@ -22,28 +22,30 @@ import thaumcraft.common.config.ConfigBlocks;
 
 public class ItemWorldOreKiller extends Item {
 	static private Set<Block> listOfOres;
-
+	
 	public ItemWorldOreKiller() {
 		setUnlocalizedName(BlightBuster.MODID + "_" + BBStrings.oreKillerName);
 		GameRegistry.registerItem(this, BBStrings.oreKillerName);
 		setCreativeTab(CreativeTabs.tabMaterials);
 		setTextureName(BlightBuster.MODID + ":" + BBStrings.oreKillerName);
 	}
-
+	
 	UBStrataColumnProvider p;
-
+	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World theWorld, EntityPlayer thePlayer) {
-
+		
 		if (!theWorld.isRemote) {
 			int x = ((int) thePlayer.posX / 16) * 16;
 			int z = ((int) thePlayer.posZ / 16) * 16;
-
+			
 			thePlayer.addChatMessage(new ChatComponentText("Killing ores in world based on coords: "));
 			thePlayer.addChatMessage(new ChatComponentText("  xSection: " + x + ", zSection: " + z));
-
-			if (p == null) { p = UBAPIHook.ubAPIHook.dimensionalStrataColumnProvider.ubStrataColumnProvider(0); }
-
+			
+			if (p == null) {
+				p = UBAPIHook.ubAPIHook.dimensionalStrataColumnProvider.ubStrataColumnProvider(0);
+			}
+			
 			if (listOfOres == null) {
 				listOfOres = new HashSet<Block>();
 				listOfOres.add(GameRegistry.findBlock("minecraft", "gold_ore"));
@@ -103,9 +105,12 @@ public class ItemWorldOreKiller extends Item {
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "igneous_metal.block.fantasy.ore"));
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "metamorphic_metal.block.fantasy.ore"));
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "sedimentary_metal.block.fantasy.ore"));
-				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "igneous_appliedenergistics2.OreQuartzCharged.7"));
-				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "metamorphic_appliedenergistics2.OreQuartzCharged.7"));
-				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "sedimentary_appliedenergistics2.OreQuartzCharged.7"));
+				listOfOres.add(
+						GameRegistry.findBlock("UndergroundBiomes", "igneous_appliedenergistics2.OreQuartzCharged.7"));
+				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes",
+						"metamorphic_appliedenergistics2.OreQuartzCharged.7"));
+				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes",
+						"sedimentary_appliedenergistics2.OreQuartzCharged.7"));
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "igneous_metal.block.fantasy.ore.2"));
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "metamorphic_metal.block.fantasy.ore.2"));
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "sedimentary_metal.block.fantasy.ore.2"));
@@ -176,8 +181,10 @@ public class ItemWorldOreKiller extends Item {
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "metamorphic_metal.block.utility.ore.4"));
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "sedimentary_metal.block.utility.ore.4"));
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "igneous_appliedenergistics2.OreQuartz.7"));
-				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "metamorphic_appliedenergistics2.OreQuartz.7"));
-				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "sedimentary_appliedenergistics2.OreQuartz.7"));
+				listOfOres.add(
+						GameRegistry.findBlock("UndergroundBiomes", "metamorphic_appliedenergistics2.OreQuartz.7"));
+				listOfOres.add(
+						GameRegistry.findBlock("UndergroundBiomes", "sedimentary_appliedenergistics2.OreQuartz.7"));
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "igneous_blockCustomOre.4"));
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "metamorphic_blockCustomOre.4"));
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "sedimentary_blockCustomOre.4"));
@@ -201,7 +208,7 @@ public class ItemWorldOreKiller extends Item {
 				listOfOres.add(GameRegistry.findBlock("UndergroundBiomes", "sedimentary_metal.block.base.ore"));
 				listOfOres.add(GameRegistry.findBlock("TConstruct", "BattleSignBlock"));
 			}
-
+			
 			for (int xLoc = x - 64; xLoc < x + 80; xLoc++) {
 				for (int zLoc = z - 64; zLoc < z + 80; zLoc++) {
 					UBStrataColumn s = p.strataColumn(xLoc, zLoc);
@@ -230,15 +237,15 @@ public class ItemWorldOreKiller extends Item {
 					}
 				}
 			}
-
+			
 			thePlayer.addChatMessage(new ChatComponentText("  ores should be dead."));
-
+			
 			theWorld.getChunkProvider().unloadQueuedChunks();
-
+			
 			IntCache.resetIntCache();
-
+			
 		}
-
+		
 		return itemStack;
 	}
 }

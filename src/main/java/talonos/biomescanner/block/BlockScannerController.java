@@ -25,7 +25,7 @@ public class BlockScannerController extends BSBlock implements ITileEntityProvid
 	private IIcon top;
 	private IIcon bottom;
 	private IIcon sides;
-
+	
 	public BlockScannerController() {
 		this.setBlockName(BiomeScanner.MODID + "_" + BSStrings.blockScannerControllerName);
 		this.setBlockUnbreakable();
@@ -36,7 +36,7 @@ public class BlockScannerController extends BSBlock implements ITileEntityProvid
 		this.setLightLevel(0.16f);
 		GameRegistry.registerBlock(this, this.getUnlocalizedName());
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
@@ -47,7 +47,7 @@ public class BlockScannerController extends BSBlock implements ITileEntityProvid
 		this.top = par1IconRegister.registerIcon("biomescanner:controller-top");
 		this.blockIcon = this.top;
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta) {
@@ -67,7 +67,7 @@ public class BlockScannerController extends BSBlock implements ITileEntityProvid
 			return this.sides;
 		}
 	}
-
+	
 	/**
 	 * Is this block (a) opaque and (b) a full 1m cube? This determines whether or
 	 * not to render the shared face of two
@@ -76,36 +76,36 @@ public class BlockScannerController extends BSBlock implements ITileEntityProvid
 	 */
 	@Override
 	public boolean isOpaqueCube() { return false; }
-
+	
 	@Override
-	public TileEntity createNewTileEntity(World world, int iDunno) {
-		return new TileEntityIslandScanner();
-	}
-
+	public TileEntity createNewTileEntity(World world, int iDunno) { return new TileEntityIslandScanner(); }
+	
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ,
+			int metadata) {
 		MapScanner.instance.chunkX = Math.floorDiv(x, 16);
 		MapScanner.instance.chunkZ = Math.floorDiv(z, 16);
 		MapScanner.instance.world = world;
 		for (int iterX = 0; iterX <= 4; iterX++) {
 			for (int iterY = 0; iterY <= 6; iterY++) {
 				TileEntity hopefullyAMap = world.getTileEntity(x + iterX - 2, y + iterY, z + 7);
-
+				
 				if (hopefullyAMap instanceof TileEntityIslandMapper) {
 					TileEntityIslandMapper map = (TileEntityIslandMapper) hopefullyAMap;
-
+					
 					map.setMapCoords(iterX * MapScanner.blockWidth, (5 - iterY) * MapScanner.blockHeight);
-
+					
 					world.markBlockForUpdate(map.xCoord, map.yCoord, map.zCoord);
 				}
 			}
 		}
-
+		
 		return metadata;
 	}
-
+	
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
+			float hitY, float hitZ) {
 		if (ForgeDirection.VALID_DIRECTIONS[side] == ForgeDirection.UP) {
 			if (!world.isRemote) {
 				if (MapScanner.instance.isActive()) {
@@ -114,7 +114,9 @@ public class BlockScannerController extends BSBlock implements ITileEntityProvid
 				else {
 					MapScanner.instance.activate();
 					TileEntityIslandScanner scanner = ((TileEntityIslandScanner) world.getTileEntity(x, y, z));
-					if (scanner != null) { scanner.scanOrdered(); }
+					if (scanner != null) {
+						scanner.scanOrdered();
+					}
 				}
 			}
 			return true;
@@ -125,12 +127,14 @@ public class BlockScannerController extends BSBlock implements ITileEntityProvid
 				return true;
 			}
 		}
-
+		
 		return false;
 	}
-
+	
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int side) {
-		if (world.getTileEntity(x, y, z) != null) { ((TileEntityIslandScanner) world.getTileEntity(x, y, z)).unregister(); }
+		if (world.getTileEntity(x, y, z) != null) {
+			((TileEntityIslandScanner) world.getTileEntity(x, y, z)).unregister();
+		}
 	}
 }

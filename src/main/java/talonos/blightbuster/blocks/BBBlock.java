@@ -15,19 +15,15 @@ public class BBBlock extends Block {
 	/**
 	 * Constructor for when no material is passed on. Default material: rock
 	 */
-	public BBBlock() {
-		super(Material.rock);
-	}
-
+	public BBBlock() { super(Material.rock); }
+	
 	/**
 	 * Constructor for defined material.
 	 *
 	 * @param material
 	 */
-	public BBBlock(Material material) {
-		super(material);
-	}
-
+	public BBBlock(Material material) { super(material); }
+	
 	public static Block dawnTotem;
 	public static BlockDawnMachineInput dawnMachineInput;
 	public static Block dawnMachineBuffer;
@@ -36,10 +32,10 @@ public class BBBlock extends Block {
 	public static Multiblock dawnMachineMultiblock;
 	public static Block offering;
 	public static Block dawnCharger;
-
+	
 	public static void init() {
 		dawnMachineMultiblock = new DawnMachineMultiblock();
-
+		
 		dawnTotem = new BlockDawnTotem(Material.wood);
 		dawnMachineInput = new BlockDawnMachineInput();
 		dawnMachineBuffer = new BlockDawnMachineDummy();
@@ -47,8 +43,8 @@ public class BBBlock extends Block {
 		cyberTotem = new BlockCyberTotem();
 		offering = new BlockOffering();
 		dawnCharger = new BlockDawnCharger();
-
+		
 		dawnMachineMultiblock.init();
 	}
-
+	
 }

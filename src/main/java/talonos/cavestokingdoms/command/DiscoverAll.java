@@ -12,12 +12,10 @@ import talonos.cavestokingdoms.network.packets.AddAllDiscoveriesPacket;
 public class DiscoverAll extends CommandBase {
 	@Override
 	public String getCommandName() { return "oreDiscoveryAll"; }
-
+	
 	@Override
-	public String getCommandUsage(ICommandSender p_71518_1_) {
-		return "/oreDiscoveryAll";
-	}
-
+	public String getCommandUsage(ICommandSender p_71518_1_) { return "/oreDiscoveryAll"; }
+	
 	@Override
 	public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_) {
 		if (p_71515_1_ instanceof EntityPlayer) {

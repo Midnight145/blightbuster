@@ -11,6 +11,6 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityIslandScanner.class, "islandScanner");
 		GameRegistry.registerTileEntity(TileEntityGauge.class, "scannerGauge");
 	}
-
+	
 	public void registerRenderers() {}
 }

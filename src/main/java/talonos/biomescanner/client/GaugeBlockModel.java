@@ -17,14 +17,14 @@ public class GaugeBlockModel {
 	private PositionTextureVertex[] vertexPositions;
 	/** An array of 6 TexturedQuads, one for each face of a cube */
 	private TexturedQuad[] quadList;
-
+	
 	private int displayList;
 	private boolean builtDisplayList = false;
-
+	
 	public GaugeBlockModel() {
 		this.vertexPositions = new PositionTextureVertex[8];
 		this.quadList = new TexturedQuad[6];
-
+		
 		PositionTextureVertex positiontexturevertex7 = new PositionTextureVertex(0, 0, 0, 8.0F, 8.0F);
 		PositionTextureVertex positiontexturevertex = new PositionTextureVertex(1, 0, 0, 8.0F, 0.0F);
 		PositionTextureVertex positiontexturevertex1 = new PositionTextureVertex(1, 1, 0, 0.0F, 0.0F);
@@ -43,31 +43,31 @@ public class GaugeBlockModel {
 		this.vertexPositions[7] = positiontexturevertex6;
 		this.quadList[0] = new TexturedQuad(new PositionTextureVertex[] { positiontexturevertex4, positiontexturevertex,
 				positiontexturevertex1, positiontexturevertex5 }, 16, 16, 0, 0, 16, 16);
-		this.quadList[1] = new TexturedQuad(new PositionTextureVertex[] { positiontexturevertex7, positiontexturevertex3,
-				positiontexturevertex6, positiontexturevertex2 }, 16, 16, 0, 0, 16, 16);
-		this.quadList[2] = new TexturedQuad(new PositionTextureVertex[] { positiontexturevertex4, positiontexturevertex3,
-				positiontexturevertex7, positiontexturevertex }, 16, 16, 0, 0, 16, 16);
-		this.quadList[3] = new TexturedQuad(new PositionTextureVertex[] { positiontexturevertex1, positiontexturevertex2,
-				positiontexturevertex6, positiontexturevertex5 }, 16, 16, 0, 0, 16, 16);
+		this.quadList[1] = new TexturedQuad(new PositionTextureVertex[] { positiontexturevertex7,
+				positiontexturevertex3, positiontexturevertex6, positiontexturevertex2 }, 16, 16, 0, 0, 16, 16);
+		this.quadList[2] = new TexturedQuad(new PositionTextureVertex[] { positiontexturevertex4,
+				positiontexturevertex3, positiontexturevertex7, positiontexturevertex }, 16, 16, 0, 0, 16, 16);
+		this.quadList[3] = new TexturedQuad(new PositionTextureVertex[] { positiontexturevertex1,
+				positiontexturevertex2, positiontexturevertex6, positiontexturevertex5 }, 16, 16, 0, 0, 16, 16);
 		this.quadList[4] = new TexturedQuad(new PositionTextureVertex[] { positiontexturevertex, positiontexturevertex7,
 				positiontexturevertex2, positiontexturevertex1 }, 16, 16, 0, 0, 16, 16);
-		this.quadList[5] = new TexturedQuad(new PositionTextureVertex[] { positiontexturevertex3, positiontexturevertex4,
-				positiontexturevertex5, positiontexturevertex6 }, 16, 16, 0, 0, 16, 16);
-
+		this.quadList[5] = new TexturedQuad(new PositionTextureVertex[] { positiontexturevertex3,
+				positiontexturevertex4, positiontexturevertex5, positiontexturevertex6 }, 16, 16, 0, 0, 16, 16);
+		
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	private void buildDisplayList() {
 		this.displayList = GLAllocation.generateDisplayLists(1);
 		GL11.glNewList(this.displayList, GL11.GL_COMPILE);
-
+		
 		for (int i = 0; i < this.quadList.length; ++i) {
 			this.quadList[i].draw(Tessellator.instance, 1.0f);
 		}
-
+		
 		GL11.glEndList();
 	}
-
+	
 	/**
 	 * Draw the six sided box defined by this ModelBox
 	 */

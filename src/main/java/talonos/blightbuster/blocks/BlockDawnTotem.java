@@ -25,26 +25,22 @@ public class BlockDawnTotem extends BBBlock {
 		this.setLightLevel(.875f);
 		GameRegistry.registerBlock(this, this.getUnlocalizedName());
 	}
-
+	
 	@Override
-	public boolean hasTileEntity(int meta) {
-		return true;
-	}
-
+	public boolean hasTileEntity(int meta) { return true; }
+	
 	@Override
-	public TileEntity createTileEntity(World world, int meta) {
-		return new DawnTotemEntity();
-	}
-
+	public TileEntity createTileEntity(World world, int meta) { return new DawnTotemEntity(); }
+	
 	// Icon stuff:
-
+	
 	/* ICONS */
 	public static final int TOP_BOT = 0;
 	public static final int SIDES = 1;
-
+	
 	@SideOnly(Side.CLIENT)
 	private static IIcon[] icons;
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
@@ -54,7 +50,7 @@ public class BlockDawnTotem extends BBBlock {
 		}
 		this.blockIcon = icons[0];
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {

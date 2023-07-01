@@ -28,18 +28,18 @@ import talonos.cavestokingdoms.network.packets.AddDiscoveryPacket;
 
 public class OreDiscoveryRegistry {
 	private static OreDiscoveryRegistry instance = null;
-
+	
 	public static OreDiscoveryRegistry getInstance() {
 		if (instance == null)
 			instance = new OreDiscoveryRegistry();
 		return instance;
 	}
-
+	
 	private List<IDiscoveryEntry> discoverData = new ArrayList<IDiscoveryEntry>();
-
+	
 	public OreDiscoveryRegistry() {
 		// Handle registry code.
-
+		
 		// Register all metals, first by ingot, then nugget, then block, then ore.
 		// This will lead to some impossible combinations (Like void metal blocks or
 		// damascus steel ore) but it should still work because of the OreDictionary
@@ -47,7 +47,7 @@ public class OreDiscoveryRegistry {
 		registerAllMetalsWith("block");
 		registerAllMetalsWith("nugget");
 		registerAllMetalsWith("ore");
-
+		
 		// Register some gems and stuff
 		registerDiscovery("crystalCertusQuartz", "discover.cavestokingdoms.certusquartz");
 		registerDiscovery("crystalNetherQuartz", "discover.cavestokingdoms.netherquartz");
@@ -57,14 +57,15 @@ public class OreDiscoveryRegistry {
 		registerDiscovery("gravel", "discover.cavestokingdoms.gravel");
 		registerDiscovery("netherrack", "discover.cavestokingdoms.netherrack");
 		registerDiscovery("obsidian", "discover.cavestokingdoms.obsidian");
-
+		
 		// Register Wood. Finally
 		registerDiscovery("logWood", "discover.cavestokingdoms.wood");
 		registerDiscovery("plankWood", "discover.cavestokingdoms.wood");
 		registerDiscovery("woodLog", "discover.cavestokingdoms.wood");
-
+		
 		// Some things lack oredict entries.
-		registerDiscovery(GameRegistry.findItem("ExtraUtilities", "bedrockiumIngot"), "discover.cavestokingdoms.bedrockium");
+		registerDiscovery(GameRegistry.findItem("ExtraUtilities", "bedrockiumIngot"),
+				"discover.cavestokingdoms.bedrockium");
 		registerDiscovery(GameRegistry.findItem("Natura", "bloodwood"), 0, "discover.cavestokingdoms.bloodwood");
 		registerDiscovery(GameRegistry.findItem("Natura", "planks"), 4, "discover.cavestokingdoms.bloodwood");
 		registerDiscovery(GameRegistry.findItem("Tconstruct", "strangeFood"), 1, "discover.cavestokingdoms.blueslime");
@@ -77,15 +78,24 @@ public class OreDiscoveryRegistry {
 		registerDiscovery(GameRegistry.findItem("minecraft", "chainmail_leggings"), "discover.cavestokingdoms.chain");
 		registerDiscovery(GameRegistry.findItem("minecraft", "chainmail_boots"), "discover.cavestokingdoms.chain");
 		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemBootsCultist"), "discover.cavestokingdoms.crimson");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemChestplateCultistLeaderPlate"), "discover.cavestokingdoms.crimson");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemChestplateCultistPlate"), "discover.cavestokingdoms.crimson");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemChestplateCultistRobe"), "discover.cavestokingdoms.crimson");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemHelmetCultistLeaderPlate"), "discover.cavestokingdoms.crimson");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemHelmetCultistPlate"), "discover.cavestokingdoms.crimson");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemHelmetCultistRobe"), "discover.cavestokingdoms.crimson");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemLeggingsCultistLeaderPlate"), "discover.cavestokingdoms.crimson");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemLeggingsCultistPlate"), "discover.cavestokingdoms.crimson");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemLeggingsCultistRobe"), "discover.cavestokingdoms.crimson");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemChestplateCultistLeaderPlate"),
+				"discover.cavestokingdoms.crimson");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemChestplateCultistPlate"),
+				"discover.cavestokingdoms.crimson");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemChestplateCultistRobe"),
+				"discover.cavestokingdoms.crimson");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemHelmetCultistLeaderPlate"),
+				"discover.cavestokingdoms.crimson");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemHelmetCultistPlate"),
+				"discover.cavestokingdoms.crimson");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemHelmetCultistRobe"),
+				"discover.cavestokingdoms.crimson");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemLeggingsCultistLeaderPlate"),
+				"discover.cavestokingdoms.crimson");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemLeggingsCultistPlate"),
+				"discover.cavestokingdoms.crimson");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemLeggingsCultistRobe"),
+				"discover.cavestokingdoms.crimson");
 		registerDiscovery(GameRegistry.findItem("Natura", "Dark Tree"), 0, "discover.cavestokingdoms.darkwood");
 		registerDiscovery(GameRegistry.findItem("Natura", "planks"), 11, "discover.cavestokingdoms.darkwood");
 		registerDiscovery(GameRegistry.findItem("Natura", "Dark Tree"), 1, "discover.cavestokingdoms.fusewood");
@@ -94,9 +104,11 @@ public class OreDiscoveryRegistry {
 		registerDiscovery(GameRegistry.findItem("Natura", "planks"), 2, "discover.cavestokingdoms.ghostwood");
 		registerDiscovery(GameRegistry.findItem("Tconstruct", "materials"), 36, "discover.cavestokingdoms.glue");
 		registerDiscovery(GameRegistry.findItem("minecraft", "slime_ball"), "discover.cavestokingdoms.greenslime");
-		registerDiscovery(GameRegistry.findItem("ThaumicTinkerer", "kamiResource"), 1, "discover.cavestokingdoms.ichorcloth");
+		registerDiscovery(GameRegistry.findItem("ThaumicTinkerer", "kamiResource"), 1,
+				"discover.cavestokingdoms.ichorcloth");
 		registerDiscovery(GameRegistry.findItem("minecraft", "leather"), "discover.cavestokingdoms.leather");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemResource"), 7, "discover.cavestokingdoms.magiccloth");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemResource"), 7,
+				"discover.cavestokingdoms.magiccloth");
 		registerDiscovery(GameRegistry.findItem("ExtraTiC", "chunk"), 165, "discover.cavestokingdoms.peridot");
 		registerDiscovery(GameRegistry.findItem("minecraft", "reeds"), "discover.cavestokingdoms.reeds");
 		registerDiscovery(GameRegistry.findItem("customnpcs", "npcNanorumChest"), "discover.cavestokingdoms.scout");
@@ -107,28 +119,41 @@ public class OreDiscoveryRegistry {
 		registerDiscovery(GameRegistry.findItem("customnpcs", "npcWizardPants"), "discover.cavestokingdoms.wizard");
 		registerDiscovery(GameRegistry.findItem("customnpcs", "npcAssassinHead"), "discover.cavestokingdoms.assassin");
 		registerDiscovery(GameRegistry.findItem("customnpcs", "npcAssassinBoots"), "discover.cavestokingdoms.assassin");
-		registerDiscovery(GameRegistry.findItem("customnpcs", "npcAssassinLeggings"), "discover.cavestokingdoms.assassin");
-		registerDiscovery(GameRegistry.findItem("MineFactoryReloaded", "pinkslime"), "discover.cavestokingdoms.pinkslime");
-		registerDiscovery(GameRegistry.findItem("MineFactoryReloaded", "rubber.raw"), "discover.cavestokingdoms.plastic");
-		registerDiscovery(GameRegistry.findItem("MineFactoryReloaded", "plastic.raw"), "discover.cavestokingdoms.plastic");
-		registerDiscovery(GameRegistry.findItem("MineFactoryReloaded", "plastic.sheets"), "discover.cavestokingdoms.plastic");
-
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "blockStoneDevice"), 2, "discover.cavestokingdoms.enhancedthaumium");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemSwordElemental"), "discover.cavestokingdoms.enhancedthaumium");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemAxeElemental"), "discover.cavestokingdoms.enhancedthaumium");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemPickaxeElemental"), "discover.cavestokingdoms.enhancedthaumium");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemHoeElemental"), "discover.cavestokingdoms.enhancedthaumium");
-		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemShovelElemental"), "discover.cavestokingdoms.enhancedthaumium");
-
-		registerDiscovery(GameRegistry.findItem("ForbiddenMagic", "NetherShard"), 1, "discover.cavestokingdoms.chameleon");
-		registerDiscovery(GameRegistry.findItem("ThaumicTinkerer", "kamiResource"), 2, "discover.cavestokingdoms.ichorium");
-
+		registerDiscovery(GameRegistry.findItem("customnpcs", "npcAssassinLeggings"),
+				"discover.cavestokingdoms.assassin");
+		registerDiscovery(GameRegistry.findItem("MineFactoryReloaded", "pinkslime"),
+				"discover.cavestokingdoms.pinkslime");
+		registerDiscovery(GameRegistry.findItem("MineFactoryReloaded", "rubber.raw"),
+				"discover.cavestokingdoms.plastic");
+		registerDiscovery(GameRegistry.findItem("MineFactoryReloaded", "plastic.raw"),
+				"discover.cavestokingdoms.plastic");
+		registerDiscovery(GameRegistry.findItem("MineFactoryReloaded", "plastic.sheets"),
+				"discover.cavestokingdoms.plastic");
+		
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "blockStoneDevice"), 2,
+				"discover.cavestokingdoms.enhancedthaumium");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemSwordElemental"),
+				"discover.cavestokingdoms.enhancedthaumium");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemAxeElemental"),
+				"discover.cavestokingdoms.enhancedthaumium");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemPickaxeElemental"),
+				"discover.cavestokingdoms.enhancedthaumium");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemHoeElemental"),
+				"discover.cavestokingdoms.enhancedthaumium");
+		registerDiscovery(GameRegistry.findItem("Thaumcraft", "ItemShovelElemental"),
+				"discover.cavestokingdoms.enhancedthaumium");
+		
+		registerDiscovery(GameRegistry.findItem("ForbiddenMagic", "NetherShard"), 1,
+				"discover.cavestokingdoms.chameleon");
+		registerDiscovery(GameRegistry.findItem("ThaumicTinkerer", "kamiResource"), 2,
+				"discover.cavestokingdoms.ichorium");
+		
 		registerDiscovery(GameRegistry.findItem("AWWayofTime", "masterStone"), "discover.cavestokingdoms.bound");
 		registerDiscovery(GameRegistry.findItem("AWWayofTime", "energySword"), "discover.cavestokingdoms.bound");
 		registerDiscovery(GameRegistry.findItem("AWWayofTime", "boundPickaxe"), "discover.cavestokingdoms.bound");
 		registerDiscovery(GameRegistry.findItem("AWWayofTime", "boundAxe"), "discover.cavestokingdoms.bound");
 		registerDiscovery(GameRegistry.findItem("AWWayofTime", "boundShovel"), "discover.cavestokingdoms.bound");
-
+		
 		// Now do it all again, but for the mining levels.
 		registerDiscovery("crystalCertusQuartz", "discover.cavestokingdoms.harvestlevel2");
 		registerDiscovery("crystalNetherQuartz", "discover.cavestokingdoms.harvestlevel3");
@@ -138,7 +163,7 @@ public class OreDiscoveryRegistry {
 		registerDiscovery("gravel", "discover.cavestokingdoms.harvestlevel1");
 		registerDiscovery("netherrack", "discover.cavestokingdoms.harvestlevel1");
 		registerDiscovery("obsidian", "discover.cavestokingdoms.harvestlevel4");
-
+		
 		// Some things lack oredict entries.
 		registerDiscovery(GameRegistry.findItem("Natura", "bloodwood"), 0, "discover.cavestokingdoms.harvestlevel4");
 		registerDiscovery(GameRegistry.findItem("Natura", "planks"), 4, "discover.cavestokingdoms.harvestlevel4");
@@ -151,11 +176,11 @@ public class OreDiscoveryRegistry {
 		registerDiscovery(GameRegistry.findItem("Natura", "tree"), 2, "discover.cavestokingdoms.harvestlevel1");
 		registerDiscovery(GameRegistry.findItem("Natura", "planks"), 2, "discover.cavestokingdoms.harvestlevel1");
 		registerDiscovery(GameRegistry.findItem("ExtraTiC", "chunk"), 165, "discover.cavestokingdoms.harvestlevel3");
-
+		
 		FMLCommonHandler.instance().bus().register(this);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
-
+	
 	private void registerAllMetalsWith(String type) {
 		registerDiscovery(type + "Adamantine", "discover.cavestokingdoms.adamantine");
 		registerDiscovery(type + "Alumite", "discover.cavestokingdoms.alumite");
@@ -216,7 +241,7 @@ public class OreDiscoveryRegistry {
 		registerDiscovery(type + "Vulcanite", "discover.cavestokingdoms.vulcanite");
 		registerDiscovery(type + "Vyroxeres", "discover.cavestokingdoms.vyroxeres");
 		registerDiscovery(type + "Unstable", "discover.cavestokingdoms.unstable");
-
+		
 		// Also handle the mining level stuff
 		registerDiscovery(type + "Adamantine", "discover.cavestokingdoms.harvestlevel8");
 		registerDiscovery(type + "Alumite", "discover.cavestokingdoms.harvestlevel5");
@@ -271,71 +296,67 @@ public class OreDiscoveryRegistry {
 		registerDiscovery(type + "Void", "discover.cavestokingdoms.harvestlevel7");
 		registerDiscovery(type + "Vulcanite", "discover.cavestokingdoms.harvestlevel7");
 		registerDiscovery(type + "Vyroxeres", "discover.cavestokingdoms.harvestlevel5");
-
+		
 		// Hardcoded check to avoid derpiness from Thaumcraft Quicksilver.
 		if (!type.equals("nugget")) {
 			registerDiscovery(type + "Quicksilver", "discover.cavestokingdoms.quicksilver");
 			registerDiscovery(type + "Quicksilver", "discover.cavestokingdoms.harvestlevel6");
 		}
 	}
-
+	
 	public void registerDiscovery(String oreDictionaryEntry, String discovery) {
 		discoverData.add(new OreDictionaryDiscoveryEntry(oreDictionaryEntry, discovery));
 	}
-
-	public void registerDiscovery(Block block, String discovery) {
-		this.registerDiscovery(block, 0, 0, discovery);
-	}
-
+	
+	public void registerDiscovery(Block block, String discovery) { this.registerDiscovery(block, 0, 0, discovery); }
+	
 	public void registerDiscovery(Block block, int meta, String discovery) {
 		this.registerDiscovery(block, meta, 0xF, discovery);
 	}
-
+	
 	public void registerDiscovery(Block block, int meta, int metaFlags, String discovery) {
 		this.registerDiscovery(Item.getItemFromBlock(block), meta, metaFlags, discovery);
 	}
-
-	public void registerDiscovery(Item item, String discovery) {
-		this.registerDiscovery(item, 0, 0, discovery);
-	}
-
+	
+	public void registerDiscovery(Item item, String discovery) { this.registerDiscovery(item, 0, 0, discovery); }
+	
 	public void registerDiscovery(Item item, int meta, String discovery) {
 		this.registerDiscovery(item, meta, 0xF, discovery);
 	}
-
+	
 	public void registerDiscovery(Item item, int meta, int metaFlags, String discovery) {
 		discoverData.add(new ItemDiscoveryEntry(item, meta, metaFlags, discovery));
 	}
-
+	
 	public List<String> findDiscoveries(ItemStack stack) {
 		if (stack == null)
 			return null;
-
+		
 		List<String> discoveries = new ArrayList<String>();
-
+		
 		int size = discoverData.size();
 		for (int i = 0; i < size; i++) {
 			if (discoverData.get(i).matches(stack))
 				discoveries.add(discoverData.get(i).getDiscoveredOreData());
 		}
-
+		
 		return discoveries;
 	}
-
+	
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void playerReceivedItem(PlayerEvent.ItemPickupEvent event) {
 		ItemStack item = event.pickedUp.getEntityItem();
-
+		
 		checkDiscovery(item, event.player);
 	}
-
+	
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onCrafting(PlayerEvent.ItemCraftedEvent event) {
 		ItemStack item = event.crafting;
-
+		
 		checkDiscovery(item, event.player);
 	}
-
+	
 	@SubscribeEvent
 	public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
 		if (event.wasDeath) {
@@ -345,13 +366,13 @@ public class OreDiscoveryRegistry {
 			}
 		}
 	}
-
+	
 	protected void checkDiscovery(ItemStack item, EntityPlayer player) {
 		if (player.worldObj.isRemote)
 			return;
-
+		
 		List<String> discoveryOres = findDiscoveries(item);
-
+		
 		if (discoveryOres != null && discoveryOres.size() != 0) {
 			int discoveryCount = discoveryOres.size();
 			for (int i = 0; i < discoveryCount; i++) {
@@ -360,7 +381,7 @@ public class OreDiscoveryRegistry {
 			}
 		}
 	}
-
+	
 	public void scanPlayerForDiscoveries(EntityPlayer player) {
 		InventoryPlayer inventory = player.inventory;
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
@@ -368,39 +389,39 @@ public class OreDiscoveryRegistry {
 			checkDiscovery(stack, player);
 		}
 	}
-
+	
 	public boolean hasDiscovery(EntityPlayer player, String discoveryOre) {
 		return hasDiscovery(player.getEntityData(), discoveryOre);
 	}
-
+	
 	public void addDiscovery(EntityPlayer player, String discoveryOre) {
 		if (hasDiscovery(player, discoveryOre))
 			return;
-
+		
 		addDiscovery(player.getEntityData(), discoveryOre);
-
+		
 		if (!player.addedToChunk)
 			return;
-
+		
 		if (!player.worldObj.isRemote)
 			player.addChatMessage(new ChatComponentTranslation("blightfallmanual.discovery.add",
 					new Object[] { StatCollector.translateToLocal(discoveryOre) }));
 		if (player instanceof EntityPlayerMP)
 			CavesToKingdomsNetwork.sendToPlayer(new AddDiscoveryPacket(discoveryOre), (EntityPlayerMP) player);
 	}
-
+	
 	public void addAllDiscoveries(NBTTagCompound tag) {
 		for (IDiscoveryEntry entry : discoverData) {
 			addDiscovery(tag, entry.getDiscoveredOreData());
 		}
 	}
-
+	
 	public void clearDiscoveries(NBTTagCompound tag) {
 		NBTTagList list = tag.getTagList("cavesToKingdomsOreDiscoveries", 8);
 		if (list.tagCount() > 0)
 			tag.removeTag("cavesToKingdomsOreDiscoveries");
 	}
-
+	
 	public boolean hasDiscovery(NBTTagCompound tag, String discoveryOre) {
 		if (tag == null) { return false; }
 		NBTTagList list = tag.getTagList("cavesToKingdomsOreDiscoveries", 8);
@@ -408,21 +429,21 @@ public class OreDiscoveryRegistry {
 			if (list.getStringTagAt(i).equals(discoveryOre))
 				return true;
 		}
-
+		
 		return false;
 	}
-
+	
 	public void addDiscovery(NBTTagCompound tag, String discoveryOre) {
 		NBTTagList list = tag.getTagList("cavesToKingdomsOreDiscoveries", 8);
 		list.appendTag(new NBTTagString(discoveryOre));
 		tag.setTag("cavesToKingdomsOreDiscoveries", list);
 	}
-
+	
 	public void copyDiscoveries(NBTTagCompound from, NBTTagCompound to) {
 		NBTTagList list = from.getTagList("cavesToKingdomsOreDiscoveries", 8);
 		for (int i = 0; i < list.tagCount(); i++) {
 			String discovery = list.getStringTagAt(i);
-
+			
 			if (!hasDiscovery(to, discovery))
 				addDiscovery(to, discovery);
 		}

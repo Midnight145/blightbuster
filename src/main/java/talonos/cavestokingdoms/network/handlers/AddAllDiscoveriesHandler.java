@@ -8,13 +8,14 @@ import talonos.cavestokingdoms.client.pages.orediscovery.OreDiscoveryRegistry;
 import talonos.cavestokingdoms.network.packets.AddAllDiscoveriesPacket;
 
 public class AddAllDiscoveriesHandler implements IMessageHandler<AddAllDiscoveriesPacket, IMessage> {
-
+	
 	public AddAllDiscoveriesHandler() {}
-
+	
 	@Override
 	public IMessage onMessage(AddAllDiscoveriesPacket message, MessageContext ctx) {
-		OreDiscoveryRegistry.getInstance().addAllDiscoveries(CavesToKingdoms.proxy.getPlayerFromContext(ctx).getEntityData());
-
+		OreDiscoveryRegistry.getInstance()
+				.addAllDiscoveries(CavesToKingdoms.proxy.getPlayerFromContext(ctx).getEntityData());
+		
 		return null;
 	}
 }

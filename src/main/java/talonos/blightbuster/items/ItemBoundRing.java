@@ -26,7 +26,7 @@ public class ItemBoundRing extends ItemAngelRing implements ArmourUpgrade {
 	public static HashSet<String> flyingPlayers = new HashSet<String>();
 	public int wingType = -1;
 	boolean sentPacket = false;
-
+	
 	public ItemBoundRing() {
 		this.setUnlocalizedName(BlightBuster.MODID + "_" + BBStrings.boundRingName);
 		GameRegistry.registerItem(this, BBStrings.boundRingName);
@@ -34,49 +34,63 @@ public class ItemBoundRing extends ItemAngelRing implements ArmourUpgrade {
 		this.setTextureName(BlightBuster.MODID + ":" + BBStrings.boundRingName);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
-
+	
 	@Override
 	public void onArmourUpdate(World world, EntityPlayer player, ItemStack thisItemStack) {
-		if (!world.isRemote) { if (!this.sentPacket) { this.sendPacket(player.getDisplayName(), this.wingType); }}
+		if (!world.isRemote) {
+			if (!this.sentPacket) {
+				this.sendPacket(player.getDisplayName(), this.wingType);
+			}
+		}
 		if (world.isRemote) {
-			if (this.wingType == -1) { this.wingType = thisItemStack.getItemDamage(); }
+			if (this.wingType == -1) {
+				this.wingType = thisItemStack.getItemDamage();
+			}
 			if (!(flyingPlayers.contains(player.getDisplayName())) && this.shouldFly(player)) {
-
+				
 				player.capabilities.allowFlying = true;
 				player.sendPlayerAbilities();
 				flyingPlayers.add(player.getDisplayName());
 			}
 		}
 	}
-
+	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int slot, boolean par5) {
 		super.onUpdate(itemstack, world, entity, slot, par5);
-		if (this.wingType == -1) { this.wingType = itemstack.getItemDamage(); }
+		if (this.wingType == -1) {
+			this.wingType = itemstack.getItemDamage();
+		}
 	}
-
+	
 	@Override
 	public boolean isUpgrade() { return true; }
-
+	
 	@Override
 	public int getEnergyForTenSeconds() { return 1000; }
-
+	
 	@SubscribeEvent
 	public void canFly(LivingUpdateEvent event) {
 		if (event.entity.worldObj.isRemote) { return; }
 		if (!(event.entityLiving instanceof EntityPlayerMP)) { return; }
 		EntityPlayerMP player = (EntityPlayerMP) event.entityLiving;
 		if (this.shouldFly(player)) {
-			if (!(flyingPlayers.contains(player.getDisplayName()))) { flyingPlayers.add(player.getDisplayName()); }
-			if (!this.sentPacket) { this.sendPacket(player.getDisplayName(), this.wingType); }
-
+			if (!(flyingPlayers.contains(player.getDisplayName()))) {
+				flyingPlayers.add(player.getDisplayName());
+			}
+			if (!this.sentPacket) {
+				this.sendPacket(player.getDisplayName(), this.wingType);
+			}
+			
 			player.capabilities.allowFlying = true;
 			player.sendPlayerAbilities();
 		}
 		else {
 			if (flyingPlayers.contains(player.getDisplayName())) {
 				flyingPlayers.remove(player.getDisplayName());
-				if (!this.sentPacket) { this.sendPacket(player.getDisplayName(), 0); }
+				if (!this.sentPacket) {
+					this.sendPacket(player.getDisplayName(), 0);
+				}
 				if (!player.capabilities.isCreativeMode) {
 					player.capabilities.allowFlying = false;
 					player.capabilities.isFlying = false;
@@ -85,11 +99,13 @@ public class ItemBoundRing extends ItemAngelRing implements ArmourUpgrade {
 			}
 		}
 	}
-
+	
 	public boolean shouldFly(EntityPlayer player) {
 		for (int i = 0; i < 4; i++) {
 			ItemStack stack = player.getCurrentArmor(i);
-			if (stack == null) { continue; }
+			if (stack == null) {
+				continue;
+			}
 			Item item = stack.getItem();
 			if (item != null && item instanceof BoundArmour) {
 				BoundArmour armor = (BoundArmour) item;
@@ -100,7 +116,7 @@ public class ItemBoundRing extends ItemAngelRing implements ArmourUpgrade {
 		}
 		return false;
 	}
-
+	
 	private void sendPacket(String playerName, int type) {
 		NetworkHandler.sendToAllPlayers(new PacketAngelRingNotifier(playerName, type));
 	}

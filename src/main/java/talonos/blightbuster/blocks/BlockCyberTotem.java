@@ -11,11 +11,11 @@ import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
 
 public class BlockCyberTotem extends BBBlock {
-
+	
 	private IIcon topIcon;
 	private IIcon sideIcon;
 	private IIcon bottomIcon;
-
+	
 	public BlockCyberTotem() {
 		super(Material.wood);
 		this.setLightLevel(.875f);
@@ -26,7 +26,7 @@ public class BlockCyberTotem extends BBBlock {
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		GameRegistry.registerBlock(this, this.getUnlocalizedName());
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister registry) {
@@ -34,7 +34,7 @@ public class BlockCyberTotem extends BBBlock {
 		sideIcon = registry.registerIcon("blightbuster:dawnMachineDeactivated");
 		bottomIcon = registry.registerIcon("blightbuster:dawnMachineBottom");
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta) {

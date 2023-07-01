@@ -21,14 +21,10 @@ public class BlockDawnCharger extends BBBlock {
 		this.setBlockTextureName("blightbuster:dawnChargerDeactivated");
 		GameRegistry.registerBlock(this, BBStrings.dawnChargerName);
 	}
-
+	
 	@Override
-	public boolean hasTileEntity(int meta) {
-		return true;
-	}
-
+	public boolean hasTileEntity(int meta) { return true; }
+	
 	@Override
-	public TileEntity createTileEntity(World world, int meta) {
-		return new DawnChargerTileEntity();
-	}
+	public TileEntity createTileEntity(World world, int meta) { return new DawnChargerTileEntity(); }
 }

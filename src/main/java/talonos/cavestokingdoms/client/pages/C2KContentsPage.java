@@ -17,13 +17,13 @@ public class C2KContentsPage extends BookPage {
 	String text;
 	String[] iconText;
 	ItemStack[] icons;
-
+	
 	@Override
 	public void readPageFromXML(Element element) {
 		NodeList nodes = element.getElementsByTagName("text");
 		if (nodes != null)
 			text = nodes.item(0).getTextContent();
-
+		
 		nodes = element.getElementsByTagName("link");
 		iconText = new String[nodes.getLength()];
 		icons = new ItemStack[nodes.getLength()];
@@ -31,7 +31,7 @@ public class C2KContentsPage extends BookPage {
 			NodeList children = nodes.item(i).getChildNodes();
 			iconText[i] = children.item(1).getTextContent();
 			icons[i] = new ItemStack(Items.rotten_flesh);
-
+			
 			String total = children.item(3).getTextContent();
 			String mod = total.substring(0, total.indexOf(':'));
 			String itemName = total.substring(total.indexOf(':') + 1);
@@ -42,16 +42,19 @@ public class C2KContentsPage extends BookPage {
 				itemName = itemName.substring(0, itemName.indexOf(':'));
 			}
 			Item iconItem = GameRegistry.findItem(mod, itemName);
-			if (iconItem != null) { icons[i] = new ItemStack(GameRegistry.findItem(mod, itemName), 1, meta); }
+			if (iconItem != null) {
+				icons[i] = new ItemStack(GameRegistry.findItem(mod, itemName), 1, meta);
+			}
 		}
 	}
-
+	
 	@Override
 	public void renderContentLayer(int localWidth, int localHeight, boolean isTranslatable) {
 		if (text != null) {
 			if (isTranslatable)
 				text = StatCollector.translateToLocal(text);
-			manual.fonts.drawString("\u00a7n" + text, localWidth + 25 + manual.fonts.getStringWidth(text) / 2, localHeight + 4, 0);
+			manual.fonts.drawString("\u00a7n" + text, localWidth + 25 + manual.fonts.getStringWidth(text) / 2,
+					localHeight + 4, 0);
 		}
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		RenderHelper.enableGUIStandardItemLighting();
@@ -62,7 +65,7 @@ public class C2KContentsPage extends BookPage {
 			int yOffset = 18;
 			if (isTranslatable)
 				iconText[i] = StatCollector.translateToLocal(iconText[i]);
-
+			
 			if (iconText[i].length() > 40)
 				yOffset = 13;
 			manual.fonts.drawString(iconText[i], localWidth + 38, localHeight + 18 * i + yOffset, 0);

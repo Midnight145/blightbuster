@@ -23,19 +23,15 @@ public class AltarBlock extends CtKBlock {
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		GameRegistry.registerBlock(this, this.getUnlocalizedName());
 	}
-
+	
 	@Override
-	public boolean hasTileEntity(int meta) {
-		return true;
-	}
-
+	public boolean hasTileEntity(int meta) { return true; }
+	
 	@Override
-	public TileEntity createTileEntity(World world, int meta) {
-		return new AltarEntity();
-	}
-
+	public TileEntity createTileEntity(World world, int meta) { return new AltarEntity(); }
+	
 	// Icon stuff:
-
+	
 	/* ICONS */
 	public static final int PLAIN = 0;
 	public static final int LEFTSIDE = 1;
@@ -44,10 +40,10 @@ public class AltarBlock extends CtKBlock {
 	public static final int TOPRIGHT = 4;
 	public static final int BOTTOMLEFT = 5;
 	public static final int BOTTOMRIGHT = 6;
-
+	
 	@SideOnly(Side.CLIENT)
 	private static IIcon[] icons;
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
@@ -57,7 +53,7 @@ public class AltarBlock extends CtKBlock {
 		}
 		this.blockIcon = icons[0];
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
@@ -70,11 +66,19 @@ public class AltarBlock extends CtKBlock {
 		boolean westCovered = true;
 		boolean northCovered = true;
 		boolean southCovered = true;
-		if (east == null || !(east instanceof AltarEntity)) { eastCovered = false; }
-		if (west == null || !(west instanceof AltarEntity)) { westCovered = false; }
-		if (north == null || !(north instanceof AltarEntity)) { northCovered = false; }
-		if (south == null || !(south instanceof AltarEntity)) { southCovered = false; }
-
+		if (east == null || !(east instanceof AltarEntity)) {
+			eastCovered = false;
+		}
+		if (west == null || !(west instanceof AltarEntity)) {
+			westCovered = false;
+		}
+		if (north == null || !(north instanceof AltarEntity)) {
+			northCovered = false;
+		}
+		if (south == null || !(south instanceof AltarEntity)) {
+			southCovered = false;
+		}
+		
 		if (side == 1) {
 			// We are on top.
 			if (northCovered) {
@@ -86,7 +90,7 @@ public class AltarBlock extends CtKBlock {
 				if (westCovered) { return icons[TOPRIGHT]; }
 			}
 		}
-
+		
 		if (side == 4 || side == 5) {
 			if (southCovered) { return icons[LEFTSIDE]; }
 			if (northCovered) { return icons[RIGHTSIDE]; }

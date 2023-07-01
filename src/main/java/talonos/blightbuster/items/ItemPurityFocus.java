@@ -45,31 +45,29 @@ import thaumcraft.common.lib.utils.EntityUtils;
 import thaumcraft.common.tiles.TileNode;
 
 public class ItemPurityFocus extends ItemFocusBasic {
-
+	
 	public ItemPurityFocus() {
 		this.setUnlocalizedName(BlightBuster.MODID + "_" + BBStrings.purityFocusName);
 		GameRegistry.registerItem(this, BBStrings.purityFocusName);
 		this.setCreativeTab(Thaumcraft.tabTC);
 		this.setTextureName(BlightBuster.MODID + ":" + BBStrings.purityFocusName);
 	}
-
+	
 	@Override
-	public String getSortingHelper(ItemStack itemstack) {
-		return "PU" + super.getSortingHelper(itemstack);
-	}
-
+	public String getSortingHelper(ItemStack itemstack) { return "PU" + super.getSortingHelper(itemstack); }
+	
 	private static final AspectList cost = new AspectList().add(Aspect.EARTH, 10).add(Aspect.ORDER, 15);
 	private static final AspectList auraCost = new AspectList().add(Aspect.EARTH, 10000).add(Aspect.ORDER, 15000);
-
+	
 	public boolean isVisCostPerTick() { return false; }
-
+	
 	@Override
 	public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer p, MovingObjectPosition mop) {
 		ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
 		int potency = wand.getFocusEnlarge(itemstack) + 1;
-
+		
 		if (!wand.consumeAllVis(itemstack, p, this.getBigVisCost(potency), false, false)) { return itemstack; }
-
+		
 		Entity pointedEntity = EntityUtils.getPointedEntity(p.worldObj, p, 0.0D, 32.0D, 32.0F);
 		if (pointedEntity != null && !world.isRemote) {
 			// if target is a tainted sheep, convert to sheep
@@ -79,7 +77,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
 				this.convertFromTo(entityTaintSheep, entitysheep);
 				wand.consumeAllVis(itemstack, p, this.getVisCost(itemstack), true, false);
 			}
-
+			
 			// if target is a tainted cow, convert to cow
 			else if (pointedEntity instanceof EntityTaintCow) {
 				EntityTaintCow entityTaintCow = (EntityTaintCow) pointedEntity;
@@ -87,7 +85,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
 				this.convertFromTo(entityTaintCow, entityCow);
 				wand.consumeAllVis(itemstack, p, this.getVisCost(itemstack), true, false);
 			}
-
+			
 			// if target is a tainted chicken, convert to chicken
 			else if (pointedEntity instanceof EntityTaintChicken) {
 				EntityTaintChicken entityTaintChicken = (EntityTaintChicken) pointedEntity;
@@ -95,7 +93,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
 				this.convertFromTo(entityTaintChicken, chicken);
 				wand.consumeAllVis(itemstack, p, this.getVisCost(itemstack), true, false);
 			}
-
+			
 			// if target is a tainted villager, convert to villager
 			else if (pointedEntity instanceof EntityTaintVillager) {
 				EntityTaintVillager entityTaintVillager = (EntityTaintVillager) pointedEntity;
@@ -103,7 +101,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
 				this.convertFromTo(entityTaintVillager, villager);
 				wand.consumeAllVis(itemstack, p, this.getVisCost(itemstack), true, false);
 			}
-
+			
 			// if target is a tainted pig, convert to pig
 			else if (pointedEntity instanceof EntityTaintPig) {
 				EntityTaintPig entityTaintPig = (EntityTaintPig) pointedEntity;
@@ -134,7 +132,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
 				}
 			}
 		}
-
+		
 		if (mop != null && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
 			for (int xOffset = 0 - potency; xOffset < 1 + potency; xOffset++) {
 				for (int zOffset = 0 - potency; zOffset < 1 + potency; zOffset++) {
@@ -144,7 +142,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
 		}
 		return itemstack;
 	}
-
+	
 	@Override
 	public boolean onFocusBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) {
 		ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
@@ -157,13 +155,13 @@ public class ItemPurityFocus extends ItemFocusBasic {
 				node.markDirty();
 				player.getEntityWorld().markBlockForUpdate(x, y, z);
 			}
-
+			
 			return true;
 		}
-
+		
 		return false;
 	}
-
+	
 	/*
 	 * converts original entity to convertTo entity and subtracts one from player
 	 * held item stack requires the following lines before calling (replace
@@ -175,20 +173,22 @@ public class ItemPurityFocus extends ItemFocusBasic {
 		// new entity copies original entity location
 		convertTo.copyLocationAndAnglesFrom(original);
 		// original entity spawns new entity into the world
-		if (!original.worldObj.isRemote) { original.worldObj.spawnEntityInWorld(convertTo); }
+		if (!original.worldObj.isRemote) {
+			original.worldObj.spawnEntityInWorld(convertTo);
+		}
 		// new entity removes the old entity
 		convertTo.worldObj.removeEntity(original);
 	}
-
+	
 	private AspectList getBigVisCost(int potency) {
-		AspectList toReturn = new AspectList().add(Aspect.EARTH, 10 * (potency * 2 + 1) * (potency * 2 + 1)).add(Aspect.ORDER,
-				15 * (potency * 2 + 1) * (potency * 2 + 1));
+		AspectList toReturn = new AspectList().add(Aspect.EARTH, 10 * (potency * 2 + 1) * (potency * 2 + 1))
+				.add(Aspect.ORDER, 15 * (potency * 2 + 1) * (potency * 2 + 1));
 		return toReturn;
 	}
-
+	
 	private void cleanUpLand(int x, int z, World world, ItemStack itemStack, EntityPlayer p) {
 		boolean flag = false; // this is used to check if there *is* any block needing to be removed in the
-								// check to see if the original biome is also magicalforest or eerie
+								 // check to see if the original biome is also magicalforest or eerie
 		if (!p.worldObj.isRemote) {
 			for (int y = 0; y < 256; y++) {
 				if (world.getBlock(x, y, z) == ConfigBlocks.blockTaintFibres) {
@@ -198,7 +198,8 @@ public class ItemPurityFocus extends ItemFocusBasic {
 				if (world.getBlock(x, y, z) == ConfigBlocks.blockTaint) {
 					if (world.getBlockMetadata(x, y, z) == 2) { return; } // Flesh blocks. WHAT THE FUCK THAUMCRAFT
 					if (world.getBlockMetadata(x, y, z) == 0) {
-						world.setBlock(x, y, z, ConfigBlocks.blockFluxGoo, ((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(), 3);
+						world.setBlock(x, y, z, ConfigBlocks.blockFluxGoo,
+								((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(), 3);
 					}
 					else if (world.getBlockMetadata(x, y, z) == 1) {
 						world.setBlock(x, y, z, Blocks.dirt);
@@ -214,8 +215,9 @@ public class ItemPurityFocus extends ItemFocusBasic {
 					|| (world.getBiomeGenForCoords(x, z).biomeID == Config.biomeMagicalForestID))) {
 				ItemWandCasting wand = (ItemWandCasting) itemStack.getItem();
 				BiomeGenBase[] biomesForGeneration = null;
-				biomesForGeneration = world.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x, z, 1, 1);
-
+				biomesForGeneration = world.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x, z, 1,
+						1);
+				
 				if ((biomesForGeneration != null) && (biomesForGeneration[0] != null)) {
 					if (!flag) {
 						if ((biomesForGeneration[0].biomeID == Config.biomeEerieID
@@ -227,47 +229,41 @@ public class ItemPurityFocus extends ItemFocusBasic {
 					}
 					wand.consumeAllVis(itemStack, p, this.getVisCost(itemStack), true, false);
 					BlightbusterNetwork.setBiomeAt(world, x, z, biomesForGeneration[0]);
-
+					
 				}
 			}
 		}
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
 		this.itemIcon = register.registerIcon(this.getIconString());
 		this.icon = register.registerIcon(this.getIconString());
 	}
-
+	
 	@Override
-	public int getFocusColor(ItemStack arg0) {
-		return 0x32f8c5;
-	}
-
+	public int getFocusColor(ItemStack arg0) { return 0x32f8c5; }
+	
 	@Override
 	public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack itemstack, int rank) {
 		switch (rank) {
-		case 1:
-			return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.enlarge };
-		case 2:
-			return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.enlarge };
-		case 3:
-			return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.enlarge };
-		case 4:
-			return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.enlarge };
-		case 5:
-			return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.enlarge };
+			case 1:
+				return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.enlarge };
+			case 2:
+				return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.enlarge };
+			case 3:
+				return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.enlarge };
+			case 4:
+				return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.enlarge };
+			case 5:
+				return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.enlarge };
 		}
 		return null;
 	}
-
+	
 	@Override
-	public AspectList getVisCost(ItemStack arg0) {
-		return cost;
-	}
-
-	public AspectList getNodeVisCost(ItemStack arg0) {
-		return auraCost;
-	}
+	public AspectList getVisCost(ItemStack arg0) { return cost; }
+	
+	public AspectList getNodeVisCost(ItemStack arg0) { return auraCost; }
 }

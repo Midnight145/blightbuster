@@ -13,8 +13,8 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(DawnMachineTileEntity.class, "DawnMachine");
 		GameRegistry.registerTileEntity(DawnChargerTileEntity.class, "DawnCharger");
 	}
-
+	
 	public void registerRenderers() {}
-
+	
 	public double getBestCleanseSpawnHeight() { return 0; }
 }

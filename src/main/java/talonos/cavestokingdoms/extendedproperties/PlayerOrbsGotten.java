@@ -20,16 +20,16 @@ public class PlayerOrbsGotten implements IExtendedEntityProperties {
 	 * than the tutorial example.
 	 */
 	public final static String EXT_PROP_NAME = "CavesToKingdoms";
-
+	
 	// I always include the entity to which the properties belong for easy access
 	// It's final because we won't be changing which player it is
 	private final EntityPlayer player;
-
+	
 	// Declare other variables you want to add here
-
+	
 	// We're adding mana to the player, so we'll need current Orbs
 	private int currentOrbs;
-
+	
 	/*
 	 * The default constructor takes no arguments, but I put in the Entity so I can
 	 * initialize the above variable 'player'
@@ -42,7 +42,7 @@ public class PlayerOrbsGotten implements IExtendedEntityProperties {
 		// Start with max mana. Every player starts with the same amount.
 		this.currentOrbs = 0;
 	}
-
+	
 	/**
 	 * Used to register these extended properties for the player during
 	 * EntityConstructing event
@@ -51,7 +51,7 @@ public class PlayerOrbsGotten implements IExtendedEntityProperties {
 	public static final void register(EntityPlayer player) {
 		player.registerExtendedProperties(PlayerOrbsGotten.EXT_PROP_NAME, new PlayerOrbsGotten(player));
 	}
-
+	
 	/**
 	 * Returns ExtendedPlayer properties for player
 	 * This method is for convenience only; it will make your code look nicer
@@ -59,17 +59,17 @@ public class PlayerOrbsGotten implements IExtendedEntityProperties {
 	public static final PlayerOrbsGotten get(EntityPlayer player) {
 		return (PlayerOrbsGotten) player.getExtendedProperties(EXT_PROP_NAME);
 	}
-
+	
 	// Save any custom data that needs saving here
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
 		// We need to create a new tag compound that will save everything for our
 		// Extended Properties
 		NBTTagCompound properties = new NBTTagCompound();
-
+		
 		// We only have 2 variables currently; save them both to the new tag
 		properties.setInteger("CurrentOrbs", this.currentOrbs);
-
+		
 		/*
 		 * Now add our custom tag to the player's tag with a unique name (our property's
 		 * name).
@@ -84,7 +84,7 @@ public class PlayerOrbsGotten implements IExtendedEntityProperties {
 		 */
 		compound.setTag(EXT_PROP_NAME, properties);
 	}
-
+	
 	// Load whatever data you saved
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
@@ -96,20 +96,20 @@ public class PlayerOrbsGotten implements IExtendedEntityProperties {
 		// Just so you know it's working, add this line:
 		System.out.println("[CTK PROPS] Mana from NBT: " + this.currentOrbs);
 	}
-
+	
 	/*
 	 * I personally have yet to find a use for this method. If you know of any,
 	 * please let me know and I'll add it in!
 	 */
 	@Override
 	public void init(Entity entity, World world) {}
-
+	
 	/*
 	 * That's it for the IExtendedEntityProperties methods, but we need to add a few
 	 * of our own in order to
 	 * interact with our new variables.
 	 */
-
+	
 	/**
 	 * Returns true if the orb was consumed or false
 	 * if the player had no irb
@@ -121,15 +121,11 @@ public class PlayerOrbsGotten implements IExtendedEntityProperties {
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Simple method adds an orb.
 	 */
-	public void giveOrb() {
-		this.currentOrbs += 1;
-	}
-
-	public boolean hasOrb() {
-		return (this.currentOrbs > 0);
-	}
+	public void giveOrb() { this.currentOrbs += 1; }
+	
+	public boolean hasOrb() { return (this.currentOrbs > 0); }
 }

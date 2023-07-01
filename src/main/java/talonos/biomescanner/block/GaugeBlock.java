@@ -10,7 +10,7 @@ import talonos.biomescanner.BiomeScanner;
 
 public class GaugeBlock extends BSBlock {
 	int pos;
-
+	
 	public GaugeBlock() {
 		this.setBlockUnbreakable();
 		this.setResistance(6000000.0F);
@@ -20,16 +20,16 @@ public class GaugeBlock extends BSBlock {
 		this.setBlockUnbreakable();
 		this.setLightLevel(1.0f);
 	}
-
+	
 	public GaugeBlock setPos(int pos) {
 		this.pos = pos;
 		this.setBlockName(BiomeScanner.MODID + "_" + BSStrings.GaugeBlockName + pos);
 		return this;
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
@@ -39,7 +39,7 @@ public class GaugeBlock extends BSBlock {
 			icons[i] = par1IconRegister.registerIcon(BiomeScanner.MODID + ":" + "statbar" + (this.pos * 16 + i));
 		}
 	}
-
+	
 	/**
 	 * From the specified side and block metadata retrieves the blocks texture.
 	 * Args: side, metadata

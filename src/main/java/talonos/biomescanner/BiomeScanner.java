@@ -110,7 +110,7 @@ public class BiomeScanner {
 	public void init(FMLInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(MapScanner.instance);
 		MinecraftForge.EVENT_BUS.register(MapScanner.instance);
-
+		
 	}
 	
 	@Mod.EventHandler

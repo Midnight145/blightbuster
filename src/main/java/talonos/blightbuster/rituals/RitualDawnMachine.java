@@ -19,13 +19,13 @@ import thaumcraft.common.tiles.TileEtherealBloom;
 
 public class RitualDawnMachine extends RitualEffect {
 	DawnMachineTileEntity dawnMachine;
-	int[][] bloomOffsets = new int[][] { { 7, 3, 0 }, { -7, 3, 0 }, { 5, 3, -5 }, { 5, 3, 5 }, { 0, 3, 7 }, { 0, 3, -7 }, { -5, 3, -5 },
-			{ -5, 3, 5 } };
+	int[][] bloomOffsets = new int[][] { { 7, 3, 0 }, { -7, 3, 0 }, { 5, 3, -5 }, { 5, 3, 5 }, { 0, 3, 7 },
+			{ 0, 3, -7 }, { -5, 3, -5 }, { -5, 3, 5 } };
 	boolean going = false;
-
+	
 	@Override
 	public boolean startRitual(IMasterRitualStone ritualStone, EntityPlayer player) {
-
+		
 		if (!this.checkBlooms(ritualStone)) {
 			player.addChatMessage(new ChatComponentTranslation("gui.ritual.missingBlooms"));
 			return false;
@@ -33,14 +33,14 @@ public class RitualDawnMachine extends RitualEffect {
 		this.going = true;
 		return true;
 	}
-
+	
 	@Override
 	public void performEffect(IMasterRitualStone ritualStone) {
 		this.going = this.checkBlooms(ritualStone);
 		if (!this.going) { return; }
-
+		
 		String owner = ritualStone.getOwner();
-
+		
 		int currentEssence = SoulNetworkHandler.getCurrentEssence(owner);
 		World world = ritualStone.getWorld();
 		int x = ritualStone.getXCoord();
@@ -48,28 +48,28 @@ public class RitualDawnMachine extends RitualEffect {
 		int z = ritualStone.getZCoord();
 		if (world.getTileEntity(x, y + 2, z) instanceof DawnMachineTileEntity) {
 			this.dawnMachine = (DawnMachineTileEntity) world.getTileEntity(x, y + 2, z);
-
+			
 		}
 		else {
 			return;
 		}
-
+		
 		int bloodToAdd = Math.min(currentEssence, this.getCostPerRefresh());
 		int actuallyAdd = this.dawnMachine.addBlood(bloodToAdd, true);
 		if (currentEssence < actuallyAdd) {
 			SoulNetworkHandler.causeNauseaToPlayer(owner);
 			return;
 		}
-
+		
 		this.dawnMachine.addBlood(actuallyAdd, false);
 		SoulNetworkHandler.syphonFromNetwork(owner, actuallyAdd);
 	}
-
+	
 	@Override
 	public int getCostPerRefresh() { // TODO Auto-generated method stub
 		return 500;
 	}
-
+	
 	@Override
 	public List<RitualComponent> getRitualComponentList() { // TODO Auto-generated method stub
 		ArrayList<RitualComponent> dawnMachineRitual = new ArrayList<RitualComponent>();
@@ -137,12 +137,12 @@ public class RitualDawnMachine extends RitualEffect {
 		dawnMachineRitual.add(new RitualComponent(-5, 1, 5, RitualComponent.FIRE));
 		dawnMachineRitual.add(new RitualComponent(-5, 2, 5, RitualComponent.DUSK));
 		dawnMachineRitual.add(new RitualComponent(-1, 0, 6, RitualComponent.EARTH));
-
+		
 		return dawnMachineRitual;
 	}
-
+	
 	private boolean checkBloomExists(IMasterRitualStone ritualStone, int[] coords) {
-
+		
 		World world = ritualStone.getWorld();
 		int x = ritualStone.getXCoord();
 		int y = ritualStone.getYCoord();
@@ -150,21 +150,22 @@ public class RitualDawnMachine extends RitualEffect {
 		TileEntity tile = world.getTileEntity(x + coords[0], y + coords[1], z + coords[2]);
 		return tile != null && tile instanceof TileEtherealBloom;
 	}
-
+	
 	public static void init() {
 		Rituals.registerRitual("BBDawnMachineRitual", 1, 10000, new RitualDawnMachine(), "Ritual of the New Dawn",
-				new AlchemyCircleRenderer(new ResourceLocation("alchemicalwizardry:textures/models/SimpleTransCircle.png"), 0, 0, 0, 255, 0,
-						0.501, 0.501, 0, 1.5, true));
+				new AlchemyCircleRenderer(
+						new ResourceLocation("alchemicalwizardry:textures/models/SimpleTransCircle.png"), 0, 0, 0, 255,
+						0, 0.501, 0.501, 0, 1.5, true));
 	}
-
+	
 	public boolean checkBlooms(IMasterRitualStone ritualStone) {
 		for (int[] offset : this.bloomOffsets) {
 			if (!this.checkBloomExists(ritualStone, offset)) {
-
+				
 				return false;
 			}
 		}
 		return true;
 	}
-
+	
 }

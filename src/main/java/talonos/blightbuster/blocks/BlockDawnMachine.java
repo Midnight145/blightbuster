@@ -23,13 +23,13 @@ import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import thaumcraft.common.Thaumcraft;
 
 public class BlockDawnMachine extends BlockMultiblock {
-
+	
 	private IIcon top;
 	private IIcon bottom;
 	private IIcon sideLive;
 	private IIcon sideDead;
 	private IIcon glow;
-
+	
 	public BlockDawnMachine() {
 		super(Material.wood, BBBlock.dawnMachineMultiblock);
 		this.setLightLevel(.875f);
@@ -39,16 +39,18 @@ public class BlockDawnMachine extends BlockMultiblock {
 		this.setStepSound(soundTypeWood);
 		GameRegistry.registerBlock(this, this.getUnlocalizedName());
 	}
-
+	
 	@Override
 	public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6) {
 		if (par5 == 1) {
-			if (par1World.isRemote) { Thaumcraft.proxy.blockSparkle(par1World, par2, par3, par4, 16736256, 5); }
+			if (par1World.isRemote) {
+				Thaumcraft.proxy.blockSparkle(par1World, par2, par3, par4, 16736256, 5);
+			}
 			return true;
 		}
 		return super.onBlockEventReceived(par1World, par2, par3, par4, par5, par6);
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister registry) {
@@ -58,51 +60,48 @@ public class BlockDawnMachine extends BlockMultiblock {
 		this.bottom = registry.registerIcon("blightbuster:dawnMachineBottom");
 		this.glow = registry.registerIcon("blightbuster:dawnMachineGlow");
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public int getRenderType() { return -1; }
-
+	
 	public IIcon getTopIcon() { return this.top; }
-
+	
 	public IIcon getBottomIcon() { return this.bottom; }
-
+	
 	public IIcon getLiveSideIcon() { return this.sideLive; }
-
+	
 	public IIcon getDeadSideIcon() { return this.sideDead; }
-
+	
 	public IIcon getGlowIcon() { return this.glow; }
-
+	
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3) {
 		return Item.getItemFromBlock(BBBlock.cyberTotem);
 	}
-
+	
 	@Override
-	public boolean hasTileEntity(int meta) {
-		return true;
-	}
-
+	public boolean hasTileEntity(int meta) { return true; }
+	
 	@Override
-	public TileEntity createTileEntity(World world, int meta) {
-		return new DawnMachineTileEntity();
-	}
-
+	public TileEntity createTileEntity(World world, int meta) { return new DawnMachineTileEntity(); }
+	
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
 		super.breakBlock(world, x, y, z, block, meta);
-
-//        BlightBuster.instance.chunkLoader.eliminateDawnMachine();
+		
+		// BlightBuster.instance.chunkLoader.eliminateDawnMachine();
 	}
-
+	
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what, float these, float are) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what,
+			float these, float are) {
 		DawnMachineTileEntity tileEntity = (DawnMachineTileEntity) world.getTileEntity(x, y, z);
-
+		
 		if (tileEntity == null) { return false; }
-
+		
 		ItemStack playerItem = player.getCurrentEquippedItem();
-
+		
 		if (playerItem != null && playerItem.getItem().equals(ModItems.divinationSigil) && !player.isSneaking()) {
 			if (!player.worldObj.isRemote) {
 				player.addChatMessage(new ChatComponentText("Current Blood: " + tileEntity.getFluidAmount()));
@@ -111,7 +110,7 @@ public class BlockDawnMachine extends BlockMultiblock {
 			}
 			return true;
 		}
-
+		
 		return false;
 	}
 }
