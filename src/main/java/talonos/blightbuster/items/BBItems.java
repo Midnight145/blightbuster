@@ -11,14 +11,9 @@ public class BBItems {
 	public static Item worldOreKiller;
 	public static ItemBlock dawnChargerItem;
 	public static Item boundRing;
-	
+
 	public static void init() {
 		purityFocus = new ItemPurityFocus();
 		silverPotion = new ItemSilverPotion();
-		worldTainter = new ItemWorldTainter();
-		worldOreKiller = new ItemWorldOreKiller();
-		worldSuperTainter = new ItemSuperTestWorldTainter();
-		worldSuperTainter = new ItemAlienTome();
-		boundRing = new ItemBoundRing();
 	}
 }

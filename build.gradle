@@ -20,8 +20,8 @@ plugins {
 apply plugin: 'forge'
 
 version = "2.0.7"
-group= "com.midnight.blightbuster" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "blightbuster"
+group= "com.midnight.blightbusterstandalone" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "blightbuster-standalone"
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
