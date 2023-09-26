@@ -9,8 +9,15 @@ tile.blightbuster_dawnCharger.name=Dawn Charger
 item.blightbuster_purityFocus.name=Wand Focus: Purity
 item.blightbuster_silverPotion.name=Silverleaf Splash Potion
 item.blightbuster_worldTainter.name=World Tainter
+item.blightbuster_chunkTainter.name=Chunk Tainter
 item.blightbuster_worldOreKiller.name=Ore Killer
 item.blightbuster_researchnote.name=Translated Alien Grimoire
+item.blightbuster_boundRing.name=Bound Ring
+item.blightbuster_boundRing.0.name=Invisible Wings
+item.blightbuster_boundRing.1.name=Feathery Wings
+item.blightbuster_boundRing.2.name=Fairy Wings
+item.blightbuster_boundRing.3.name=Dragon Wings
+item.blightbuster_boundRing.4.name=Golden Wings
 
 tc.research_name.SILVERPOTION=Silverwood potions
 tc.research_text.SILVERPOTION=Spot cleaning taint!
@@ -34,5 +41,8 @@ gui.offering.noPairing=This wand isn't attuned to a Dawn Machine.
 gui.offering.wrongDimension=You cannot transport a Dawn Machine across dimensions.
 gui.offering.pairingDestroyed=The attuned Dawn Machine has been moved or destroyed.
 gui.offering.clearArea=Clear the area around the offering.
+gui.offering.movePlayer=Please move away from the offering.
 
 gui.charger.pairSuccessful=Your wand attunes to the Dawn Charger.
+
+gui.ritual.missingBlooms=You remember what the Dark One said...Place Ethereal Blooms on top of the pillars.

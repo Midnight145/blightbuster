@@ -9,9 +9,10 @@ import talonos.blightbuster.network.packets.BiomeChangePacket;
 import thaumcraft.common.Thaumcraft;
 
 public class BiomeChangeHandler implements IMessageHandler<BiomeChangePacket, IMessage> {
-    @Override
-    public IMessage onMessage(BiomeChangePacket message, MessageContext ctx) {
-        BlightbusterNetwork.setBiomeAt(Thaumcraft.proxy.getClientWorld(), message.getX(), message.getZ(), BiomeGenBase.getBiome(message.getBiomeID()));
-        return null;
-    }
+	@Override
+	public IMessage onMessage(BiomeChangePacket message, MessageContext ctx) {
+		BlightbusterNetwork.setBiomeAt(Thaumcraft.proxy.getClientWorld(), message.getX(), message.getZ(),
+				BiomeGenBase.getBiome(message.getBiomeID()));
+		return null;
+	}
 }

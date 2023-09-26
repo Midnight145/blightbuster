@@ -12,9 +12,14 @@ item.cavestokingdoms:basicManual.6.name=Research Journal Fragment
 item.cavestokingdoms:basicManual.7.name=Crazed Journal Scrap
 item.cavestokingdoms:basicManual.8.name=Tattered Research Journal
 item.cavestokingdoms:basicManual.9.name=Ominous Journal Scrap
+item.cavestokingdoms:basicManual.12.name=The Beginning
+item.cavestokingdoms:basicManual.13.name=The End
+item.cavestokingdoms:basicManual.14.name=The End
 blightfallmanual.geology=By Ayumu Nagasawa
 blightfallmanual.ben=By Archmage Xillith
 blightfallmanual.taint=By Dagomawr the Scribe
+blightfallmanual.sarah=By The King
+blightfallmanual.dark=By The Dark One
 
 
 ubc.cavestokingdoms.cinnabar=Cinnabar
@@ -176,7 +181,7 @@ discover.cavestokingdoms.sapphire=sapphire
 discover.cavestokingdoms.scout=Jaded scout armor
 discover.cavestokingdoms.shadowiron=shadow iron
 discover.cavestokingdoms.shadowsteel=shadow steel
-discover.cavestokingdoms.signalum=dignalum
+discover.cavestokingdoms.signalum=signalum
 discover.cavestokingdoms.silver=silver
 discover.cavestokingdoms.steel=steel
 discover.cavestokingdoms.tartarite=tartarite
@@ -189,6 +194,7 @@ discover.cavestokingdoms.vulcanite=vulcanite
 discover.cavestokingdoms.vyroxeres=vyroxeres
 discover.cavestokingdoms.wax=wax
 discover.cavestokingdoms.wizard=alien wizard apparel
+discover.cavestokingdoms.wood=wood
 
 discover.cavestokingdoms.pinkslime=pink slime
 discover.cavestokingdoms.plastic=rubber and plastic

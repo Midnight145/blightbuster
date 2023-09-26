@@ -3,75 +3,77 @@ package talonos.blightbuster.tileentity.dawnmachine;
 import thaumcraft.api.aspects.Aspect;
 
 public enum DawnMachineResource {
-			// aspect			mult cost max  disc     u     v
-    SANO     (Aspect.HEAL,      512,  2, 16384, 16,    0.6f, 0.5f),
-    IGNIS    (Aspect.FIRE,      2048, 2, 65536, 4,     0,    0.5f),
-    AER      (Aspect.AIR,       128,  2, 4096,  63,    0,    0),
-    COGNITIO (Aspect.MIND,      128,  2, 4096,  63,    0.6f, 0),
-    MACHINA  (Aspect.MECHANISM, 128,  2, 4096,  63,    0.2f, 0.5f),
-    AURAM    (Aspect.AURA,      1,    4, 32,    16000, 0.4f, 0),
-    VACUOS   (Aspect.VOID,      512,  2, 16384, 16,    0.8f, 0.5f),
-    ORDO     (Aspect.ORDER,     128,  2, 4096,  63,    0.4f, 0.5f),
-    ARBOR    (Aspect.TREE,      256,  2, 8192,  32,    0.2f, 0),
-    HERBA    (Aspect.PLANT,     512,  2, 16384, 16,    0.8f, 0);
-
-    private Aspect aspect;
-    private int valueMultiplier;
-    private int cost;
-    private int maximumValue;
-    private int rfDiscountCost;
-    private float u;
-    private float v;
-
-    DawnMachineResource(Aspect aspect, int valueMultiplier, int cost, int maximumValue, int rfDiscountCost, float u, float v) {
-        this.aspect = aspect;
-        this.valueMultiplier = valueMultiplier;
-        this.cost = cost;
-        this.maximumValue = maximumValue;
-        this.rfDiscountCost = rfDiscountCost;
-        this.u = u;
-        this.v = v;
-    }
-
-    public Aspect getAspect() { return aspect; }
-    public int getValueMultiplier() { return valueMultiplier; }
-    public int getAspectCost() { return cost; }
-    public int getMaximumValue() { return maximumValue; }
-    public int getEnergyCost() { return rfDiscountCost; }
-    public float getU() { return u; }
-    public float getV() { return v; }
-
-    public static DawnMachineResource getResourceFromAspect(Aspect aspect) {
-        if (aspect == Aspect.HEAL)
-            return SANO;
-
-        if (aspect == Aspect.FIRE)
-            return IGNIS;
-
-        if (aspect == Aspect.AIR)
-            return AER;
-
-        if (aspect == Aspect.MIND)
-            return COGNITIO;
-
-        if (aspect == Aspect.MECHANISM)
-            return MACHINA;
-
-        if (aspect == Aspect.AURA)
-            return AURAM;
-
-        if (aspect == Aspect.VOID)
-            return VACUOS;
-
-        if (aspect == Aspect.ORDER)
-            return ORDO;
-
-        if (aspect == Aspect.TREE)
-            return ARBOR;
-
-        if (aspect == Aspect.PLANT)
-            return HERBA;
-
-        return null;
-    }
+	
+	// machina, ordo, cognitio costs * 32 because they were significantly cheaper
+	// They work per operation, not per block, so after moving to a chunkwise
+	// operation they only get used a fraction of the time
+	
+	// Aspect, mult * 4 so you can halve three times
+	// aspect mult cost max rf mana blood u v
+	SANO(Aspect.HEAL, 512 * 4, 2 * 4, 16384 * 4, 16, 250, 12, 0.6f, 0.5f),
+	IGNIS(Aspect.FIRE, 2048 * 4, 2 * 4, 65536 * 4, 4, 250, 12, 0, 0.5f),
+	AER(Aspect.AIR, 128 * 4, 2 * 4, 4096 * 4, 63, 750, 37, 0, 0),
+	COGNITIO(Aspect.MIND, 128 * 4, 2 * 32 * 4, 4096 * 4, 63, 500, 25, 0.6f, 0),
+	MACHINA(Aspect.MECHANISM, 128 * 4, 2 * 32 * 4, 4096 * 4, 63, 500, 25, 0.2f, 0.5f),
+	AURAM(Aspect.AURA, 1 * 4, 4 * 4, 32 * 4, 16000, 100, 50, 0.4f, 0),
+	VACUOS(Aspect.VOID, 512 * 4, 2 * 4, 16384 * 4, 16, 250, 12, 0.8f, 0.5f),
+	ORDO(Aspect.ORDER, 128 * 4, 2 * 32 * 4, 4096 * 4, 63, 750, 37, 0.4f, 0.5f),
+	ARBOR(Aspect.TREE, 256 * 4, 2 * 4, 8192 * 4, 32, 500, 25, 0.2f, 0),
+	HERBA(Aspect.PLANT, 512 * 4, 2 * 4, 16384 * 4, 16, 250, 12, 0.8f, 0);
+	
+	private Aspect aspect;
+	private int valueMultiplier;
+	private int cost;
+	private int maximumValue;
+	private int rfDiscountCost;
+	private int manaDiscountCost;
+	private int bloodDiscountCost;
+	private float u;
+	private float v;
+	
+	DawnMachineResource(Aspect aspect, int valueMultiplier, int cost, int maximumValue, int rfDiscountCost,
+			int manaDiscountCost, int bloodDiscountCost, float u, float v) {
+		this.aspect = aspect;
+		this.valueMultiplier = valueMultiplier;
+		this.cost = cost;
+		this.maximumValue = maximumValue;
+		this.rfDiscountCost = rfDiscountCost;
+		this.manaDiscountCost = manaDiscountCost; // TODO: update
+		this.bloodDiscountCost = bloodDiscountCost; // TODO: update
+		this.u = u;
+		this.v = v;
+	}
+	
+	public Aspect getAspect() { return this.aspect; }
+	
+	public int getValueMultiplier() { return this.valueMultiplier; }
+	
+	public int getAspectCost() { return this.cost; }
+	
+	public int getMaximumValue() { return this.maximumValue; }
+	
+	public int getEnergyCost() { return this.rfDiscountCost; }
+	
+	public int getManaCost() { return this.manaDiscountCost; }
+	
+	public int getBloodCost() { return this.bloodDiscountCost; }
+	
+	public float getU() { return this.u; }
+	
+	public float getV() { return this.v; }
+	
+	public static DawnMachineResource getResourceFromAspect(Aspect aspect) {
+		if (aspect == Aspect.HEAL) { return SANO; }
+		if (aspect == Aspect.FIRE) { return IGNIS; }
+		if (aspect == Aspect.AIR) { return AER; }
+		if (aspect == Aspect.MIND) { return COGNITIO; }
+		if (aspect == Aspect.MECHANISM) { return MACHINA; }
+		if (aspect == Aspect.AURA) { return AURAM; }
+		if (aspect == Aspect.VOID) { return VACUOS; }
+		if (aspect == Aspect.ORDER) { return ORDO; }
+		if (aspect == Aspect.TREE) { return ARBOR; }
+		if (aspect == Aspect.PLANT) { return HERBA; }
+		
+		return null;
+	}
 }

@@ -19,7 +19,7 @@ plugins {
 }
 apply plugin: 'forge'
 
-version = "1.0.4-pre"
+version = "2.0.7"
 group= "com.midnight.blightbuster" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "blightbuster"
 

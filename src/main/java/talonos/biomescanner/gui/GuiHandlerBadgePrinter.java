@@ -7,21 +7,21 @@ import net.minecraft.world.World;
 import talonos.biomescanner.tileentity.TileEntityIslandScanner;
 
 public class GuiHandlerBadgePrinter implements IGuiHandler {
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityIslandScanner)
-            return new ContainerBadgePrinter(player.inventory, (TileEntityIslandScanner)tileEntity);
-
-        return null;
-    }
-
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityIslandScanner)
-            return new GuiBadgePrinter(player.inventory, (TileEntityIslandScanner)tileEntity);
-
-        return null;
-    }
+	@Override
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		if (tileEntity instanceof TileEntityIslandScanner)
+			return new ContainerBadgePrinter(player.inventory, (TileEntityIslandScanner) tileEntity);
+		
+		return null;
+	}
+	
+	@Override
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		if (tileEntity instanceof TileEntityIslandScanner)
+			return new GuiBadgePrinter(player.inventory, (TileEntityIslandScanner) tileEntity);
+		
+		return null;
+	}
 }

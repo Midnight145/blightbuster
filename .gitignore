@@ -1,3 +1,6 @@
+node_info.json
+conf/
+libs*
 build
 .gradle
 eclipse
@@ -12,6 +15,5 @@ out/
 libs/
 deps/
 target/
-CavesToKingdoms/
 gradlew*
 gradle/
