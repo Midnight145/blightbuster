@@ -791,5 +791,23 @@ when Skyla wrote his seminal work.
       <icon>ExtraUtilities:bedrockiumIngot</icon>
       <text>An amazingly tough metal. That's all that's good about it.</text>
    </page>
+   
+  <page type="c2kModularToolsPage">
+      <title>Unstable Induced</title>
+      <requires>discover.cavestokingdoms.unstable</requires>
+      <requiresIcon>ExtraUtilities:unstableingot</requiresIcon>
+      <icon>ExtraUtilities:unstableingot</icon>
+      <text>You had to divide by diamond to get here. It better be good.</text>
+      <toolmaterial>unstableIngot</toolmaterial>
+   </page>
+   
+  <page type="c2kModularToolsPage">
+      <title>Magical Wood</title>
+      <requires>discover.cavestokingdoms.magicalwood</requires>
+      <requiresIcon>ExtraUtilities:decorativeBlock1:8</requiresIcon>
+      <icon>ExtraUtilities:decorativeBlock1:8</icon>
+      <text>Wood infused with enchantment magic. Very malleable.</text>
+      <toolmaterial>MagicWood</toolmaterial>
+   </page>
 
 </book>

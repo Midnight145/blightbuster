@@ -147,6 +147,10 @@ public class OreDiscoveryRegistry {
 				"discover.cavestokingdoms.chameleon");
 		registerDiscovery(GameRegistry.findItem("ThaumicTinkerer", "kamiResource"), 2,
 				"discover.cavestokingdoms.ichorium");
+		registerDiscovery(GameRegistry.findItem("ExtraUtilities", "unstableingot"), 0,
+				"discover.cavestokingdoms.unstable");
+		registerDiscovery(GameRegistry.findItem("ExtraUtilities", "decorativeBlock1"), 8,
+				"discover.cavestokingdoms.magicalwood");
 		
 		registerDiscovery(GameRegistry.findItem("AWWayofTime", "masterStone"), "discover.cavestokingdoms.bound");
 		registerDiscovery(GameRegistry.findItem("AWWayofTime", "energySword"), "discover.cavestokingdoms.bound");
