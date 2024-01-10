@@ -33,7 +33,7 @@ public class BiomeScanner {
 	
 	public static final String MODID = "biomescanner";
 	public static final String MODNAME = "Biome Scanner";
-	public static final String VERSION = "2.0.8";
+	public static final String VERSION = "2.1.0";
 	public static final String DEPS = "before:UndergroundBiomes;after:ThermalFoundation;after:appliedenergistics2;after:Thaumcraft";
 	public static final String COMMONPROXYLOCATION = "talonos." + MODID + ".CommonProxy";
 	public static final String CLIENTPROXYLOCATION = "talonos." + MODID + ".ClientProxy";
