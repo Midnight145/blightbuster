@@ -1,19 +1,17 @@
 package exterminatorJeff.undergroundBiomes.api;
 
 import java.util.Iterator;
-import java.util.Set;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.RegistryNamespaced;
 
-public class NamedItem extends Names
-{
+public class NamedItem extends Names {
+
     protected int id;
     protected Item item;
 
-    public NamedItem(String internalName)
-    {
+    public NamedItem(String internalName) {
         super(internalName);
     }
 
@@ -21,8 +19,7 @@ public class NamedItem extends Names
         this(block.internal());
     }
 
-    public void register(int _id, Item _item)
-    {
+    public void register(int _id, Item _item) {
         reRegister(_id, _item);
     }
 
@@ -30,27 +27,25 @@ public class NamedItem extends Names
         this.id = _id;
         this.item = _item;
         Item current = Item.getItemById(_id);
-        if (current != _item)
-            Item.itemRegistry.addObject(_id, internal(), _item);
+        if (current != _item) Item.itemRegistry.addObject(_id, internal(), _item);
     }
 
-    public Item cachedItem()
-    {
+    public Item cachedItem() {
         if (this.item == null) {
-            this.item = ((Item)Item.itemRegistry.getObject(external()));
+            this.item = ((Item) Item.itemRegistry.getObject(external()));
             if (this.item == null) throw new RuntimeException(internal() + " has no item");
         }
         return this.item;
     }
 
     public Item registeredItem() {
-        Item result = (Item)Item.itemRegistry.getObject(internal());
+        Item result = (Item) Item.itemRegistry.getObject(internal());
         if (result == null) {
-            result = (Item)Item.itemRegistry.getObject(external());
-            if (result == null)
-            {
+            result = (Item) Item.itemRegistry.getObject(external());
+            if (result == null) {
                 Object key;
-                for (Iterator i$ = Item.itemRegistry.getKeys().iterator(); i$.hasNext(); key = i$.next());
+                for (Iterator i$ = Item.itemRegistry.getKeys()
+                    .iterator(); i$.hasNext(); key = i$.next());
                 throw new RuntimeException();
             }
         }

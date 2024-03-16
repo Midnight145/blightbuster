@@ -3,7 +3,8 @@ package cofh.api.energy;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
- * Implement this interface on TileEntities which should connect to energy transportation blocks. This is intended for blocks which generate energy but do not
+ * Implement this interface on TileEntities which should connect to energy transportation blocks. This is intended for
+ * blocks which generate energy but do not
  * accept it; otherwise just use IEnergyHandler.
  * <p>
  * Note that {@link IEnergyHandler} is an extension of this.
@@ -13,9 +14,9 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public interface IEnergyConnection {
 
-	/**
-	 * Returns TRUE if the TileEntity can connect on a given side.
-	 */
-	boolean canConnectEnergy(ForgeDirection from);
+    /**
+     * Returns TRUE if the TileEntity can connect on a given side.
+     */
+    boolean canConnectEnergy(ForgeDirection from);
 
 }

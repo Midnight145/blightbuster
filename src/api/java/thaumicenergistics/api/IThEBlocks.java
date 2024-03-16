@@ -1,20 +1,20 @@
 package thaumicenergistics.api;
 
-public abstract class IThEBlocks
-{
-	public IThEItemDescription EssentiaProvider;
+public abstract class IThEBlocks {
 
-	public IThEItemDescription InfusionProvider;
+    public IThEItemDescription EssentiaProvider;
 
-	public IThEItemDescription IronGearBox;
+    public IThEItemDescription InfusionProvider;
 
-	public IThEItemDescription ThaumiumGearBox;
+    public IThEItemDescription IronGearBox;
 
-	public IThEItemDescription EssentiaCellWorkbench;
+    public IThEItemDescription ThaumiumGearBox;
 
-	public IThEItemDescription ArcaneAssembler;
+    public IThEItemDescription EssentiaCellWorkbench;
 
-	public IThEItemDescription KnowledgeInscriber;
+    public IThEItemDescription ArcaneAssembler;
 
-	public IThEItemDescription EssentiaVibrationChamber;
+    public IThEItemDescription KnowledgeInscriber;
+
+    public IThEItemDescription EssentiaVibrationChamber;
 }

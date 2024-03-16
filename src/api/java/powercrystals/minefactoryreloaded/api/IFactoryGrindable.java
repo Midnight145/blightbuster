@@ -9,27 +9,28 @@ import net.minecraft.world.World;
 /**
  * @author PowerCrystals
  *
- * Defines a grindable entity for the Grinder.
+ *         Defines a grindable entity for the Grinder.
  */
-public interface IFactoryGrindable
-{
-	/**
-	 * @return The class that this grindable instance is handling. This must be a subtype of EntityLivingBase or the entity will never
-	 * be noticed by the Grinder.
-	 */
-	public Class<? extends EntityLivingBase> getGrindableEntity();
+public interface IFactoryGrindable {
 
-	/**
-	 * @param world The world this entity is in.
-	 * @param entity The entity instance being ground.
-	 * @param random A Random instance.
-	 * @return The drops generated when this entity is killed.
-	 */
-	public List<MobDrop> grind(World world, EntityLivingBase entity, Random random);
+    /**
+     * @return The class that this grindable instance is handling. This must be a subtype of EntityLivingBase or the
+     *         entity will never
+     *         be noticed by the Grinder.
+     */
+    public Class<? extends EntityLivingBase> getGrindableEntity();
 
-	/**
-	 * @param entity The entity instance being ground.
-	 * @return Whether this entity has been fully processed or not.
-	 */
-	public boolean processEntity(EntityLivingBase entity);
+    /**
+     * @param world  The world this entity is in.
+     * @param entity The entity instance being ground.
+     * @param random A Random instance.
+     * @return The drops generated when this entity is killed.
+     */
+    public List<MobDrop> grind(World world, EntityLivingBase entity, Random random);
+
+    /**
+     * @param entity The entity instance being ground.
+     * @return Whether this entity has been fully processed or not.
+     */
+    public boolean processEntity(EntityLivingBase entity);
 }

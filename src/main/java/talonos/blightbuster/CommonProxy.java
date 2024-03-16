@@ -7,14 +7,17 @@ import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import talonos.blightbuster.tileentity.DawnTotemEntity;
 
 public class CommonProxy {
-	public void registerTileEntities() {
-		GameRegistry.registerTileEntity(DawnTotemEntity.class, "DawnTotemEntity");
-		GameRegistry.registerTileEntity(DawnMachineSpoutTileEntity.class, "DawnMachineSpout");
-		GameRegistry.registerTileEntity(DawnMachineTileEntity.class, "DawnMachine");
-		GameRegistry.registerTileEntity(DawnChargerTileEntity.class, "DawnCharger");
-	}
-	
-	public void registerRenderers() {}
-	
-	public double getBestCleanseSpawnHeight() { return 0; }
+
+    public void registerTileEntities() {
+        GameRegistry.registerTileEntity(DawnTotemEntity.class, "DawnTotemEntity");
+        GameRegistry.registerTileEntity(DawnMachineSpoutTileEntity.class, "DawnMachineSpout");
+        GameRegistry.registerTileEntity(DawnMachineTileEntity.class, "DawnMachine");
+        GameRegistry.registerTileEntity(DawnChargerTileEntity.class, "DawnCharger");
+    }
+
+    public void registerRenderers() {}
+
+    public double getBestCleanseSpawnHeight() {
+        return 0;
+    }
 }

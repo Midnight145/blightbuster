@@ -2,6 +2,7 @@ package thaumicenergistics.api;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
 import appeng.api.features.INetworkEncodable;
 import appeng.api.implementations.items.IAEItemPowerStorage;
 
@@ -13,14 +14,13 @@ import appeng.api.implementations.items.IAEItemPowerStorage;
  * @author Nividica
  * 
  */
-public interface IThEWirelessEssentiaTerminal
-	extends INetworkEncodable, IAEItemPowerStorage
-{
-	/**
-	 * Gets the tag used to store the terminal data.
-	 * 
-	 * @param terminalItemstack
-	 * @return
-	 */
-	public NBTTagCompound getWETerminalTag( ItemStack terminalItemstack );
+public interface IThEWirelessEssentiaTerminal extends INetworkEncodable, IAEItemPowerStorage {
+
+    /**
+     * Gets the tag used to store the terminal data.
+     * 
+     * @param terminalItemstack
+     * @return
+     */
+    public NBTTagCompound getWETerminalTag(ItemStack terminalItemstack);
 }

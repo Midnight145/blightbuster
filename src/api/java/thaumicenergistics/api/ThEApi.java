@@ -2,80 +2,76 @@ package thaumicenergistics.api;
 
 import java.lang.reflect.Method;
 import java.util.List;
+
 import com.google.common.collect.ImmutableList;
 
 /**
  * Thaumic Energistics API
  */
-public abstract class ThEApi
-{
-	protected static ThEApi api = null;
+public abstract class ThEApi {
 
-	/**
-	 * Gets the Thaumic Energistics API.
-	 * Note: Only available after the PREINIT event.
-	 */
-	public static ThEApi instance()
-	{
-		// Have we already retrieved the api?
-		if( ThEApi.api == null )
-		{
-			try
-			{
-				// Attempt to locate the API implementation
-				Class clazz = Class.forName( "thaumicenergistics.implementaion.ThEAPIImplementation" );
+    protected static ThEApi api = null;
 
-				// Get the instance method
-				Method instanceAccessor = clazz.getMethod( "instance" );
+    /**
+     * Gets the Thaumic Energistics API.
+     * Note: Only available after the PREINIT event.
+     */
+    public static ThEApi instance() {
+        // Have we already retrieved the api?
+        if (ThEApi.api == null) {
+            try {
+                // Attempt to locate the API implementation
+                Class clazz = Class.forName("thaumicenergistics.implementaion.ThEAPIImplementation");
 
-				// Attempt to get the API instance
-				ThEApi.api = (ThEApi)instanceAccessor.invoke( null );
-			}
-			catch( Throwable e )
-			{
-				// Unable to locate the API, return null
-				return null;
-			}
-		}
+                // Get the instance method
+                Method instanceAccessor = clazz.getMethod("instance");
 
-		return ThEApi.api;
-	}
+                // Attempt to get the API instance
+                ThEApi.api = (ThEApi) instanceAccessor.invoke(null);
+            } catch (Throwable e) {
+                // Unable to locate the API, return null
+                return null;
+            }
+        }
 
-	/**
-	 * Blocks
-	 */
-	public abstract IThEBlocks blocks();
+        return ThEApi.api;
+    }
 
-	/**
-	 * Configuration
-	 */
-	public abstract IThEConfig config();
+    /**
+     * Blocks
+     */
+    public abstract IThEBlocks blocks();
 
-	/**
-	 * Essentia Gasses
-	 */
-	public abstract ImmutableList<List<IThEEssentiaGas>> essentiaGases();
+    /**
+     * Configuration
+     */
+    public abstract IThEConfig config();
 
-	/**
-	 * Gets the ThE interaction manager
-	 * 
-	 * @return
-	 */
-	public abstract IThEInteractionHelper interact();
+    /**
+     * Essentia Gasses
+     */
+    public abstract ImmutableList<List<IThEEssentiaGas>> essentiaGases();
 
-	/**
-	 * Items
-	 */
-	public abstract IThEItems items();
+    /**
+     * Gets the ThE interaction manager
+     * 
+     * @return
+     */
+    public abstract IThEInteractionHelper interact();
 
-	/**
-	 * Cable Parts
-	 */
-	public abstract IThEParts parts();
+    /**
+     * Items
+     */
+    public abstract IThEItems items();
 
-	/**
-	 * Transport Permissions.
-	 */
-	public abstract IThETransportPermissions transportPermissions();
+    /**
+     * Cable Parts
+     */
+    public abstract IThEParts parts();
+
+    /**
+     * Transport Permissions.
+     */
+    public abstract IThETransportPermissions transportPermissions();
 
 }

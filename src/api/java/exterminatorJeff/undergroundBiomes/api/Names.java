@@ -1,11 +1,10 @@
 package exterminatorJeff.undergroundBiomes.api;
 
-public class Names
-{
+public class Names {
+
     private final String internal;
 
-    public Names(String internalName)
-    {
+    public Names(String internalName) {
         this.internal = internalName;
     }
 
