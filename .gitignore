@@ -15,8 +15,6 @@ out/
 libs/
 deps/
 target/
-gradlew*
-gradle/
 .idea/
 CODEOWNERS
 LICENSE-template
