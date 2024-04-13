@@ -1,16 +1,16 @@
 package exterminatorJeff.undergroundBiomes.api;
 
-import Zeno410Utils.BlockState;
 import net.minecraft.block.Block;
 
-public class BlockCodes extends BlockState
-{
+import Zeno410Utils.BlockState;
+
+public class BlockCodes extends BlockState {
+
     public final NamedBlock name;
     public final BlockCodes onDrop;
     private final int metadataHashcode;
 
-    public BlockCodes(Block block, int metadata)
-    {
+    public BlockCodes(Block block, int metadata) {
         super(block, metadata);
         this.name = null;
         this.onDrop = this;
@@ -40,7 +40,7 @@ public class BlockCodes extends BlockState
 
     public boolean equals(Object compared) {
         if ((compared instanceof BlockCodes)) {
-            BlockCodes comparedCodes = (BlockCodes)compared;
+            BlockCodes comparedCodes = (BlockCodes) compared;
             if ((this.block == comparedCodes.block) && (this.metadata == comparedCodes.metadata)) return true;
         }
         return false;

@@ -1,7 +1,7 @@
 package exterminatorJeff.undergroundBiomes.api;
 
-public abstract class UndergroundBiomeSet
-{
+public abstract class UndergroundBiomeSet {
+
     public final StrataLayer[][] strataLayers;
     public final BiomeGenUndergroundBase[] biomeList = new BiomeGenUndergroundBase[256];
 

@@ -17,3 +17,8 @@ deps/
 target/
 gradlew*
 gradle/
+.idea/
+CODEOWNERS
+LICENSE-template
+jitpack.yml
+run/

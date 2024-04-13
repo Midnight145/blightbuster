@@ -1,20 +1,20 @@
 package exterminatorJeff.undergroundBiomes.api;
 
-public class UBStoneCodes extends BlockCodes
-{
-    public UBStoneCodes(NamedBlock name, int _metadata)
-    {
+public class UBStoneCodes extends BlockCodes {
+
+    public UBStoneCodes(NamedBlock name, int _metadata) {
         super(name, _metadata, cobbleVersion(name, _metadata));
     }
+
     public final UBStoneCodes slabVersionEquivalent() {
         return new UBStoneCodes(UBIDs.slabVersionID(this.name), this.metadata);
     }
+
     public final UBStoneCodes brickVersionEquivalent() {
         return new UBStoneCodes(UBIDs.brickVersionID(this.name), this.metadata);
     }
 
-    public static BlockCodes cobbleVersion(NamedBlock name, int metadata)
-    {
+    public static BlockCodes cobbleVersion(NamedBlock name, int metadata) {
         if (name == UBIDs.igneousStoneName) {
             return new BlockCodes(UBIDs.igneousCobblestoneName, metadata);
         }
@@ -25,18 +25,15 @@ public class UBStoneCodes extends BlockCodes
             return new BlockCodes(UBIDs.sedimentaryStoneName, metadata);
         }
 
-        if ((name == NamedVanillaBlock.stone) &&
-                (metadata == 0)) {
+        if ((name == NamedVanillaBlock.stone) && (metadata == 0)) {
             return new BlockCodes(NamedVanillaBlock.cobblestone, metadata);
         }
 
-        if ((name == NamedVanillaBlock.sandstone) &&
-                (metadata == 0)) {
+        if ((name == NamedVanillaBlock.sandstone) && (metadata == 0)) {
             return new BlockCodes(NamedVanillaBlock.sandstone, metadata);
         }
 
-        if ((name == NamedVanillaBlock.sand) &&
-                (metadata == 0)) {
+        if ((name == NamedVanillaBlock.sand) && (metadata == 0)) {
             return new BlockCodes(NamedVanillaBlock.sandstone, metadata);
         }
 
@@ -88,6 +85,7 @@ public class UBStoneCodes extends BlockCodes
 
         return new BlockCodes(NamedVanillaBlock.cobblestone, metadata);
     }
+
     public final BlockCodes cobblestoneEquivalent() {
         return this.onDrop;
     }

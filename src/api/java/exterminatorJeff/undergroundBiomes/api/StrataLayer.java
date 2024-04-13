@@ -1,15 +1,14 @@
 package exterminatorJeff.undergroundBiomes.api;
 
-public class StrataLayer
-{
+public class StrataLayer {
+
     public final NamedBlock layerBlock;
     public final int layerMetadataID;
     public final int layerMin;
     public final int layerMax;
     public final UBStoneCodes codes;
 
-    public StrataLayer(NamedBlock layerBlock, int layerMetadataID, int layerMin, int layerMax)
-    {
+    public StrataLayer(NamedBlock layerBlock, int layerMetadataID, int layerMin, int layerMax) {
         this.layerBlock = layerBlock;
         this.layerMetadataID = layerMetadataID;
         this.layerMin = layerMin;

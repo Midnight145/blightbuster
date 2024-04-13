@@ -1,19 +1,18 @@
 package exterminatorJeff.undergroundBiomes.api;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.RegistryNamespaced;
 
-public class NamedBlock extends Names
-{
+import cpw.mods.fml.common.registry.GameRegistry;
+
+public class NamedBlock extends Names {
+
     protected int id;
     public Block block;
     public static final String modid = "undergroundBiomes";
 
-    public NamedBlock(String internalName)
-    {
+    public NamedBlock(String internalName) {
         super(internalName);
     }
 
@@ -35,8 +34,7 @@ public class NamedBlock extends Names
         this.block = _block;
         this.block.setBlockName(external());
         Block current = Block.getBlockById(_id);
-        if (current != this.block)
-        {
+        if (current != this.block) {
             if (current != null) {
                 throw new RuntimeException(internal() + " has been replaced by " + current.toString());
             }
@@ -50,7 +48,7 @@ public class NamedBlock extends Names
 
     public boolean matches(Item compared) {
         if ((compared instanceof ItemBlock)) {
-            return ((ItemBlock)compared).field_150939_a.equals(this.block);
+            return ((ItemBlock) compared).field_150939_a.equals(this.block);
         }
         return false;
     }
@@ -58,9 +56,11 @@ public class NamedBlock extends Names
     public boolean matches(Block compared) {
         return compared.equals(block());
     }
+
     public int ID() {
         return Block.getIdFromBlock(block());
     }
+
     public Item matchingItem(Block block) {
         return Item.getItemById(Block.getIdFromBlock(block));
     }

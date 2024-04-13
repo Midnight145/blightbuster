@@ -2,10 +2,9 @@ package exterminatorJeff.undergroundBiomes.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.util.RegistryNamespaced;
 
-public class UBIDs
-{
+public class UBIDs {
+
     public static final int version = 3;
     public static final NamedBlock igneousStoneName = new NamedBlock("igneousStone");
     public static final NamedBlock igneousCobblestoneName = new NamedBlock("igneousCobblestone");
@@ -35,8 +34,12 @@ public class UBIDs
     public static final NamedBlock IconTrap = new NamedBlock("iconTrap");
 
     public static final String ubPrefix() {
-        return "UndergroundBiomes:"; }
-    public static final String ubIconPrefix() { return "undergroundbiomes:"; }
+        return "UndergroundBiomes:";
+    }
+
+    public static final String ubIconPrefix() {
+        return "undergroundbiomes:";
+    }
 
     public static String publicName(String inModName) {
         if (inModName.contains(ubPrefix())) return inModName;
@@ -49,7 +52,7 @@ public class UBIDs
     }
 
     public static Item itemNamed(String name) {
-        return (Item)Item.itemRegistry.getObject(name);
+        return (Item) Item.itemRegistry.getObject(name);
     }
 
     public static Block blockNamed(String name) {

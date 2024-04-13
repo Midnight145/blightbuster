@@ -3,8 +3,8 @@ package exterminatorJeff.undergroundBiomes.api;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
-public class NamedVanillaBlock extends NamedBlock
-{
+public class NamedVanillaBlock extends NamedBlock {
+
     public static final NamedBlock cobblestone = new NamedVanillaBlock(Blocks.cobblestone);
     public static final NamedBlock cobblestone_wall = new NamedVanillaBlock(Blocks.cobblestone_wall);
     public static final NamedBlock dispenser = new NamedVanillaBlock(Blocks.dispenser);

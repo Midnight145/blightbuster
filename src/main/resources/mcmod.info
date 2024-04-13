@@ -1,10 +1,10 @@
 [
 	{
-	  "modid": "blightbuster",
-	  "name": "BlightBuster",
+	  "modid": "{modId}",
+	  "name": "{modName}",
 	  "description": "Collection of mods for Blightfall",
-	  "version": "${version}",
-	  "mcversion": "${mcversion}",
+	  "version": "${modVersion}",
+	  "mcversion": "${minecraftVersion}",
 	  "url": "https://github.com/Midnight145/blightbuster",
 	  "updateUrl": "",
 	  "authorList": ["Talonos", "Icedice", "CannibalVox", "Midnight"],

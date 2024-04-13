@@ -1,7 +1,7 @@
 package exterminatorJeff.undergroundBiomes.api;
 
-public class BiomeGenUndergroundBase
-{
+public class BiomeGenUndergroundBase {
+
     public String biomeName = "";
     public final int biomeID;
     public boolean hasStrata = false;
@@ -9,16 +9,15 @@ public class BiomeGenUndergroundBase
     public final PerlinNoiseGenerator strataNoise;
     public final UBStoneCodes fillerBlockCodes;
 
-    public BiomeGenUndergroundBase(int ID, NamedBlock filler, int metadataValue, BiomeGenUndergroundBase[] biomeList)
-    {
+    public BiomeGenUndergroundBase(int ID, NamedBlock filler, int metadataValue, BiomeGenUndergroundBase[] biomeList) {
         this.biomeID = ID;
         this.fillerBlockCodes = new UBStoneCodes(filler, metadataValue);
         this.strataNoise = new PerlinNoiseGenerator(1L);
         biomeList[ID] = this;
     }
 
-    public BiomeGenUndergroundBase(int ID, NamedBlock filler, int metadataValue, BiomeGenUndergroundBase[] biomeList, StrataLayer[] strataLayers)
-    {
+    public BiomeGenUndergroundBase(int ID, NamedBlock filler, int metadataValue, BiomeGenUndergroundBase[] biomeList,
+        StrataLayer[] strataLayers) {
         this.biomeID = ID;
         this.fillerBlockCodes = new UBStoneCodes(filler, metadataValue);
         this.strataNoise = new PerlinNoiseGenerator(1L);

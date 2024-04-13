@@ -1,15 +1,14 @@
 package exterminatorJeff.undergroundBiomes.api;
 
-public abstract class NoiseGenerator
-{
+public abstract class NoiseGenerator {
+
     protected final int[] perm = new int[512];
     protected double offsetX;
     protected double offsetY;
     protected double offsetZ;
 
-    public static int floor(double x)
-    {
-        return x >= 0.0D ? (int)x : (int)x - 1;
+    public static int floor(double x) {
+        return x >= 0.0D ? (int) x : (int) x - 1;
     }
 
     protected static double fade(double x) {
@@ -27,45 +26,38 @@ public abstract class NoiseGenerator
         return ((hash & 0x1) == 0 ? u : -u) + ((hash & 0x2) == 0 ? v : -v);
     }
 
-    public double noise(double x)
-    {
+    public double noise(double x) {
         return noise(x, 0.0D, 0.0D);
     }
 
-    public double noise(double x, double y)
-    {
+    public double noise(double x, double y) {
         return noise(x, y, 0.0D);
     }
 
     public abstract double noise(double paramDouble1, double paramDouble2, double paramDouble3);
 
-    public double noise(double x, int octaves, double frequency, double amplitude)
-    {
+    public double noise(double x, int octaves, double frequency, double amplitude) {
         return noise(x, 0.0D, 0.0D, octaves, frequency, amplitude);
     }
 
-    public double noise(double x, int octaves, double frequency, double amplitude, boolean normalized)
-    {
+    public double noise(double x, int octaves, double frequency, double amplitude, boolean normalized) {
         return noise(x, 0.0D, 0.0D, octaves, frequency, amplitude, normalized);
     }
 
-    public double noise(double x, double y, int octaves, double frequency, double amplitude)
-    {
+    public double noise(double x, double y, int octaves, double frequency, double amplitude) {
         return noise(x, y, 0.0D, octaves, frequency, amplitude);
     }
 
-    public double noise(double x, double y, int octaves, double frequency, double amplitude, boolean normalized)
-    {
+    public double noise(double x, double y, int octaves, double frequency, double amplitude, boolean normalized) {
         return noise(x, y, 0.0D, octaves, frequency, amplitude, normalized);
     }
 
-    public double noise(double x, double y, double z, int octaves, double frequency, double amplitude)
-    {
+    public double noise(double x, double y, double z, int octaves, double frequency, double amplitude) {
         return noise(x, y, z, octaves, frequency, amplitude, false);
     }
 
-    public double noise(double x, double y, double z, int octaves, double frequency, double amplitude, boolean normalized)
-    {
+    public double noise(double x, double y, double z, int octaves, double frequency, double amplitude,
+        boolean normalized) {
         double result = 0.0D;
         double amp = 1.0D;
         double freq = 1.0D;
