@@ -42,6 +42,7 @@ import net.minecraftforge.fluids.IFluidTank;
 import WayofTime.alchemicalWizardry.AlchemicalWizardry;
 import cofh.api.energy.IEnergyReceiver;
 import cofh.api.energy.IEnergyStorage;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -81,10 +82,14 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     // FLUID INTEGRATION (Blood Magic)
     private static final int MAX_BLOOD = 100000;
-    private static final Fluid blood = AlchemicalWizardry.lifeEssenceFluid;
-    private final FluidStack fluid = new FluidStack(blood, 0);
-    private final FluidTankInfo tankInfo = new FluidTankInfo(this.getFluid(), MAX_BLOOD);
-    private final FluidTankInfo[] tankInfoArray = { this.tankInfo };
+    // private static final Fluid blood = AlchemicalWizardry.lifeEssenceFluid;
+    // private final FluidStack fluid = new FluidStack(blood, 0);
+    // private final FluidTankInfo tankInfo = new FluidTankInfo(this.getFluid(), MAX_BLOOD);
+    // private final FluidTankInfo[] tankInfoArray = { this.tankInfo };
+    private static Fluid blood;
+    private FluidStack fluid;
+    private FluidTankInfo tankInfo;
+    private FluidTankInfo[] tankInfoArray;
 
     // END FLUID INTEGRATION
 
@@ -175,6 +180,12 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     public DawnMachineTileEntity() {
         this.rand = new Random(System.currentTimeMillis());
+        if (Loader.isModLoaded("AWWayofTime")) {
+            blood = AlchemicalWizardry.lifeEssenceFluid;
+            this.fluid = new FluidStack(blood, 0);
+            this.tankInfo = new FluidTankInfo(this.fluid, MAX_BLOOD);
+            this.tankInfoArray = new FluidTankInfo[] { this.tankInfo };
+        }
     }
 
     @Override
@@ -184,6 +195,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             return;
         }
         if (this.doInit) {
+            this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
             this.dawnMachineBlockCoords = new int[] { this.xCoord, this.zCoord };
             this.scanlineCoords = this.generateScanlineCoords();
             this.scanlineAerCoords = this.generateScanlineAerCoords();
@@ -193,7 +205,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             return;
         }
 
-        this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
         if (this.dawnMachineTicket == null || !this.hasInitializedChunkloading) {
             this.initalizeChunkloading();
         }
@@ -214,21 +225,22 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
         // Code from
         // https://github.com/VazkiiMods/Botania/blob/1.7.10-final/src/main/java/vazkii/botania/common/block/tile/TileTerraPlate.java
-        final ISparkEntity spark = this.getAttachedSpark();
-        if (spark != null) {
-            final List<ISparkEntity> sparkEntities = SparkHelper
-                .getSparksAround(this.worldObj, this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5);
-            for (final ISparkEntity otherSpark : sparkEntities) {
-                if (spark == otherSpark) {
-                    continue;
-                }
+        if (Loader.isModLoaded("botania")) {
+            final ISparkEntity spark = this.getAttachedSpark();
+            if (spark != null) {
+                final List<ISparkEntity> sparkEntities = SparkHelper
+                    .getSparksAround(this.worldObj, this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5);
+                for (final ISparkEntity otherSpark : sparkEntities) {
+                    if (spark == otherSpark) {
+                        continue;
+                    }
 
-                if (otherSpark.getAttachedTile() != null && otherSpark.getAttachedTile() instanceof IManaPool) {
-                    otherSpark.registerTransfer(spark);
+                    if (otherSpark.getAttachedTile() != null && otherSpark.getAttachedTile() instanceof IManaPool) {
+                        otherSpark.registerTransfer(spark);
+                    }
                 }
             }
         }
-
         // if (!(this.currentMana >= MAX_MANA)) {
         // this.recieveMana(1000);
         // }
@@ -806,16 +818,16 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         int currentLocX = startX, currentLocZ = startZ;
         int dx = 0, dz = -1;
         int found_corners = 0;
-        int[][] corner_array = { { this.chunkX - 50, this.chunkZ - 50 }, { this.chunkX + 50, this.chunkZ + 50 },
-            { this.chunkX - 50, this.chunkZ + 50 }, { this.chunkX + 50, this.chunkZ - 50 } };
+        int[][] corner_array = { { startCoords[0] - 50, startCoords[1] - 50 }, { startCoords[0] + 50, startCoords[1] + 50 },
+            { startCoords[0] - 50, startCoords[1] + 50 }, { startCoords[0] + 50, startCoords[1] - 50 } };
         final List<int[]> corners = Arrays.asList(corner_array);
 
         while (found_corners != 4) {
             final int[] current = { currentLocX, currentLocZ };
 
-            if (currentLocX >= this.chunkX - 50 && currentLocX <= this.chunkX + 50
-                && currentLocZ >= this.chunkZ - 50
-                && currentLocZ <= this.chunkZ + 50) {
+            if (currentLocX >= startCoords[0] - 50 && currentLocX <= startCoords[0] + 50
+                && currentLocZ >= startCoords[1] - 50
+                && currentLocZ <= startCoords[1] + 50) {
                 coords.add(current);
             }
 
@@ -880,8 +892,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     private void generateRandomCoords(boolean haveEnoughForAer) {
         if (haveEnoughForAer) {
-            this.chunkX = this.rand.nextInt(this.MAP_WIDTH_CHUNKS + 1);
-            this.chunkZ = this.rand.nextInt(this.MAP_HEIGHT_CHUNKS + 1);
+            this.chunkX = this.rand.nextInt(101) - 50 + this.dawnMachineChunkCoords[0];
+            this.chunkZ = this.rand.nextInt(101) - 50 + this.dawnMachineChunkCoords[1];
         } else {
             this.chunkX = this.rand.nextInt(9) - 4 + this.getDawnMachineChunkCoords()[0];
             this.chunkZ = this.rand.nextInt(9) - 4 + this.getDawnMachineChunkCoords()[1];
@@ -910,14 +922,16 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         final int bloodCost = resource.getBloodCost();
 
         final int enoughRF = this.currentRF >= energyCost ? 1 : 0, enoughMana = this.currentMana >= manaCost ? 1 : 0,
-            enoughBlood = this.fluid.amount >= bloodCost ? 1 : 0;
+            enoughBlood = this.fluid != null ? (this.fluid.amount >= bloodCost ? 1 : 0) : 0;
 
         final int discountMultiplier = 1 << enoughRF + enoughMana + enoughBlood;
 
         if (!simulate) {
             this.currentRF = enoughRF > 0 ? this.currentRF - energyCost : this.currentRF;
             this.currentMana = enoughMana > 0 ? this.currentMana - manaCost : this.currentMana;
-            this.fluid.amount = enoughBlood > 0 ? this.fluid.amount - bloodCost : this.fluid.amount;
+            if (this.fluid != null) {
+                this.fluid.amount = enoughBlood > 0 ? this.fluid.amount - bloodCost : this.fluid.amount;
+            }
         }
 
         return discountMultiplier;
@@ -1008,8 +1022,9 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
         this.internalAspectList.readFromNBT(tag.getCompoundTag("Essentia"));
         this.currentRF = tag.getInteger("CurrentRF");
-
-        this.fluid.amount = tag.getInteger("Blood");
+        if (this.fluid != null) {
+            this.fluid.amount = tag.getInteger("Blood");
+        }
         this.currentMana = tag.getInteger("Mana");
     }
 
@@ -1027,7 +1042,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         tag.setInteger("Index", this.index);
         tag.setInteger("AerIndex", this.aerIndex);
         tag.setInteger("CurrentRF", this.currentRF);
-        tag.setInteger("Blood", this.fluid.amount);
+        tag.setInteger("Blood", this.fluid != null ? this.fluid.amount : 0);
         tag.setInteger("Mana", this.currentMana);
     }
 
