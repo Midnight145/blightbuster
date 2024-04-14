@@ -818,8 +818,9 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         int currentLocX = startX, currentLocZ = startZ;
         int dx = 0, dz = -1;
         int found_corners = 0;
-        int[][] corner_array = { { startCoords[0] - 50, startCoords[1] - 50 }, { startCoords[0] + 50, startCoords[1] + 50 },
-            { startCoords[0] - 50, startCoords[1] + 50 }, { startCoords[0] + 50, startCoords[1] - 50 } };
+        int[][] corner_array = { { startCoords[0] - 50, startCoords[1] - 50 },
+            { startCoords[0] + 50, startCoords[1] + 50 }, { startCoords[0] - 50, startCoords[1] + 50 },
+            { startCoords[0] + 50, startCoords[1] - 50 } };
         final List<int[]> corners = Arrays.asList(corner_array);
 
         while (found_corners != 4) {
