@@ -2,6 +2,7 @@ package talonos.blightbuster;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import cofh.thermalexpansion.block.TEBlocks;
 import cpw.mods.fml.common.Loader;
@@ -13,6 +14,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
+import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
 import thaumcraft.api.wands.WandTriggerRegistry;
@@ -23,6 +25,12 @@ public class AddedResearch {
 
     public static void initResearch() {
         // ResearchCategories.registerCategory("ANTITAINT, arg1, arg2);
+
+        ResourceLocation background = new ResourceLocation("thaumcraft", "textures/gui/gui_researchback.png");
+        ResearchCategories.registerCategory(
+            "BLIGHTBUSTER",
+            new ResourceLocation("blightbuster", "textures/items/purityFocus.png"),
+            background);
 
         // Creates the silverleaf potion recipe
         final ShapedArcaneRecipe silverPotRecipe = ThaumcraftApi.addArcaneCraftingRecipe(
@@ -93,7 +101,7 @@ public class AddedResearch {
 
         final ResearchItem silverPotResearch = new ResearchItem(
             "SILVERPOTION", // research name
-            "ALCHEMY", // thaumonomicon page
+            "BLIGHTBUSTER", // thaumonomicon page
             new AspectList().add(Aspect.WATER, 3)
                 .add(Aspect.HEAL, 6)
                 .add(Aspect.TAINT, 3)
@@ -114,7 +122,7 @@ public class AddedResearch {
 
         final ResearchItem purityFocusResearch = new ResearchItem(
             "PURITYFOCUS",
-            "ALCHEMY",
+            "BLIGHTBUSTER",
             new AspectList().add(Aspect.TOOL, 3)
                 .add(Aspect.HEAL, 6)
                 .add(Aspect.TAINT, 3)
@@ -133,7 +141,7 @@ public class AddedResearch {
 
         final ResearchItem dawnTotemResearch = new ResearchItem(
             "DAWNTOTEM",
-            "ALCHEMY",
+            "BLIGHTBUSTER",
             new AspectList().add(Aspect.AURA, 6)
                 .add(Aspect.HEAL, 8)
                 .add(Aspect.TAINT, 3)
@@ -153,7 +161,7 @@ public class AddedResearch {
             // "machina 32, aer 4, ignis 4, ordo 4, arbor 4, auram 4, cognitio 4, fabrico 4, herba 4, potentia 4, sano
             // 4, vacuos 4
             "DAWNMACHINE",
-            "ALCHEMY",
+            "BLIGHTBUSTER",
             new AspectList().add(Aspect.MECHANISM, 32)
                 .add(Aspect.AIR, 4)
                 .add(Aspect.FIRE, 4)
@@ -207,7 +215,7 @@ public class AddedResearch {
 
             final ResearchItem dawnChargerResearch = new ResearchItem(
                 "DAWNCHARGER",
-                "ALCHEMY",
+                "BLIGHTBUSTER",
                 new AspectList().add(Aspect.ORDER, 4)
                     .add(Aspect.VOID, 5)
                     .add(Aspect.MECHANISM, 8)

@@ -45,6 +45,7 @@ tc.research_page.DAWNMACHINE.7=If given cognitio essentia, the Dawn Machine will
 tc.research_page.DAWNMACHINE.8=The amount of essentia this machine consumes is astounding. There is a way to lessen it, however. Providing RF to the Dawn Machine, through the plug directly under the cyber totem, halves the amount of essentia this machine requires. Likewise, you can place a spark on the Dawn Machine to provide it with mana, which has the same effect. There may also be another way using more...sinister kinds of magic to make the conversion even more efficient.
 tc.research_page.DAWNMACHINE.9=The Dawn Machine, fully supplied with essentia, will clean the entire continent quickly and efficiently. However, it may prove difficult to keep up with its essentia demands. Now that you have the research to do so, your final task will be to come up with ways to provide the needed essentia...<LINE>To keep it from consuming essentia when not in use, a redstone current may be applied to the center block to deactivate it.
 
+tc.research_category.BLIGHTBUSTER=Blightbuster
 
 blightbuster.researchnote=The alien grimoire reveals secret thaumaturgic knowledge!
 
