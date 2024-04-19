@@ -2,7 +2,7 @@
 	{
 	  "modid": "{modId}",
 	  "name": "{modName}",
-	  "description": "Collection of mods for Blightfall",
+	  "description": "All of the cleansing items for Blightfall",
 	  "version": "${modVersion}",
 	  "mcversion": "${minecraftVersion}",
 	  "url": "https://github.com/Midnight145/blightbuster",
