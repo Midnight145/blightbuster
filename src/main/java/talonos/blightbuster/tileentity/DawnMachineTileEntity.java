@@ -152,6 +152,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     static private HashMap<Long, CleansedChunk> cleansedChunks = new HashMap<Long, CleansedChunk>();
 
     private boolean firstTick = true, doInit = true;
+    public boolean isActive = false;
 
     static {
         final Class<?>[] taintedEntities = { EntityTaintSheep.class, EntityTaintChicken.class, EntityTaintCow.class,
@@ -200,8 +201,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         // Check for redstone signal
         if (this.getWorldObj()
             .getIndirectPowerLevelTo(this.xCoord, this.yCoord, this.zCoord, 1) > 0) {
+            this.isActive = false;
             return;
         }
+        this.isActive = true;
 
         for (final CleansedChunk chunk : cleansedChunks.values()) {
             chunk.exists = this.isChunkLoaded(chunk.x, chunk.z);

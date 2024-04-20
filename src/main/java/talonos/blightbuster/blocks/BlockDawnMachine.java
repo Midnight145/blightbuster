@@ -113,10 +113,30 @@ public class BlockDawnMachine extends BlockMultiblock {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what,
         float these, float are) {
+        if (world.isRemote) {
+            return true;
+        }
         DawnMachineTileEntity tileEntity = (DawnMachineTileEntity) world.getTileEntity(x, y, z);
 
         if (tileEntity == null) {
             return false;
+        }
+
+        if (player.isSneaking()) {
+            if (tileEntity.isActive) {
+                player.addChatComponentMessage(
+                    new ChatComponentText(
+                        "Currently cleansing chunk " + tileEntity.chunkX
+                            + ", "
+                            + tileEntity.chunkZ
+                            + " (block coords "
+                            + tileEntity.chunkX * 16
+                            + ", "
+                            + tileEntity.chunkZ * 16
+                            + ")."));
+            } else {
+                player.addChatComponentMessage(new ChatComponentText("The Dawn Machine is not active."));
+            }
         }
 
         ItemStack playerItem = player.getCurrentEquippedItem();
