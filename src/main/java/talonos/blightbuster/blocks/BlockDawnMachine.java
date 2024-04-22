@@ -14,6 +14,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import WayofTime.alchemicalWizardry.ModItems;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -121,8 +122,10 @@ public class BlockDawnMachine extends BlockMultiblock {
 
         ItemStack playerItem = player.getCurrentEquippedItem();
 
-        if (playerItem != null && playerItem.getItem()
-            .equals(ModItems.divinationSigil) && !player.isSneaking()) {
+        if (playerItem != null && Loader.isModLoaded("AWWayOfTime")
+            && playerItem.getItem()
+                .equals(ModItems.divinationSigil)
+            && !player.isSneaking()) {
             if (!player.worldObj.isRemote) {
                 player.addChatMessage(new ChatComponentText("Current Blood: " + tileEntity.getFluidAmount()));
                 player.addChatMessage(new ChatComponentText("Current RF: " + tileEntity.getEnergyStored()));
