@@ -4,7 +4,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import cofh.thermalexpansion.block.TEBlocks;
 import cpw.mods.fml.common.Loader;
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.handlers.TalonosWandTriggerManager;
@@ -195,7 +194,7 @@ public class AddedResearch {
 
         dawnMachineResearch.registerResearchItem();
 
-        if (Loader.isModLoaded("ThermalExpansion")) {
+        if (Loader.isModLoaded("CoFHCore")) {
             final ShapedArcaneRecipe dawnChargerRecipe = ThaumcraftApi.addArcaneCraftingRecipe(
                 "DAWNCHARGER",
                 new ItemStack(BBBlock.dawnCharger),
@@ -211,7 +210,7 @@ public class AddedResearch {
                 'S',
                 new ItemStack(ConfigBlocks.blockMagicalLog, 1, 1),
                 'L',
-                new ItemStack(TEBlocks.blockFrame, 1, 7));
+                new ItemStack(ConfigItems.itemAmuletVis, 1));
 
             final ResearchItem dawnChargerResearch = new ResearchItem(
                 "DAWNCHARGER",
@@ -230,7 +229,7 @@ public class AddedResearch {
                 .setPages(new ResearchPage("tc.research_page.DAWNCHARGER.1"), new ResearchPage(dawnChargerRecipe));
 
             dawnChargerResearch.setConcealed();
-            dawnChargerResearch.setParents("DAWNOFFERING");
+            dawnChargerResearch.setParents("DAWNMACHINE");
             dawnChargerResearch.registerResearchItem();
         }
 
@@ -245,7 +244,7 @@ public class AddedResearch {
         WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 1, BBBlock.dawnMachineInput, -1, "blightbuster");
         WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 1, BBBlock.dawnMachineBuffer, -1, "blightbuster");
         WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 2, BBBlock.offering, -1, "blightbuster");
-        if (Loader.isModLoaded("ThermalExpansion")) {
+        if (Loader.isModLoaded("CoFHCore")) {
             WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 3, BBBlock.dawnCharger, -1, "blightbuster");
         }
     }
