@@ -76,7 +76,7 @@ import vazkii.botania.api.mana.spark.SparkHelper;
 @Optional.InterfaceList(
     value = { @Interface(iface = "cofh.api.energy.IEnergyReceiver", modid = "CoFHCore"),
         @Interface(iface = "cofh.api.energy.IEnergyStorage", modid = "CoFHCore"),
-        @Interface(iface = "vazkii.botania.api.mana.spark.ISparkAttachable", modid = "botania") })
+        @Interface(iface = "vazkii.botania.api.mana.spark.ISparkAttachable", modid = "Botania") })
 public class DawnMachineTileEntity extends TileEntity implements IAspectSource, IAspectContainer, IEnergyReceiver,
     IEnergyStorage, ISparkAttachable, IFluidTank, IFluidHandler {
 
