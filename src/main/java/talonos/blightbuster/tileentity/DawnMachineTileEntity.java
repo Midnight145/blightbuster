@@ -225,7 +225,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
         // Code from
         // https://github.com/VazkiiMods/Botania/blob/1.7.10-final/src/main/java/vazkii/botania/common/block/tile/TileTerraPlate.java
-        if (Loader.isModLoaded("botania")) {
+        if (Loader.isModLoaded("Botania")) {
             final ISparkEntity spark = this.getAttachedSpark();
             if (spark != null) {
                 final List<ISparkEntity> sparkEntities = SparkHelper
