@@ -225,7 +225,11 @@ public class ItemPurityFocus extends ItemFocusBasic {
                         }
                     }
                     wand.consumeAllVis(itemStack, p, this.getVisCost(itemStack), true, false);
-                    BlightbusterNetwork.setBiomeAt(world, x, z, biomesForGeneration[0]);
+                    if (biomesForGeneration[0].biomeID == Config.biomeTaintID) {
+                        BlightbusterNetwork.setBiomeAt(world, x, z, BiomeGenBase.getBiome(Config.biomeMagicalForestID));
+                    } else {
+                        BlightbusterNetwork.setBiomeAt(world, x, z, biomesForGeneration[0]);
+                    }
 
                 }
             }

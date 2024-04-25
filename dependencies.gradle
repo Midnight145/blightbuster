@@ -34,12 +34,15 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    //runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev")
+//    runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev")
     
     compileOnly("com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-342-GTNH:dev")
-    api(rfg.deobf("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev"))
+
+    api("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
     compileOnly("com.github.GTNewHorizons:BloodMagic:1.5.1:dev")
+//    api("com.github.GTNewHorizons:BloodMagic:1.5.1:dev")
     compileOnly(rfg.deobf("curse.maven:botania-225643:2249359"))
+//    api(rfg.deobf("curse.maven:botania-225643:2249359"))
     compileOnly("com.github.GTNewHorizons:ThaumicEnergistics:1.6.4-GTNH:dev")
     compileOnly("curse.maven:thermalexpansion-69163:2388759")
     compileOnly("curse.maven:thermalfoundation-222880:2388753")

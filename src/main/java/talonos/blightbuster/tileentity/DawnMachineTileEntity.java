@@ -299,14 +299,14 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
                 final int[] newChunkCoords = { this.chunkX + OFFSETS[i][0], this.chunkZ + OFFSETS[i][1] };
                 final long hash = this.getHash();
-                // if (cleansedChunks.contains(hash)) {
-                // if (this.isChunkLoaded(newChunkCoords[0], newChunkCoords[1])) {
-                // Chunk chunk_ = getChunk(this.worldObj, newChunkCoords[0], newChunkCoords[1]);
-                // if (chunk_ != null && this.hasAnythingToCleanseHere(chunk_)) {
-                // this.executeCleanse(chunk);
-                // }
-                // }
-                // }
+                if (cleansedChunks.containsKey(hash)) {
+                    if (this.isChunkLoaded(newChunkCoords[0], newChunkCoords[1])) {
+                        Chunk chunk_ = getChunk(this.worldObj, newChunkCoords[0], newChunkCoords[1]);
+                        if (chunk_ != null && this.hasAnythingToCleanseHere(chunk_)) {
+                            this.executeCleanse(chunk);
+                        }
+                    }
+                }
 
                 final CleansedChunk cchunk = cleansedChunks.get(hash);
                 if (cchunk != null && cchunk.isDirty && cchunk.exists) {
@@ -402,7 +402,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                     .loadBlockGeneratorData(origBiome, coords[0], coords[1], 1, 1);
                 final BiomeGenBase biome = this.getWorldObj()
                     .getBiomeGenForCoords(coords[0], coords[1]);
-                if (biome.biomeID == Config.biomeTaintID && origBiome[0].biomeID != Config.biomeTaintID
+                if (biome.biomeID == Config.biomeTaintID
                     || biome.biomeID == Config.biomeEerieID && origBiome[0].biomeID != Config.biomeEerieID
                     || biome.biomeID == Config.biomeMagicalForestID
                         && origBiome[0].biomeID != Config.biomeMagicalForestID) {
@@ -483,7 +483,15 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                     || biome.biomeID == Config.biomeMagicalForestID) {
 
                     if (genBiomes != null && genBiomes.length > 0 && genBiomes[0] != null) {
-                        BlightbusterNetwork.setBiomeAt(this.getWorldObj(), coords[0], coords[1], genBiomes[0]);
+                        if (genBiomes[0].biomeID == Config.biomeTaintID) {
+                            BlightbusterNetwork.setBiomeAt(
+                                this.getWorldObj(),
+                                coords[0],
+                                coords[1],
+                                BiomeGenBase.getBiome(Config.biomeMagicalForestID));
+                        } else {
+                            BlightbusterNetwork.setBiomeAt(this.getWorldObj(), coords[0], coords[1], genBiomes[0]);
+                        }
                     }
                 }
             }

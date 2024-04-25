@@ -72,11 +72,19 @@ public class EntitySilverPotion extends EntityThrowable {
                                 1,
                                 1);
                         if ((biomesForGeneration != null) && (biomesForGeneration[0] != null)) {
-                            BlightbusterNetwork.setBiomeAt(
-                                this.worldObj,
-                                x + (int) this.posX,
-                                z + (int) this.posZ,
-                                biomesForGeneration[0]);
+                            if (biomesForGeneration[0].biomeID == Config.biomeTaintID) {
+                                BlightbusterNetwork.setBiomeAt(
+                                    this.worldObj,
+                                    x + (int) this.posX,
+                                    z + (int) this.posZ,
+                                    BiomeGenBase.getBiome(Config.biomeMagicalForestID));
+                            } else {
+                                BlightbusterNetwork.setBiomeAt(
+                                    this.worldObj,
+                                    x + (int) this.posX,
+                                    z + (int) this.posZ,
+                                    biomesForGeneration[0]);
+                            }
                         }
                     }
 
