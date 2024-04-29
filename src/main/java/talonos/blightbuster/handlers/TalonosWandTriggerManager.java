@@ -272,6 +272,10 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
             && !world.isRemote) {
             BBBlock.dawnMachineMultiblock
                 .convertMultiblockWithOrientationFromSideBlock(world, x, y, z, entry.getValue(), false, entry.getKey());
+            TileEntity newTile = world.getTileEntity(x, y, z);
+            if (newTile instanceof DawnMachineTileEntity dawnmachine) {
+                dawnmachine.updatePos();
+            }
             return true;
         }
         return false;

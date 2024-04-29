@@ -1494,6 +1494,9 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         return Vec3.createVectorHelper(right.xCoord + red, right.yCoord + green, right.zCoord + blue);
     }
 
+    public void updatePos() {
+        this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
+    }
     // END MISC. FUNCTIONS
 
 }
