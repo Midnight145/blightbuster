@@ -2,20 +2,15 @@ package talonos.blightbuster.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.biome.BiomeGenBase;
 
+import talonos.blightbuster.lib.CleansingHelper;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.network.packets.SpawnCleanseParticlesPacket;
-import thaumcraft.common.config.Config;
 
-public class DawnTotemEntity extends TileEntity {
+public class DawnTotemTileEntity extends TileEntity {
 
     public long queuedTicks = 0;
     public long offset = -1;
-
-    public boolean canUpdate() {
-        return true;
-    }
 
     public void updateEntity() {
         super.updateEntity();
@@ -94,20 +89,7 @@ public class DawnTotemEntity extends TileEntity {
 
         for (int x = centerX - 1; x < centerX + 2; x++) {
             for (int z = centerZ - 1; z < centerZ + 2; z++) {
-                if ((this.worldObj.getBiomeGenForCoords(x + this.xCoord, z + this.zCoord).biomeID
-                    == Config.biomeTaintID)
-                    || (this.worldObj.getBiomeGenForCoords(x + this.xCoord, z + this.zCoord).biomeID
-                        == Config.biomeEerieID)
-                    || (this.worldObj.getBiomeGenForCoords(x + this.xCoord, z + this.zCoord).biomeID
-                        == Config.biomeMagicalForestID)) {
-                    BiomeGenBase[] biomesForGeneration = null;
-                    biomesForGeneration = this.worldObj.getWorldChunkManager()
-                        .loadBlockGeneratorData(biomesForGeneration, x + this.xCoord, z + this.zCoord, 1, 1);
-                    if ((biomesForGeneration != null) && (biomesForGeneration[0] != null)) {
-                        BiomeGenBase biome = biomesForGeneration[0];
-                        BlightbusterNetwork.setBiomeAt(this.worldObj, x + this.xCoord, z + this.zCoord, biome);
-                    }
-                }
+                CleansingHelper.cleanseBiome(this.xCoord + x, this.zCoord + x, this.worldObj);
             }
         }
     }
