@@ -3,7 +3,6 @@ package talonos.blightbuster;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import cofh.thermalexpansion.block.TEBlocks;
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.handlers.TalonosWandTriggerManager;
 import talonos.blightbuster.items.BBItems;
@@ -78,22 +77,22 @@ public class AddedResearch {
                 new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 3),
                 new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 3), new ItemStack(ConfigBlocks.blockCrystal, 1, 4) });
 
-        ShapedArcaneRecipe dawnChargerRecipe = ThaumcraftApi.addArcaneCraftingRecipe(
-            "DAWNCHARGER",
-            new ItemStack(BBBlock.dawnCharger),
-            new AspectList().add(Aspect.WATER, 25)
-                .add(Aspect.ORDER, 25)
-                .add(Aspect.ENTROPY, 25)
-                .add(Aspect.FIRE, 25)
-                .add(Aspect.EARTH, 25)
-                .add(Aspect.AIR, 25),
-            "SSS",
-            "SLS",
-            "SSS",
-            'S',
-            new ItemStack(ConfigBlocks.blockMagicalLog, 1, 1),
-            'L',
-            new ItemStack(TEBlocks.blockFrame, 1, 7));
+        // ShapedArcaneRecipe dawnChargerRecipe = ThaumcraftApi.addArcaneCraftingRecipe(
+        // "DAWNCHARGER",
+        // new ItemStack(BBBlock.dawnCharger),
+        // new AspectList().add(Aspect.WATER, 25)
+        // .add(Aspect.ORDER, 25)
+        // .add(Aspect.ENTROPY, 25)
+        // .add(Aspect.FIRE, 25)
+        // .add(Aspect.EARTH, 25)
+        // .add(Aspect.AIR, 25),
+        // "SSS",
+        // "SLS",
+        // "SSS",
+        // 'S',
+        // new ItemStack(ConfigBlocks.blockMagicalLog, 1, 1),
+        // 'L',
+        // new ItemStack(TEBlocks.blockFrame, 1, 7));
 
         ResearchItem silverPotResearch = new ResearchItem(
             "SILVERPOTION", // research name
@@ -165,7 +164,7 @@ public class AddedResearch {
             new ItemStack(BBBlock.dawnCharger));
 
         dawnChargerResearch
-            .setPages(new ResearchPage("tc.research_page.DAWNCHARGER.1"), new ResearchPage(dawnChargerRecipe));
+            .setPages(new ResearchPage("tc.research_page.DAWNCHARGER.1")/* , new ResearchPage(dawnChargerRecipe) */);
 
         dawnChargerResearch.setConcealed();
         dawnChargerResearch.setParents("DAWNOFFERING");
@@ -173,7 +172,7 @@ public class AddedResearch {
 
         TalonosWandTriggerManager wandTrigger = new TalonosWandTriggerManager();
 
-        // Registers wand triggers, eg. on right click
+        // Registers wand triggers, e.g. on right click
         // First parameter is the trigger, second parameter is the event number, third
         // is the block, fourth is the block metadata, fifth is the mod id
         WandTriggerRegistry.registerWandBlockTrigger(wandTrigger, 0, BBBlock.cyberTotem, -1, "cavestokingdoms");
