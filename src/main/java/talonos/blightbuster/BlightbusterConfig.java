@@ -91,7 +91,7 @@ public class BlightbusterConfig {
             .get("General", "Enable Thaumic Energistics Integration", enableThaumicEnergistics)
             .getBoolean(enableThaumicEnergistics);
 
-        String buffer = config.get("Purification", "Default Biome", "plains")
+        String buffer = config.get("Purification", "Default Biome", "Plains")
             .getString();
         for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()) {
             if (biome != null && biome.biomeName.equals(buffer)) {
