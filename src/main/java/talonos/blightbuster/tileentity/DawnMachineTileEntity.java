@@ -125,6 +125,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     protected static final Vec3 COLOR_RED = Vec3.createVectorHelper(0.9, 0, 0);
     private int currentRF = 0;
 
+    private final ArrayList<CleansedChunk> toCleanse = new ArrayList<>();
+
     // END RF INTEGRATION
 
     // THAUMCRAFT INTEGRATION
@@ -197,8 +199,9 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         this.isActive = true;
 
         for (final CleansedChunk chunk : cleansedChunks.values()) {
-            chunk.exists = this.isChunkLoaded(chunk.x, chunk.z);
-            if (!chunk.exists && chunk.lastTick != chunk.exists) {
+            chunk.exists = getChunk(this.worldObj, chunk.x, chunk.z) != null;
+            if (!chunk.exists && chunk.lastTick && !chunk.isDirty) {
+                System.out.println("Marking chunk " + chunk.x + ", " + chunk.z + " as dirty");
                 chunk.isDirty = true;
             }
             chunk.lastTick = chunk.exists;
@@ -212,84 +215,88 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         this.ticksSinceLastCleanse %= cleanseLength;
 
         if (this.ticksSinceLastCleanse == 0 || this.waiting) {
-            if (!this.waiting) {
-                this.unloadChunk();
-                this.getNewCleanseCoords();
-                this.loadChunk();
-            }
-            Chunk chunk = getChunk(this.worldObj, this.chunkX, this.chunkZ);
-
-            if (chunk == null) {
-                this.waiting = true;
-                return;
-            }
-            this.waiting = false;
+            Chunk chunk = getNextChunk();
+            if (chunk == null) return;
 
             boolean anythingToDo = this.hasAnythingToCleanseHere(chunk);
+            // will retry up to 10 times to find a chunk with something to cleanse.
+            // 10 is arbitrary, but the higher the number is, the longer each tick takes which is bad
+            // !this.waiting is to prevent wasted loops when a chunk is waiting to load so we can check it again
             int count = 0;
-            while (!anythingToDo && count <= 10) {
+            while (!anythingToDo && count <= 10 && !this.waiting) {
                 if (!this.haveEnoughFor(DawnMachineResource.COGNITIO)) {
                     break;
                 }
                 this.spend(DawnMachineResource.COGNITIO);
-                if (!this.waiting) {
-                    this.unloadChunk();
-                    this.getNewCleanseCoords();
-                    this.loadChunk();
-                }
-                chunk = getChunk(this.worldObj, this.chunkX, this.chunkZ);
-                if (chunk == null) {
-                    this.waiting = true;
-                    return;
-                }
-                this.waiting = false;
+                chunk = this.getNextChunk();
+                if (chunk == null) continue;
                 anythingToDo = this.hasAnythingToCleanseHere(chunk);
                 count++;
             }
-
             if (cleanseLength == 4) {
                 this.spend(DawnMachineResource.MACHINA);
             }
-            this.executeCleanse(chunk);
-
-            for (int i = 0; i < 8; i++) {
-                for (final Object entity : this.getWorldObj().playerEntities) {
-                    EntityPlayer player = null;
-                    if (entity instanceof EntityPlayer) {
-                        player = (EntityPlayer) entity;
-                    }
-                    if (player == null) {
-                        return;
-                    }
-                }
-                final int[] newChunkCoords = { this.chunkX + OFFSETS[i][0], this.chunkZ + OFFSETS[i][1] };
-                final long hash = this.getHash(newChunkCoords[0], newChunkCoords[1]);
-                // if (cleansedChunks.contains(hash)) {
-                // if (this.isChunkLoaded(newChunkCoords[0], newChunkCoords[1])) {
-                // Chunk chunk_ = getChunk(this.worldObj, newChunkCoords[0], newChunkCoords[1]);
-                // if (chunk_ != null && this.hasAnythingToCleanseHere(chunk_)) {
-                // this.executeCleanse(chunk);
-                // }
-                // }
-                // }
-
-                final CleansedChunk cchunk = cleansedChunks.get(hash);
-                if (cchunk != null && cchunk.isDirty && cchunk.exists) {
-                    final Chunk chunk_ = getChunk(this.worldObj, newChunkCoords[0], newChunkCoords[1]);
-                    if (chunk_ != null && this.hasAnythingToCleanseHere(chunk_)) {
-                        this.executeCleanse(chunk);
-                        cchunk.isDirty = false;
-                    }
-                }
+            if (anythingToDo) {
+                this.executeCleanse(chunk);
+                cleansedChunks.put(this.getHash(), new CleansedChunk(this.chunkX, this.chunkZ));
             }
+
+            checkHashedChunks();
         }
         this.ticksSinceLastCleanse++;
+    }
+
+    private Chunk getNextChunk() {
+        if (!this.waiting) {
+            this.unloadChunk();
+            this.getNewCleanseCoords();
+            this.loadChunk();
+        }
+        Chunk chunk = getChunk(this.worldObj, this.chunkX, this.chunkZ);
+
+        this.waiting = chunk == null;
+        return chunk;
+    }
+
+    private void checkHashedChunks() {
+        for (final CleansedChunk cchunk : toCleanse) {
+            tryCleanseCleanedChunk(cchunk);
+        }
+        toCleanse.clear();
+        for (final CleansedChunk cchunk : cleansedChunks.values()) {
+            tryCleanseCleanedChunk(cchunk);
+        }
 
     }
 
+    private void tryCleanseCleanedChunk(CleansedChunk cchunk) {
+        System.out.println("Checking chunk " + cchunk.x + ", " + cchunk.z);
+        if (cchunk.isDirty) {
+            System.out.println("Chunk is dirty, attempting cleanse");
+            final Chunk chunk = getChunk(this.worldObj, cchunk.x, cchunk.z);
+            if (chunk == null) {
+                System.out.println("Chunk is null, waiting for it to load");
+                if (!toCleanse.contains(cchunk)) {
+                    toCleanse.add(cchunk);
+                }
+                this.loadChunk(cchunk.x, cchunk.z);
+                return;
+            }
+            if (this.hasAnythingToCleanseHere(chunk)) {
+                System.out.println("Chunk has something to cleanse, cleansing");
+                this.executeCleanse(chunk);
+                cchunk.isDirty = false;
+                cchunk.lastTick = false; // this stops the chunk from being cleansed over and over again from being
+                                         // unloaded
+            } else {
+                System.out.println("Chunk is clean, doing nothing");
+            }
+            this.unloadChunk(cchunk.x, cchunk.z);
+        }
+    }
     // CLEANSING FUNCTIONS
 
-    protected class CleansedChunk {
+    protected static class CleansedChunk {
 
         CleansedChunk(int x, int z) {
             this.x = x;
@@ -333,9 +340,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         if (this.haveEnoughFor(DawnMachineResource.SANO)) {
             this.cleanseMobs(chunk);
         }
-        // cleansedChunks.add(this.getHash(this.chunkX, this.chunkZ));
-        cleansedChunks.put(this.getHash(this.chunkX, this.chunkZ), new CleansedChunk(this.chunkX, this.chunkZ));
-
         this.sendParticlePackets(didUseIgnis);
     }
 
