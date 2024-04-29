@@ -26,7 +26,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.ForgeChunkManager;
-import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -70,7 +69,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     private final FluidStack fluid = new FluidStack(blood, 0);
     private final FluidTankInfo tankInfo = new FluidTankInfo(this.getFluid(), MAX_BLOOD);
     private final FluidTankInfo[] tankInfoArray = { this.tankInfo };
-    int bloodLastTick = 0;
 
     // END FLUID INTEGRATION
 
@@ -140,83 +138,53 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     public int chunkZ = Integer.MAX_VALUE;
 
     // Last cleansed chunk
-    public int lastChunkX = Integer.MAX_VALUE;
-    public int lastChunkZ = Integer.MAX_VALUE;
+    private int lastChunkX = Integer.MAX_VALUE;
+    private int lastChunkZ = Integer.MAX_VALUE;
 
     // Map size
-    public final int MAP_WIDTH_CHUNKS = 111;
-    public final int MAP_HEIGHT_CHUNKS = 136;
 
     private int ticksSinceLastCleanse = 0;
 
-    // Offsets for all adjacent chunks, used to check if still clean
-    public static final int[][] OFFSETS = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 },
-        { 1, 1 } };
     int[] dawnMachineChunkCoords = null;
     int[][] scanlineCoords = null;
     int[][] scanlineAerCoords = null;
-    int[] dawnMachineBlockCoords = null;
+    int[] dawnMachineBlockCoords;
     int index = 0;
     int aerIndex = 0;
 
     // Variables used in chunkloading
     private ForgeChunkManager.Ticket dawnMachineTicket;
-    private boolean hasInitializedChunkloading = false;
 
     // Denotes if waiting for chunk to load
     private boolean waiting = false;
 
-    // Used in cleanseSingleMob for nicer purifying of animals
-    // Class<?> is tainted mob, constructor is the purified version
-    static private HashMap<Class<?>, Constructor<?>> taint_purified_constructors = new HashMap<Class<?>, Constructor<?>>();
     // static private HashSet<Long> cleansedChunks = new HashSet<Long>();
-    static private HashMap<Long, CleansedChunk> cleansedChunks = new HashMap<Long, CleansedChunk>();
+    private final HashMap<Long, CleansedChunk> cleansedChunks = new HashMap<>();
 
-    private boolean firstTick = true, doInit = true;
     public boolean isActive = false;
-
-    static {
-        final Class<?>[] taintedEntities = { EntityTaintSheep.class, EntityTaintChicken.class, EntityTaintCow.class,
-            EntityTaintPig.class, EntityTaintVillager.class, EntityTaintCreeper.class };
-
-        final Class<?>[] purifiedEntities = { EntitySheep.class, EntityChicken.class, EntityCow.class, EntityPig.class,
-            EntityVillager.class, EntityCreeper.class };
-
-        for (int i = 0; i < taintedEntities.length; i++) {
-            try {
-                taint_purified_constructors.put(taintedEntities[i], purifiedEntities[i].getConstructor(World.class));
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     // Used for generating coordinates and desert chance placement
     Random rand;
+    private boolean init = true;
 
     public DawnMachineTileEntity() {
         this.rand = new Random(System.currentTimeMillis());
+
     }
 
     @Override
     public void updateEntity() {
-        if (this.firstTick) {
-            this.firstTick = false;
-            return;
-        }
-        if (this.doInit) {
-            this.dawnMachineBlockCoords = new int[] { this.xCoord, this.zCoord };
-            this.scanlineCoords = this.generateScanlineCoords();
-            this.scanlineAerCoords = this.generateScanlineAerCoords();
-            this.doInit = false;
-        }
         if (this.getWorldObj().isRemote) {
             return;
         }
-
-        this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
-        if (this.dawnMachineTicket == null || !this.hasInitializedChunkloading) {
+        if (this.init) {
+            // this all has to wait for the first tick because the tileentity isn't fully initialized until then
+            this.dawnMachineBlockCoords = new int[] { this.xCoord, this.zCoord };
+            this.scanlineCoords = this.generateScanlineCoords();
+            this.scanlineAerCoords = this.generateScanlineAerCoords();
+            this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
             this.initalizeChunkloading();
+            this.init = false;
         }
 
         // Check for redstone signal
@@ -549,21 +517,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
                     final BiomeGenBase biome = this.getWorldObj()
                         .getBiomeGenForCoords(coords[0], coords[1]);
-                    final String biomeName = biome.biomeName.toLowerCase(Locale.ENGLISH);
-
-                    // Default to oak
-                    int treeType = 0;
-                    if (biomeName.contains("taiga") || biomeName.contains("tundra")) {
-                        treeType = 1; // Spruce trees
-                    } else if (biomeName.contains("birch")) {
-                        treeType = 2; // Birch trees
-                    } else if (biomeName.contains("jungle")) {
-                        treeType = 3; // Jungle tree
-                    } else if (biomeName.contains("savanna")) {
-                        treeType = 4; // Acacia trees
-                    } else if (biomeName.contains("roof")) {
-                        treeType = 5;
-                    }
+                    int treeType = getTreeType(biome);
 
                     this.getWorldObj()
                         .setBlock(coords[0], topBlock + 1, coords[1], Blocks.sapling, treeType, 3);
@@ -603,6 +557,25 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             }
         }
         return haveUsedIgnis;
+    }
+
+    private static int getTreeType(BiomeGenBase biome) {
+        final String biomeName = biome.biomeName.toLowerCase(Locale.ENGLISH);
+
+        // Default to oak
+        int treeType = 0;
+        if (biomeName.contains("taiga") || biomeName.contains("tundra")) {
+            treeType = 1; // Spruce trees
+        } else if (biomeName.contains("birch")) {
+            treeType = 2; // Birch trees
+        } else if (biomeName.contains("jungle")) {
+            treeType = 3; // Jungle tree
+        } else if (biomeName.contains("savanna")) {
+            treeType = 4; // Acacia trees
+        } else if (biomeName.contains("roof")) {
+            treeType = 5;
+        }
+        return treeType;
     }
 
     private boolean cleanseSingleBlock(int x, int y, int z, Block block, int meta, boolean doHerbaCheck) {
@@ -690,9 +663,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             final TileEntity tile = this.getWorldObj()
                 .getTileEntity(x, y, z);
 
-            if (tile != null && tile instanceof TileNode) {
-                final TileNode node = (TileNode) tile;
-                if (node != null && node.getNodeType() == NodeType.TAINTED) {
+            if (tile instanceof TileNode node) {
+                if (node.getNodeType() == NodeType.TAINTED) {
                     this.spend(DawnMachineResource.AURAM);
                     node.setNodeType(NodeType.NORMAL);
                     node.markDirty();
@@ -948,11 +920,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         this.signalUpdate();
     }
 
-    public boolean spendAndCheck(DawnMachineResource resource) {
-        this.spend(resource);
-        return this.haveEnoughFor(resource);
-    }
-
     public boolean needsMore(Aspect aspect) {
         final DawnMachineResource relevantResource = DawnMachineResource.getResourceFromAspect(aspect);
 
@@ -981,16 +948,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         return new int[] { (int) Math.floor(this.xCoord / 16.0), (int) Math.floor(this.zCoord / 16.0) };
     }
 
-    private long getHash(int x, int z) {
-        long hashedCoords = this.chunkX << 32;
+    private long getHash() {
+        long hashedCoords = (long) this.chunkX << 32;
         hashedCoords |= this.chunkZ;
         return hashedCoords;
-    }
-
-    // Adds chunk x, z coordinate to get "true" coordinate in relation to the map,
-    // not the chunk
-    public int[] getBlockCoordsFromChunk(Chunk chunk, int x, int z) {
-        return new int[] { chunk.xPosition * 16 + x, chunk.zPosition * 16 + z };
     }
 
     // END HELPER FUNCTIONS
@@ -1318,13 +1279,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     @Override
     public void recieveMana(int mana) {
         this.currentMana = Math.max(0, Math.min(MAX_MANA, this.currentMana + mana));
-        // i
-        // have
-        // no
-        // idea
-        // what
-        // this
-        // does
         this.worldObj.func_147453_f(
             this.xCoord,
             this.yCoord,
@@ -1334,7 +1288,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     @Override
     public boolean canRecieveManaFromBursts() {
-        return false;
+        return true;
     }
 
     // ISparkAttachable
@@ -1391,26 +1345,36 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     private void initalizeChunkloading() {
         this.dawnMachineTicket = ForgeChunkManager
             .requestTicket(BlightBuster.instance, this.getWorldObj(), ForgeChunkManager.Type.NORMAL);
+        if (this.dawnMachineTicket == null) {
+            return;
+        }
         this.dawnMachineTicket.getModData()
             .setString("id", "DawnMachine");
         final int[] dawnMachineCoords = this.getDawnMachineChunkCoords();
         ForgeChunkManager
             .forceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(dawnMachineCoords[0], dawnMachineCoords[1]));
-        this.hasInitializedChunkloading = true;
     }
 
     private void loadChunk() {
-        if (Arrays.equals(new int[] { this.chunkX, this.chunkZ }, this.getDawnMachineChunkCoords())) {
+        this.loadChunk(this.chunkX, this.chunkZ);
+    }
+
+    private void loadChunk(int x, int z) {
+        if (Arrays.equals(new int[] { x, z }, this.getDawnMachineChunkCoords())) {
             return;
         }
-        ForgeChunkManager.forceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
+        ForgeChunkManager.forceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(x, z));
     }
 
     private void unloadChunk() {
-        if (Arrays.equals(new int[] { this.chunkX, this.chunkZ }, this.getDawnMachineChunkCoords())) {
+        this.unloadChunk(this.chunkX, this.chunkZ);
+    }
+
+    private void unloadChunk(int x, int z) {
+        if (Arrays.equals(new int[] { x, z }, this.getDawnMachineChunkCoords()) || !this.isChunkLoaded(x, z)) {
             return;
         }
-        ForgeChunkManager.unforceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(this.chunkX, this.chunkZ));
+        ForgeChunkManager.unforceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(x, z));
     }
 
     private boolean isChunkLoaded(int x, int z) {
@@ -1420,15 +1384,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             }
         }
         return false;
-    }
-
-    public void forceChunkLoading(Ticket ticket) {
-        if (this.dawnMachineTicket == null) {
-            this.dawnMachineTicket = ticket;
-        }
-        final int[] dawnMachineCoords = this.getDawnMachineChunkCoords();
-        ForgeChunkManager
-            .forceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(dawnMachineCoords[0], dawnMachineCoords[1]));
     }
 
     @Override
@@ -1441,11 +1396,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     // MISC. FUNCTIONS
 
-    public void pairDawnCharger(NBTTagCompound tag) {
-        this.writeToNBT(tag);
-    }
-
-    public Vec3 getGlowColor(double partialTicks) {
+    public Vec3 getGlowColor() {
         if (this.currentRF >= FULLGREEN_RF) {
             return COLOR_GREEN;
         }
