@@ -1,25 +1,17 @@
 package talonos.blightbuster.tileentity;
 
-import java.lang.reflect.Constructor;
+import static talonos.blightbuster.lib.CleansingHelper.cleanseMobFromMapping;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.function.Function;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.passive.EntityWolf;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -48,6 +40,7 @@ import cofh.api.energy.IEnergyStorage;
 import cpw.mods.fml.common.registry.GameRegistry;
 import noppes.npcs.entity.EntityCustomNpc;
 import talonos.blightbuster.BlightBuster;
+import talonos.blightbuster.lib.CleansingHelper;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.network.packets.SpawnCleanseParticlesPacket;
 import talonos.blightbuster.tileentity.dawnmachine.DawnMachineResource;
@@ -55,19 +48,12 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IAspectContainer;
 import thaumcraft.api.aspects.IAspectSource;
-import thaumcraft.api.entities.ITaintedMob;
 import thaumcraft.api.nodes.NodeType;
 import thaumcraft.common.blocks.BlockFluxGoo;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.entities.EntityFallingTaint;
-import thaumcraft.common.entities.monster.EntityTaintChicken;
-import thaumcraft.common.entities.monster.EntityTaintCow;
-import thaumcraft.common.entities.monster.EntityTaintCreeper;
-import thaumcraft.common.entities.monster.EntityTaintPig;
-import thaumcraft.common.entities.monster.EntityTaintSheep;
 import thaumcraft.common.entities.monster.EntityTaintSporeSwarmer;
-import thaumcraft.common.entities.monster.EntityTaintVillager;
 import thaumcraft.common.tiles.TileNode;
 import vazkii.botania.api.mana.IManaPool;
 import vazkii.botania.api.mana.spark.ISparkAttachable;
@@ -413,7 +399,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         if (this.haveEnoughFor(DawnMachineResource.SANO)) {
             for (final List<Entity> list : chunk.entityLists) {
                 for (final Entity entity : list) {
-                    if (entity instanceof ITaintedMob) {
+                    if (entity instanceof EntityCustomNpc && BlightbusterConfig.customNpcSupport
+                        && BlightbusterConfig.customNpcMappings.containsKey(((EntityCustomNpc) entity).linkedName)) {
+                        return true;
+                    }
+                    if (BlightbusterConfig.purifiedMappings.containsKey(entity.getClass())) {
                         return true;
                     }
                 }
@@ -468,23 +458,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         return false;
     }
 
-    protected void cleanseBiome(Chunk chunk) {
-        BiomeGenBase[] genBiomes = null;
+    public void cleanseBiome(Chunk chunk) {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 final int[] coords = this.getBlockCoordsFromChunk(chunk, x, z);
-                genBiomes = this.getWorldObj()
-                    .getWorldChunkManager()
-                    .loadBlockGeneratorData(genBiomes, coords[0], coords[1], 1, 1);
-                final BiomeGenBase biome = this.getWorldObj()
-                    .getBiomeGenForCoords(coords[0], coords[1]);
-                if (biome.biomeID == Config.biomeTaintID || biome.biomeID == Config.biomeEerieID
-                    || biome.biomeID == Config.biomeMagicalForestID) {
-
-                    if (genBiomes != null && genBiomes.length > 0 && genBiomes[0] != null) {
-                        BlightbusterNetwork.setBiomeAt(this.getWorldObj(), coords[0], coords[1], genBiomes[0]);
-                    }
-                }
+                CleansingHelper.cleanseBiome(coords[0], coords[1], this.worldObj);
             }
         }
     }
@@ -712,39 +690,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     protected void cleanseMobs(Chunk chunk) {
 
-        final List<Entity>[] entityLists = chunk.entityLists.clone();
+        final List[] entityLists = chunk.entityLists.clone();
         for (int i = 0; i < entityLists.length; i++) {
             for (int j = 0; j < entityLists[i].size(); j++) {
-                boolean spend = false;
-                if (DawnMachineTileEntity.taint_purified_constructors.containsKey(
-                    chunk.entityLists[i].get(j)
-                        .getClass())) {
-                    spend = true;
-                    try {
-                        this.cleanseSingleMob(
-                            (Entity) chunk.entityLists[i].get(j),
-                            (EntityLivingBase) taint_purified_constructors.get(
-                                chunk.entityLists[i].get(j)
-                                    .getClass())
-                                .newInstance(this.getWorldObj()));
-                    } catch (final Exception e) {}
-                }
-
-                final Entity entity = (Entity) chunk.entityLists[i].get(j);
-                if (entity instanceof EntityCustomNpc) {
-                    final EntityCustomNpc npc = (EntityCustomNpc) entity;
-
-                    if ("TaintedOcelot".equals(npc.linkedName)) {
-                        this.cleanseSingleMob(entity, new EntityOcelot(entity.worldObj));
-                        spend = true;
-                    } else if ("TaintedWolf".equals(npc.linkedName)) {
-                        this.cleanseSingleMob(entity, new EntityWolf(entity.worldObj));
-                        spend = true;
-                    } else if ("TaintedTownsfolk".equals(npc.linkedName)) {
-                        this.cleanseSingleMob(entity, new EntityVillager(entity.worldObj));
-                        spend = true;
-                    }
-                }
+                boolean spend = cleanseMobFromMapping((Entity) chunk.entityLists[i].get(j), this.worldObj);
 
                 if (spend) {
                     this.spend(DawnMachineResource.SANO);
@@ -754,15 +703,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                 }
             }
         }
-    }
-
-    private void cleanseSingleMob(Entity tainted, EntityLivingBase cleansed) {
-        // new entity copies original entity location
-        cleansed.copyLocationAndAnglesFrom(tainted);
-        // original entity spawns new entity into the world
-        tainted.worldObj.spawnEntityInWorld(cleansed);
-        // new entity removes the old entity
-        cleansed.worldObj.removeEntity(tainted);
     }
 
     // END CLEANSING FUNCTIONS
