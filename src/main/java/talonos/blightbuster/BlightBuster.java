@@ -85,7 +85,9 @@ public class BlightBuster {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        AddedResearch.initResearch();
+        if (BlightbusterConfig.registerResearch) {
+            AddedResearch.initResearch();
+        }
         proxy.registerRenderers();
         if (BlightbusterConfig.enableBlood) {
             RitualDawnMachine.init();

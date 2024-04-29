@@ -89,7 +89,7 @@ public class DawnTotemTileEntity extends TileEntity {
 
         for (int x = centerX - 1; x < centerX + 2; x++) {
             for (int z = centerZ - 1; z < centerZ + 2; z++) {
-                CleansingHelper.cleanseBiome(this.xCoord + x, this.zCoord + x, this.worldObj);
+                CleansingHelper.cleanseBiome(this.xCoord + x, this.zCoord + z, this.worldObj);
             }
         }
     }

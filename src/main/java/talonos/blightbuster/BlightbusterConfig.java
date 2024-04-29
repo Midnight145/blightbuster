@@ -11,15 +11,18 @@ import net.minecraftforge.common.config.Configuration;
 
 public class BlightbusterConfig {
 
+    // todo: add comments to config entries
     public static boolean enableWorldTainter = false;
     public static boolean enableSuperWorldTainter = false;
     public static boolean enableDawnMachine = true;
     public static boolean enablePurityFocus = true;
     public static boolean enableSilverPotion = true;
     public static boolean enableDawnTotem = true;
-    public static boolean enableDawnCharger = true;
+    public static boolean enableDawnCharger = false;
     public static boolean enableDawnOffering = false;
 
+    public static boolean registerResearch = true; // should only be false if using something like minetweaker to manage
+                                                   // research
     public static boolean createThaumTab = false;
 
     public static boolean customNpcSupport = false;
@@ -69,6 +72,8 @@ public class BlightbusterConfig {
         enableDawnOffering = config.get("General", "Enable Dawn Offering", enableDawnOffering)
             .getBoolean(enableDawnOffering);
 
+        registerResearch = config.get("General", "Register Research", registerResearch)
+            .getBoolean(registerResearch);
         createThaumTab = config.get("General", "Create Thaumcraft Tab", createThaumTab)
             .getBoolean(createThaumTab);
 
@@ -91,7 +96,7 @@ public class BlightbusterConfig {
             .get("General", "Enable Thaumic Energistics Integration", enableThaumicEnergistics)
             .getBoolean(enableThaumicEnergistics);
 
-        String buffer = config.get("Purification", "Default Biome", "plains")
+        String buffer = config.get("Purification", "Default Biome", "Plains")
             .getString();
         for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()) {
             if (biome != null && biome.biomeName.equals(buffer)) {

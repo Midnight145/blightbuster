@@ -36,6 +36,7 @@ import net.minecraftforge.fluids.IFluidTank;
 import WayofTime.alchemicalWizardry.AlchemicalWizardry;
 import cofh.api.energy.IEnergyReceiver;
 import cofh.api.energy.IEnergyStorage;
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import noppes.npcs.entity.EntityCustomNpc;
 import talonos.blightbuster.BlightBuster;
@@ -60,6 +61,11 @@ import vazkii.botania.api.mana.spark.ISparkAttachable;
 import vazkii.botania.api.mana.spark.ISparkEntity;
 import vazkii.botania.api.mana.spark.SparkHelper;
 
+@SuppressWarnings(value = { "unchecked", "rawtypes" })
+@Optional.InterfaceList(
+    value = { @Optional.Interface(iface = "cofh.api.energy.IEnergyReceiver", modid = "CoFHCore"),
+        @Optional.Interface(iface = "cofh.api.energy.IEnergyStorage", modid = "CoFHCore"),
+        @Optional.Interface(iface = "vazkii.botania.api.mana.spark.ISparkAttachable", modid = "Botania") })
 public class DawnMachineTileEntity extends TileEntity implements IAspectSource, IAspectContainer, IEnergyReceiver,
     IEnergyStorage, ISparkAttachable, IFluidTank, IFluidHandler {
 
