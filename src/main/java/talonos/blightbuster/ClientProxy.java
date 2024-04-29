@@ -19,11 +19,18 @@ public class ClientProxy extends CommonProxy {
     public void registerRenderers() {
         super.registerRenderers();
 
-        RenderingRegistry
-            .registerEntityRenderingHandler(EntitySilverPotion.class, new RenderSnowball(BBItems.silverPotion));
-        RenderManager.instance.entityRenderMap.put(EntitySilverPotion.class, new RenderSnowball(BBItems.silverPotion));
-        ClientRegistry.bindTileEntitySpecialRenderer(DawnMachineTileEntity.class, new DawnMachineControllerRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(DawnMachineSpoutTileEntity.class, new DawnMachineSpoutRenderer());
+        if (BlightbusterConfig.enableSilverPotion) {
+            RenderingRegistry
+                .registerEntityRenderingHandler(EntitySilverPotion.class, new RenderSnowball(BBItems.silverPotion));
+            RenderManager.instance.entityRenderMap
+                .put(EntitySilverPotion.class, new RenderSnowball(BBItems.silverPotion));
+        }
+        if (BlightbusterConfig.enableDawnMachine) {
+            ClientRegistry
+                .bindTileEntitySpecialRenderer(DawnMachineTileEntity.class, new DawnMachineControllerRenderer());
+            ClientRegistry
+                .bindTileEntitySpecialRenderer(DawnMachineSpoutTileEntity.class, new DawnMachineSpoutRenderer());
+        }
     }
 
     @Override

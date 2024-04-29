@@ -19,6 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
+import talonos.blightbuster.BlightbusterConfig;
 import talonos.blightbuster.multiblock.BlockMultiblock;
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import thaumcraft.common.Thaumcraft;
@@ -140,15 +141,16 @@ public class BlockDawnMachine extends BlockMultiblock {
         }
 
         ItemStack playerItem = player.getCurrentEquippedItem();
-
-        if (playerItem != null && playerItem.getItem()
-            .equals(ModItems.divinationSigil) && !player.isSneaking()) {
-            if (!player.worldObj.isRemote) {
-                player.addChatMessage(new ChatComponentText("Current Blood: " + tileEntity.getFluidAmount()));
-                player.addChatMessage(new ChatComponentText("Current RF: " + tileEntity.getEnergyStored()));
-                player.addChatMessage(new ChatComponentText("Current Mana: " + tileEntity.getCurrentMana()));
+        if (BlightbusterConfig.enableBlood) {
+            if (playerItem != null && playerItem.getItem()
+                .equals(ModItems.divinationSigil) && !player.isSneaking()) {
+                if (!player.worldObj.isRemote) {
+                    player.addChatMessage(new ChatComponentText("Current Blood: " + tileEntity.getFluidAmount()));
+                    player.addChatMessage(new ChatComponentText("Current RF: " + tileEntity.getEnergyStored()));
+                    player.addChatMessage(new ChatComponentText("Current Mana: " + tileEntity.getCurrentMana()));
+                }
+                return true;
             }
-            return true;
         }
 
         return false;

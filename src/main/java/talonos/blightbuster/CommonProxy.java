@@ -4,15 +4,21 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import talonos.blightbuster.tileentity.DawnChargerTileEntity;
 import talonos.blightbuster.tileentity.DawnMachineSpoutTileEntity;
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
-import talonos.blightbuster.tileentity.DawnTotemEntity;
+import talonos.blightbuster.tileentity.DawnTotemTileEntity;
 
 public class CommonProxy {
 
     public void registerTileEntities() {
-        GameRegistry.registerTileEntity(DawnTotemEntity.class, "DawnTotemEntity");
-        GameRegistry.registerTileEntity(DawnMachineSpoutTileEntity.class, "DawnMachineSpout");
-        GameRegistry.registerTileEntity(DawnMachineTileEntity.class, "DawnMachine");
-        GameRegistry.registerTileEntity(DawnChargerTileEntity.class, "DawnCharger");
+        if (BlightbusterConfig.enableDawnTotem) {
+            GameRegistry.registerTileEntity(DawnTotemTileEntity.class, "DawnTotemEntity");
+        }
+        if (BlightbusterConfig.enableDawnMachine) {
+            GameRegistry.registerTileEntity(DawnMachineSpoutTileEntity.class, "DawnMachineSpout");
+            GameRegistry.registerTileEntity(DawnMachineTileEntity.class, "DawnMachine");
+            if (BlightbusterConfig.enableDawnCharger && BlightbusterConfig.enableRf) {
+                GameRegistry.registerTileEntity(DawnChargerTileEntity.class, "DawnCharger");
+            }
+        }
     }
 
     public void registerRenderers() {}

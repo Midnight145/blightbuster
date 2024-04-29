@@ -1,7 +1,8 @@
 package talonos.blightbuster.items;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+
+import talonos.blightbuster.BlightbusterConfig;
 
 public class BBItems {
 
@@ -9,17 +10,19 @@ public class BBItems {
     public static Item silverPotion;
     public static Item worldTainter;
     public static Item worldSuperTainter;
-    public static Item worldOreKiller;
-    public static ItemBlock dawnChargerItem;
-    public static Item boundRing;
 
     public static void init() {
-        purityFocus = new ItemPurityFocus();
-        silverPotion = new ItemSilverPotion();
-        worldTainter = new ItemWorldTainter();
-        worldOreKiller = new ItemWorldOreKiller();
-        worldSuperTainter = new ItemSuperTestWorldTainter();
-        worldSuperTainter = new ItemAlienTome();
-        boundRing = new ItemBoundRing();
+        if (BlightbusterConfig.enablePurityFocus) {
+            purityFocus = new ItemPurityFocus();
+        }
+        if (BlightbusterConfig.enableSilverPotion) {
+            silverPotion = new ItemSilverPotion();
+        }
+        if (BlightbusterConfig.enableWorldTainter) {
+            worldTainter = new ItemWorldTainter();
+        }
+        if (BlightbusterConfig.enableSuperWorldTainter) {
+            worldSuperTainter = new ItemSuperTestWorldTainter();
+        }
     }
 }

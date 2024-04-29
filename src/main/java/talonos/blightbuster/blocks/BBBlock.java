@@ -3,6 +3,7 @@ package talonos.blightbuster.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
+import talonos.blightbuster.BlightbusterConfig;
 import talonos.blightbuster.multiblock.DawnMachineMultiblock;
 import talonos.blightbuster.multiblock.Multiblock;
 
@@ -21,11 +22,6 @@ public class BBBlock extends Block {
         super(Material.rock);
     }
 
-    /**
-     * Constructor for defined material.
-     *
-     * @param material
-     */
     public BBBlock(Material material) {
         super(material);
     }
@@ -40,15 +36,24 @@ public class BBBlock extends Block {
     public static Block dawnCharger;
 
     public static void init() {
-        dawnMachineMultiblock = new DawnMachineMultiblock();
+        if (BlightbusterConfig.enableDawnMachine) {
+            dawnMachineMultiblock = new DawnMachineMultiblock();
+            dawnMachineInput = new BlockDawnMachineInput();
+            dawnMachineBuffer = new BlockDawnMachineDummy();
+            dawnMachine = new BlockDawnMachine();
+            cyberTotem = new BlockCyberTotem();
 
-        dawnTotem = new BlockDawnTotem(Material.wood);
-        dawnMachineInput = new BlockDawnMachineInput();
-        dawnMachineBuffer = new BlockDawnMachineDummy();
-        dawnMachine = new BlockDawnMachine();
-        cyberTotem = new BlockCyberTotem();
-        offering = new BlockOffering();
-        dawnCharger = new BlockDawnCharger();
+            if (BlightbusterConfig.enableDawnOffering) {
+                offering = new BlockOffering();
+            }
+            if (BlightbusterConfig.enableDawnCharger && BlightbusterConfig.enableRf) {
+                dawnCharger = new BlockDawnCharger();
+            }
+        }
+
+        if (BlightbusterConfig.enableDawnTotem) {
+            dawnTotem = new BlockDawnTotem(Material.wood);
+        }
 
         dawnMachineMultiblock.init();
     }
