@@ -14,6 +14,7 @@ import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.multiblock.BlockMultiblock;
 import talonos.blightbuster.multiblock.entries.MultiblockEntry;
 import talonos.blightbuster.tileentity.DawnChargerTileEntity;
+import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.IWandTriggerManager;
@@ -158,13 +159,7 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
                     return false;
                 }
                 final TileEntity charger = world.getTileEntity(x, y, z);
-                this.pairDawnChargerToDawnMachine(
-                    charger.getWorldObj(),
-                    wand,
-                    charger.getWorldObj().provider.dimensionId,
-                    x,
-                    y,
-                    z);
+                this.pairDawnChargerToDawnMachine(charger.getWorldObj(), wand, x, y, z);
                 player.addChatMessage(new ChatComponentTranslation("gui.charger.pairSuccessful"));
         }
         return false;
@@ -187,8 +182,6 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
             dawnMachineTag.getInteger("Y"),
             dawnMachineTag.getInteger("Z"),
             dawnMachineTag.getInteger("Dimension"));
-        dawnCharger.setDawnMachinePaired(true);
-
     }
 
     private boolean isWandPaired(ItemStack wand, int dimension, int x, int y, int z) {
@@ -203,12 +196,9 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
         }
 
         final NBTTagCompound dawnMachineTag = wandTag.getCompoundTag("DawnMachine");
-        if (dawnMachineTag.getInteger("Dimension") != dimension || dawnMachineTag.getInteger("X") != x
-            || dawnMachineTag.getInteger("Y") != y
-            || dawnMachineTag.getInteger("Z") != z) {
-            return false;
-        }
-        return true;
+        return dawnMachineTag.getInteger("Dimension") == dimension && dawnMachineTag.getInteger("X") == x
+            && dawnMachineTag.getInteger("Y") == y
+            && dawnMachineTag.getInteger("Z") == z;
     }
 
     private void pairDawnMachineToWand(World world, ItemStack wand, int dimension, int x, int y, int z) {
@@ -243,7 +233,7 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
 
     }
 
-    private void pairDawnChargerToDawnMachine(World world, ItemStack wand, int dimension, int x, int y, int z) {
+    private void pairDawnChargerToDawnMachine(World world, ItemStack wand, int x, int y, int z) {
         final NBTTagCompound wandTag = wand.getTagCompound();
         NBTTagCompound wandChargerTag;
         if (!wandTag.hasKey("DawnMachine")) {
@@ -264,17 +254,6 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
             dawnMachineTag.getInteger("Y"),
             dawnMachineTag.getInteger("Z"),
             dawnMachineTag.getInteger("Dimension"));
-        dawnCharger.setDawnMachinePaired(true);
-    }
-
-    private NBTTagCompound createChargerTag(NBTTagCompound dawnMachineTag) {
-        final NBTTagCompound dawnChargerTag = new NBTTagCompound();
-
-        dawnChargerTag.setInteger("Dimension", dawnMachineTag.getInteger("Dimension"));
-        dawnChargerTag.setInteger("X", dawnMachineTag.getInteger("X"));
-        dawnChargerTag.setInteger("Y", dawnMachineTag.getInteger("Y"));
-        dawnChargerTag.setInteger("Z", dawnMachineTag.getInteger("Z"));
-        return dawnChargerTag;
     }
 
     private boolean createDawnMachine(ItemStack stack, EntityPlayer player, World world, int x, int y, int z) {

@@ -9,7 +9,6 @@ import cofh.api.energy.IEnergyHandler;
 public class DawnChargerTileEntity extends TileEntity implements IEnergyHandler {
 
     private final int[] dawnMachineCoords = new int[4];
-    private boolean dawnMachinePaired = false;
     DawnMachineTileEntity dawnMachine;
 
     public DawnChargerTileEntity() {
@@ -85,13 +84,7 @@ public class DawnChargerTileEntity extends TileEntity implements IEnergyHandler 
         try {
             this.dawnMachine = (DawnMachineTileEntity) this.getWorldObj()
                 .getTileEntity(this.dawnMachineCoords[0], this.dawnMachineCoords[1], this.dawnMachineCoords[2]);
-        } catch (final NullPointerException e) {
-            return;
-        }
-    }
-
-    public void setDawnMachinePaired(boolean paired) {
-        this.dawnMachinePaired = paired;
+        } catch (final NullPointerException ignored) {}
     }
 
     public void pairDawnMachine(int x, int y, int z, int dimension) {

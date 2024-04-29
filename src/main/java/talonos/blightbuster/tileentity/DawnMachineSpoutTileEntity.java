@@ -19,7 +19,9 @@ public class DawnMachineSpoutTileEntity extends TileEntity implements IEssentiaT
     protected DawnMachineTileEntity getController() {
         TileEntity controller = BBBlock.dawnMachineInput
             .getMultiblockController(getWorldObj(), this.xCoord, this.yCoord, this.zCoord);
-        if (controller == null || !(controller instanceof DawnMachineTileEntity)) return null;
+        if (!(controller instanceof DawnMachineTileEntity)) {
+            return null;
+        }
 
         return (DawnMachineTileEntity) controller;
     }
@@ -72,7 +74,7 @@ public class DawnMachineSpoutTileEntity extends TileEntity implements IEssentiaT
     public boolean doesContainerAccept(Aspect aspect) {
         DawnMachineTileEntity controller = getController();
 
-        return (controller == null) ? false : controller.doesContainerAccept(aspect);
+        return controller != null && controller.doesContainerAccept(aspect);
     }
 
     @Override
@@ -88,28 +90,28 @@ public class DawnMachineSpoutTileEntity extends TileEntity implements IEssentiaT
     public boolean takeFromContainer(Aspect aspect, int i) {
         DawnMachineTileEntity controller = getController();
 
-        return (controller == null) ? false : controller.takeFromContainer(aspect, i);
+        return controller != null && controller.takeFromContainer(aspect, i);
     }
 
     @Override
     public boolean takeFromContainer(AspectList aspectList) {
         DawnMachineTileEntity controller = getController();
 
-        return (controller == null) ? false : controller.takeFromContainer(aspectList);
+        return controller != null && controller.takeFromContainer(aspectList);
     }
 
     @Override
     public boolean doesContainerContainAmount(Aspect aspect, int i) {
         DawnMachineTileEntity controller = getController();
 
-        return (controller == null) ? false : controller.doesContainerContainAmount(aspect, i);
+        return controller != null && controller.doesContainerContainAmount(aspect, i);
     }
 
     @Override
     public boolean doesContainerContain(AspectList aspectList) {
         DawnMachineTileEntity controller = getController();
 
-        return (controller == null) ? false : controller.doesContainerContain(aspectList);
+        return controller != null && controller.doesContainerContain(aspectList);
     }
 
     @Override

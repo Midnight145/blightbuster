@@ -14,10 +14,6 @@ public abstract class Multiblock {
 
     public abstract void init();
 
-    public int findMultiblockFit(World world, int x, int y, int z) {
-        return findMultiblockFit(world, x, y, z, false, null);
-    }
-
     public int findMultiblockFit(World world, int x, int y, int z, boolean isConverted, MultiblockEntry centerEntry) {
         for (int orientation = 0; orientation < 4; orientation++) {
             if (checkSingleFit(world, x, y, z, orientation, isConverted, centerEntry)) return orientation;
@@ -62,8 +58,7 @@ public abstract class Multiblock {
 
     public Pair<MultiblockEntry, Integer> getEntry(World world, int x, int y, int z, int orientation, Block block,
         int meta) {
-        boolean convertedMultiblock = false;
-        if (orientation >= 0) convertedMultiblock = true;
+        boolean convertedMultiblock = orientation >= 0;
 
         for (MultiblockEntry entry : getMultiblockSchema()) {
             IMultiblockEntryState test = (convertedMultiblock) ? entry.getConvertedState() : entry.getBuildState();
@@ -71,10 +66,10 @@ public abstract class Multiblock {
             if (test.isBlockState(block, meta)) {
                 if (!convertedMultiblock) {
                     int outOrientation = findMultiblockFit(world, x, y, z, false, entry);
-                    if (outOrientation >= 0) return new ImmutablePair<MultiblockEntry, Integer>(entry, outOrientation);
+                    if (outOrientation >= 0) return new ImmutablePair<>(entry, outOrientation);
                 } else {
                     if (checkSingleFit(world, x, y, z, orientation, true, entry))
-                        return new ImmutablePair<MultiblockEntry, Integer>(entry, orientation);
+                        return new ImmutablePair<>(entry, orientation);
                 }
             }
         }
@@ -124,14 +119,6 @@ public abstract class Multiblock {
         convertMultiblockWithOrientation(world, x - offsetX, y - offsetY, z - offsetZ, orientation, doUnconvert);
     }
 
-    public void convertMultiblockWithOrientation(World world, int x, int y, int z, int orientation) {
-        convertMultiblockWithOrientation(world, x, y, z, orientation, false);
-    }
-
-    public void unconvertMultiblockWithOrientation(World world, int x, int y, int z, int orientation) {
-        convertMultiblockWithOrientation(world, x, y, z, orientation, true);
-    }
-
     protected void convertMultiblockWithOrientation(World world, int x, int y, int z, int orientation,
         boolean doUnconvert) {
         ForgeDirection zAxis = ForgeDirection.SOUTH;
@@ -147,8 +134,8 @@ public abstract class Multiblock {
             int offsetZ = xAxis.offsetZ * entry.getXOffset() + zAxis.offsetZ * entry.getZOffset();
             int offsetY = entry.getYOffset();
 
-            IMultiblockEntryState testState = null;
-            IMultiblockEntryState convertState = null;
+            IMultiblockEntryState testState;
+            IMultiblockEntryState convertState;
 
             if (doUnconvert) {
                 testState = entry.getConvertedState();

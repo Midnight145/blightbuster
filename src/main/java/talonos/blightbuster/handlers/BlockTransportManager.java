@@ -20,14 +20,14 @@ public class BlockTransportManager {
 
     };
 
-    private static class BlockData {
+    protected static class BlockData {
 
-        private int offsetX;
-        private int offsetY;
-        private int offsetZ;
-        private Block block;
-        private int metadata;
-        private NBTTagCompound tileEntityData;
+        private final int offsetX;
+        private final int offsetY;
+        private final int offsetZ;
+        private final Block block;
+        private final int metadata;
+        private final NBTTagCompound tileEntityData;
 
         public BlockData(int offsetX, int offsetY, int offsetZ, Block block, int metadata,
             NBTTagCompound tileEntityData) {
@@ -76,7 +76,7 @@ public class BlockTransportManager {
     }
 
     protected ArrayList<BlockData> captureData(World world, int originX, int originY, int originZ) {
-        ArrayList<BlockData> blockData = new ArrayList<BlockData>(125);
+        ArrayList<BlockData> blockData = new ArrayList<>(125);
 
         for (int y = -2; y <= 2; y++) {
             for (int x = -2; x <= 2; x++) {
@@ -127,17 +127,13 @@ public class BlockTransportManager {
     }
 
     protected void wipeCapturedData(World world, int wipeX, int wipeY, int wipeZ, ArrayList<BlockData> data) {
-        int dataSize = data.size();
-        for (int i = 0; i < dataSize; i++) {
-            BlockData block = data.get(i);
+        for (BlockData block : data) {
             this.wipeBlock(world, wipeX + block.getOffsetX(), wipeY + block.getOffsetY(), wipeZ + block.getOffsetZ());
         }
     }
 
     protected void generateData(World world, int genX, int genY, int genZ, ArrayList<BlockData> data) {
-        int dataSize = data.size();
-        for (int i = 0; i < dataSize; i++) {
-            BlockData block = data.get(i);
+        for (BlockData block : data) {
             this.generateBlock(
                 world,
                 genX + block.getOffsetX(),
@@ -159,11 +155,7 @@ public class BlockTransportManager {
         if (tileEntity instanceof IEssentiaContainerItem) {
             return true;
         }
-        if (tileEntity instanceof IEssentiaTransport) {
-            return true;
-        }
-
-        return false;
+        return tileEntity instanceof IEssentiaTransport;
     }
 
     protected void wipeBlock(World world, int x, int y, int z) {

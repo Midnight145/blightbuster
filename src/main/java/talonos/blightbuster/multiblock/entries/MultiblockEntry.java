@@ -2,12 +2,12 @@ package talonos.blightbuster.multiblock.entries;
 
 public class MultiblockEntry {
 
-    private int xOffset;
-    private int yOffset;
-    private int zOffset;
+    private final int xOffset;
+    private final int yOffset;
+    private final int zOffset;
 
-    private IMultiblockEntryState buildState;
-    private IMultiblockEntryState convertedState;
+    private final IMultiblockEntryState buildState;
+    private final IMultiblockEntryState convertedState;
 
     public MultiblockEntry(int xOffset, int yOffset, int zOffset, IMultiblockEntryState buildBlock,
         IMultiblockEntryState convertedBlock) {

@@ -8,10 +8,6 @@ public class OrientationMultiblockState extends BasicMultiblockState {
         super(block);
     }
 
-    public OrientationMultiblockState(Block block, int meta) {
-        super(block, meta);
-    }
-
     public OrientationMultiblockState(Block block, int meta, int metaFlags) {
         super(block, meta, metaFlags);
     }

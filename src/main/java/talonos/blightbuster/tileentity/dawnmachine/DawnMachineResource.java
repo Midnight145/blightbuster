@@ -21,15 +21,15 @@ public enum DawnMachineResource {
     ARBOR(Aspect.TREE, 256 * 4, 2 * 4, 8192 * 4, 32, 500, 25, 0.2f, 0),
     HERBA(Aspect.PLANT, 512 * 4, 2 * 4, 16384 * 4, 16, 250, 12, 0.8f, 0);
 
-    private Aspect aspect;
-    private int valueMultiplier;
-    private int cost;
-    private int maximumValue;
-    private int rfDiscountCost;
-    private int manaDiscountCost;
-    private int bloodDiscountCost;
-    private float u;
-    private float v;
+    private final Aspect aspect;
+    private final int valueMultiplier;
+    private final int cost;
+    private final int maximumValue;
+    private final int rfDiscountCost;
+    private final int manaDiscountCost;
+    private final int bloodDiscountCost;
+    private final float u;
+    private final float v;
 
     DawnMachineResource(Aspect aspect, int valueMultiplier, int cost, int maximumValue, int rfDiscountCost,
         int manaDiscountCost, int bloodDiscountCost, float u, float v) {
@@ -38,8 +38,8 @@ public enum DawnMachineResource {
         this.cost = cost;
         this.maximumValue = maximumValue;
         this.rfDiscountCost = rfDiscountCost;
-        this.manaDiscountCost = manaDiscountCost; // TODO: update
-        this.bloodDiscountCost = bloodDiscountCost; // TODO: update
+        this.manaDiscountCost = manaDiscountCost;
+        this.bloodDiscountCost = bloodDiscountCost;
         this.u = u;
         this.v = v;
     }

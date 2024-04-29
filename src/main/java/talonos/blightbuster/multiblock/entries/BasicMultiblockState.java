@@ -5,9 +5,9 @@ import net.minecraft.world.World;
 
 public class BasicMultiblockState implements IMultiblockEntryState {
 
-    private Block block;
-    private int meta;
-    private int metaFlags;
+    private final Block block;
+    private final int meta;
+    private final int metaFlags;
 
     public BasicMultiblockState(Block block) {
         this(block, 0, 0);

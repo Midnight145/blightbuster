@@ -21,7 +21,7 @@ import thaumcraft.common.tiles.TileEtherealBloom;
 public class RitualDawnMachine extends RitualEffect {
 
     DawnMachineTileEntity dawnMachine;
-    int[][] bloomOffsets = { { 7, 3, 0 }, { -7, 3, 0 }, { 5, 3, -5 }, { 5, 3, 5 }, { 0, 3, 7 }, { 0, 3, -7 },
+    final int[][] bloomOffsets = { { 7, 3, 0 }, { -7, 3, 0 }, { 5, 3, -5 }, { 5, 3, 5 }, { 0, 3, 7 }, { 0, 3, -7 },
         { -5, 3, -5 }, { -5, 3, 5 } };
     boolean going = false;
 
@@ -67,13 +67,13 @@ public class RitualDawnMachine extends RitualEffect {
     }
 
     @Override
-    public int getCostPerRefresh() { // TODO Auto-generated method stub
+    public int getCostPerRefresh() {
         return 500;
     }
 
     @Override
-    public List<RitualComponent> getRitualComponentList() { // TODO Auto-generated method stub
-        ArrayList<RitualComponent> dawnMachineRitual = new ArrayList<RitualComponent>();
+    public List<RitualComponent> getRitualComponentList() {
+        ArrayList<RitualComponent> dawnMachineRitual = new ArrayList<>();
         dawnMachineRitual.add(new RitualComponent(1, 0, 0, RitualComponent.EARTH));
         dawnMachineRitual.add(new RitualComponent(2, 0, 0, RitualComponent.WATER));
         dawnMachineRitual.add(new RitualComponent(4, 0, 0, RitualComponent.AIR));
@@ -149,7 +149,7 @@ public class RitualDawnMachine extends RitualEffect {
         int y = ritualStone.getYCoord();
         int z = ritualStone.getZCoord();
         TileEntity tile = world.getTileEntity(x + coords[0], y + coords[1], z + coords[2]);
-        return tile != null && tile instanceof TileEtherealBloom;
+        return tile instanceof TileEtherealBloom;
     }
 
     public static void init() {

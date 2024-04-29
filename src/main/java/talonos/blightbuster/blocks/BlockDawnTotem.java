@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
-import talonos.blightbuster.tileentity.DawnTotemEntity;
+import talonos.blightbuster.tileentity.DawnTotemTileEntity;
 
 public class BlockDawnTotem extends BBBlock {
 
@@ -35,14 +35,10 @@ public class BlockDawnTotem extends BBBlock {
 
     @Override
     public TileEntity createTileEntity(World world, int meta) {
-        return new DawnTotemEntity();
+        return new DawnTotemTileEntity();
     }
 
     // Icon stuff:
-
-    /* ICONS */
-    public static final int TOP_BOT = 0;
-    public static final int SIDES = 1;
 
     @SideOnly(Side.CLIENT)
     private static IIcon[] icons;

@@ -40,7 +40,7 @@ public class ItemWorldTainter extends Item {
     public ItemStack onItemRightClick(ItemStack itemStack, World theWorld, EntityPlayer thePlayer) {
         // Lazily initialize the list of stuff to randomly replace.
         if (toRandomlyReplace == null) {
-            toRandomlyReplace = new HashSet<Block>();
+            toRandomlyReplace = new HashSet<>();
             toRandomlyReplace.add(Blocks.snow_layer);
             toRandomlyReplace.add(GameRegistry.findBlock("Natura", "N Crops"));
         }

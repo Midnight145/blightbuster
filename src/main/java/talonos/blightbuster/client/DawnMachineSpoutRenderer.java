@@ -13,8 +13,8 @@ import thaumcraft.api.aspects.Aspect;
 
 public class DawnMachineSpoutRenderer extends TileEntitySpecialRenderer {
 
-    private ResourceLocation normalTexture = new ResourceLocation("blightbuster:textures/aspects/rawAspects.png");
-    private ResourceLocation glowTexture = new ResourceLocation("blightbuster:textures/aspects/glowAspects.png");
+    private final ResourceLocation normalTexture = new ResourceLocation("blightbuster:textures/aspects/rawAspects.png");
+    private final ResourceLocation glowTexture = new ResourceLocation("blightbuster:textures/aspects/glowAspects.png");
     private boolean initializedTexFilters = false;
 
     public DawnMachineSpoutRenderer() {
@@ -33,6 +33,7 @@ public class DawnMachineSpoutRenderer extends TileEntitySpecialRenderer {
         DawnMachineSpoutTileEntity te = (DawnMachineSpoutTileEntity) tile;
 
         if (!initializedTexFilters) initializeTexFilters();
+        initializedTexFilters = true;
 
         GL11.glPushMatrix();
         ForgeDirection dir = ForgeDirection.NORTH;
@@ -99,8 +100,6 @@ public class DawnMachineSpoutRenderer extends TileEntitySpecialRenderer {
     }
 
     private boolean isRightSide(Aspect aspect) {
-        if (aspect == Aspect.MIND || aspect == Aspect.MECHANISM || aspect == Aspect.TREE || aspect == Aspect.PLANT)
-            return true;
-        return false;
+        return aspect == Aspect.MIND || aspect == Aspect.MECHANISM || aspect == Aspect.TREE || aspect == Aspect.PLANT;
     }
 }

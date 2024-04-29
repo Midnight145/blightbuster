@@ -14,7 +14,7 @@ import thaumcraft.common.config.ConfigBlocks;
 
 public class DawnMachineMultiblock extends Multiblock {
 
-    private List<MultiblockEntry> entries = new ArrayList<MultiblockEntry>(9);
+    private final List<MultiblockEntry> entries = new ArrayList<>(9);
     private MultiblockEntry controller = null;
 
     public DawnMachineMultiblock() {}

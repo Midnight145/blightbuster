@@ -76,7 +76,7 @@ public class DawnMachineControllerRenderer extends TileEntitySpecialRenderer {
         }
         GL11.glPopMatrix();
 
-        Vec3 color = te.getGlowColor(f);
+        Vec3 color = te.getGlowColor();
 
         if (color == null) return;
 

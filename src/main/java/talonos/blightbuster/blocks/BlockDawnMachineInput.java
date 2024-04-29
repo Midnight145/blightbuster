@@ -25,10 +25,10 @@ public class BlockDawnMachineInput extends BlockMultiblock {
 
     private IIcon backgroundTop;
     private IIcon backgroundSide;
-    private IIcon[] topLeftIcons = new IIcon[6];
-    private IIcon[] topRightIcons = new IIcon[6];
-    private IIcon[] bottomLeftIcons = new IIcon[6];
-    private IIcon[] bottomRightIcons = new IIcon[6];
+    private final IIcon[] topLeftIcons = new IIcon[6];
+    private final IIcon[] topRightIcons = new IIcon[6];
+    private final IIcon[] bottomLeftIcons = new IIcon[6];
+    private final IIcon[] bottomRightIcons = new IIcon[6];
 
     public BlockDawnMachineInput() {
         super(Material.wood, BBBlock.dawnMachineMultiblock);

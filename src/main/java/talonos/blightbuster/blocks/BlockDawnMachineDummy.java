@@ -22,8 +22,8 @@ public class BlockDawnMachineDummy extends BlockMultiblock {
 
     private IIcon backgroundTop;
     private IIcon backgroundSide;
-    private IIcon[] leftBufferLayer = new IIcon[6];
-    private IIcon[] rightBufferLayer = new IIcon[6];
+    private final IIcon[] leftBufferLayer = new IIcon[6];
+    private final IIcon[] rightBufferLayer = new IIcon[6];
 
     protected BlockDawnMachineDummy() {
         super(Material.wood, BBBlock.dawnMachineMultiblock);
@@ -94,12 +94,10 @@ public class BlockDawnMachineDummy extends BlockMultiblock {
     private IIcon getInputIcon(int side, int meta) {
         int block = meta / 4;
 
-        switch (block) {
-            case 1:
-                return rightBufferLayer[side];
-            default:
-                return leftBufferLayer[side];
+        if (block == 1) {
+            return rightBufferLayer[side];
         }
+        return leftBufferLayer[side];
     }
 
     @Override
