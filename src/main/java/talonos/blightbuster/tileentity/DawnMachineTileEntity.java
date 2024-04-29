@@ -40,6 +40,7 @@ import cofh.api.energy.IEnergyStorage;
 import cpw.mods.fml.common.registry.GameRegistry;
 import noppes.npcs.entity.EntityCustomNpc;
 import talonos.blightbuster.BlightBuster;
+import talonos.blightbuster.BlightbusterConfig;
 import talonos.blightbuster.lib.CleansingHelper;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.network.packets.SpawnCleanseParticlesPacket;
@@ -77,6 +78,40 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     private static final int MAX_MANA = 1000000;
     private int currentMana = 0;
+
+    private static final Function<DawnMachineTileEntity, Void> registerManaTransfer;
+
+    // We need to use a static initializer to set the registerManaTransfer function
+    // We do this so we don't have to check whether mana is enabled every single tick, we can check once and then set
+    // the function to use
+    static {
+        if (BlightbusterConfig.enableMana) {
+            registerManaTransfer = (dawnmachine) -> {
+                // Code from
+                // https://github.com/VazkiiMods/Botania/blob/1.7.10-final/src/main/java/vazkii/botania/common/block/tile/TileTerraPlate.java
+                final ISparkEntity spark = dawnmachine.getAttachedSpark();
+                if (spark != null) {
+                    final List<ISparkEntity> sparkEntities = SparkHelper.getSparksAround(
+                        dawnmachine.worldObj,
+                        dawnmachine.xCoord + 0.5,
+                        dawnmachine.yCoord + 0.5,
+                        dawnmachine.zCoord + 0.5);
+                    for (final ISparkEntity otherSpark : sparkEntities) {
+                        if (spark == otherSpark) {
+                            continue;
+                        }
+
+                        if (otherSpark.getAttachedTile() != null && otherSpark.getAttachedTile() instanceof IManaPool) {
+                            otherSpark.registerTransfer(spark);
+                        }
+                    }
+                }
+                return null;
+            };
+        } else {
+            registerManaTransfer = (dawnmachine) -> null;
+        }
+    }
 
     // END BOTANIA INTEGRATION
 
@@ -190,6 +225,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             this.isActive = false;
             return;
         }
+
         this.isActive = true;
 
         for (final CleansedChunk chunk : cleansedChunks.values()) {
@@ -200,30 +236,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             chunk.lastTick = chunk.exists;
         }
 
-        // Code from
-        // https://github.com/VazkiiMods/Botania/blob/1.7.10-final/src/main/java/vazkii/botania/common/block/tile/TileTerraPlate.java
-        final ISparkEntity spark = this.getAttachedSpark();
-        if (spark != null) {
-            final List<ISparkEntity> sparkEntities = SparkHelper
-                .getSparksAround(this.worldObj, this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5);
-            for (final ISparkEntity otherSpark : sparkEntities) {
-                if (spark == otherSpark) {
-                    continue;
-                }
-
-                if (otherSpark.getAttachedTile() != null && otherSpark.getAttachedTile() instanceof IManaPool) {
-                    otherSpark.registerTransfer(spark);
-                }
-            }
-        }
-
-        // if (!(this.currentMana >= MAX_MANA)) {
-        // this.recieveMana(1000);
-        // }
-        if (this.dawnMachineBlockCoords[0] != this.xCoord || this.dawnMachineBlockCoords[1] != this.zCoord) {
-            this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
-            this.dawnMachineBlockCoords = new int[] { this.xCoord, this.zCoord };
-        }
+        registerManaTransfer.apply(this);
 
         // Determines cleanse speed in ticks
         final int cleanseLength = this.haveEnoughFor(DawnMachineResource.MACHINA) ? 4 : 12;
@@ -387,7 +400,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                     .loadBlockGeneratorData(origBiome, coords[0], coords[1], 1, 1);
                 final BiomeGenBase biome = this.getWorldObj()
                     .getBiomeGenForCoords(coords[0], coords[1]);
-                if (biome.biomeID == Config.biomeTaintID && origBiome[0].biomeID != Config.biomeTaintID
+                if (biome.biomeID == Config.biomeTaintID
                     || biome.biomeID == Config.biomeEerieID && origBiome[0].biomeID != Config.biomeEerieID
                     || biome.biomeID == Config.biomeMagicalForestID
                         && origBiome[0].biomeID != Config.biomeMagicalForestID) {
@@ -465,6 +478,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                 CleansingHelper.cleanseBiome(coords[0], coords[1], this.worldObj);
             }
         }
+    }
+
+    public int[] getBlockCoordsFromChunk(Chunk chunk, int x, int z) {
+        return new int[] { chunk.xPosition * 16 + x, chunk.zPosition * 16 + z };
     }
 
     protected boolean cleanseBlocks(Chunk chunk) {
@@ -762,25 +779,28 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     }
 
     private int[][] generateScanlineAerCoords() {
-        final List<int[]> coords = new ArrayList<int[]>();
+        final List<int[]> coords = new ArrayList<>();
         coords.add(this.getDawnMachineChunkCoords());
         final int[] startCoords = this.getDawnMachineChunkCoords();
         final int startX = startCoords[0], startZ = startCoords[1];
         int currentLocX = startX, currentLocZ = startZ;
         int dx = 0, dz = -1;
         int found_corners = 0;
-        final int[][] corner_array = { { 0, 0 }, { 112, 135 }, { 0, 135 }, { 112, 0 } };
-        final List<int[]> corners = Arrays.asList(corner_array);
+        List<int[]> corners = Arrays
+            .asList(BlightbusterConfig.useCorners ? BlightbusterConfig.dawnMachineCorners : this.generateCorners());
 
         while (found_corners != 4) {
             final int[] current = { currentLocX, currentLocZ };
 
-            if (currentLocX >= 0 && currentLocX <= 112 && currentLocZ >= 0 && currentLocZ <= 135) {
+            int minX = Math.min(corners.get(0)[0], corners.get(1)[0]);
+            int maxX = Math.max(corners.get(0)[0], corners.get(1)[0]);
+            int minZ = Math.min(corners.get(0)[1], corners.get(1)[1]);
+            int maxZ = Math.max(corners.get(0)[1], corners.get(1)[1]);
+
+            if (currentLocX >= minX && currentLocX <= maxX && currentLocZ >= minZ && currentLocZ <= maxZ) {
                 coords.add(current);
             }
-
-            final boolean found = this.doesContain(corners, current);
-            if (found) {
+            if (this.doesContain(corners, current)) {
                 found_corners++;
             }
 
@@ -802,6 +822,14 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         return returnval;
     }
 
+    private int[][] generateCorners() {
+        int radius = BlightbusterConfig.maxDawnMachineRadius;
+        return new int[][] { { this.dawnMachineChunkCoords[0] + radius, this.dawnMachineChunkCoords[1] + radius },
+            { this.dawnMachineChunkCoords[0] - radius, this.dawnMachineChunkCoords[1] - radius },
+            { this.dawnMachineChunkCoords[0] + radius, this.dawnMachineChunkCoords[1] - radius },
+            { this.dawnMachineChunkCoords[0] - radius, this.dawnMachineChunkCoords[1] + radius } };
+    }
+
     private boolean doesContain(List<int[]> corners, int[] coords) {
         for (final int[] corner : corners) {
             if (Arrays.equals(corner, coords)) {
@@ -813,11 +841,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     private int[][] generateScanlineCoords() {
         final int[] dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
-        final int maxWidth = dawnMachineChunkCoords[0] + 4;
-        final int minWidth = dawnMachineChunkCoords[0] - 4;
+        final int maxWidth = dawnMachineChunkCoords[0] + BlightbusterConfig.minDawnMachineRadius;
+        final int minWidth = dawnMachineChunkCoords[0] - BlightbusterConfig.minDawnMachineRadius;
 
-        final int maxHeight = dawnMachineChunkCoords[1] + 4;
-        final int minHeight = dawnMachineChunkCoords[1] - 4;
+        final int maxHeight = dawnMachineChunkCoords[1] + BlightbusterConfig.minDawnMachineRadius;
+        final int minHeight = dawnMachineChunkCoords[1] - BlightbusterConfig.minDawnMachineRadius;
 
         int x = Math.abs(maxWidth - minWidth), z = Math.abs(maxHeight - minHeight);
         final int maxVal = x * z; // x and z change in the loop, causes indexoutofbounds
@@ -840,11 +868,20 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     private void generateRandomCoords(boolean haveEnoughForAer) {
         if (haveEnoughForAer) {
-            this.chunkX = this.rand.nextInt(this.MAP_WIDTH_CHUNKS + 1);
-            this.chunkZ = this.rand.nextInt(this.MAP_HEIGHT_CHUNKS + 1);
+            int[][] corners = BlightbusterConfig.useCorners ? BlightbusterConfig.dawnMachineCorners
+                : this.generateCorners();
+
+            int maxX = Math.max(corners[0][0], corners[1][0]);
+            int maxZ = Math.max(corners[0][1], corners[1][1]);
+            this.chunkX = maxX;
+            this.chunkZ = maxZ;
         } else {
-            this.chunkX = this.rand.nextInt(9) - 4 + this.getDawnMachineChunkCoords()[0];
-            this.chunkZ = this.rand.nextInt(9) - 4 + this.getDawnMachineChunkCoords()[1];
+            this.chunkX = this.rand.nextInt(BlightbusterConfig.minDawnMachineRadius * 2 + 1)
+                - BlightbusterConfig.minDawnMachineRadius
+                + this.getDawnMachineChunkCoords()[0];
+            this.chunkZ = this.rand.nextInt(BlightbusterConfig.minDawnMachineRadius * 2 + 1)
+                - BlightbusterConfig.minDawnMachineRadius
+                + this.getDawnMachineChunkCoords()[1];
         }
     }
 
@@ -1122,7 +1159,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        if (from != ForgeDirection.DOWN) {
+        if (!BlightbusterConfig.enableRf || from != ForgeDirection.DOWN) {
             return 0;
         }
 
@@ -1245,7 +1282,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     @Override
     public boolean canFill(ForgeDirection direction, Fluid fluid) {
-        return true;
+        return BlightbusterConfig.enableBlood;
     }
 
     @Override
@@ -1304,7 +1341,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     @Override
     public boolean canAttachSpark(ItemStack stack) {
-        return true;
+        return BlightbusterConfig.enableMana;
     }
 
     @Override
@@ -1337,7 +1374,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     @Override
     public int getAvailableSpaceForMana() {
-        return MAX_MANA - this.currentMana;
+        return BlightbusterConfig.enableMana ? Math.max(0, MAX_MANA - this.currentMana) : 0;
     }
 
     // IManaBlock
