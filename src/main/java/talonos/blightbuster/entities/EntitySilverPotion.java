@@ -62,7 +62,7 @@ public class EntitySilverPotion extends EntityThrowable {
                 for (int z = -5; z < 5; z++) {
                     int newX = x + (int) this.posX;
                     int newZ = z + (int) this.posZ;
-                    CleansingHelper.cleanseBiome(x, z, worldObj);
+                    CleansingHelper.cleanseBiome(x + (int) this.posX, z + (int) this.posZ, worldObj);
 
                     for (int y = -3; y < 3; y++) {
                         int newY = y + (int) this.posY;
