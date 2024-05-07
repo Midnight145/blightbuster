@@ -9,6 +9,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.config.Configuration;
 
+import talonos.blightbuster.compat.CompatFixes;
+
 public class BlightbusterConfig {
 
     // todo: add comments to config entries
@@ -133,6 +135,8 @@ public class BlightbusterConfig {
         if (config.hasChanged()) {
             config.save();
         }
+
+        CompatFixes.fixEnderIO(); // Workaround EnderIO crash when RF is disabled
     }
 
     public static Class<? extends EntityLivingBase> getEntityConstructorByStringId(String entityId) {
