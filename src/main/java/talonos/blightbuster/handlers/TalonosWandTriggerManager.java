@@ -257,7 +257,7 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
     }
 
     private boolean createDawnMachine(ItemStack stack, EntityPlayer player, World world, int x, int y, int z) {
-        if (world.isRemote) {
+        if (world.isRemote || DawnMachineTileEntity.instance != null) {
             return false;
         }
 

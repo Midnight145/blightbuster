@@ -34,12 +34,12 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-//    api("com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-342-GTNH:dev")
+//    api("com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-405-GTNH:dev")
     api("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
-    compileOnly("com.github.GTNewHorizons:BloodMagic:1.5.1:dev")
+    compileOnly("com.github.GTNewHorizons:BloodMagic:1.6.2:dev")
     compileOnly(rfg.deobf("curse.maven:botania-225643:2249359"))
     compileOnly(rfg.deobf("curse.maven:customnpcs-221826:2495406"))
-    compileOnly("com.github.GTNewHorizons:ThaumicEnergistics:1.6.4-GTNH:dev")
+    compileOnly("com.github.GTNewHorizons:ThaumicEnergistics:1.6.10-GTNH:dev")
     runtimeOnly("com.azanor.baubles:Baubles:1.0.1.10:deobf")
 
 }
