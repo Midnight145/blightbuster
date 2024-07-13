@@ -4,7 +4,6 @@ import static talonos.blightbuster.lib.CleansingHelper.cleanseMobFromMapping;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -32,6 +31,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import WayofTime.alchemicalWizardry.AlchemicalWizardry;
 import cofh.api.energy.IEnergyReceiver;
@@ -68,6 +69,8 @@ import vazkii.botania.api.mana.spark.SparkHelper;
         @Optional.Interface(iface = "vazkii.botania.api.mana.spark.ISparkAttachable", modid = "Botania") })
 public class DawnMachineTileEntity extends TileEntity implements IAspectSource, IAspectContainer, IEnergyReceiver,
     IEnergyStorage, ISparkAttachable, IFluidTank, IFluidHandler {
+
+    public static DawnMachineTileEntity instance;
 
     // FLUID INTEGRATION (Blood Magic)
     private static final int MAX_BLOOD = 100000;
@@ -131,8 +134,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     protected static final Vec3 COLOR_RED = Vec3.createVectorHelper(0.9, 0, 0);
     private int currentRF = 0;
 
-    private final ArrayList<CleansedChunk> toCleanse = new ArrayList<>();
-
     // END RF INTEGRATION
 
     // THAUMCRAFT INTEGRATION
@@ -166,7 +167,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     // Denotes if waiting for chunk to load
     private boolean waiting = false;
 
-    private final ArrayList<CleansedChunk> cleansedChunks = new ArrayList<>();
+    public static final ArrayList<int[]> cleansedChunks = new ArrayList<>();
 
     public boolean isActive = false;
 
@@ -175,6 +176,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     private boolean init = true;
 
     public DawnMachineTileEntity() {
+        instance = this;
         this.rand = new Random(System.currentTimeMillis());
 
     }
@@ -202,15 +204,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         }
 
         this.isActive = true;
-
-        for (final CleansedChunk chunk : cleansedChunks) {
-            chunk.exists = getChunk(this.worldObj, chunk.x, chunk.z) != null;
-            if (!chunk.exists && chunk.lastTick && !chunk.isDirty) {
-                System.out.println("Marking chunk " + chunk.x + ", " + chunk.z + " as dirty");
-                chunk.isDirty = true;
-            }
-            chunk.lastTick = chunk.exists;
-        }
 
         registerManaTransfer.apply(this);
 
@@ -243,10 +236,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             }
             if (anythingToDo) {
                 this.executeCleanse(chunk);
-                cleansedChunks.add(new CleansedChunk(this.chunkX, this.chunkZ));
+                cleansedChunks.add(new int[] { this.chunkX, this.chunkZ });
             }
-
-            checkHashedChunks();
         }
         this.ticksSinceLastCleanse++;
     }
@@ -261,51 +252,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
         this.waiting = chunk == null;
         return chunk;
-    }
-
-    private void checkHashedChunks() {
-        for (final CleansedChunk cchunk : toCleanse) {
-            tryCleanseCleanedChunk(cchunk);
-        }
-        toCleanse.clear();
-        for (final CleansedChunk cchunk : cleansedChunks) {
-            tryCleanseCleanedChunk(cchunk);
-        }
-
-    }
-
-    private void tryCleanseCleanedChunk(CleansedChunk cchunk) {
-        if (cchunk.isDirty) {
-            final Chunk chunk = getChunk(this.worldObj, cchunk.x, cchunk.z);
-            if (chunk == null) {
-                if (!toCleanse.contains(cchunk)) {
-                    toCleanse.add(cchunk);
-                }
-                this.loadChunk(cchunk.x, cchunk.z);
-                return;
-            }
-            if (this.hasAnythingToCleanseHere(chunk)) {
-                this.executeCleanse(chunk);
-                cchunk.isDirty = false;
-                cchunk.lastTick = false; // this stops the chunk from being cleansed over and over again from being
-                                         // unloaded
-            }
-            this.unloadChunk(cchunk.x, cchunk.z);
-        }
-    }
-    // CLEANSING FUNCTIONS
-
-    protected static class CleansedChunk {
-
-        CleansedChunk(int x, int z) {
-            this.x = x;
-            this.z = z;
-        }
-
-        int x, z;
-        boolean isDirty = false;
-        boolean lastTick = false;
-        boolean exists = false;
     }
 
     protected void executeCleanse(Chunk chunk) {
@@ -977,6 +923,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
         this.fluid.amount = tag.getInteger("Blood");
         this.currentMana = tag.getInteger("Mana");
+        int[] unpackedCoords = tag.getIntArray("CleansedChunks");
+        cleansedChunks.clear();
+        for (int i = 0; i < unpackedCoords.length - 1; i += 2) {
+            cleansedChunks.add(new int[] { unpackedCoords[i], unpackedCoords[i + 1] });
+        }
     }
 
     @Override
@@ -995,6 +946,13 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         tag.setInteger("CurrentRF", this.currentRF);
         tag.setInteger("Blood", this.fluid.amount);
         tag.setInteger("Mana", this.currentMana);
+        // int[] tmpArray = ArrayUtils.toPrimitive(cleansedChunks.toArray(new Integer[0]));
+        ArrayList<Integer> unpackedCoords = new ArrayList<>();
+        for (int[] coords : cleansedChunks) {
+            unpackedCoords.add(coords[0]);
+            unpackedCoords.add(coords[1]);
+        }
+        tag.setIntArray("CleansedChunks", ArrayUtils.toPrimitive(unpackedCoords.toArray(new Integer[0])));
     }
 
     @Override
@@ -1428,6 +1386,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     public void updatePos() {
         this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
     }
-    // END MISC. FUNCTIONS
 
+    public static void deconstruct() {
+        instance = null;
+        cleansedChunks.clear();
+    }
+
+    // END MISC. FUNCTIONS
 }

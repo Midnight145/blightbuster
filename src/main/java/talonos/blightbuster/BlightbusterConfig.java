@@ -139,6 +139,7 @@ public class BlightbusterConfig {
         CompatFixes.fixEnderIO(); // Workaround EnderIO crash when RF is disabled
     }
 
+    @SuppressWarnings("unchecked")
     public static Class<? extends EntityLivingBase> getEntityConstructorByStringId(String entityId) {
         return (Class<? extends EntityLivingBase>) EntityList.stringToClassMapping.get(entityId);
     }
