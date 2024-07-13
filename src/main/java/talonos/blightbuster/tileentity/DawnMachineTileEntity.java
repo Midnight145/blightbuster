@@ -166,8 +166,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     // Denotes if waiting for chunk to load
     private boolean waiting = false;
 
-    // static private HashSet<Long> cleansedChunks = new HashSet<Long>();
-    private final HashMap<Long, CleansedChunk> cleansedChunks = new HashMap<>();
+    private final ArrayList<CleansedChunk> cleansedChunks = new ArrayList<>();
 
     public boolean isActive = false;
 
@@ -204,7 +203,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
         this.isActive = true;
 
-        for (final CleansedChunk chunk : cleansedChunks.values()) {
+        for (final CleansedChunk chunk : cleansedChunks) {
             chunk.exists = getChunk(this.worldObj, chunk.x, chunk.z) != null;
             if (!chunk.exists && chunk.lastTick && !chunk.isDirty) {
                 System.out.println("Marking chunk " + chunk.x + ", " + chunk.z + " as dirty");
@@ -244,7 +243,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             }
             if (anythingToDo) {
                 this.executeCleanse(chunk);
-                cleansedChunks.put(this.getHash(), new CleansedChunk(this.chunkX, this.chunkZ));
+                cleansedChunks.add(new CleansedChunk(this.chunkX, this.chunkZ));
             }
 
             checkHashedChunks();
@@ -269,19 +268,16 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             tryCleanseCleanedChunk(cchunk);
         }
         toCleanse.clear();
-        for (final CleansedChunk cchunk : cleansedChunks.values()) {
+        for (final CleansedChunk cchunk : cleansedChunks) {
             tryCleanseCleanedChunk(cchunk);
         }
 
     }
 
     private void tryCleanseCleanedChunk(CleansedChunk cchunk) {
-        System.out.println("Checking chunk " + cchunk.x + ", " + cchunk.z);
         if (cchunk.isDirty) {
-            System.out.println("Chunk is dirty, attempting cleanse");
             final Chunk chunk = getChunk(this.worldObj, cchunk.x, cchunk.z);
             if (chunk == null) {
-                System.out.println("Chunk is null, waiting for it to load");
                 if (!toCleanse.contains(cchunk)) {
                     toCleanse.add(cchunk);
                 }
@@ -289,13 +285,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
                 return;
             }
             if (this.hasAnythingToCleanseHere(chunk)) {
-                System.out.println("Chunk has something to cleanse, cleansing");
                 this.executeCleanse(chunk);
                 cchunk.isDirty = false;
                 cchunk.lastTick = false; // this stops the chunk from being cleansed over and over again from being
                                          // unloaded
-            } else {
-                System.out.println("Chunk is clean, doing nothing");
             }
             this.unloadChunk(cchunk.x, cchunk.z);
         }
@@ -370,8 +363,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     protected boolean hasAnythingToCleanseHere(Chunk chunk) {
         // Can cleanse biome?
         BiomeGenBase[] origBiome = null;
-        for (int z = 0; z <= 16; z++) {
-            for (int x = 0; x <= 16; x++) {
+        for (int z = 0; z < 16; z++) {
+            for (int x = 0; x < 16; x++) {
                 final int[] coords = this.getBlockCoordsFromChunk(chunk, x, z);
                 origBiome = this.getWorldObj()
                     .getWorldChunkManager()
@@ -401,8 +394,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             }
         }
 
-        for (int z = 0; z <= 16; z++) {
-            for (int x = 0; x <= 16; x++) {
+        for (int z = 0; z < 16; z++) {
+            for (int x = 0; x < 16; x++) {
                 final int[] coords = this.getBlockCoordsFromChunk(chunk, x, z);
                 int herbaTopBlock = -1;
                 final boolean canHerba = this.haveEnoughFor(DawnMachineResource.HERBA);
