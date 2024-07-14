@@ -20,7 +20,8 @@ public abstract class MixinTaintedSheepAI {
     @Inject(method = "shouldExecute", at = @At(value = "HEAD"), cancellable = true)
     private void updateTaskMixin(CallbackInfoReturnable<Boolean> cir) {
         if (DawnMachineTileEntity.instance != null) {
-            for (int[] coords : DawnMachineTileEntity.cleansedChunks) {
+            for (int i = 0; i < DawnMachineTileEntity.cleansedChunks.size(); i++) {
+                int[] coords = DawnMachineTileEntity.cleansedChunks.get(i);
                 if (coords[0] == entity.chunkCoordX && coords[1] == entity.chunkCoordZ) {
                     cir.setReturnValue(false);
                     return;

@@ -23,7 +23,8 @@ public abstract class MixinBlockTaintFibres {
         if (DawnMachineTileEntity.instance != null) {
             int chunkX = x / 16;
             int chunkZ = z / 16;
-            for (int[] coords : DawnMachineTileEntity.cleansedChunks) {
+            for (int i = 0; i < DawnMachineTileEntity.cleansedChunks.size(); i++) {
+                int[] coords = DawnMachineTileEntity.cleansedChunks.get(i);
                 if (coords[0] == chunkX && coords[1] == chunkZ) {
                     ci.cancel();
                     return;
@@ -37,7 +38,8 @@ public abstract class MixinBlockTaintFibres {
         if (DawnMachineTileEntity.instance != null) {
             int chunkX = x / 16;
             int chunkZ = z / 16;
-            for (int[] coords : DawnMachineTileEntity.cleansedChunks) {
+            for (int i = 0; i < DawnMachineTileEntity.cleansedChunks.size(); i++) {
+                int[] coords = DawnMachineTileEntity.cleansedChunks.get(i);
                 if (coords[0] == chunkX && coords[1] == chunkZ) {
                     cir.setReturnValue(false);
                     return;

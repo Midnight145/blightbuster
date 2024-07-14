@@ -21,7 +21,8 @@ public abstract class MixinFluxGoo {
             BlockFluxGoo tmp = (BlockFluxGoo) (Object) this;
             int meta = world.getBlockMetadata(x, y, z);
             if (meta >= 6 && world.isAirBlock(x, y + 1, z)) {
-                for (int[] coords : DawnMachineTileEntity.cleansedChunks) {
+                for (int i = 0; i < DawnMachineTileEntity.cleansedChunks.size(); i++) {
+                    int[] coords = DawnMachineTileEntity.cleansedChunks.get(i);
                     if (coords[0] == x / 16 && coords[1] == z / 16) {
                         ci.cancel();
                         return;

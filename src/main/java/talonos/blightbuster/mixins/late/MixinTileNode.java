@@ -16,7 +16,8 @@ public abstract class MixinTileNode {
         // BlightBuster.logger.info("Mixed into handleTaintNode");
         if (DawnMachineTileEntity.instance != null) {
             TileNode tmp = (TileNode) (Object) this;
-            for (int[] coords : DawnMachineTileEntity.cleansedChunks) {
+            for (int i = 0; i < DawnMachineTileEntity.cleansedChunks.size(); i++) {
+                int[] coords = DawnMachineTileEntity.cleansedChunks.get(i);
                 if (coords[0] == tmp.xCoord / 16 && coords[1] == tmp.zCoord / 16) {
                     cir.setReturnValue(false);
                     return;
