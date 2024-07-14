@@ -14,7 +14,7 @@ import thaumcraft.common.entities.ai.misc.AIConvertGrass;
 @Mixin(AIConvertGrass.class)
 public abstract class MixinTaintedSheepAI {
 
-    @Shadow
+    @Shadow(remap = false)
     private EntityLiving entity;
 
     @Inject(method = "shouldExecute", at = @At(value = "HEAD"), cancellable = true)

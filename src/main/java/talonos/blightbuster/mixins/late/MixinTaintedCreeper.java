@@ -33,7 +33,7 @@ public abstract class MixinTaintedCreeper {
     // }
     // }
 
-    @Shadow
+    @Shadow(remap = false)
     private int timeSinceIgnited;
 
     @Inject(method = "onUpdate", at = @At(value = "HEAD"))

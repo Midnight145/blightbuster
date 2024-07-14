@@ -205,18 +205,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
         this.isActive = true;
 
-<<<<<<< HEAD
-        for (final CleansedChunk chunk : cleansedChunks) {
-            chunk.exists = getChunk(this.worldObj, chunk.x, chunk.z) != null;
-            if (!chunk.exists && chunk.lastTick && !chunk.isDirty) {
-                System.out.println("Marking chunk " + chunk.x + ", " + chunk.z + " as dirty");
-                chunk.isDirty = true;
-            }
-            chunk.lastTick = chunk.exists;
-        }
-
-=======
->>>>>>> b2bd7241647328ee244779dbae49ee448f50cca0
         registerManaTransfer.apply(this);
 
         // Determines cleanse speed in ticks
@@ -248,11 +236,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             }
             if (anythingToDo) {
                 this.executeCleanse(chunk);
-<<<<<<< HEAD
-                cleansedChunks.add(new CleansedChunk(this.chunkX, this.chunkZ));
-=======
                 cleansedChunks.add(new int[] { this.chunkX, this.chunkZ });
->>>>>>> b2bd7241647328ee244779dbae49ee448f50cca0
             }
         }
         this.ticksSinceLastCleanse++;
@@ -270,54 +254,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         return chunk;
     }
 
-<<<<<<< HEAD
-    private void checkHashedChunks() {
-        for (final CleansedChunk cchunk : toCleanse) {
-            tryCleanseCleanedChunk(cchunk);
-        }
-        toCleanse.clear();
-        for (final CleansedChunk cchunk : cleansedChunks) {
-            tryCleanseCleanedChunk(cchunk);
-        }
-
-    }
-
-    private void tryCleanseCleanedChunk(CleansedChunk cchunk) {
-        if (cchunk.isDirty) {
-            final Chunk chunk = getChunk(this.worldObj, cchunk.x, cchunk.z);
-            if (chunk == null) {
-                if (!toCleanse.contains(cchunk)) {
-                    toCleanse.add(cchunk);
-                }
-                this.loadChunk(cchunk.x, cchunk.z);
-                return;
-            }
-            if (this.hasAnythingToCleanseHere(chunk)) {
-                this.executeCleanse(chunk);
-                cchunk.isDirty = false;
-                cchunk.lastTick = false; // this stops the chunk from being cleansed over and over again from being
-                                         // unloaded
-            }
-            this.unloadChunk(cchunk.x, cchunk.z);
-        }
-    }
     // CLEANSING FUNCTIONS
 
-    protected static class CleansedChunk {
-
-        CleansedChunk(int x, int z) {
-            this.x = x;
-            this.z = z;
-        }
-
-        int x, z;
-        boolean isDirty = false;
-        boolean lastTick = false;
-        boolean exists = false;
-    }
-
-=======
->>>>>>> b2bd7241647328ee244779dbae49ee448f50cca0
     protected void executeCleanse(Chunk chunk) {
         final List<Entity>[] entityLists = chunk.entityLists;
 
