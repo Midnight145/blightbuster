@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import thaumcraft.common.entities.ai.misc.AIConvertGrass;
 

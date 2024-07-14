@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import thaumcraft.common.blocks.BlockTaintFibres;
 
@@ -21,10 +20,9 @@ public abstract class MixinBlockTaintFibres {
     @Inject(method = "taintBiomeSpread", at = @At(value = "HEAD", remap = false), cancellable = true)
     private static void taintBiomeSpreadMixin(World world, int x, int y, int z, Random rand, Block block,
         CallbackInfo ci) {
-        // BlightBuster.logger.info("Mixed into taintBiomeSpread");
-        int chunkX = x / 16;
-        int chunkZ = z / 16;
         if (DawnMachineTileEntity.instance != null) {
+            int chunkX = x / 16;
+            int chunkZ = z / 16;
             for (int[] coords : DawnMachineTileEntity.cleansedChunks) {
                 if (coords[0] == chunkX && coords[1] == chunkZ) {
                     ci.cancel();
@@ -36,10 +34,9 @@ public abstract class MixinBlockTaintFibres {
 
     @Inject(method = "spreadFibres", at = @At(value = "HEAD", remap = false), cancellable = true)
     private static void spreadFibresMixin(World world, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
-        // BlightBuster.logger.info("Mixed into spreadFibres");
-        int chunkX = x / 16;
-        int chunkZ = z / 16;
         if (DawnMachineTileEntity.instance != null) {
+            int chunkX = x / 16;
+            int chunkZ = z / 16;
             for (int[] coords : DawnMachineTileEntity.cleansedChunks) {
                 if (coords[0] == chunkX && coords[1] == chunkZ) {
                     cir.setReturnValue(false);
