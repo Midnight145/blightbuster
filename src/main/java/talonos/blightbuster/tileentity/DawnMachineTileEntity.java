@@ -83,7 +83,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     // BOTANIA INTEGRATION
 
-    private static final int MAX_MANA = 1000000;
+    private static final int MAX_MANA = 1000000 * 3;
     private int currentMana = 0;
 
     private static final Function<DawnMachineTileEntity, Void> registerManaTransfer;
@@ -1241,7 +1241,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     @Override
     public void recieveMana(int mana) {
-        this.currentMana = Math.max(0, Math.min(MAX_MANA, this.currentMana + mana));
+        this.currentMana = Math.max(0, Math.min(MAX_MANA, this.currentMana + mana * 3));
         this.worldObj.func_147453_f(
             this.xCoord,
             this.yCoord,
@@ -1291,7 +1291,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     @Override
     public int getAvailableSpaceForMana() {
-        return BlightbusterConfig.enableMana ? Math.max(0, MAX_MANA - this.currentMana) : 0;
+        return BlightbusterConfig.enableMana ? Math.max(0, (int) ((MAX_MANA - this.currentMana) / 3)) : 0;
     }
 
     // IManaBlock

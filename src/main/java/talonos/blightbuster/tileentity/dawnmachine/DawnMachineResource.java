@@ -10,15 +10,15 @@ public enum DawnMachineResource {
 
     // Aspect, mult * 4 so you can halve three times
     // aspect mult cost max rf mana blood u v
-    SANO(Aspect.HEAL, 512 * 4, 2 * 4, 16384 * 4, 32, 25, 12, 0.6f, 0.5f),
-    IGNIS(Aspect.FIRE, 2048 * 4, 2 * 4, 65536 * 4, 8, 25, 12, 0, 0.5f),
-    AER(Aspect.AIR, 128 * 4, 2 * 4, 4096 * 4, 128, 75, 37, 0, 0),
-    COGNITIO(Aspect.MIND, 128 * 4, 2 * 32 * 4, 4096 * 4, 128, 50, 25, 0.6f, 0),
+    SANO(Aspect.HEAL, 512 * 4, 2 * 4, 16384 * 4, 32, 20, 12, 0.6f, 0.5f),
+    IGNIS(Aspect.FIRE, 2048 * 4, 2 * 4, 65536 * 4, 8, 20, 12, 0, 0.5f),
+    AER(Aspect.AIR, 128 * 4, 2 * 4, 4096 * 4, 128, 30, 37, 0, 0),
+    COGNITIO(Aspect.MIND, 128 * 4, 2 * 32 * 4, 4096 * 4, 128, 20, 25, 0.6f, 0),
     MACHINA(Aspect.MECHANISM, 128 * 4, 2 * 32 * 4, 4096 * 4, 128, 50, 25, 0.2f, 0.5f),
-    AURAM(Aspect.AURA, 1 * 4, 4 * 4, 32 * 4, 16000, 20, 50, 0.4f, 0),
-    VACUOS(Aspect.VOID, 512 * 4, 2 * 4, 16384 * 4, 16, 50, 12, 0.8f, 0.5f),
-    ORDO(Aspect.ORDER, 128 * 4, 2 * 32 * 4, 4096 * 4, 63, 150, 37, 0.4f, 0.5f),
-    ARBOR(Aspect.TREE, 256 * 4, 2 * 4, 8192 * 4, 32, 100, 25, 0.2f, 0),
+    AURAM(Aspect.AURA, 1 * 4, 4 * 4, 32 * 4, 16000, 1000, 50, 0.4f, 0),
+    VACUOS(Aspect.VOID, 512 * 4, 2 * 4, 16384 * 4, 16, 30, 12, 0.8f, 0.5f),
+    ORDO(Aspect.ORDER, 128 * 4, 2 * 32 * 4, 4096 * 4, 128, 100, 37, 0.4f, 0.5f),
+    ARBOR(Aspect.TREE, 256 * 4, 2 * 4, 8192 * 4, 32, 30, 25, 0.2f, 0),
     HERBA(Aspect.PLANT, 512 * 4, 2 * 4, 16384 * 4, 16, 50, 12, 0.8f, 0);
 
     private final Aspect aspect;
