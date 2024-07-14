@@ -28,6 +28,16 @@ public enum Mixins {
         .setSide(Side.BOTH)
         .setPhase(Phase.LATE)
         .addMixinClasses("MixinTileNode")
+        .setApplyIf(() -> true)),
+    DISABLE_CREEPER_EXPLOSION(new Builder("Disabled tainted creeper explosions").addTargetedMod(TargetedMod.THAUMCRAFT)
+        .setSide(Side.BOTH)
+        .setPhase(Phase.LATE)
+        .addMixinClasses("MixinTaintedCreeper")
+        .setApplyIf(() -> true)),
+    DISABLE_FLUX_SPREAD(new Builder("Disabled flux goo spread").addTargetedMod(TargetedMod.THAUMCRAFT)
+        .setSide(Side.BOTH)
+        .setPhase(Phase.LATE)
+        .addMixinClasses("MixinFluxGoo")
         .setApplyIf(() -> true));
 
     private final List<String> mixinClasses;
