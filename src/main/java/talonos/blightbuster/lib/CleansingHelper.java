@@ -3,10 +3,12 @@ package talonos.blightbuster.lib;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import noppes.npcs.entity.EntityCustomNpc;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.BlightbusterConfig;
@@ -24,7 +26,8 @@ public class CleansingHelper {
                 cleanseSingleMob(
                     entity,
                     (EntityLivingBase) BlightbusterConfig.purifiedMappings.get(clazz)
-                        .newInstance(world));
+                        .newInstance(world),
+                    world);
                 return true;
             } catch (final Exception e) {
                 BlightBuster.logger.error("Failed to cleanse entity from mapping: " + clazz.getName(), e);
@@ -36,7 +39,8 @@ public class CleansingHelper {
                     cleanseSingleMob(
                         entity,
                         (EntityLivingBase) BlightbusterConfig.customNpcMappings.get(npc.linkedName)
-                            .newInstance(world));
+                            .newInstance(world),
+                        world);
                     return true;
                 } catch (final Exception e) {
                     BlightBuster.logger.error("Failed to cleanse entity from mapping: " + npc.linkedName, e);
@@ -46,13 +50,17 @@ public class CleansingHelper {
         return false;
     }
 
-    private static void cleanseSingleMob(Entity tainted, EntityLivingBase cleansed) {
+    private static void cleanseSingleMob(Entity tainted, EntityLivingBase cleansed, World world) {
         // new entity copies original entity location
         cleansed.copyLocationAndAnglesFrom(tainted);
         // original entity spawns new entity into the world
         tainted.worldObj.spawnEntityInWorld(cleansed);
         // new entity removes the old entity
         cleansed.worldObj.removeEntity(tainted);
+
+        if (cleansed instanceof EntityVillager villager) {
+            VillagerRegistry.applyRandomTrade(villager, world.rand);
+        }
     }
 
     public static void cleanseBiome(int x, int z, World world) {
