@@ -1,7 +1,7 @@
 [
 	{
-	  "modid": "{modId}",
-	  "name": "{modName}",
+	  "modid": "${modId}",
+	  "name": "${modName}",
 	  "description": "All of the cleansing items for Blightfall",
 	  "version": "${modVersion}",
 	  "mcversion": "${minecraftVersion}",
