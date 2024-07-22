@@ -26,8 +26,7 @@ public class CleansingHelper {
                 cleanseSingleMob(
                     entity,
                     (EntityLivingBase) BlightbusterConfig.purifiedMappings.get(clazz)
-                        .newInstance(world),
-                    world);
+                        .newInstance(world));
                 return true;
             } catch (final Exception e) {
                 BlightBuster.logger.error("Failed to cleanse entity from mapping: " + clazz.getName(), e);
@@ -39,8 +38,7 @@ public class CleansingHelper {
                     cleanseSingleMob(
                         entity,
                         (EntityLivingBase) BlightbusterConfig.customNpcMappings.get(npc.linkedName)
-                            .newInstance(world),
-                        world);
+                            .newInstance(world));
                     return true;
                 } catch (final Exception e) {
                     BlightBuster.logger.error("Failed to cleanse entity from mapping: " + npc.linkedName, e);
@@ -50,7 +48,7 @@ public class CleansingHelper {
         return false;
     }
 
-    private static void cleanseSingleMob(Entity tainted, EntityLivingBase cleansed, World world) {
+    private static void cleanseSingleMob(Entity tainted, EntityLivingBase cleansed) {
         // new entity copies original entity location
         cleansed.copyLocationAndAnglesFrom(tainted);
         // original entity spawns new entity into the world
@@ -59,7 +57,7 @@ public class CleansingHelper {
         cleansed.worldObj.removeEntity(tainted);
 
         if (cleansed instanceof EntityVillager villager) {
-            VillagerRegistry.applyRandomTrade(villager, world.rand);
+            VillagerRegistry.applyRandomTrade(villager, villager.worldObj.rand);
         }
     }
 
