@@ -26,6 +26,7 @@ tc.research_page.SILVERPOTION.1=Ethereal blooms are wonderful, but if you plant 
 tc.research_name.PURITYFOCUS=Purity Focus
 tc.research_text.PURITYFOCUS=The Blightbuster
 tc.research_page.PURITYFOCUS.1=You have found a way to infuse the properties of an ethereal bloom into a wand focus. When you right click on a block, that block and all blocks above and below it will immediately be cured of taint. The enlarge enchantment is especially useful on this focus, increasing the radius of the cleansing to 3, 5, 7, or 9, depending on the level. Beware rapidly spawning thaumic slimes when working near crusted taint. Also beware the high vis cost, especially when enlarge is applied. On the plus side, you can heal tainted creatures simply by right-clicking them with this wand.
+tc.research_page.PURITYFOCUS.2=Additionally, you can "heal" tainted nodes by holding down left-click. This requires a lot of vis; however, needing 150 ordo and 100 terra.
 
 tc.research_name.DAWNTOTEM=Totems of Dawn
 tc.research_text.DAWNTOTEM=The start of a glorious new era!

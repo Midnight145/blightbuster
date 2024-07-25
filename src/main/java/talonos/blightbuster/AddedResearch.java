@@ -95,8 +95,10 @@ public class AddedResearch {
                 2,
                 new ItemStack(BBItems.purityFocus));
 
-            purityFocusResearch
-                .setPages(new ResearchPage("tc.research_page.PURITYFOCUS.1"), new ResearchPage(purityFocusRecipe));
+            purityFocusResearch.setPages(
+                new ResearchPage("tc.research_page.PURITYFOCUS.1"),
+                new ResearchPage("tc.research_page.PURITYFOCUS.2"),
+                new ResearchPage(purityFocusRecipe));
 
             purityFocusResearch.setConcealed();
             purityFocusResearch.setParents("ETHEREALBLOOM");

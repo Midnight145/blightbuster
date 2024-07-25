@@ -38,7 +38,6 @@ public abstract class MixinTaintedCreeper {
 
     @Inject(method = "onUpdate", at = @At(value = "HEAD"))
     private void onUpdateMixin(CallbackInfo c) {
-        BlightBuster.logger.info("Mixing in onUpdate");
         if (DawnMachineTileEntity.instance != null) {
             EntityTaintCreeper tmp = (EntityTaintCreeper) (Object) this;
             for (int i = 0; i < DawnMachineTileEntity.cleansedChunks.size(); i++) {
