@@ -72,8 +72,8 @@ public class CleansingHelper {
                 if (genBiomes[0].biomeID == Config.biomeTaintID) {
                     BlightbusterNetwork.setBiomeAt(world, x, z, BlightbusterConfig.defaultBiome);
                     return;
-                } else if (genBiomes[0].biomeID == Config.biomeEerieID
-                    || genBiomes[0].biomeID == Config.biomeMagicalForestID) {
+                } else if ((genBiomes[0].biomeID == Config.biomeEerieID
+                    || genBiomes[0].biomeID == Config.biomeMagicalForestID) && genBiomes[0].biomeID == biome.biomeID) {
                         return;
                     }
                 BlightbusterNetwork.setBiomeAt(world, x, z, genBiomes[0]);
