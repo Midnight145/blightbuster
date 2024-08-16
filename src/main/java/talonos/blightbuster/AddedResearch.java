@@ -271,7 +271,9 @@ public class AddedResearch {
             dawnChargerResearch.setParents(BlightbusterConfig.enableDawnOffering ? "DAWNOFFERING" : "DAWNMACHINE");
             dawnChargerResearch.registerResearchItem();
         }
+    }
 
+    public static void initWandHandler() {
         TalonosWandTriggerManager wandTrigger = new TalonosWandTriggerManager();
 
         // Registers wand triggers, e.g. on right click

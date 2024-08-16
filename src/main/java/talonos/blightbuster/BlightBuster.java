@@ -88,6 +88,7 @@ public class BlightBuster {
         if (BlightbusterConfig.registerResearch) {
             AddedResearch.initResearch();
         }
+        AddedResearch.initWandHandler();
         proxy.registerRenderers();
         if (BlightbusterConfig.enableBlood) {
             RitualDawnMachine.init();
