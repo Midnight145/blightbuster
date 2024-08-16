@@ -59,12 +59,16 @@ public class ItemPurityFocus extends ItemFocusBasic {
         Entity pointedEntity = EntityUtils.getPointedEntity(p.worldObj, p, 0.0D, 32.0D, 32.0F);
         if (pointedEntity != null && !world.isRemote) {
             CleansingHelper.cleanseMobFromMapping(pointedEntity, pointedEntity.worldObj);
+            wand.consumeAllVis(itemstack, p, this.getVisCost(itemstack), true, false);
         }
 
         if (mop != null && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
             for (int xOffset = -potency; xOffset < 1 + potency; xOffset++) {
                 for (int zOffset = -potency; zOffset < 1 + potency; zOffset++) {
-                    this.cleanUpLand(mop.blockX + xOffset, mop.blockZ + zOffset, world, p);
+                    if (this.cleanUpLand(mop.blockX + xOffset, mop.blockZ + zOffset, world, p)) {
+                        wand.consumeAllVis(itemstack, p, this.getVisCost(itemstack), true, false);
+                    }
+
                 }
             }
         }
@@ -78,7 +82,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
             .getTileEntity(x, y, z);
         if (tile instanceof TileNode node) {
             if (node.getNodeType() == NodeType.TAINTED
-                && wand.consumeAllVis(itemstack, player, this.getNodeVisCost(itemstack), true, false)) {
+                && wand.consumeAllVis(itemstack, player, this.getNodeVisCost(), true, false)) {
                 node.setNodeType(NodeType.NORMAL);
                 node.markDirty();
                 player.getEntityWorld()
@@ -94,13 +98,15 @@ public class ItemPurityFocus extends ItemFocusBasic {
             .add(Aspect.ORDER, 15 * (potency * 2 + 1) * (potency * 2 + 1));
     }
 
-    private void cleanUpLand(int x, int z, World world, EntityPlayer p) {
+    private boolean cleanUpLand(int x, int z, World world, EntityPlayer p) {
+        boolean consumeVis = false;
         if (!p.worldObj.isRemote) {
             for (int y = 0; y < 256; y++) {
-                CleansingHelper.cleanBlock(x, y, z, world);
+                consumeVis = consumeVis || CleansingHelper.cleanBlock(x, y, z, world);
             }
-            CleansingHelper.cleanseBiome(x, z, world);
+            consumeVis = consumeVis || CleansingHelper.cleanseBiome(x, z, world);
         }
+        return consumeVis;
     }
 
     @Override
@@ -129,7 +135,7 @@ public class ItemPurityFocus extends ItemFocusBasic {
         return cost;
     }
 
-    public AspectList getNodeVisCost(ItemStack arg0) {
+    public AspectList getNodeVisCost() {
         return auraCost;
     }
 }

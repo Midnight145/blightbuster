@@ -61,7 +61,7 @@ public class CleansingHelper {
         }
     }
 
-    public static void cleanseBiome(int x, int z, World world) {
+    public static boolean cleanseBiome(int x, int z, World world) {
         BiomeGenBase[] genBiomes = world.getWorldChunkManager()
             .loadBlockGeneratorData(null, x, z, 1, 1);
         final BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
@@ -71,25 +71,28 @@ public class CleansingHelper {
             if (genBiomes != null && genBiomes.length > 0 && genBiomes[0] != null) {
                 if (genBiomes[0].biomeID == Config.biomeTaintID) {
                     BlightbusterNetwork.setBiomeAt(world, x, z, BlightbusterConfig.defaultBiome);
-                    return;
+                    return true;
                 } else if ((genBiomes[0].biomeID == Config.biomeEerieID
                     || genBiomes[0].biomeID == Config.biomeMagicalForestID) && genBiomes[0].biomeID == biome.biomeID) {
-                        return;
+                        return false;
                     }
                 BlightbusterNetwork.setBiomeAt(world, x, z, genBiomes[0]);
+                return true;
             }
         }
+        return false;
     }
 
-    public static void cleanBlock(int x, int y, int z, World world) {
+    public static boolean cleanBlock(int x, int y, int z, World world) {
+        boolean didSomething = false;
         Block block = world.getBlock(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
         if (block == ConfigBlocks.blockTaintFibres) {
             world.setBlockToAir(x, y, z);
-        }
-        if (block == ConfigBlocks.blockTaint) {
+            didSomething = true;
+        } else if (block == ConfigBlocks.blockTaint) {
             if (meta == 2) {
-                return;
+                return didSomething;
             }
             if (meta == 0) {
                 world.setBlock(
@@ -99,12 +102,16 @@ public class CleansingHelper {
                     ConfigBlocks.blockFluxGoo,
                     ((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(),
                     3);
+                didSomething = true;
             } else if (meta == 1) {
                 world.setBlock(x, y, z, Blocks.dirt, 0, 3);
+                didSomething = true;
             } else {
                 world.setBlockToAir(x, y, z);
+                didSomething = true;
             }
         }
         world.markBlockForUpdate(x, y, z);
+        return didSomething;
     }
 }
