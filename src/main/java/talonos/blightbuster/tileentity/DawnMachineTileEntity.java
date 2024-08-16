@@ -72,7 +72,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     public static DawnMachineTileEntity instance;
 
-
     // FLUID INTEGRATION (Blood Magic)
     private static final int MAX_BLOOD = 100000;
     private static Fluid blood = null;
@@ -177,13 +176,13 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     private boolean init = true;
 
     public DawnMachineTileEntity() {
-        instance = this;
+
         this.rand = new Random(System.currentTimeMillis());
         if (BlightbusterConfig.enableBlood) {
             blood = AlchemicalWizardry.lifeEssenceFluid;
             fluid = new FluidStack(blood, 0);
             tankInfo = new FluidTankInfo(this.getFluid(), MAX_BLOOD);
-            tankInfoArray = new FluidTankInfo[]{ this.tankInfo };
+            tankInfoArray = new FluidTankInfo[] { this.tankInfo };
         }
     }
 
@@ -193,6 +192,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             return;
         }
         if (this.init) {
+            instance = this;
             // this all has to wait for the first tick because the tileentity isn't fully initialized until then
             this.dawnMachineBlockCoords = new int[] { this.xCoord, this.zCoord };
             this.scanlineCoords = this.generateScanlineCoords();

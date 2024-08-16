@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import thaumcraft.common.entities.monster.EntityTaintCreeper;
 
