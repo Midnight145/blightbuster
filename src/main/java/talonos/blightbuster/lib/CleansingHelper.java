@@ -87,7 +87,7 @@ public class CleansingHelper {
         if (block == ConfigBlocks.blockTaintFibres) {
             world.setBlockToAir(x, y, z);
         }
-        if (world.getBlock(x, y, z) == ConfigBlocks.blockTaint) {
+        if (block == ConfigBlocks.blockTaint) {
             if (meta == 2) {
                 return;
             }
@@ -100,10 +100,11 @@ public class CleansingHelper {
                     ((BlockFluxGoo) ConfigBlocks.blockFluxGoo).getQuanta(),
                     3);
             } else if (meta == 1) {
-                world.setBlock(x, y, z, Blocks.dirt);
+                world.setBlock(x, y, z, Blocks.dirt, 0, 3);
             } else {
-                world.setBlock(x, y, z, Blocks.air);
+                world.setBlockToAir(x, y, z);
             }
         }
+        world.markBlockForUpdate(x, y, z);
     }
 }
