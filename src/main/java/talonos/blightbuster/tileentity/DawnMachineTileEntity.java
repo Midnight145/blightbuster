@@ -19,6 +19,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
@@ -70,7 +71,7 @@ import vazkii.botania.api.mana.spark.SparkHelper;
 public class DawnMachineTileEntity extends TileEntity implements IAspectSource, IAspectContainer, IEnergyReceiver,
     IEnergyStorage, ISparkAttachable, IFluidTank, IFluidHandler {
 
-    public static DawnMachineTileEntity instance;
+    public static int[] coords = null;
 
     // FLUID INTEGRATION (Blood Magic)
     private static final int MAX_BLOOD = 100000;
@@ -167,7 +168,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     // Denotes if waiting for chunk to load
     private boolean waiting = false;
 
-    public static final ArrayList<int[]> cleansedChunks = new ArrayList<>();
+    public final ArrayList<int[]> cleansedChunks = new ArrayList<>();
 
     public boolean isActive = false;
 
@@ -176,7 +177,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     private boolean init = true;
 
     public DawnMachineTileEntity() {
-
         this.rand = new Random(System.currentTimeMillis());
         if (BlightbusterConfig.enableBlood) {
             blood = AlchemicalWizardry.lifeEssenceFluid;
@@ -192,8 +192,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             return;
         }
         if (this.init) {
-            instance = this;
             // this all has to wait for the first tick because the tileentity isn't fully initialized until then
+            coords = new int[] { this.xCoord, this.yCoord, this.zCoord };
             this.dawnMachineBlockCoords = new int[] { this.xCoord, this.zCoord };
             this.scanlineCoords = this.generateScanlineCoords();
             this.scanlineAerCoords = this.generateScanlineAerCoords();
@@ -242,7 +242,14 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             }
             if (anythingToDo) {
                 this.executeCleanse(chunk);
-                cleansedChunks.add(new int[] { this.chunkX, this.chunkZ });
+                try {
+                    cleansedChunks.add(new int[] { this.chunkX, this.chunkZ });
+                } catch (Exception e) {
+                    BlightBuster.logger.error(e);
+                    worldObj.playerEntities.get(0)
+                        .addChatComponentMessage(new ChatComponentText(e.getMessage()));
+                    throw e;
+                }
             }
         }
         this.ticksSinceLastCleanse++;
@@ -905,12 +912,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         return new int[] { (int) Math.floor(this.xCoord / 16.0), (int) Math.floor(this.zCoord / 16.0) };
     }
 
-    private long getHash() {
-        long hashedCoords = (long) this.chunkX << 32;
-        hashedCoords |= this.chunkZ;
-        return hashedCoords;
-    }
-
     // END HELPER FUNCTIONS
 
     // FORGE OVERRIDES
@@ -934,7 +935,15 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         int[] unpackedCoords = tag.getIntArray("CleansedChunks");
         cleansedChunks.clear();
         for (int i = 0; i < unpackedCoords.length - 1; i += 2) {
-            cleansedChunks.add(new int[] { unpackedCoords[i], unpackedCoords[i + 1] });
+            try {
+                cleansedChunks.add(new int[] { unpackedCoords[i], unpackedCoords[i + 1] });
+            } catch (Exception e) {
+                BlightBuster.logger.error(e);
+                worldObj.playerEntities.get(0)
+                    .addChatComponentMessage(new ChatComponentText(e.getMessage()));
+                throw e;
+            }
+
         }
     }
 
@@ -1297,7 +1306,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     @Override
     public int getAvailableSpaceForMana() {
-        return BlightbusterConfig.enableMana ? Math.max(0, (int) ((MAX_MANA - this.currentMana) / 3)) : 0;
+        return BlightbusterConfig.enableMana ? Math.max(0, (MAX_MANA - this.currentMana) / 3) : 0;
     }
 
     // IManaBlock
@@ -1395,9 +1404,8 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
     }
 
-    public static void deconstruct() {
-        instance = null;
-        cleansedChunks.clear();
+    public static void deconstruct(World world, int x, int y, int z) {
+        coords = null;
     }
 
     // END MISC. FUNCTIONS

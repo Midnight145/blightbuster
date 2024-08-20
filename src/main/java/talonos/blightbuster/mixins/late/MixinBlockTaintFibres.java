@@ -20,14 +20,18 @@ public abstract class MixinBlockTaintFibres {
     @Inject(method = "taintBiomeSpread", at = @At(value = "HEAD", remap = false), cancellable = true)
     private static void taintBiomeSpreadMixin(World world, int x, int y, int z, Random rand, Block block,
         CallbackInfo ci) {
-        if (DawnMachineTileEntity.instance != null) {
-            int chunkX = x / 16;
-            int chunkZ = z / 16;
-            for (int i = 0; i < DawnMachineTileEntity.cleansedChunks.size(); i++) {
-                int[] coords = DawnMachineTileEntity.cleansedChunks.get(i);
-                if (coords[0] == chunkX && coords[1] == chunkZ) {
-                    ci.cancel();
-                    return;
+        if (DawnMachineTileEntity.coords != null) {
+            int[] coords = DawnMachineTileEntity.coords;
+            DawnMachineTileEntity tile = (DawnMachineTileEntity) world.getTileEntity(coords[0], coords[1], coords[2]);
+            if (tile != null) {
+                int chunkX = x / 16;
+                int chunkZ = z / 16;
+                for (int i = 0; i < tile.cleansedChunks.size(); i++) {
+                    int[] chunkCoords = tile.cleansedChunks.get(i);
+                    if (chunkCoords[0] == chunkX && chunkCoords[1] == chunkZ) {
+                        ci.cancel();
+                        return;
+                    }
                 }
             }
         }
@@ -35,14 +39,18 @@ public abstract class MixinBlockTaintFibres {
 
     @Inject(method = "spreadFibres", at = @At(value = "HEAD", remap = false), cancellable = true)
     private static void spreadFibresMixin(World world, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
-        if (DawnMachineTileEntity.instance != null) {
-            int chunkX = x / 16;
-            int chunkZ = z / 16;
-            for (int i = 0; i < DawnMachineTileEntity.cleansedChunks.size(); i++) {
-                int[] coords = DawnMachineTileEntity.cleansedChunks.get(i);
-                if (coords[0] == chunkX && coords[1] == chunkZ) {
-                    cir.setReturnValue(false);
-                    return;
+        if (DawnMachineTileEntity.coords != null) {
+            int[] coords = DawnMachineTileEntity.coords;
+            DawnMachineTileEntity tile = (DawnMachineTileEntity) world.getTileEntity(coords[0], coords[1], coords[2]);
+            if (tile != null) {
+                int chunkX = x / 16;
+                int chunkZ = z / 16;
+                for (int i = 0; i < tile.cleansedChunks.size(); i++) {
+                    int[] chunkCoords = tile.cleansedChunks.get(i);
+                    if (chunkCoords[0] == chunkX && chunkCoords[1] == chunkZ) {
+                        cir.setReturnValue(false);
+                        return;
+                    }
                 }
             }
         }

@@ -107,7 +107,7 @@ public class BlockDawnMachine extends BlockMultiblock {
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         super.breakBlock(world, x, y, z, block, meta);
-        DawnMachineTileEntity.deconstruct();
+        DawnMachineTileEntity.deconstruct(world, x, y, z);
         // BlightBuster.instance.chunkLoader.eliminateDawnMachine();
     }
 
