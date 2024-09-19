@@ -111,7 +111,9 @@ public class CleansingHelper {
                 didSomething = true;
             }
         }
-        world.markBlockForUpdate(x, y, z);
+        if (didSomething) {
+            world.markBlockForUpdate(x, y, z);
+        }
         return didSomething;
     }
 }
