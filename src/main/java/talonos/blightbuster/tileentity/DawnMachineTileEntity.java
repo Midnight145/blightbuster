@@ -2,13 +2,17 @@ package talonos.blightbuster.tileentity;
 
 import static talonos.blightbuster.lib.CleansingHelper.cleanseMobFromMapping;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.function.Function;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -198,7 +202,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             this.scanlineCoords = this.generateScanlineCoords();
             this.scanlineAerCoords = this.generateScanlineAerCoords();
             this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
-            this.initalizeChunkloading();
+            this.initializeChunkloading();
             this.init = false;
         }
 
@@ -1320,17 +1324,36 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     // CHUNKLOADING FUNCTIONS
 
-    private void initalizeChunkloading() {
+    private void initializeChunkloading() {
         this.dawnMachineTicket = ForgeChunkManager
             .requestTicket(BlightBuster.instance, this.getWorldObj(), ForgeChunkManager.Type.NORMAL);
         if (this.dawnMachineTicket == null) {
-            return;
+            this.releaseTickets();
+            this.initializeChunkloading();
         }
         this.dawnMachineTicket.getModData()
             .setString("id", "DawnMachine");
         final int[] dawnMachineCoords = this.getDawnMachineChunkCoords();
         ForgeChunkManager
             .forceChunk(this.dawnMachineTicket, new ChunkCoordIntPair(dawnMachineCoords[0], dawnMachineCoords[1]));
+    }
+
+    private void releaseTickets() {
+        try {
+            Field field = ForgeChunkManager.class.getDeclaredField("tickets");
+            field.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            Map<World, Multimap<String, ForgeChunkManager.Ticket>> tickets = (Map<World, Multimap<String, ForgeChunkManager.Ticket>>) field
+                .get(ForgeChunkManager.class);
+            LinkedList<ForgeChunkManager.Ticket> toRelease = new LinkedList<>(
+                tickets.get(worldObj)
+                    .get("blightbuster")); // copy it to avoid concurrent modification exception
+            for (ForgeChunkManager.Ticket ticket : toRelease) {
+                ForgeChunkManager.releaseTicket(ticket);
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void loadChunk() {
