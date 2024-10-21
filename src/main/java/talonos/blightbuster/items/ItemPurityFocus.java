@@ -61,16 +61,16 @@ public class ItemPurityFocus extends ItemFocusBasic {
             CleansingHelper.cleanseMobFromMapping(pointedEntity, pointedEntity.worldObj);
             wand.consumeAllVis(itemstack, p, this.getVisCost(itemstack), true, false);
         }
-
+        boolean consumeVis = false;
         if (mop != null && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
             for (int xOffset = -potency; xOffset < 1 + potency; xOffset++) {
                 for (int zOffset = -potency; zOffset < 1 + potency; zOffset++) {
-                    if (this.cleanUpLand(mop.blockX + xOffset, mop.blockZ + zOffset, world, p)) {
-                        wand.consumeAllVis(itemstack, p, this.getVisCost(itemstack), true, false);
-                    }
-
+                    consumeVis = this.cleanUpLand(mop.blockX + xOffset, mop.blockZ + zOffset, world, p) || consumeVis;
                 }
             }
+        }
+        if (consumeVis) {
+            wand.consumeAllVis(itemstack, p, this.getVisCost(itemstack), true, false);
         }
         return itemstack;
     }
@@ -102,9 +102,9 @@ public class ItemPurityFocus extends ItemFocusBasic {
         boolean consumeVis = false;
         if (!p.worldObj.isRemote) {
             for (int y = 0; y < 256; y++) {
-                consumeVis = consumeVis || CleansingHelper.cleanBlock(x, y, z, world);
+                consumeVis = CleansingHelper.cleanBlock(x, y, z, world) || consumeVis;
             }
-            consumeVis = consumeVis || CleansingHelper.cleanseBiome(x, z, world);
+            consumeVis = CleansingHelper.cleanseBiome(x, z, world) || consumeVis;
         }
         return consumeVis;
     }
