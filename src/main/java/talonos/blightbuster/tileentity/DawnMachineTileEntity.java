@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Function;
 
-import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -38,6 +37,8 @@ import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 
 import org.apache.commons.lang3.ArrayUtils;
+
+import com.google.common.collect.Multimap;
 
 import WayofTime.alchemicalWizardry.AlchemicalWizardry;
 import cofh.api.energy.IEnergyReceiver;
