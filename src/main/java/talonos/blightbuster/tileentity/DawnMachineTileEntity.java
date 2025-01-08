@@ -1191,14 +1191,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
 
     @Override
     public int fill(FluidStack fluidstack, boolean simulate) {
-        if (fluidstack.getFluid()
-            .getID() == blood.getID()) {
-            final int change = Math.max(Math.min(MAX_BLOOD - this.fluid.amount, fluidstack.amount), 0);
-            if (!simulate) {
-                this.fluid.amount += change;
-            }
-            return change;
-        }
         return 0;
     }
 
@@ -1244,8 +1236,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     // BLOODMAGIC INTEGRATION
 
     public int addBlood(int bloodAmount, boolean simulate) {
-        final FluidStack blood = new FluidStack(DawnMachineTileEntity.blood, bloodAmount);
-        return this.fill(blood, simulate);
+        final int change = Math.max(Math.min(MAX_BLOOD - this.fluid.amount, bloodAmount), 0);
+        if (!simulate) {
+            this.fluid.amount += change;
+        }
+        return change;
     }
 
     // END BLOOGMAGIC INTEGRATION
