@@ -45,6 +45,10 @@ public class CleansingHelper {
                 }
             }
         }
+        if (entity instanceof EntityLivingBase) {
+            ((EntityLivingBase) entity).removePotionEffect(Config.potionTaintPoisonID);
+            return true;
+        }
         return false;
     }
 
@@ -110,6 +114,22 @@ public class CleansingHelper {
                 world.setBlockToAir(x, y, z);
                 didSomething = true;
             }
+        }
+        if (didSomething) {
+            world.markBlockForUpdate(x, y, z);
+        }
+        return didSomething;
+    }
+
+    public static boolean cleanFlux(int x, int y, int z, World world) {
+        boolean didSomething = false;
+        Block block = world.getBlock(x, y, z);
+        if (block == ConfigBlocks.blockFluxGoo) {
+            world.setBlockToAir(x, y, z);
+            didSomething = true;
+        } else if (block == ConfigBlocks.blockFluxGas) {
+            world.setBlockToAir(x, y, z);
+            didSomething = true;
         }
         if (didSomething) {
             world.markBlockForUpdate(x, y, z);

@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import talonos.blightbuster.lib.CleansingHelper;
+import thaumcraft.common.entities.monster.EntityThaumicSlime;
 
 public class EntitySilverPotion extends EntityThrowable {
 
@@ -43,7 +44,7 @@ public class EntitySilverPotion extends EntityThrowable {
 
     @Override
     protected float func_70182_d() {
-        return 0.5F;
+        return 0.6F;
     }
 
     @Override
@@ -68,6 +69,7 @@ public class EntitySilverPotion extends EntityThrowable {
                         int newY = y + (int) this.posY;
                         if (this.getDistanceFrom(x, y, z) <= 3.0D && this.posY + y < 256 && this.posY + y >= 0) {
                             CleansingHelper.cleanBlock(newX, newY, newZ, worldObj);
+                            CleansingHelper.cleanFlux(newX, newY, newZ, worldObj);
                         }
                     }
                 }
@@ -91,7 +93,13 @@ public class EntitySilverPotion extends EntityThrowable {
         AxisAlignedBB box = AxisAlignedBB.getBoundingBox(x - 5, y - 3, z - 5, x + 5, y + 3, z + 5);
         List<EntityLivingBase> entities = new ArrayList<>(
             this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, box));
-        entities.forEach(entity -> CleansingHelper.cleanseMobFromMapping(entity, worldObj));
+        for (EntityLivingBase entity : entities) {
+            if (entity instanceof EntityThaumicSlime) {
+                entity.setDead();
+            } else {
+                CleansingHelper.cleanseMobFromMapping(entity, worldObj);
+            }
+        }
     }
 
     /**
