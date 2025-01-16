@@ -45,8 +45,8 @@ public class CleansingHelper {
                 }
             }
         }
-        if (entity instanceof EntityLivingBase) {
-            ((EntityLivingBase) entity).removePotionEffect(Config.potionTaintPoisonID);
+        if (entity instanceof EntityLivingBase e && e.isPotionActive(Config.potionTaintPoisonID)) {
+            e.removePotionEffect(Config.potionTaintPoisonID);
             return true;
         }
         return false;
