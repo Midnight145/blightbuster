@@ -57,8 +57,8 @@ public class ItemPurityFocus extends ItemFocusBasic {
         }
 
         Entity pointedEntity = EntityUtils.getPointedEntity(p.worldObj, p, 0.0D, 32.0D, 32.0F);
-        if (pointedEntity != null && !world.isRemote) {
-            CleansingHelper.cleanseMobFromMapping(pointedEntity, pointedEntity.worldObj);
+        if (pointedEntity != null && !world.isRemote
+            && CleansingHelper.cleanseMobFromMapping(pointedEntity, pointedEntity.worldObj)) {
             wand.consumeAllVis(itemstack, p, this.getVisCost(itemstack), true, false);
         }
         boolean consumeVis = false;
