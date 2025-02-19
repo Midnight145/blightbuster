@@ -98,7 +98,14 @@ public class AddedResearch {
             purityFocusResearch.setPages(
                 new ResearchPage("tc.research_page.PURITYFOCUS.1"),
                 new ResearchPage("tc.research_page.PURITYFOCUS.2"),
-                new ResearchPage(purityFocusRecipe));
+                new ResearchPage(purityFocusRecipe),
+                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.basic_upgrades"),
+                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.beam"),
+                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.vacuum"),
+                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.node"),
+                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.curative"),
+                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.blightBuster"),
+                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.spectral"));
 
             purityFocusResearch.setConcealed();
             purityFocusResearch.setParents("ETHEREALBLOOM");

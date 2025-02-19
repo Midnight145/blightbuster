@@ -24,9 +24,16 @@ tc.research_text.SILVERPOTION=Spot cleaning taint!
 tc.research_page.SILVERPOTION.1=Ethereal blooms are wonderful, but if you plant them too far apart, you can miss spots, especially in the corners. This potion, made from silverwood leaves, will cure blighted land and creatures in a 5 block radius. It doesn't eradicate tainted blocks besides those it hits directly, but any remaining blocks will not survive long on cured land. Unlike a bloom, this potion does not offer continuous protection, meaning it's possible for the land to become reinfected, sometimes quite quickly. On the plus side, the potion will also vacuum up any flux created from the purification of tainted land.
 
 tc.research_name.PURITYFOCUS=Purity Focus
-tc.research_text.PURITYFOCUS=The Blightbuster
-tc.research_page.PURITYFOCUS.1=You have found a way to infuse the properties of an ethereal bloom into a wand focus. When you right click on a block, that block and all blocks above and below it will immediately be cured of taint. The enlarge enchantment is especially useful on this focus, increasing the radius of the cleansing to 3, 5, 7, or 9, depending on the level. Beware rapidly spawning thaumic slimes when working near crusted taint. Also beware the high vis cost, especially when enlarge is applied. On the plus side, you can heal tainted creatures simply by right-clicking them with this wand.
-tc.research_page.PURITYFOCUS.2=Additionally, you can "heal" tainted nodes by holding down left-click. This requires a lot of vis; however, needing 150 ordo and 100 terra.
+tc.research_text.PURITYFOCUS=The Blight Buster
+tc.research_page.PURITYFOCUS.1=You have found a way to infuse the properties of an ethereal bloom into a wand focus. When you right click on a block, that block and all blocks above and below it will immediately be cured of taint. The enlarge enchantment is especially useful on this focus, increasing the radius of the cleansing by one for each level. Beware rapidly spawning thaumic slimes when working near crusted taint. Also beware the high vis cost, especially when enlarge is applied. On the plus side, you can heal tainted creatures simply by right-clicking them with this wand.
+tc.research_page.PURITYFOCUS.2=Additionally, you can "heal" tainted nodes by holding down left-click. This requires a lot of vis, however, needing §7150 ordo§r and §2100 terra§r.
+tc.research_page.PURITYFOCUS.basic_upgrades=    §nBasic Upgrades: Every Level§r<BR>§nFrugal§r: Reduce all vis costs by 10% per level.<BR>§nEnlarge§r: Expand the radius of the Purity Focus's area of effect by 1 per level. The default area is a 3x3 square.
+tc.research_page.PURITYFOCUS.beam=      §nPurifying Beam: Level 1§r<IMG>thaumcraft:textures/aspects/lux.png:0:0:255:255:0.0625</IMG>Concentrates the Purity Focus's effect into a purifying beam which cures friendly creatures of taint infections and damages tainted enemies that cannot be cured. Will still clean blocks and the tainted biome, but it will only clean the blocks along its path instead of every block in a vertical column.<BR>§nEnlarge§r: Increase the beam's maximum range by 2 blocks for each level.<BR>§nPotency§r: Increases the damage done to tainted enemies. May be chosen for levels 2-5 if §nPurifying Beam§r is present. 
+tc.research_page.PURITYFOCUS.vacuum=         §nVacuum: Level 3§r<IMG>thaumcraft:textures/aspects/vacuos.png:0:0:255:255:0.0625</IMG>Sucks up all flux goo and gas as well as any thaumic slimes.
+tc.research_page.PURITYFOCUS.node=      §nNode Purifier: Level 5§r<IMG>thaumcraft:textures/aspects/auram.png:0:0:255:255:0.0625</IMG>All nodes cleansed by a focus with this upgrade will become pure nodes, which protect the land around them from becoming infected again. 
+tc.research_page.PURITYFOCUS.curative=         §nCurative: Level 5§r<IMG>thaumcraft:textures/aspects/sano.png:0:0:255:255:0.0625</IMG>The Purity Focus's light will heal all friendly creatures and players (excluding the caster) as well as harm any undead monsters in its area of effect. Also makes its holder immune to the Taint Poison debuff while in the inventory.
+tc.research_page.PURITYFOCUS.blightBuster=      §nBlight Buster: Level 5§r<IMG>thaumcraft:textures/aspects/telum.png:0:0:255:255:0.0625</IMG>Modifies the Purity Focus's cleansing power to deal massive damage to tainted creatures. This shift in priority removes the ability to cure tainted animals and villagers.
+tc.research_page.PURITYFOCUS.spectral=         §nSpectral: Level 5§r<BR>       Requires §nPurifying Beam§r<IMG>thaumcraft:textures/aspects/spiritus.png:0:0:255:255:0.0625</IMG>Allows the §nPurifying Beam§r to pierce through blocks, purifying many blocks at a time and harming tainted creatures through walls.
 
 tc.research_name.DAWNTOTEM=Totems of Dawn
 tc.research_text.DAWNTOTEM=The start of a glorious new era!
@@ -71,3 +78,17 @@ gui.charger.pairSuccessful=Your wand attunes to the Dawn Charger.
 gui.ritual.missingBlooms=You remember what the Dark One said...Place Ethereal Blooms on top of the Dusk Runes.
 
 ritual.BBDawnMachineRitual.name=Ritual of the New Dawn
+
+focus.upgrade.bb_node.name=Node Purifier
+focus.upgrade.bb_curative.name=Curative
+focus.upgrade.bb_beam.name=Purifying Beam
+focus.upgrade.bb_blightBuster.name=Blight Buster
+focus.upgrade.bb_vacuum.name=Vacuum
+focus.upgrade.bb_spectral.name=Spectral
+
+focus.upgrade.bb_node.text=Becomes more efficient with the vis used to cleanse nodes of taint. All cleansed nodes will also become pure nodes which will keep the area around them clean.
+focus.upgrade.bb_curative.text=Cleans all mobs in its area of effect. Its therapeutic light heals friendly creatures and harms the undead.
+focus.upgrade.bb_beam.text=Channels the Purity Focus's power into a Purifying Beam that cures tainted animals and villagers and damages incurable tainted foes.
+focus.upgrade.bb_blightBuster.text=Severely damages all tainted enemies in its area of effect. A focus with this upgrade loses its ability to cure tainted animals and villagers.
+focus.upgrade.bb_vacuum.text=Sucks up flux goo and gas.
+focus.upgrade.bb_spectral.text=Allows the Purifying Beam to phase through blocks and entities, cleansing all in its path.
