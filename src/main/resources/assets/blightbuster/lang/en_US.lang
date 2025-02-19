@@ -19,21 +19,19 @@ item.blightbuster_boundRing.2.name=Fairy Wings
 item.blightbuster_boundRing.3.name=Dragon Wings
 item.blightbuster_boundRing.4.name=Golden Wings
 
-tc.research_name.SILVERPOTION=Silverwood potions
+tc.research_name.SILVERPOTION=Silverwood Potions
 tc.research_text.SILVERPOTION=Spot cleaning taint!
 tc.research_page.SILVERPOTION.1=Ethereal blooms are wonderful, but if you plant them too far apart, you can miss spots, especially in the corners. This potion, made from silverwood leaves, will cure blighted land and creatures in a 5 block radius. It doesn't eradicate tainted blocks besides those it hits directly, but any remaining blocks will not survive long on cured land. Unlike a bloom, this potion does not offer continuous protection, meaning it's possible for the land to become reinfected, sometimes quite quickly. On the plus side, the potion will also vacuum up any flux created from the purification of tainted land.
 
 tc.research_name.PURITYFOCUS=Purity Focus
 tc.research_text.PURITYFOCUS=The Blight Buster
-tc.research_page.PURITYFOCUS.1=You have found a way to infuse the properties of an ethereal bloom into a wand focus. When you right click on a block, that block and all blocks above and below it will immediately be cured of taint. The enlarge enchantment is especially useful on this focus, increasing the radius of the cleansing by one for each level. Beware rapidly spawning thaumic slimes when working near crusted taint. Also beware the high vis cost, especially when enlarge is applied. On the plus side, you can heal tainted creatures simply by right-clicking them with this wand.
-tc.research_page.PURITYFOCUS.2=Additionally, you can "heal" tainted nodes by holding down left-click. This requires a lot of vis, however, needing §7150 ordo§r and §2100 terra§r.
-tc.research_page.PURITYFOCUS.basic_upgrades=    §nBasic Upgrades: Every Level§r<BR>§nFrugal§r: Reduce all vis costs by 10% per level.<BR>§nEnlarge§r: Expand the radius of the Purity Focus's area of effect by 1 per level. The default area is a 3x3 square.
-tc.research_page.PURITYFOCUS.beam=      §nPurifying Beam: Level 1§r<IMG>thaumcraft:textures/aspects/lux.png:0:0:255:255:0.0625</IMG>Concentrates the Purity Focus's effect into a purifying beam which cures friendly creatures of taint infections and damages tainted enemies that cannot be cured. Will still clean blocks and the tainted biome, but it will only clean the blocks along its path instead of every block in a vertical column.<BR>§nEnlarge§r: Increase the beam's maximum range by 2 blocks for each level.<BR>§nPotency§r: Increases the damage done to tainted enemies. May be chosen for levels 2-5 if §nPurifying Beam§r is present. 
-tc.research_page.PURITYFOCUS.vacuum=         §nVacuum: Level 3§r<IMG>thaumcraft:textures/aspects/vacuos.png:0:0:255:255:0.0625</IMG>Sucks up all flux goo and gas as well as any thaumic slimes.
-tc.research_page.PURITYFOCUS.node=      §nNode Purifier: Level 5§r<IMG>thaumcraft:textures/aspects/auram.png:0:0:255:255:0.0625</IMG>All nodes cleansed by a focus with this upgrade will become pure nodes, which protect the land around them from becoming infected again. 
-tc.research_page.PURITYFOCUS.curative=         §nCurative: Level 5§r<IMG>thaumcraft:textures/aspects/sano.png:0:0:255:255:0.0625</IMG>The Purity Focus's light will heal all friendly creatures and players (excluding the caster) as well as harm any undead monsters in its area of effect. Also makes its holder immune to the Taint Poison debuff while in the inventory.
-tc.research_page.PURITYFOCUS.blightBuster=      §nBlight Buster: Level 5§r<IMG>thaumcraft:textures/aspects/telum.png:0:0:255:255:0.0625</IMG>Modifies the Purity Focus's cleansing power to deal massive damage to tainted creatures. This shift in priority removes the ability to cure tainted animals and villagers.
-tc.research_page.PURITYFOCUS.spectral=         §nSpectral: Level 5§r<BR>       Requires §nPurifying Beam§r<IMG>thaumcraft:textures/aspects/spiritus.png:0:0:255:255:0.0625</IMG>Allows the §nPurifying Beam§r to pierce through blocks, purifying many blocks at a time and harming tainted creatures through walls.
+tc.research_page.PURITYFOCUS.1=You have found a way to infuse the properties of an ethereal bloom into a wand focus. When you right click on a block, a 3x3 area and all blocks above and below it will immediately be cured of taint. Each tainted block that is purified costs §20.1 Terra§0 and §70.15 Ordo§0 vis.<BR>Crusted taint will leave behind large amounts of flux goo, so beware of creating rapidly-growing thaumic slimes when working near it.<BR>Also beware the high vis cost, especially when upgraded with Enlarge.
+tc.research_page.PURITYFOCUS.2=As well as cleaning blighted lands, you may heal creatures infected by taint by right clicking them with a wand equipped with this focus. This will also cure the Taint Poison debuff. Healing creatures costs §22 Terra§0, §32 Aqua§0, and §71 Ordo§0 vis. This effect works at great distances.<BR>Additionally, you can remove taint from nodes by holding down left click while holding a wand with this focus (this focus prevents the destruction of any node). This requires a lot of vis, however, needing §7150 Ordo§0 and §2100 Terra§0. Take care to ensure that the nodes you clean do not get infected again in the future.
+tc.research_page.PURITYFOCUS.basic_upgrades=    §nBasic Upgrades: Every Level§r<BR>§nFrugal§r: Reduce all vis costs by 10% per level.<BR>§nEnlarge§r: Expand the dimensions of the Purity Focus's area of effect by 2 per level, up from the default 3x3 area.
+tc.research_page.PURITYFOCUS.vacuum=       §nFlux Vacuum: Level 3§r<IMG>blightbuster:textures/foci/fluxVacuum.png:0:0:255:255:0.0625</IMG>The days of manually cleaning up flux are over. A Purity Focus with this upgrade will suck up all flux goo and gas (including that which is created when cleaning crusted taint) as well as any thaumic slimes in its area of effect.<BR>This costs §60.5 Aer§0 and §80.5 Perditio§0 vis for each block of flux cleaned.
+tc.research_page.PURITYFOCUS.node=      §nNode Purifier: Level 5§r<IMG>blightbuster:textures/foci/nodePurifier.png:0:0:255:255:0.0625</IMG>All nodes cleansed by a focus with this upgrade will become pure nodes, which protect the land around them from becoming infected again.<BR>This upgrade also allows the Purity Focus to clean all nodes in its area of effect, rather than just ones that are targeted with left click.
+tc.research_page.PURITYFOCUS.curative=         §nCurative: Level 5§r<IMG>blightbuster:textures/foci/curative.png:0:0:255:255:0.0625</IMG>This upgrade augments the Purity Focus's therapeutic light. It will now heal all friendly creatures and players (except for the caster) in its area of effect by two hearts of health.<BR>Just like curing creatures of taint infections, healing creatures costs §22 Terra§0, §32 Aqua§0, and §71 Ordo§0 vis for each one healed.<BR>A Purity Focus with this upgrade also makes its holder immune to the Taint Poison debuff while on a wand in the inventory. 
+tc.research_page.PURITYFOCUS.blightBuster=      §nBlight Buster: Level 5§r<IMG>blightbuster:textures/foci/blightBuster.png:0:0:255:255:0.0625</IMG>Modifies the Purity Focus's cleansing power to deal massive damage to tainted creatures.<BR>Deals 10 hearts of damage to any tainted creature it finds in its area of effect at the cost of §c5 Ignis§0 and §85 Perditio§0 vis each.<BR>This shift in priority removes the ability to cure tainted animals and villagers; all blighted creatures shall feel your wrath.
 
 tc.research_name.DAWNTOTEM=Totems of Dawn
 tc.research_text.DAWNTOTEM=The start of a glorious new era!
@@ -81,14 +79,10 @@ ritual.BBDawnMachineRitual.name=Ritual of the New Dawn
 
 focus.upgrade.bb_node.name=Node Purifier
 focus.upgrade.bb_curative.name=Curative
-focus.upgrade.bb_beam.name=Purifying Beam
 focus.upgrade.bb_blightBuster.name=Blight Buster
-focus.upgrade.bb_vacuum.name=Vacuum
-focus.upgrade.bb_spectral.name=Spectral
+focus.upgrade.bb_vacuum.name=Flux Vacuum
 
-focus.upgrade.bb_node.text=Becomes more efficient with the vis used to cleanse nodes of taint. All cleansed nodes will also become pure nodes which will keep the area around them clean.
-focus.upgrade.bb_curative.text=Cleans all mobs in its area of effect. Its therapeutic light heals friendly creatures and harms the undead.
-focus.upgrade.bb_beam.text=Channels the Purity Focus's power into a Purifying Beam that cures tainted animals and villagers and damages incurable tainted foes.
+focus.upgrade.bb_node.text=Cleans all nodes in the focus's area of effect. All cleansed nodes will also become pure nodes which keep the area around them free from taint.
+focus.upgrade.bb_curative.text=Cleans all creatures in its area of effect. Its therapeutic light heals friendly creatures and protects its holder from Taint Poison.
 focus.upgrade.bb_blightBuster.text=Severely damages all tainted enemies in its area of effect. A focus with this upgrade loses its ability to cure tainted animals and villagers.
 focus.upgrade.bb_vacuum.text=Sucks up flux goo and gas.
-focus.upgrade.bb_spectral.text=Allows the Purifying Beam to phase through blocks and entities, cleansing all in its path.
