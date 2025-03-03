@@ -1,6 +1,7 @@
 package talonos.blightbuster.handlers;
 
-import cpw.mods.fml.common.gameevent.TickEvent;
+import static talonos.blightbuster.items.ItemPurityFocus.curative;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -8,14 +9,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.BlightbusterConfig;
-import talonos.blightbuster.items.ItemPurityFocus;
 import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.items.wands.ItemWandCasting;
-
-import static talonos.blightbuster.items.ItemPurityFocus.curative;
 
 public class PurityFocusEventHandler {
 

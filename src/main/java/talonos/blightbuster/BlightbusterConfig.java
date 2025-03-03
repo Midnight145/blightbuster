@@ -10,6 +10,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.config.Configuration;
 
 import talonos.blightbuster.compat.CompatFixes;
+import talonos.blightbuster.items.ItemPurityFocus;
+import thaumcraft.api.aspects.Aspect;
 
 public class BlightbusterConfig {
 
@@ -55,6 +57,20 @@ public class BlightbusterConfig {
     public static boolean useCorners = false;
     public static int[][] dawnMachineCorners = new int[][] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } };
     public static boolean enableThaumicEnergistics;
+
+    public static int blockTerra;
+    public static int blockOrdo;
+    public static int healTerra;
+    public static int healAqua;
+    public static int healOrdo;
+    public static int nodeTerra;
+    public static int nodeOrdo;
+    public static int vacuumAer;
+    public static int vacuumPerditio;
+    public static int attackIgnis;
+    public static int attackPerditio;
+    public static int attackStrength;
+    public static int healStrength;
 
     public static void load(Configuration config) {
         enableWorldTainter = config.get("General", "Enable World Tainter", enableWorldTainter)
@@ -130,6 +146,79 @@ public class BlightbusterConfig {
                 Integer.parseInt(split[0].split(",")[1]) };
         } catch (Exception e) {
             BlightBuster.logger.error("Error parsing Dawn Machine Corners: {}", e);
+        }
+
+        if (enablePurityFocus) {
+            attackStrength = config.get(
+                "Purity Focus",
+                "Blight Buster Attack Strength",
+                20,
+                "Configuration options for the Blight Buster focus upgrade. Attack Strength is in half-hearts (20 = 10 hearts of damage), and vis costs are divided by 100 (500 = 5 vis per cast).")
+                .getInt(attackStrength);
+            attackIgnis = config.get("Purity Focus", "Blight Buster Ignis Cost", 500)
+                .getInt(attackIgnis);
+            attackPerditio = config.get("Purity Focus", "Blight Buster Perditio Cost", 250)
+                .getInt(attackPerditio);
+            blockOrdo = config.get(
+                "Purity Focus",
+                "Block Ordo Cost",
+                15,
+                "Configuration options for the default block and biome cleaning costs. Vis costs are divided by 100 (15 = .15 vis per cast).")
+                .getInt(blockOrdo);
+            blockTerra = config.get("Purity Focus", "Block Terra Cost", 10)
+                .getInt(blockTerra);
+            healAqua = config.get(
+                "Purity Focus",
+                "Healing Aqua Cost",
+                200,
+                "Configuration options for purifying mobs and healing them with the Curative upgrade. Healing Strength is in half-hearts (4 = 2 hearts of healing), and vis costs are divided by 100 (200 = 2 vis per cast).")
+                .getInt(healAqua);
+            healStrength = config.get("Purity Focus", "Healing Strength", 4)
+                .getInt(healStrength);
+            healOrdo = config.get("Purity Focus", "Healing Ordo Cost", 100)
+                .getInt(healOrdo);
+            healTerra = config.get("Purity Focus", "Healing Terra Cost", 200)
+                .getInt(healTerra);
+            nodeOrdo = config.get(
+                "Purity Focus",
+                "Node Ordo Cost",
+                15000,
+                "Configuration options for purifying nodes regardless of the presence of the Node Purifier upgrade. Vis costs are divided by 100 (15000 = 150 vis per cast).")
+                .getInt(nodeOrdo);
+            nodeTerra = config.get("Purity Focus", "Node Terra Cost", 10000)
+                .getInt(nodeTerra);
+            vacuumAer = config.get(
+                "Purity Focus",
+                "Vacuum Aer Cost",
+                25,
+                "Configuration options for the Flux Vacuum focus upgrade. Vis costs are divided by 100 (25 = .25 vis per cast).")
+                .getInt(vacuumAer);
+            vacuumPerditio = config.get("Purity Focus", "Vacuum Perditio Cost", 25)
+                .getInt(vacuumPerditio);
+
+            ItemPurityFocus.blockCost.remove(Aspect.EARTH)
+                .remove(Aspect.ORDER);
+            ItemPurityFocus.nodeCost.remove(Aspect.EARTH)
+                .remove(Aspect.ORDER);
+            ItemPurityFocus.attackCost.remove(Aspect.FIRE)
+                .remove(Aspect.ENTROPY);
+            ItemPurityFocus.healCost.remove(Aspect.EARTH)
+                .remove(Aspect.WATER)
+                .remove(Aspect.ORDER);
+            ItemPurityFocus.vacuumCost.remove(Aspect.AIR)
+                .remove(Aspect.ENTROPY);
+
+            ItemPurityFocus.blockCost.add(Aspect.EARTH, blockTerra)
+                .add(Aspect.ORDER, blockOrdo);
+            ItemPurityFocus.nodeCost.add(Aspect.EARTH, nodeTerra)
+                .add(Aspect.ORDER, nodeOrdo);
+            ItemPurityFocus.attackCost.add(Aspect.FIRE, attackIgnis)
+                .add(Aspect.ENTROPY, attackPerditio);
+            ItemPurityFocus.healCost.add(Aspect.EARTH, healTerra)
+                .add(Aspect.WATER, healAqua)
+                .add(Aspect.ORDER, healOrdo);
+            ItemPurityFocus.vacuumCost.add(Aspect.AIR, vacuumAer)
+                .add(Aspect.ENTROPY, vacuumPerditio);
         }
 
         if (config.hasChanged()) {

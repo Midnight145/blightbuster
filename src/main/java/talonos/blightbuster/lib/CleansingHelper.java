@@ -53,6 +53,9 @@ public class CleansingHelper {
     }
 
     private static void cleanseSingleMob(Entity tainted, EntityLivingBase cleansed) {
+        if (tainted.worldObj.isRemote) {
+            return;
+        }
         // new entity copies original entity location
         cleansed.copyLocationAndAnglesFrom(tainted);
         // original entity spawns new entity into the world

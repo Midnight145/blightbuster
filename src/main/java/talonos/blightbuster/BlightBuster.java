@@ -1,5 +1,8 @@
 package talonos.blightbuster;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IReloadableResourceManager;
+import net.minecraft.client.resources.IResourceManager;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -22,6 +25,7 @@ import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.rituals.RitualDawnMachine;
 import talonos.blightbuster.tileentity.DawnMachineSpoutTileEntity;
 import talonos.blightbuster.tileentity.dawnmachine.DawnMachineChunkLoader;
+import thaumcraft.api.research.ResearchCategories;
 import thaumicenergistics.api.ThEApi;
 
 @Mod(
@@ -95,5 +99,15 @@ public class BlightBuster {
         }
         BlightbusterConfig.init_mappings();
 
+        // Rebuild formatted research on language change.
+        if (BlightbusterConfig.enablePurityFocus && Minecraft.getMinecraft()
+            .getResourceManager() instanceof IReloadableResourceManager manager) {
+            manager.registerReloadListener(
+                (IResourceManager manager2) -> {
+                    AddedResearch.setPurityFocusPages(
+                        ResearchCategories.getResearch("PURITYFOCUS"),
+                        AddedResearch.purityFocusRecipe);
+                });
+        }
     }
 }

@@ -1,13 +1,17 @@
 package talonos.blightbuster;
 
+import java.text.DecimalFormat;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.handlers.TalonosWandTriggerManager;
 import talonos.blightbuster.items.BBItems;
+import talonos.blightbuster.items.ItemPurityFocus;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -21,6 +25,8 @@ import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 
 public class AddedResearch {
+
+    static ShapedArcaneRecipe purityFocusRecipe;
 
     public static void initResearch() {
         String category = "ALCHEMY";
@@ -68,7 +74,7 @@ public class AddedResearch {
         }
 
         if (BlightbusterConfig.enablePurityFocus) {
-            ShapedArcaneRecipe purityFocusRecipe = ThaumcraftApi.addArcaneCraftingRecipe(
+            purityFocusRecipe = ThaumcraftApi.addArcaneCraftingRecipe(
                 "PURITYFOCUS",
                 new ItemStack(BBItems.purityFocus),
                 new AspectList().add(Aspect.WATER, 5)
@@ -95,15 +101,7 @@ public class AddedResearch {
                 2,
                 new ItemStack(BBItems.purityFocus));
 
-            purityFocusResearch.setPages(
-                new ResearchPage("tc.research_page.PURITYFOCUS.1"),
-                new ResearchPage("tc.research_page.PURITYFOCUS.2"),
-                new ResearchPage(purityFocusRecipe),
-                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.basic_upgrades"),
-                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.vacuum"),
-                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.node"),
-                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.curative"),
-                new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.blightBuster"));
+            setPurityFocusPages(purityFocusResearch, purityFocusRecipe);
 
             purityFocusResearch.setConcealed();
             purityFocusResearch.setParents("ETHEREALBLOOM");
@@ -276,6 +274,50 @@ public class AddedResearch {
             dawnChargerResearch.setParents(BlightbusterConfig.enableDawnOffering ? "DAWNOFFERING" : "DAWNMACHINE");
             dawnChargerResearch.registerResearchItem();
         }
+    }
+
+    // Used to rebuild formatted research on language change.
+    public static void setPurityFocusPages(ResearchItem purityFocusResearch, ShapedArcaneRecipe purityFocusRecipe) {
+        DecimalFormat formatter = new DecimalFormat("#####.##");
+        purityFocusResearch.setPages(
+            new ResearchPage(
+                StatCollector.translateToLocalFormatted(
+                    "tc.research_page.PURITYFOCUS.1",
+                    formatter.format(ItemPurityFocus.blockCost.getAmount(Aspect.EARTH) / 100F),
+                    formatter.format(ItemPurityFocus.blockCost.getAmount(Aspect.ORDER) / 100F))),
+            new ResearchPage(
+                StatCollector.translateToLocalFormatted(
+                    "tc.research_page.PURITYFOCUS.2",
+                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.EARTH) / 100F),
+                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.WATER) / 100F),
+                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.ORDER) / 100F),
+                    formatter.format(ItemPurityFocus.nodeCost.getAmount(Aspect.EARTH) / 100F),
+                    formatter.format(ItemPurityFocus.nodeCost.getAmount(Aspect.ORDER) / 100F))),
+            new ResearchPage(purityFocusRecipe),
+            new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.basic_upgrades"),
+            new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.architect"),
+            new ResearchPage(
+                "FOCALMANIPULATION",
+                StatCollector.translateToLocalFormatted(
+                    "tc.research_page.PURITYFOCUS.vacuum",
+                    formatter.format(ItemPurityFocus.vacuumCost.getAmount(Aspect.AIR) / 100F),
+                    formatter.format(ItemPurityFocus.vacuumCost.getAmount(Aspect.ENTROPY) / 100F))),
+            new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.node"),
+            new ResearchPage(
+                "FOCALMANIPULATION",
+                StatCollector.translateToLocalFormatted(
+                    "tc.research_page.PURITYFOCUS.curative",
+                    formatter.format(BlightbusterConfig.healStrength / 2F),
+                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.EARTH) / 100F),
+                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.WATER) / 100F),
+                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.ORDER) / 100F))),
+            new ResearchPage(
+                "FOCALMANIPULATION",
+                StatCollector.translateToLocalFormatted(
+                    "tc.research_page.PURITYFOCUS.blightBuster",
+                    formatter.format(BlightbusterConfig.attackStrength / 2F),
+                    formatter.format(ItemPurityFocus.attackCost.getAmount(Aspect.FIRE) / 100F),
+                    formatter.format(ItemPurityFocus.attackCost.getAmount(Aspect.ENTROPY) / 100F))));
     }
 
     public static void initWandHandler() {
