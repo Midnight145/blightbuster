@@ -138,7 +138,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
             return true;
         } else if (doBlightBuster(itemstack, p, entity, wand, focus)) {
             if (p.worldObj.isRemote) {
-                PurityFocusFX.fire(entity);
+                PurityFocusFX.fire(entity, p);
             } else {
                 entity.attackEntityFrom(
                     new EntityDamageSource("magic", p).setDamageBypassesArmor(),
@@ -148,14 +148,14 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
             return true;
         } else if (doBasicClean(itemstack, p, entity, wand, focus)) {
             if (p.worldObj.isRemote) {
-                PurityFocusFX.clean(entity);
+                PurityFocusFX.clean(entity, p);
             } else {
                 wand.consumeAllVis(itemstack, p, getHealVisCost(), true, false);
             }
             return true;
         } else if (doCurative(itemstack, p, entity, wand, focus)) {
             if (p.worldObj.isRemote) {
-                PurityFocusFX.heal(entity);
+                PurityFocusFX.heal(entity, p);
             } else {
                 entity.heal(BlightbusterConfig.healStrength);
                 wand.consumeAllVis(itemstack, p, getHealVisCost(), true, false);

@@ -5,21 +5,24 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import thaumcraft.common.Thaumcraft;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 public class PurityFocusFX {
 
-    public static long lastFireTime = 0;
-    public static long lastCleanTime = 0;
-    public static long lastHealTime = 0;
-    public static long lastNodeTime = 0;
+    public static HashMap<UUID, Long> lastFireTime = new HashMap<>();
+    public static HashMap<UUID, Long> lastCleanTime = new HashMap<>();
+    public static HashMap<UUID, Long> lastHealTime = new HashMap<>();
+    public static HashMap<UUID, Long> lastNodeTime = new HashMap<>();
 
-    public static void fire(EntityLivingBase entity) {
+    public static void fire(EntityLivingBase entity, EntityPlayer player) {
         double w;
         double d;
         double h;
         // Only play this sound once per cast, even if multiple entities are hit
-        if (lastFireTime < entity.worldObj.getTotalWorldTime() - 4) {
+        if (lastFireTime.get(player.getUniqueID()) < entity.worldObj.getTotalWorldTime() - 4) {
             entity.worldObj.playSoundAtEntity(entity, "thaumcraft:fireloop", 0.66F, 2.0F);
-            lastFireTime = entity.worldObj.getTotalWorldTime();
+            lastFireTime.put(player.getUniqueID(), entity.worldObj.getTotalWorldTime());
         }
         double count = 3 + entity.worldObj.rand.nextInt(8) * entity.height;
         for (int i = (int) count; i >= 0; i--) {
@@ -48,14 +51,14 @@ public class PurityFocusFX {
         }
     }
 
-    public static void clean(EntityLivingBase entity) {
+    public static void clean(EntityLivingBase entity, EntityPlayer player) {
         double w;
         double d;
         double h;
         // Only play this sound once per cast, even if multiple entities are hit
-        if (lastCleanTime < entity.worldObj.getTotalWorldTime() - 4) {
+        if (lastCleanTime.get(player.getUniqueID()) < entity.worldObj.getTotalWorldTime() - 4) {
             entity.worldObj.playSoundAtEntity(entity, "thaumcraft:gore", 0.5F, 1);
-            lastCleanTime = entity.worldObj.getTotalWorldTime();
+            lastCleanTime.put(player.getUniqueID(), entity.worldObj.getTotalWorldTime());
         }
         for (int i = 20; i > 0; i--) {
             for (int j = 20; j > 0; j--) {
@@ -65,17 +68,16 @@ public class PurityFocusFX {
 
             }
         }
-
     }
 
-    public static void heal(EntityLivingBase entity) {
+    public static void heal(EntityLivingBase entity, EntityPlayer player) {
         double w;
         double d;
         double h;
         // Only play this sound once per cast, even if multiple entities are hit
-        if (lastHealTime < entity.worldObj.getTotalWorldTime() - 4) {
+        if (lastHealTime.get(player.getUniqueID()) < entity.worldObj.getTotalWorldTime() - 4) {
             entity.worldObj.playSoundAtEntity(entity, "thaumcraft:wand", 0.5F, 1);
-            lastHealTime = entity.worldObj.getTotalWorldTime();
+            lastHealTime.put(player.getUniqueID(), entity.worldObj.getTotalWorldTime());
         }
         for (int i = (2 + entity.worldObj.rand.nextInt(3)); i > 0; i--) {
             w = (entity.worldObj.rand.nextGaussian() - 0.5) * entity.width;
@@ -95,9 +97,9 @@ public class PurityFocusFX {
         float h;
         // Only play this sound once at a time, even if multiple nodes are hit.
         // It also only plays if the node is within 10 blocks.
-        if (lastNodeTime < player.worldObj.getTotalWorldTime() - 4 && player.getDistanceSq(x, y, z) < 100) {
+        if (lastNodeTime.get(player.getUniqueID()) < player.worldObj.getTotalWorldTime() - 4 && player.getDistanceSq(x, y, z) < 100) {
             player.playSound("thaumcraft:wand", 0.5F, 1F);
-            lastNodeTime = player.worldObj.getTotalWorldTime();
+            lastNodeTime.put(player.getUniqueID(), player.worldObj.getTotalWorldTime());
         }
 
         for (int i = 12; i >= 0; i--) {
