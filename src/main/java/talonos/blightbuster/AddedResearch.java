@@ -1,6 +1,7 @@
 package talonos.blightbuster;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -283,16 +284,12 @@ public class AddedResearch {
             new ResearchPage(
                 StatCollector.translateToLocalFormatted(
                     "tc.research_page.PURITYFOCUS.1",
-                    formatter.format(ItemPurityFocus.blockCost.getAmount(Aspect.EARTH) / 100F),
-                    formatter.format(ItemPurityFocus.blockCost.getAmount(Aspect.ORDER) / 100F))),
+                    formatVis(ItemPurityFocus.getBlockVisCost(), formatter))),
             new ResearchPage(
                 StatCollector.translateToLocalFormatted(
                     "tc.research_page.PURITYFOCUS.2",
-                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.EARTH) / 100F),
-                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.WATER) / 100F),
-                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.ORDER) / 100F),
-                    formatter.format(ItemPurityFocus.nodeCost.getAmount(Aspect.EARTH) / 100F),
-                    formatter.format(ItemPurityFocus.nodeCost.getAmount(Aspect.ORDER) / 100F))),
+                    formatVis(ItemPurityFocus.getHealVisCost(), formatter),
+                    formatVis(ItemPurityFocus.getNodeVisCost(), formatter))),
             new ResearchPage(purityFocusRecipe),
             new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.basic_upgrades"),
             new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.architect"),
@@ -300,24 +297,58 @@ public class AddedResearch {
                 "FOCALMANIPULATION",
                 StatCollector.translateToLocalFormatted(
                     "tc.research_page.PURITYFOCUS.vacuum",
-                    formatter.format(ItemPurityFocus.vacuumCost.getAmount(Aspect.AIR) / 100F),
-                    formatter.format(ItemPurityFocus.vacuumCost.getAmount(Aspect.ENTROPY) / 100F))),
+                    formatVis(ItemPurityFocus.getVacuumVisCost(), formatter))),
             new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.node"),
             new ResearchPage(
                 "FOCALMANIPULATION",
                 StatCollector.translateToLocalFormatted(
                     "tc.research_page.PURITYFOCUS.curative",
                     formatter.format(BlightbusterConfig.healStrength / 2F),
-                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.EARTH) / 100F),
-                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.WATER) / 100F),
-                    formatter.format(ItemPurityFocus.healCost.getAmount(Aspect.ORDER) / 100F))),
+                    formatVis(ItemPurityFocus.getHealVisCost(), formatter))),
             new ResearchPage(
                 "FOCALMANIPULATION",
                 StatCollector.translateToLocalFormatted(
                     "tc.research_page.PURITYFOCUS.blightBuster",
                     formatter.format(BlightbusterConfig.attackStrength / 2F),
-                    formatter.format(ItemPurityFocus.attackCost.getAmount(Aspect.FIRE) / 100F),
-                    formatter.format(ItemPurityFocus.attackCost.getAmount(Aspect.ENTROPY) / 100F))));
+                    formatVis(ItemPurityFocus.getAttackVisCost(), formatter))));
+    }
+
+    /**
+     * Tried my best to make this work across languages.
+     */
+    private static String formatVis(AspectList visCost, DecimalFormat formatter) {
+        String separator = StatCollector.translateToLocal("gui.visCost.separator");
+        String and = StatCollector.translateToLocal("gui.visCost.and");
+        String space = StatCollector.translateToLocal("gui.visCost.space");
+        String vis = StatCollector.translateToLocal("gui.visCost.visName");
+        if (visCost == null || visCost.size() == 0) {
+            return StatCollector.translateToLocal("gui.visCost.noCost");
+        }
+        ArrayList<String> list = new ArrayList<>();
+        for (Aspect a : visCost.getAspects()) {
+            list.add(getColorCode(a) + formatter.format(visCost.getAmount(a) / 100F) + space + a.getName() + "§0");
+        }
+        if (list.size() == 1) {
+            return list.get(0) + space + vis;
+        }
+        if (list.size() == 2) {
+            return list.get(0) + space + and + space + list.get(1) + space + vis;
+        }
+        String result = String.join(separator + space, list.subList(0, list.size() - 1));
+        return result + separator + space + and + space + list.get(list.size() - 1) + space + vis;
+    }
+
+    /**
+     * Aer's chat color is different from the one used in the Thaumonomicon.
+     */
+    private static String getColorCode(Aspect a) {
+        if (a == null) {
+            return "";
+        }
+        if (a.getTag().equals("aer")) {
+            return "§6";
+        }
+        return "§" + a.getChatcolor();
     }
 
     public static void initWandHandler() {

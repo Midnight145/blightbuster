@@ -9,9 +9,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.config.Configuration;
 
+import org.apache.logging.log4j.Level;
 import talonos.blightbuster.compat.CompatFixes;
 import talonos.blightbuster.items.ItemPurityFocus;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
 
 public class BlightbusterConfig {
 
@@ -58,17 +60,6 @@ public class BlightbusterConfig {
     public static int[][] dawnMachineCorners = new int[][] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } };
     public static boolean enableThaumicEnergistics;
 
-    public static int blockTerra;
-    public static int blockOrdo;
-    public static int healTerra;
-    public static int healAqua;
-    public static int healOrdo;
-    public static int nodeTerra;
-    public static int nodeOrdo;
-    public static int vacuumAer;
-    public static int vacuumPerditio;
-    public static int attackIgnis;
-    public static int attackPerditio;
     public static int attackStrength;
     public static int healStrength;
 
@@ -153,72 +144,26 @@ public class BlightbusterConfig {
                 "Purity Focus",
                 "Blight Buster Attack Strength",
                 20,
-                "Configuration options for the Blight Buster focus upgrade. Attack Strength is in half-hearts (20 = 10 hearts of damage), and vis costs are divided by 100 (500 = 5 vis per cast).")
-                .getInt(attackStrength);
-            attackIgnis = config.get("Purity Focus", "Blight Buster Ignis Cost", 500)
-                .getInt(attackIgnis);
-            attackPerditio = config.get("Purity Focus", "Blight Buster Perditio Cost", 250)
-                .getInt(attackPerditio);
-            blockOrdo = config.get(
-                "Purity Focus",
-                "Block Ordo Cost",
-                15,
-                "Configuration options for the default block and biome cleaning costs. Vis costs are divided by 100 (15 = .15 vis per cast).")
-                .getInt(blockOrdo);
-            blockTerra = config.get("Purity Focus", "Block Terra Cost", 10)
-                .getInt(blockTerra);
-            healAqua = config.get(
-                "Purity Focus",
-                "Healing Aqua Cost",
-                200,
-                "Configuration options for purifying mobs and healing them with the Curative upgrade. Healing Strength is in half-hearts (4 = 2 hearts of healing), and vis costs are divided by 100 (200 = 2 vis per cast).")
-                .getInt(healAqua);
-            healStrength = config.get("Purity Focus", "Healing Strength", 4)
-                .getInt(healStrength);
-            healOrdo = config.get("Purity Focus", "Healing Ordo Cost", 100)
-                .getInt(healOrdo);
-            healTerra = config.get("Purity Focus", "Healing Terra Cost", 200)
-                .getInt(healTerra);
-            nodeOrdo = config.get(
-                "Purity Focus",
-                "Node Ordo Cost",
-                15000,
-                "Configuration options for purifying nodes regardless of the presence of the Node Purifier upgrade. Vis costs are divided by 100 (15000 = 150 vis per cast).")
-                .getInt(nodeOrdo);
-            nodeTerra = config.get("Purity Focus", "Node Terra Cost", 10000)
-                .getInt(nodeTerra);
-            vacuumAer = config.get(
-                "Purity Focus",
-                "Vacuum Aer Cost",
-                25,
-                "Configuration options for the Flux Vacuum focus upgrade. Vis costs are divided by 100 (25 = .25 vis per cast).")
-                .getInt(vacuumAer);
-            vacuumPerditio = config.get("Purity Focus", "Vacuum Perditio Cost", 25)
-                .getInt(vacuumPerditio);
+                "How many half-hearts of damage the Blight Buster focus upgrade will deal to tainted mobs (20 = 10 hearts of damage).")
+                .getInt(20);
+            String[] attackCost = config.get("Purity Focus", "Blight Buster Attack Cost", new String[]{"ignis:500", "perditio:250"}, "The cost to attack tainted mobs with the Blight Buster focus upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (500 = 5 vis per cast).")
+                .getStringList();
+            String[] blockCost = config.get("Purity Focus", "Block/Biome Cleaning Cost", new String[]{"ordo:15", "terra:10"}, "The cost to clean blocks/biomes. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (15 = .15 vis per cast).")
+                .getStringList();
+            healStrength = config.get("Purity Focus", "Healing Strength", 4, "How many half-hearts of healing the Curative focus will apply to mobs (4 = 2 hearts).")
+                .getInt(4);
+            String[] healCost = config.get("Purity Focus", "Healing Cost", new String[]{"ordo:100", "terra:200", "aqua:200"}, "The cost to purify mobs or heal them with the Curative upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (200 = 2 vis per cast).")
+                .getStringList();
+            String[] nodeCost = config.get("Purity Focus", "Node Purifying Cost", new String[]{"ordo:15000", "terra:10000"}, "The cost to purify nodes regardless of the presence of the Node Purifier upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (15000 = 150 vis per cast).")
+                .getStringList();
+            String[] vacuumCost = config.get("Purity Focus", "Vacuum Cost", new String[]{"aer:25", "perditio:25"}, "The cost to use the Flux Vacuum focus upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (25 = .25 vis per cast).")
+                .getStringList();
 
-            ItemPurityFocus.blockCost.remove(Aspect.EARTH)
-                .remove(Aspect.ORDER);
-            ItemPurityFocus.nodeCost.remove(Aspect.EARTH)
-                .remove(Aspect.ORDER);
-            ItemPurityFocus.attackCost.remove(Aspect.FIRE)
-                .remove(Aspect.ENTROPY);
-            ItemPurityFocus.healCost.remove(Aspect.EARTH)
-                .remove(Aspect.WATER)
-                .remove(Aspect.ORDER);
-            ItemPurityFocus.vacuumCost.remove(Aspect.AIR)
-                .remove(Aspect.ENTROPY);
-
-            ItemPurityFocus.blockCost.add(Aspect.EARTH, blockTerra)
-                .add(Aspect.ORDER, blockOrdo);
-            ItemPurityFocus.nodeCost.add(Aspect.EARTH, nodeTerra)
-                .add(Aspect.ORDER, nodeOrdo);
-            ItemPurityFocus.attackCost.add(Aspect.FIRE, attackIgnis)
-                .add(Aspect.ENTROPY, attackPerditio);
-            ItemPurityFocus.healCost.add(Aspect.EARTH, healTerra)
-                .add(Aspect.WATER, healAqua)
-                .add(Aspect.ORDER, healOrdo);
-            ItemPurityFocus.vacuumCost.add(Aspect.AIR, vacuumAer)
-                .add(Aspect.ENTROPY, vacuumPerditio);
+            ItemPurityFocus.setBlockVisCost(parseVisCost(blockCost));
+            ItemPurityFocus.setNodeVisCost(parseVisCost(nodeCost));
+            ItemPurityFocus.setAttackVisCost(parseVisCost(attackCost));
+            ItemPurityFocus.setHealVisCost(parseVisCost(healCost));
+            ItemPurityFocus.setVacuumVisCost(parseVisCost(vacuumCost));
         }
 
         if (config.hasChanged()) {
@@ -226,6 +171,36 @@ public class BlightbusterConfig {
         }
 
         CompatFixes.fixEnderIO(); // Workaround EnderIO crash when RF is disabled
+    }
+
+    private static AspectList parseVisCost(String[] config) {
+        AspectList cost = new AspectList();
+        for (String s : config) {
+            String[] pair = s.split(":");
+            if (pair.length < 2) {
+                continue;
+            }
+            Aspect a = null;
+            for (Aspect primal : Aspect.getPrimalAspects()) {
+                if (primal.getTag().equals(pair[0].toLowerCase())) {
+                    a = primal;
+                    break;
+                }
+            }
+            if (a == null) {
+                BlightBuster.logger.warn("Unable to parse primal aspect for entry \"%s\".", s);
+                continue;
+            }
+            int size;
+            try {
+                size = Integer.parseInt(pair[1]);
+            } catch (NumberFormatException e) {
+                BlightBuster.logger.warn("Unable to parse aspect size for entry \"%s\".", s);
+                continue;
+            }
+            cost.add(a, size);
+        }
+        return cost;
     }
 
     @SuppressWarnings("unchecked")

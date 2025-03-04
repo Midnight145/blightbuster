@@ -1,7 +1,5 @@
 package talonos.blightbuster.items;
 
-import static thaumcraft.api.wands.FocusUpgradeType.architect;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +42,8 @@ import thaumcraft.common.items.wands.WandManager;
 import thaumcraft.common.lib.utils.EntityUtils;
 import thaumcraft.common.tiles.TileNode;
 
+import static thaumcraft.api.wands.FocusUpgradeType.*;
+
 public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
 
     public ItemPurityFocus() {
@@ -58,11 +58,11 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         return "PU" + super.getSortingHelper(itemstack);
     }
 
-    public static final AspectList blockCost = new AspectList();
-    public static final AspectList nodeCost = new AspectList();
-    public static final AspectList attackCost = new AspectList();
-    public static final AspectList healCost = new AspectList();
-    public static final AspectList vacuumCost = new AspectList();
+    private static final AspectList blockCost = new AspectList();
+    private static final AspectList nodeCost = new AspectList();
+    private static final AspectList attackCost = new AspectList();
+    private static final AspectList healCost = new AspectList();
+    private static final AspectList vacuumCost = new AspectList();
 
     @Override
     public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer p, MovingObjectPosition mop) {
@@ -119,9 +119,9 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         boolean vacuumUpgrade = isUpgradedWith(focus, vacuum);
         boolean blightBusterUpgrade = isUpgradedWith(focus, blightBuster);
         for (EntityLivingBase entity : entities) {
-            if (!(wand.consumeAllVis(itemstack, p, this.getHealVisCost(), false, false)
-                || vacuumUpgrade && wand.consumeAllVis(itemstack, p, this.getVacuumVisCost(), false, false)
-                || (blightBusterUpgrade && wand.consumeAllVis(itemstack, p, this.getAttackVisCost(), false, false)))) {
+            if (!(wand.consumeAllVis(itemstack, p, getHealVisCost(), false, false)
+                || vacuumUpgrade && wand.consumeAllVis(itemstack, p, getVacuumVisCost(), false, false)
+                || (blightBusterUpgrade && wand.consumeAllVis(itemstack, p, getAttackVisCost(), false, false)))) {
                 break;
             }
             cleanEntity(itemstack, p, entity, wand, focus);
@@ -131,9 +131,9 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
     private boolean cleanEntity(ItemStack itemstack, EntityPlayer p, EntityLivingBase entity, ItemWandCasting wand,
         ItemStack focus) {
         if (doVacuum(itemstack, p, entity, wand, focus)) {
-            if (p.worldObj.isRemote) {} else {
+            if (!p.worldObj.isRemote) {
                 entity.setDead();
-                wand.consumeAllVis(itemstack, p, this.getVacuumVisCost(), true, false);
+                wand.consumeAllVis(itemstack, p, getVacuumVisCost(), true, false);
             }
             return true;
         } else if (doBlightBuster(itemstack, p, entity, wand, focus)) {
@@ -143,14 +143,14 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
                 entity.attackEntityFrom(
                     new EntityDamageSource("magic", p).setDamageBypassesArmor(),
                     BlightbusterConfig.attackStrength);
-                wand.consumeAllVis(itemstack, p, this.getAttackVisCost(), true, false);
+                wand.consumeAllVis(itemstack, p, getAttackVisCost(), true, false);
             }
             return true;
         } else if (doBasicClean(itemstack, p, entity, wand, focus)) {
             if (p.worldObj.isRemote) {
                 PurityFocusFX.clean(entity);
             } else {
-                wand.consumeAllVis(itemstack, p, this.getHealVisCost(), true, false);
+                wand.consumeAllVis(itemstack, p, getHealVisCost(), true, false);
             }
             return true;
         } else if (doCurative(itemstack, p, entity, wand, focus)) {
@@ -158,7 +158,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
                 PurityFocusFX.heal(entity);
             } else {
                 entity.heal(BlightbusterConfig.healStrength);
-                wand.consumeAllVis(itemstack, p, this.getHealVisCost(), true, false);
+                wand.consumeAllVis(itemstack, p, getHealVisCost(), true, false);
             }
             return true;
         }
@@ -168,7 +168,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
     private boolean doVacuum(ItemStack itemstack, EntityPlayer p, EntityLivingBase entity, ItemWandCasting wand,
         ItemStack focus) {
         return isUpgradedWith(focus, vacuum) && entity instanceof EntityThaumicSlime
-            && wand.consumeAllVis(itemstack, p, this.getVacuumVisCost(), false, false);
+            && wand.consumeAllVis(itemstack, p, getVacuumVisCost(), false, false);
     }
 
     private boolean doBlightBuster(ItemStack itemstack, EntityPlayer p, EntityLivingBase entity, ItemWandCasting wand,
@@ -179,20 +179,20 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
                 || (BlightbusterConfig.customNpcSupport && entity instanceof EntityCustomNpc npc
                     && npc.linkedName.toLowerCase()
                         .contains("taint")))
-            && wand.consumeAllVis(itemstack, p, this.getAttackVisCost(), false, false);
+            && wand.consumeAllVis(itemstack, p, getAttackVisCost(), false, false);
     }
 
     private boolean doBasicClean(ItemStack itemstack, EntityPlayer p, EntityLivingBase entity, ItemWandCasting wand,
         ItemStack focus) {
         return !isUpgradedWith(focus, blightBuster)
-            && wand.consumeAllVis(itemstack, p, this.getHealVisCost(), false, false)
+            && wand.consumeAllVis(itemstack, p, getHealVisCost(), false, false)
             && CleansingHelper.cleanseMobFromMapping(entity, p.worldObj);
     }
 
     private boolean doCurative(ItemStack itemstack, EntityPlayer p, EntityLivingBase entity, ItemWandCasting wand,
         ItemStack focus) {
         return isUpgradedWith(focus, curative) && entity.getHealth() < entity.getMaxHealth()
-            && wand.consumeAllVis(itemstack, p, this.getHealVisCost(), false, false)
+            && wand.consumeAllVis(itemstack, p, getHealVisCost(), false, false)
             && (!entity.isCreatureType(EnumCreatureType.monster, false)
                 || entity instanceof EntityPlayer && !entity.equals(p))
             && !(p instanceof FakePlayer);
@@ -231,27 +231,27 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
     private void cleanUpLand(int x, int z, World world, EntityPlayer p, ItemStack itemstack) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
         boolean blockCost = false;
-        boolean cleanBlocks = wand.consumeAllVis(itemstack, p, this.getBlockVisCost(), false, false);
+        boolean cleanBlocks = wand.consumeAllVis(itemstack, p, getBlockVisCost(), false, false);
         boolean cleanFlux = this.isUpgradedWith(wand.getFocusItem(itemstack), vacuum)
-            && wand.consumeAllVis(itemstack, p, this.getVacuumVisCost(), false, false);
+            && wand.consumeAllVis(itemstack, p, getVacuumVisCost(), false, false);
         boolean cleanNodes = this.isUpgradedWith(wand.getFocusItem(itemstack), node)
-            && wand.consumeAllVis(itemstack, p, this.getNodeVisCost(), false, false);
+            && wand.consumeAllVis(itemstack, p, getNodeVisCost(), false, false);
         if (!p.worldObj.isRemote) {
             for (int y = 0; y < 256; y++) {
                 if (cleanBlocks && CleansingHelper.cleanBlock(x, y, z, world)) {
                     blockCost = true;
                 }
                 if (cleanFlux && CleansingHelper.cleanFlux(x, y, z, world)) {
-                    wand.consumeAllVis(itemstack, p, this.getVacuumVisCost(), true, false);
-                    cleanFlux = wand.consumeAllVis(itemstack, p, this.getVacuumVisCost(), false, false);
+                    wand.consumeAllVis(itemstack, p, getVacuumVisCost(), true, false);
+                    cleanFlux = wand.consumeAllVis(itemstack, p, getVacuumVisCost(), false, false);
                 }
                 if (cleanNodes) {
                     cleanNode(x, y, z, p, itemstack);
-                    cleanNodes = wand.consumeAllVis(itemstack, p, this.getNodeVisCost(), false, false);
+                    cleanNodes = wand.consumeAllVis(itemstack, p, getNodeVisCost(), false, false);
                 }
             }
             if ((cleanBlocks && CleansingHelper.cleanseBiome(x, z, world)) || blockCost) {
-                wand.consumeAllVis(itemstack, p, this.getBlockVisCost(), true, false);
+                wand.consumeAllVis(itemstack, p, getBlockVisCost(), true, false);
             }
         }
     }
@@ -339,10 +339,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         int dim = WandManager.getAreaDim(stack);
         if (axis == IArchitect.EnumAxis.X && (dim == 0 || dim == 1)) {
             return true;
-        } else if (axis == IArchitect.EnumAxis.Z && (dim == 0 || dim == 2)) {
-            return true;
-        }
-        return false;
+        } else return axis == EnumAxis.Z && (dim == 0 || dim == 2);
     }
 
     @Override
@@ -371,6 +368,10 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
     }
 
     private static void addVis(List list, AspectList al) {
+        if (al.size() < 1) {
+            list.add(" " + StatCollector.translateToLocal("gui.visCost.noCost"));
+            return;
+        }
         for (Aspect aspect : al.getAspectsSorted()) {
             DecimalFormat formatter = new DecimalFormat("#####.##");
             String amount = formatter.format(al.getAmount(aspect) / 100.0F);
@@ -394,24 +395,84 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         return cost;
     }
 
-    public AspectList getBlockVisCost() {
+    public static AspectList getBlockVisCost() {
         return blockCost;
     }
 
-    public AspectList getNodeVisCost() {
+    public static AspectList getNodeVisCost() {
         return nodeCost;
     }
 
-    public AspectList getAttackVisCost() {
+    public static AspectList getAttackVisCost() {
         return attackCost;
     }
 
-    public AspectList getHealVisCost() {
+    public static AspectList getHealVisCost() {
         return healCost;
     }
 
-    public AspectList getVacuumVisCost() {
+    public static AspectList getVacuumVisCost() {
         return vacuumCost;
+    }
+
+    public static void setBlockVisCost(AspectList list) {
+        for (Aspect a : blockCost.getAspects()) {
+            blockCost.remove(a);
+        }
+        if (list.size() < 1) {
+            return;
+        }
+        for (Aspect a : list.getAspects()) {
+            blockCost.add(a, list.getAmount(a));
+        }
+    }
+
+    public static void setNodeVisCost(AspectList list) {
+        for (Aspect a : nodeCost.getAspects()) {
+            nodeCost.remove(a);
+        }
+        if (list.size() < 1) {
+            return;
+        }
+        for (Aspect a : list.getAspects()) {
+            nodeCost.add(a, list.getAmount(a));
+        }
+    }
+
+    public static void setAttackVisCost(AspectList list) {
+        for (Aspect a : attackCost.getAspects()) {
+            attackCost.remove(a);
+        }
+        if (list.size() < 1) {
+            return;
+        }
+        for (Aspect a : list.getAspects()) {
+            attackCost.add(a, list.getAmount(a));
+        }
+    }
+
+    public static void setHealVisCost(AspectList list) {
+        for (Aspect a : healCost.getAspects()) {
+            healCost.remove(a);
+        }
+        if (list.size() < 1) {
+            return;
+        }
+        for (Aspect a : list.getAspects()) {
+            healCost.add(a, list.getAmount(a));
+        }
+    }
+
+    public static void setVacuumVisCost(AspectList list) {
+        for (Aspect a : vacuumCost.getAspects()) {
+            vacuumCost.remove(a);
+        }
+        if (list.size() < 1) {
+            return;
+        }
+        for (Aspect a : list.getAspects()) {
+            vacuumCost.add(a, list.getAmount(a));
+        }
     }
 
     public static FocusUpgradeType vacuum;
