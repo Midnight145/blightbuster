@@ -345,7 +345,8 @@ public class AddedResearch {
         if (a == null) {
             return "";
         }
-        if (a.getTag().equals("aer")) {
+        if (a.getTag()
+            .equals("aer")) {
             return "§6";
         }
         return "§" + a.getChatcolor();

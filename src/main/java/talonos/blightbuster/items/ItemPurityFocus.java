@@ -42,8 +42,6 @@ import thaumcraft.common.items.wands.WandManager;
 import thaumcraft.common.lib.utils.EntityUtils;
 import thaumcraft.common.tiles.TileNode;
 
-import static thaumcraft.api.wands.FocusUpgradeType.*;
-
 public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
 
     public ItemPurityFocus() {
@@ -75,7 +73,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
             cleaned = cleanEntity(itemstack, p, e, wand, focus);
         }
         if (mop != null && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-            if (this.isUpgradedWith(focus, architect)) {
+            if (this.isUpgradedWith(focus, FocusUpgradeType.architect)) {
                 for (BlockCoordinates block : getArchitectBlocks(
                     itemstack,
                     p.worldObj,
@@ -184,8 +182,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
 
     private boolean doBasicClean(ItemStack itemstack, EntityPlayer p, EntityLivingBase entity, ItemWandCasting wand,
         ItemStack focus) {
-        return !isUpgradedWith(focus, blightBuster)
-            && wand.consumeAllVis(itemstack, p, getHealVisCost(), false, false)
+        return !isUpgradedWith(focus, blightBuster) && wand.consumeAllVis(itemstack, p, getHealVisCost(), false, false)
             && CleansingHelper.cleanseMobFromMapping(entity, p.worldObj);
     }
 
@@ -278,7 +275,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         output.add(FocusUpgradeType.enlarge);
         output.add(FocusUpgradeType.frugal);
         if (rank == 1) {
-            output.add(architect);
+            output.add(FocusUpgradeType.architect);
         } else if (rank == 3) {
             output.add(vacuum);
         } else if (rank == 5) {

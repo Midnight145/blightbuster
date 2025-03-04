@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.config.Configuration;
 
-import org.apache.logging.log4j.Level;
 import talonos.blightbuster.compat.CompatFixes;
 import talonos.blightbuster.items.ItemPurityFocus;
 import thaumcraft.api.aspects.Aspect;
@@ -146,17 +145,42 @@ public class BlightbusterConfig {
                 20,
                 "How many half-hearts of damage the Blight Buster focus upgrade will deal to tainted mobs (20 = 10 hearts of damage).")
                 .getInt(20);
-            String[] attackCost = config.get("Purity Focus", "Blight Buster Attack Cost", new String[]{"ignis:500", "perditio:250"}, "The cost to attack tainted mobs with the Blight Buster focus upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (500 = 5 vis per cast).")
+            String[] attackCost = config.get(
+                "Purity Focus",
+                "Blight Buster Attack Cost",
+                new String[] { "ignis:500", "perditio:250" },
+                "The cost to attack tainted mobs with the Blight Buster focus upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (500 = 5 vis per cast).")
                 .getStringList();
-            String[] blockCost = config.get("Purity Focus", "Block/Biome Cleaning Cost", new String[]{"ordo:15", "terra:10"}, "The cost to clean blocks/biomes. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (15 = .15 vis per cast).")
+            String[] blockCost = config.get(
+                "Purity Focus",
+                "Block/Biome Cleaning Cost",
+                new String[] { "ordo:15", "terra:10" },
+                "The cost to clean blocks/biomes. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (15 = .15 vis per cast).")
                 .getStringList();
-            healStrength = config.get("Purity Focus", "Healing Strength", 4, "How many half-hearts of healing the Curative focus will apply to mobs (4 = 2 hearts).")
+            healStrength = config
+                .get(
+                    "Purity Focus",
+                    "Healing Strength",
+                    4,
+                    "How many half-hearts of healing the Curative focus will apply to mobs (4 = 2 hearts).")
                 .getInt(4);
-            String[] healCost = config.get("Purity Focus", "Healing Cost", new String[]{"ordo:100", "terra:200", "aqua:200"}, "The cost to purify mobs or heal them with the Curative upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (200 = 2 vis per cast).")
+            String[] healCost = config.get(
+                "Purity Focus",
+                "Healing Cost",
+                new String[] { "ordo:100", "terra:200", "aqua:200" },
+                "The cost to purify mobs or heal them with the Curative upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (200 = 2 vis per cast).")
                 .getStringList();
-            String[] nodeCost = config.get("Purity Focus", "Node Purifying Cost", new String[]{"ordo:15000", "terra:10000"}, "The cost to purify nodes regardless of the presence of the Node Purifier upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (15000 = 150 vis per cast).")
+            String[] nodeCost = config.get(
+                "Purity Focus",
+                "Node Purifying Cost",
+                new String[] { "ordo:15000", "terra:10000" },
+                "The cost to purify nodes regardless of the presence of the Node Purifier upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (15000 = 150 vis per cast).")
                 .getStringList();
-            String[] vacuumCost = config.get("Purity Focus", "Vacuum Cost", new String[]{"aer:25", "perditio:25"}, "The cost to use the Flux Vacuum focus upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (25 = .25 vis per cast).")
+            String[] vacuumCost = config.get(
+                "Purity Focus",
+                "Vacuum Cost",
+                new String[] { "aer:25", "perditio:25" },
+                "The cost to use the Flux Vacuum focus upgrade. List one vis cost per line in the format aspect:cost. Vis costs are divided by 100 (25 = .25 vis per cast).")
                 .getStringList();
 
             ItemPurityFocus.setBlockVisCost(parseVisCost(blockCost));
@@ -182,7 +206,8 @@ public class BlightbusterConfig {
             }
             Aspect a = null;
             for (Aspect primal : Aspect.getPrimalAspects()) {
-                if (primal.getTag().equals(pair[0].toLowerCase())) {
+                if (primal.getTag()
+                    .equals(pair[0].toLowerCase())) {
                     a = primal;
                     break;
                 }
