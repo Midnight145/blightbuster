@@ -219,7 +219,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
                     node.setNodeType(NodeType.NORMAL);
                 }
                 node.markDirty();
-                player.getEntityWorld()
+                player.worldObj
                     .markBlockForUpdate(x, y, z);
                 PurityFocusFX.node(player, x, y, z);
             }

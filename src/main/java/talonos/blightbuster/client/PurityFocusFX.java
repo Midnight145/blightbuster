@@ -76,9 +76,9 @@ public class PurityFocusFX {
             lastHealTime.put(player.getUniqueID(), entity.worldObj.getTotalWorldTime());
         }
         for (int i = (2 + entity.worldObj.rand.nextInt(3)); i > 0; i--) {
-            double w = entity.worldObj.rand.nextGaussian() * entity.width;
-            double d = entity.worldObj.rand.nextGaussian() * entity.width;
-            double h = (entity.worldObj.rand.nextGaussian() - 0.4) * entity.height * 0.8F;
+            double w = entity.worldObj.rand.nextGaussian() * entity.width * 0.5;
+            double d = entity.worldObj.rand.nextGaussian() * entity.width * 0.5;
+            double h = entity.worldObj.rand.nextFloat() * entity.height * 0.8F;
 
             double d0 = entity.worldObj.rand.nextGaussian() * 0.02D;
             double d1 = entity.worldObj.rand.nextGaussian() * 0.02D;
@@ -93,7 +93,7 @@ public class PurityFocusFX {
         if (!lastNodeTime.containsKey(player.getUniqueID())
             || lastNodeTime.get(player.getUniqueID()) < player.worldObj.getTotalWorldTime() - 4
                 && player.getDistanceSq(x, y, z) < 100) {
-            player.worldObj.playSound(player.posX, player.posY, player.posZ, "thaumcraft:wand", 0.5F, 1, false);
+            player.worldObj.playSound(x, y, z, "thaumcraft:wand", 0.5F, 1, false);
             lastNodeTime.put(player.getUniqueID(), player.worldObj.getTotalWorldTime());
         }
 
