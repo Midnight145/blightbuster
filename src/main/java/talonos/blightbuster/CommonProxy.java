@@ -26,4 +26,6 @@ public class CommonProxy {
     public double getBestCleanseSpawnHeight() {
         return 0;
     }
+
+    public static void registerResearchReload() {}
 }

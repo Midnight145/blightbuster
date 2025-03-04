@@ -3,6 +3,8 @@ package talonos.blightbuster;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.resources.IReloadableResourceManager;
+import net.minecraft.client.resources.IResourceManager;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -12,6 +14,7 @@ import talonos.blightbuster.entities.EntitySilverPotion;
 import talonos.blightbuster.items.BBItems;
 import talonos.blightbuster.tileentity.DawnMachineSpoutTileEntity;
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
+import thaumcraft.api.research.ResearchCategories;
 
 public class ClientProxy extends CommonProxy {
 
@@ -36,5 +39,17 @@ public class ClientProxy extends CommonProxy {
     @Override
     public double getBestCleanseSpawnHeight() {
         return Minecraft.getMinecraft().thePlayer.posY;
+    }
+
+    public static void registerResearchReload() {
+        if (BlightbusterConfig.enablePurityFocus && Minecraft.getMinecraft()
+            .getResourceManager() instanceof IReloadableResourceManager manager) {
+            manager.registerReloadListener(
+                (IResourceManager manager2) -> {
+                    AddedResearch.setPurityFocusPages(
+                        ResearchCategories.getResearch("PURITYFOCUS"),
+                        AddedResearch.purityFocusRecipe);
+                });
+        }
     }
 }

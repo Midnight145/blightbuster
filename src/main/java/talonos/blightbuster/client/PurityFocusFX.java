@@ -1,4 +1,4 @@
-package talonos.blightbuster.items;
+package talonos.blightbuster.client;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -20,8 +20,9 @@ public class PurityFocusFX {
         double d;
         double h;
         // Only play this sound once per cast, even if multiple entities are hit
-        if (!lastFireTime.containsKey(player.getUniqueID()) || lastFireTime.get(player.getUniqueID()) < entity.worldObj.getTotalWorldTime() - 4) {
-            entity.worldObj.playSound(entity.posX, entity.posY, entity.posZ,"thaumcraft:fireloop", 0.66F, 2.0F, false);
+        if (!lastFireTime.containsKey(player.getUniqueID())
+            || lastFireTime.get(player.getUniqueID()) < entity.worldObj.getTotalWorldTime() - 4) {
+            entity.worldObj.playSound(entity.posX, entity.posY, entity.posZ, "thaumcraft:fireloop", 0.66F, 2.0F, false);
             lastFireTime.put(player.getUniqueID(), entity.worldObj.getTotalWorldTime());
         }
         double count = 3 + entity.worldObj.rand.nextInt(8) * entity.height;
@@ -56,8 +57,9 @@ public class PurityFocusFX {
         double d;
         double h;
         // Only play this sound once per cast, even if multiple entities are hit
-        if (!lastCleanTime.containsKey(player.getUniqueID()) || lastCleanTime.get(player.getUniqueID()) < entity.worldObj.getTotalWorldTime() - 4) {
-            entity.worldObj.playSound(entity.posX, entity.posY, entity.posZ,"thaumcraft:gore", 0.5F, 1, false);
+        if (!lastCleanTime.containsKey(player.getUniqueID())
+            || lastCleanTime.get(player.getUniqueID()) < entity.worldObj.getTotalWorldTime() - 4) {
+            entity.worldObj.playSound(entity.posX, entity.posY, entity.posZ, "thaumcraft:gore", 0.5F, 1, false);
             lastCleanTime.put(player.getUniqueID(), entity.worldObj.getTotalWorldTime());
         }
         for (int i = 20; i > 0; i--) {
@@ -75,8 +77,9 @@ public class PurityFocusFX {
         double d;
         double h;
         // Only play this sound once per cast, even if multiple entities are hit
-        if (!lastHealTime.containsKey(player.getUniqueID()) || lastHealTime.get(player.getUniqueID()) < entity.worldObj.getTotalWorldTime() - 4) {
-            entity.worldObj.playSound(entity.posX, entity.posY, entity.posZ,"thaumcraft:wand", 0.5F, 1, false);
+        if (!lastHealTime.containsKey(player.getUniqueID())
+            || lastHealTime.get(player.getUniqueID()) < entity.worldObj.getTotalWorldTime() - 4) {
+            entity.worldObj.playSound(entity.posX, entity.posY, entity.posZ, "thaumcraft:wand", 0.5F, 1, false);
             lastHealTime.put(player.getUniqueID(), entity.worldObj.getTotalWorldTime());
         }
         for (int i = (2 + entity.worldObj.rand.nextInt(3)); i > 0; i--) {
@@ -97,8 +100,9 @@ public class PurityFocusFX {
         float h;
         // Only play this sound once at a time, even if multiple nodes are hit.
         // It also only plays if the node is within 10 blocks.
-        if (!lastNodeTime.containsKey(player.getUniqueID()) || lastNodeTime.get(player.getUniqueID()) < player.worldObj.getTotalWorldTime() - 4
-            && player.getDistanceSq(x, y, z) < 100) {
+        if (!lastNodeTime.containsKey(player.getUniqueID())
+            || lastNodeTime.get(player.getUniqueID()) < player.worldObj.getTotalWorldTime() - 4
+                && player.getDistanceSq(x, y, z) < 100) {
             player.playSound("thaumcraft:wand", 0.5F, 1F);
             lastNodeTime.put(player.getUniqueID(), player.worldObj.getTotalWorldTime());
         }

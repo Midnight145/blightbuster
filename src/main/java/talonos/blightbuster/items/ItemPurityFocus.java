@@ -26,6 +26,7 @@ import noppes.npcs.entity.EntityCustomNpc;
 import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.BlightbusterConfig;
+import talonos.blightbuster.client.PurityFocusFX;
 import talonos.blightbuster.lib.CleansingHelper;
 import thaumcraft.api.BlockCoordinates;
 import thaumcraft.api.IArchitect;
