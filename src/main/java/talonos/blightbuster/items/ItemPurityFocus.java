@@ -139,9 +139,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
             if (p.worldObj.isRemote) {
                 PurityFocusFX.fire(entity, p);
             } else {
-                entity.attackEntityFrom(
-                    new EntityDamageSource("magic", p).setDamageBypassesArmor(),
-                    BlightbusterConfig.attackStrength);
+                entity.attackEntityFrom(new EntityDamageSource("magic", p), BlightbusterConfig.attackStrength);
                 wand.consumeAllVis(itemstack, p, getAttackVisCost(), true, false);
             }
             return true;
