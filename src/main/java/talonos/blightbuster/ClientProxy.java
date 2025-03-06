@@ -41,9 +41,15 @@ public class ClientProxy extends CommonProxy {
         return Minecraft.getMinecraft().thePlayer.posY;
     }
 
-    public static void registerResearchReload() {
-        if (BlightbusterConfig.enablePurityFocus && Minecraft.getMinecraft()
-            .getResourceManager() instanceof IReloadableResourceManager manager) {
+    /**
+     * Rebuild the purity focus research on language change for the vis costs to appear properly.
+     * Add future researches here that also need to be rebuilt on language change.
+     */
+    @Override
+    public void reloadResearchOnLangChange() {
+        if (BlightbusterConfig.registerResearch && BlightbusterConfig.enablePurityFocus
+            && Minecraft.getMinecraft()
+                .getResourceManager() instanceof IReloadableResourceManager manager) {
             manager.registerReloadListener(
                 (IResourceManager manager2) -> {
                     AddedResearch.setPurityFocusPages(

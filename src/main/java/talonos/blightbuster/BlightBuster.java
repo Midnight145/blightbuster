@@ -95,6 +95,6 @@ public class BlightBuster {
         }
         BlightbusterConfig.init_mappings();
 
-        BlightBuster.proxy.registerResearchReload();
+        BlightBuster.proxy.reloadResearchOnLangChange();
     }
 }

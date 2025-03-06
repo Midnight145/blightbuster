@@ -27,5 +27,5 @@ public class CommonProxy {
         return 0;
     }
 
-    public static void registerResearchReload() {}
+    public void reloadResearchOnLangChange() {}
 }
