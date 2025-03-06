@@ -280,37 +280,52 @@ public class AddedResearch {
     // Used to rebuild formatted research on language change.
     public static void setPurityFocusPages(ResearchItem purityFocusResearch, ShapedArcaneRecipe purityFocusRecipe) {
         DecimalFormat formatter = new DecimalFormat("#####.##");
-        purityFocusResearch.setPages(
+        ArrayList<ResearchPage> list = new ArrayList<>();
+        list.add(
             new ResearchPage(
                 StatCollector.translateToLocalFormatted(
                     "tc.research_page.PURITYFOCUS.1",
-                    formatVis(ItemPurityFocus.getBlockVisCost(), formatter))),
+                    formatVis(ItemPurityFocus.getBlockVisCost(), formatter))));
+        list.add(
             new ResearchPage(
                 StatCollector.translateToLocalFormatted(
                     "tc.research_page.PURITYFOCUS.2",
                     formatVis(ItemPurityFocus.getHealVisCost(), formatter),
-                    formatVis(ItemPurityFocus.getNodeVisCost(), formatter))),
-            new ResearchPage(purityFocusRecipe),
-            new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.basic_upgrades"),
-            new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.architect"),
-            new ResearchPage(
-                "FOCALMANIPULATION",
-                StatCollector.translateToLocalFormatted(
-                    "tc.research_page.PURITYFOCUS.vacuum",
-                    formatVis(ItemPurityFocus.getVacuumVisCost(), formatter))),
-            new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.node"),
-            new ResearchPage(
-                "FOCALMANIPULATION",
-                StatCollector.translateToLocalFormatted(
-                    "tc.research_page.PURITYFOCUS.curative",
-                    formatter.format(BlightbusterConfig.healStrength / 2F),
-                    formatVis(ItemPurityFocus.getHealVisCost(), formatter))),
-            new ResearchPage(
-                "FOCALMANIPULATION",
-                StatCollector.translateToLocalFormatted(
-                    "tc.research_page.PURITYFOCUS.blightBuster",
-                    formatter.format(BlightbusterConfig.attackStrength / 2F),
-                    formatVis(ItemPurityFocus.getAttackVisCost(), formatter))));
+                    formatVis(ItemPurityFocus.getNodeVisCost(), formatter))));
+        list.add(new ResearchPage(purityFocusRecipe));
+        list.add(new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.basic_upgrades"));
+        list.add(new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.architect"));
+        if (BlightbusterConfig.enableFluxVacuumUpgrade) {
+            list.add(
+                new ResearchPage(
+                    "FOCALMANIPULATION",
+                    StatCollector.translateToLocalFormatted(
+                        "tc.research_page.PURITYFOCUS.vacuum",
+                        formatVis(ItemPurityFocus.getVacuumVisCost(), formatter))));
+        }
+        if (BlightbusterConfig.enableNodePurifierUpgrade) {
+            list.add(new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.node"));
+        }
+        if (BlightbusterConfig.enableCurativeUpgrade) {
+            list.add(
+                new ResearchPage(
+                    "FOCALMANIPULATION",
+                    StatCollector.translateToLocalFormatted(
+                        "tc.research_page.PURITYFOCUS.curative",
+                        formatter.format(BlightbusterConfig.healStrength / 2F),
+                        formatVis(ItemPurityFocus.getHealVisCost(), formatter))));
+        }
+        if (BlightbusterConfig.enableBlightBusterUpgrade) {
+            list.add(
+                new ResearchPage(
+                    "FOCALMANIPULATION",
+                    StatCollector.translateToLocalFormatted(
+                        "tc.research_page.PURITYFOCUS.blightBuster",
+                        formatter.format(BlightbusterConfig.attackStrength / 2F),
+                        formatVis(ItemPurityFocus.getAttackVisCost(), formatter))));
+        }
+
+        purityFocusResearch.setPages(list.toArray(new ResearchPage[] {}));
     }
 
     /**

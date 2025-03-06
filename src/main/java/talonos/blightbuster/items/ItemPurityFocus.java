@@ -277,11 +277,19 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         if (rank == 1) {
             output.add(FocusUpgradeType.architect);
         } else if (rank == 3) {
-            output.add(vacuum);
+            if (BlightbusterConfig.enableFluxVacuumUpgrade) {
+                output.add(vacuum);
+            }
         } else if (rank == 5) {
-            output.add(curative);
-            output.add(blightBuster);
-            output.add(node);
+            if (BlightbusterConfig.enableCurativeUpgrade) {
+                output.add(curative);
+            }
+            if (BlightbusterConfig.enableBlightBusterUpgrade) {
+                output.add(blightBuster);
+            }
+            if (BlightbusterConfig.enableNodePurifierUpgrade) {
+                output.add(node);
+            }
         }
         return output.toArray(new FocusUpgradeType[0]);
     }

@@ -59,6 +59,11 @@ public class BlightbusterConfig {
     public static int[][] dawnMachineCorners = new int[][] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } };
     public static boolean enableThaumicEnergistics;
 
+    public static boolean enableFluxVacuumUpgrade;
+    public static boolean enableNodePurifierUpgrade;
+    public static boolean enableCurativeUpgrade;
+    public static boolean enableBlightBusterUpgrade;
+
     public static int attackStrength;
     public static int healStrength;
 
@@ -139,6 +144,31 @@ public class BlightbusterConfig {
         }
 
         if (enablePurityFocus) {
+            enableBlightBusterUpgrade = config.get(
+                "Focus Upgrades",
+                "Blight Buster",
+                true,
+                "Whether the Blight Buster focus upgrade for the purity focus should be obtainable. This upgrade lets the focus do damage to tainted mobs in its AoE.")
+                .getBoolean(true);
+            enableCurativeUpgrade = config.get(
+                "Focus Upgrades",
+                "Curative",
+                true,
+                "Set whether the Curative focus upgrade for the purity focus should be obtainable. This upgrade lets the focus heal and cure all friendly mobs in its AoE in one action. It also makes its holder immune to taint poison.")
+                .getBoolean(true);
+            enableFluxVacuumUpgrade = config.get(
+                "Focus Upgrades",
+                "Flux Vacuum",
+                true,
+                "Set whether the Flux Vacuum focus upgrade for the purity focus should be obtainable. This upgrade sucks up flux goo/gas and thaumic slimes.")
+                .getBoolean(true);
+            enableNodePurifierUpgrade = config.get(
+                "Focus Upgrades",
+                "Node Purifier",
+                true,
+                "Set whether the Node Purifier focus upgrade for the purity focus should be obtainable. This upgrade turns tainted nodes into pure nodes which are immune to reinfection and works on all nodes in its AoE.")
+                .getBoolean(true);
+
             attackStrength = config.get(
                 "Purity Focus",
                 "Blight Buster Attack Strength",
@@ -185,9 +215,13 @@ public class BlightbusterConfig {
 
             ItemPurityFocus.setBlockVisCost(parseVisCost(blockCost));
             ItemPurityFocus.setNodeVisCost(parseVisCost(nodeCost));
-            ItemPurityFocus.setAttackVisCost(parseVisCost(attackCost));
             ItemPurityFocus.setHealVisCost(parseVisCost(healCost));
-            ItemPurityFocus.setVacuumVisCost(parseVisCost(vacuumCost));
+            if (enableBlightBusterUpgrade) {
+                ItemPurityFocus.setAttackVisCost(parseVisCost(attackCost));
+            }
+            if (enableFluxVacuumUpgrade) {
+                ItemPurityFocus.setVacuumVisCost(parseVisCost(vacuumCost));
+            }
         }
 
         if (config.hasChanged()) {
