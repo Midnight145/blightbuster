@@ -1,5 +1,8 @@
 package talonos.blightbuster.handlers;
 
+import static talonos.blightbuster.items.ItemPurityFocus.curative;
+import static talonos.blightbuster.items.ItemPurityFocus.getHealVisCost;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,9 +18,6 @@ import thaumcraft.api.potions.PotionVisExhaust;
 import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.items.wands.ItemWandCasting;
-
-import static talonos.blightbuster.items.ItemPurityFocus.curative;
-import static talonos.blightbuster.items.ItemPurityFocus.getHealVisCost;
 
 public class PurityFocusEventHandler {
 
@@ -56,14 +56,17 @@ public class PurityFocusEventHandler {
         int amplifier = -1;
         int duration = 0;
         if (fluxFlu) {
-            amplifier = player.getActivePotionEffect(PotionVisExhaust.instance).getAmplifier();
-            duration = player.getActivePotionEffect(PotionVisExhaust.instance).getDuration();
+            amplifier = player.getActivePotionEffect(PotionVisExhaust.instance)
+                .getAmplifier();
+            duration = player.getActivePotionEffect(PotionVisExhaust.instance)
+                .getDuration();
         } else if (!taintPoison) {
             return;
         }
 
         for (ItemStack is : player.inventory.mainInventory) {
-            if (is != null && is.getItem() instanceof ItemWandCasting wand && wand.consumeAllVis(is, player, getHealVisCost(), false, false)) {
+            if (is != null && is.getItem() instanceof ItemWandCasting wand
+                && wand.consumeAllVis(is, player, getHealVisCost(), false, false)) {
                 ItemFocusBasic focus = wand.getFocus(is);
                 if (focus != null && focus.isUpgradedWith(wand.getFocusItem(is), curative)) {
                     if (taintPoison && !wand.consumeAllVis(is, player, getHealVisCost(), true, false)) {
@@ -83,7 +86,8 @@ public class PurityFocusEventHandler {
                         }
                         player.removePotionEffect(Config.potionVisExhaustID);
                         if (c < amplifier) {
-                            player.addPotionEffect(new PotionEffect(Config.potionVisExhaustID, duration, amplifier - c));
+                            player
+                                .addPotionEffect(new PotionEffect(Config.potionVisExhaustID, duration, amplifier - c));
                         }
                     }
                     return;
