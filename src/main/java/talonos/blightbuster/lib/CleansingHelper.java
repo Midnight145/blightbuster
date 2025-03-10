@@ -29,7 +29,7 @@ public class CleansingHelper {
                         .newInstance(world));
                 return true;
             } catch (final Exception e) {
-                BlightBuster.logger.error("Failed to cleanse entity from mapping: " + clazz.getName(), e);
+                BlightBuster.logger.error("Failed to cleanse entity from mapping: {}", clazz.getName(), e);
             }
         }
         if (BlightbusterConfig.customNpcSupport && entity instanceof EntityCustomNpc npc) {
@@ -41,7 +41,7 @@ public class CleansingHelper {
                             .newInstance(world));
                     return true;
                 } catch (final Exception e) {
-                    BlightBuster.logger.error("Failed to cleanse entity from mapping: " + npc.linkedName, e);
+                    BlightBuster.logger.error("Failed to cleanse entity from mapping: {}", npc.linkedName, e);
                 }
             }
         }
@@ -53,6 +53,9 @@ public class CleansingHelper {
     }
 
     private static void cleanseSingleMob(Entity tainted, EntityLivingBase cleansed) {
+        if (tainted.worldObj.isRemote) {
+            return;
+        }
         // new entity copies original entity location
         cleansed.copyLocationAndAnglesFrom(tainted);
         // original entity spawns new entity into the world
@@ -122,18 +125,12 @@ public class CleansingHelper {
     }
 
     public static boolean cleanFlux(int x, int y, int z, World world) {
-        boolean didSomething = false;
         Block block = world.getBlock(x, y, z);
-        if (block == ConfigBlocks.blockFluxGoo) {
+        if (block == ConfigBlocks.blockFluxGoo || block == ConfigBlocks.blockFluxGas) {
             world.setBlockToAir(x, y, z);
-            didSomething = true;
-        } else if (block == ConfigBlocks.blockFluxGas) {
-            world.setBlockToAir(x, y, z);
-            didSomething = true;
-        }
-        if (didSomething) {
             world.markBlockForUpdate(x, y, z);
+            return true;
         }
-        return didSomething;
+        return false;
     }
 }

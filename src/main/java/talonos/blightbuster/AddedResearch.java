@@ -1,13 +1,18 @@
 package talonos.blightbuster;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.handlers.TalonosWandTriggerManager;
 import talonos.blightbuster.items.BBItems;
+import talonos.blightbuster.items.ItemPurityFocus;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -21,6 +26,8 @@ import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 
 public class AddedResearch {
+
+    static ShapedArcaneRecipe purityFocusRecipe;
 
     public static void initResearch() {
         String category = "ALCHEMY";
@@ -68,7 +75,7 @@ public class AddedResearch {
         }
 
         if (BlightbusterConfig.enablePurityFocus) {
-            ShapedArcaneRecipe purityFocusRecipe = ThaumcraftApi.addArcaneCraftingRecipe(
+            purityFocusRecipe = ThaumcraftApi.addArcaneCraftingRecipe(
                 "PURITYFOCUS",
                 new ItemStack(BBItems.purityFocus),
                 new AspectList().add(Aspect.WATER, 5)
@@ -95,10 +102,7 @@ public class AddedResearch {
                 2,
                 new ItemStack(BBItems.purityFocus));
 
-            purityFocusResearch.setPages(
-                new ResearchPage("tc.research_page.PURITYFOCUS.1"),
-                new ResearchPage("tc.research_page.PURITYFOCUS.2"),
-                new ResearchPage(purityFocusRecipe));
+            setPurityFocusPages(purityFocusResearch, purityFocusRecipe);
 
             purityFocusResearch.setConcealed();
             purityFocusResearch.setParents("ETHEREALBLOOM");
@@ -271,6 +275,96 @@ public class AddedResearch {
             dawnChargerResearch.setParents(BlightbusterConfig.enableDawnOffering ? "DAWNOFFERING" : "DAWNMACHINE");
             dawnChargerResearch.registerResearchItem();
         }
+    }
+
+    // Used to rebuild formatted research on language change.
+    public static void setPurityFocusPages(ResearchItem purityFocusResearch, ShapedArcaneRecipe purityFocusRecipe) {
+        DecimalFormat formatter = new DecimalFormat("#####.##");
+        ArrayList<ResearchPage> list = new ArrayList<>();
+        list.add(
+            new ResearchPage(
+                StatCollector.translateToLocalFormatted(
+                    "tc.research_page.PURITYFOCUS.1",
+                    formatVis(ItemPurityFocus.getBlockVisCost(), formatter))));
+        list.add(
+            new ResearchPage(
+                StatCollector.translateToLocalFormatted(
+                    "tc.research_page.PURITYFOCUS.2",
+                    formatVis(ItemPurityFocus.getHealVisCost(), formatter),
+                    formatVis(ItemPurityFocus.getNodeVisCost(), formatter))));
+        list.add(new ResearchPage(purityFocusRecipe));
+        list.add(new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.basic_upgrades"));
+        list.add(new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.architect"));
+        if (BlightbusterConfig.enableFluxVacuumUpgrade) {
+            list.add(
+                new ResearchPage(
+                    "FOCALMANIPULATION",
+                    StatCollector.translateToLocalFormatted(
+                        "tc.research_page.PURITYFOCUS.vacuum",
+                        formatVis(ItemPurityFocus.getVacuumVisCost(), formatter))));
+        }
+        if (BlightbusterConfig.enableNodePurifierUpgrade) {
+            list.add(new ResearchPage("FOCALMANIPULATION", "tc.research_page.PURITYFOCUS.node"));
+        }
+        if (BlightbusterConfig.enableCurativeUpgrade) {
+            list.add(
+                new ResearchPage(
+                    "FOCALMANIPULATION",
+                    StatCollector.translateToLocalFormatted(
+                        "tc.research_page.PURITYFOCUS.curative",
+                        formatter.format(BlightbusterConfig.healStrength / 2F),
+                        formatVis(ItemPurityFocus.getHealVisCost(), formatter))));
+        }
+        if (BlightbusterConfig.enableBlightBusterUpgrade) {
+            list.add(
+                new ResearchPage(
+                    "FOCALMANIPULATION",
+                    StatCollector.translateToLocalFormatted(
+                        "tc.research_page.PURITYFOCUS.blightBuster",
+                        formatter.format(BlightbusterConfig.attackStrength / 2F),
+                        formatVis(ItemPurityFocus.getAttackVisCost(), formatter))));
+        }
+
+        purityFocusResearch.setPages(list.toArray(new ResearchPage[] {}));
+    }
+
+    /**
+     * Tried my best to make this work across languages.
+     */
+    private static String formatVis(AspectList visCost, DecimalFormat formatter) {
+        String separator = StatCollector.translateToLocal("gui.visCost.separator");
+        String and = StatCollector.translateToLocal("gui.visCost.and");
+        String space = StatCollector.translateToLocal("gui.visCost.space");
+        String vis = StatCollector.translateToLocal("gui.visCost.visName");
+        if (visCost == null || visCost.size() == 0) {
+            return StatCollector.translateToLocal("gui.visCost.noCost");
+        }
+        ArrayList<String> list = new ArrayList<>();
+        for (Aspect a : visCost.getAspects()) {
+            list.add(getColorCode(a) + formatter.format(visCost.getAmount(a) / 100F) + space + a.getName() + "§0");
+        }
+        if (list.size() == 1) {
+            return list.get(0) + space + vis;
+        }
+        if (list.size() == 2) {
+            return list.get(0) + space + and + space + list.get(1) + space + vis;
+        }
+        String result = String.join(separator + space, list.subList(0, list.size() - 1));
+        return result + separator + space + and + space + list.get(list.size() - 1) + space + vis;
+    }
+
+    /**
+     * Aer's chat color is different from the one used in the Thaumonomicon.
+     */
+    private static String getColorCode(Aspect a) {
+        if (a == null) {
+            return "";
+        }
+        if (a.getTag()
+            .equals("aer")) {
+            return "§6";
+        }
+        return "§" + a.getChatcolor();
     }
 
     public static void initWandHandler() {
