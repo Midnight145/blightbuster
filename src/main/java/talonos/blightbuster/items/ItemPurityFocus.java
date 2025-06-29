@@ -141,7 +141,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
             } else { // 20% attack boost with extra potency from runes
                 entity.attackEntityFrom(
                     new EntityDamageSource("magic", p),
-                    BlightbusterConfig.attackStrength * (5 + wand.getFocusPotency(itemstack)) / 5.0F);
+                    BlightbusterConfig.attackStrength * (1 + wand.getFocusPotency(itemstack) / 5.0F));
                 wand.consumeAllVis(itemstack, p, getAttackVisCost(), true, false);
             }
             return true;
