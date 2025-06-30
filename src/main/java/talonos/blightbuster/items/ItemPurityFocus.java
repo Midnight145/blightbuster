@@ -138,8 +138,10 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         } else if (doBlightBuster(itemstack, p, entity, wand, focus)) {
             if (p.worldObj.isRemote) {
                 PurityFocusFX.fire(entity, p);
-            } else {
-                entity.attackEntityFrom(new EntityDamageSource("magic", p), BlightbusterConfig.attackStrength);
+            } else { // 20% attack boost with extra potency from runes
+                entity.attackEntityFrom(
+                    new EntityDamageSource("magic", p),
+                    BlightbusterConfig.attackStrength * (1 + wand.getFocusPotency(itemstack) / 5.0F));
                 wand.consumeAllVis(itemstack, p, getAttackVisCost(), true, false);
             }
             return true;
@@ -153,8 +155,8 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         } else if (doCurative(itemstack, p, entity, wand, focus)) {
             if (p.worldObj.isRemote) {
                 PurityFocusFX.heal(entity, p);
-            } else {
-                entity.heal(BlightbusterConfig.healStrength);
+            } else { // +1 health with extra potency from runes
+                entity.heal(BlightbusterConfig.healStrength + wand.getFocusPotency(itemstack));
                 wand.consumeAllVis(itemstack, p, getHealVisCost(), true, false);
             }
             return true;
