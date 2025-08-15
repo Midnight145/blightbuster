@@ -11,6 +11,6 @@ public class DispenserBehaviorSilverPotion extends BehaviorProjectileDispense {
 
     @Override
     protected IProjectile getProjectileEntity(World world, IPosition position) {
-        return new EntitySilverPotion(world, position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+        return new EntitySilverPotion(world, position.getX(), position.getY(), position.getZ());
     }
 }
