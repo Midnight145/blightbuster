@@ -1,5 +1,6 @@
 package talonos.blightbuster.items;
 
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -10,6 +11,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.entities.EntitySilverPotion;
+import talonos.blightbuster.handlers.DispenserBehaviorSilverPotion;
 
 public class ItemSilverPotion extends Item {
 
@@ -18,6 +20,7 @@ public class ItemSilverPotion extends Item {
         GameRegistry.registerItem(this, BBStrings.silverPotionName);
         setCreativeTab(CreativeTabs.tabMaterials);
         setTextureName(BlightBuster.MODID + ":" + BBStrings.silverPotionName);
+        BlockDispenser.dispenseBehaviorRegistry.putObject(this, new DispenserBehaviorSilverPotion());
     }
 
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
