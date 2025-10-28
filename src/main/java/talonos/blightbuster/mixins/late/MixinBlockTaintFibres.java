@@ -2,9 +2,14 @@ package talonos.blightbuster.mixins.late;
 
 import java.util.Random;
 
+import com.google.common.collect.ImmutableList;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.block.Block;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 
+import net.minecraft.world.biome.BiomeGenBase;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,38 +25,36 @@ public abstract class MixinBlockTaintFibres {
     @Inject(method = "taintBiomeSpread", at = @At(value = "HEAD", remap = false), cancellable = true)
     private static void taintBiomeSpreadMixin(World world, int x, int y, int z, Random rand, Block block,
         CallbackInfo ci) {
-        if (DawnMachineTileEntity.coords != null) {
-            int[] coords = DawnMachineTileEntity.coords;
-            DawnMachineTileEntity tile = (DawnMachineTileEntity) world.getTileEntity(coords[0], coords[1], coords[2]);
-            if (tile != null) {
-                int chunkX = x / 16;
-                int chunkZ = z / 16;
-                for (int i = 0; i < tile.cleansedChunks.size(); i++) {
-                    int[] chunkCoords = tile.cleansedChunks.get(i);
-                    if (chunkCoords[0] == chunkX && chunkCoords[1] == chunkZ) {
-                        ci.cancel();
-                        return;
-                    }
-                }
+        ImmutableList<DawnMachineTileEntity> tiles = DawnMachineTileEntity.getDawnMachines(world);
+        ChunkCoordIntPair chunk = new ChunkCoordIntPair(x / 16, z / 16);
+        for (DawnMachineTileEntity tile : tiles) {
+            if (tile.cleansedChunks.contains(chunk)) {
+                ci.cancel();
+                return;
             }
         }
     }
 
+    @WrapOperation(method = "taintBiomeSpread", at = @At(value = "INVOKE", target = "Lthaumcraft/common/lib/utils/Utils;setBiomeAt(Lnet/minecraft/world/World;IILnet/minecraft/world/biome/BiomeGenBase;)V"))
+    private static void stopTaintInChunk(World world, int x, int z, BiomeGenBase biome, Operation<Void> original) {
+        ImmutableList<DawnMachineTileEntity> tiles = DawnMachineTileEntity.getDawnMachines(world);
+        ChunkCoordIntPair chunk = new ChunkCoordIntPair(x / 16, z / 16);
+        for (DawnMachineTileEntity tile : tiles) {
+            if (tile.cleansedChunks.contains(chunk)) {
+                return;
+            }
+        }
+        original.call(world, x, z, biome);
+    }
+
     @Inject(method = "spreadFibres", at = @At(value = "HEAD", remap = false), cancellable = true)
     private static void spreadFibresMixin(World world, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
-        if (DawnMachineTileEntity.coords != null) {
-            int[] coords = DawnMachineTileEntity.coords;
-            DawnMachineTileEntity tile = (DawnMachineTileEntity) world.getTileEntity(coords[0], coords[1], coords[2]);
-            if (tile != null) {
-                int chunkX = x / 16;
-                int chunkZ = z / 16;
-                for (int i = 0; i < tile.cleansedChunks.size(); i++) {
-                    int[] chunkCoords = tile.cleansedChunks.get(i);
-                    if (chunkCoords[0] == chunkX && chunkCoords[1] == chunkZ) {
-                        cir.setReturnValue(false);
-                        return;
-                    }
-                }
+        ImmutableList<DawnMachineTileEntity> tiles = DawnMachineTileEntity.getDawnMachines(world);
+        ChunkCoordIntPair chunk = new ChunkCoordIntPair(x / 16, z / 16);
+        for (DawnMachineTileEntity tile : tiles) {
+            if (tile.cleansedChunks.contains(chunk)) {
+                cir.setReturnValue(true);
+                return;
             }
         }
     }

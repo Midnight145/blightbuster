@@ -2,6 +2,8 @@ package talonos.blightbuster.mixins.late;
 
 import java.util.Random;
 
+import com.google.common.collect.ImmutableList;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,19 +19,14 @@ public abstract class MixinFluxGoo {
 
     @Inject(method = "updateTick", at = @At(value = "HEAD"), cancellable = true)
     private void updateTickMixin(World world, int x, int y, int z, Random rand, CallbackInfo ci) {
-        if (DawnMachineTileEntity.coords != null) {
-            int[] coords = DawnMachineTileEntity.coords;
-            DawnMachineTileEntity tile = (DawnMachineTileEntity) world.getTileEntity(coords[0], coords[1], coords[2]);
-            if (tile != null) {
-                int meta = world.getBlockMetadata(x, y, z);
-                if (meta >= 6 && world.isAirBlock(x, y + 1, z)) {
-                    for (int i = 0; i < tile.cleansedChunks.size(); i++) {
-                        int[] chunkCoords = tile.cleansedChunks.get(i);
-                        if (chunkCoords[0] == x / 16 && chunkCoords[1] == z / 16) {
-                            ci.cancel();
-                            return;
-                        }
-                    }
+        ImmutableList<DawnMachineTileEntity> tiles = DawnMachineTileEntity.getDawnMachines(world);
+        ChunkCoordIntPair chunk = new ChunkCoordIntPair(x / 16, z / 16);
+        for (DawnMachineTileEntity tile : tiles) {
+            int meta = world.getBlockMetadata(x, y, z);
+            if (meta >= 6 && world.isAirBlock(x, y + 1, z)) {
+                if (tile.cleansedChunks.contains(chunk)) {
+                    ci.cancel();
+                    return;
                 }
             }
         }
