@@ -41,5 +41,7 @@ dependencies {
     compileOnly(rfg.deobf("curse.maven:customnpcs-221826:2495406"))
     compileOnly("com.github.GTNewHorizons:ThaumicEnergistics:1.7.14-GTNH:dev")
     runtimeOnly("com.azanor.baubles:Baubles:1.0.1.10:deobf")
+    compileOnly(rfg.deobf("curse.maven:ubc-72744:2304497"))
+    compileOnly("curse.maven:cofhcore-69162:2388751")
 
 }

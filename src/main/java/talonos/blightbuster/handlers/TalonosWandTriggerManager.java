@@ -257,7 +257,7 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
     }
 
     private boolean createDawnMachine(ItemStack stack, EntityPlayer player, World world, int x, int y, int z) {
-        if (world.isRemote || DawnMachineTileEntity.coords != null) {
+        if (world.isRemote) {
             return false;
         }
 
@@ -268,8 +268,7 @@ public class TalonosWandTriggerManager implements IWandTriggerManager {
         final Pair<MultiblockEntry, Integer> entry = BBBlock.dawnMachineMultiblock
             .getEntry(world, x, y, z, -1, block, meta);
 
-        if (entry != null && wand.consumeAllVisCrafting(stack, player, new AspectList().add(Aspect.ORDER, 20), true)
-            && !world.isRemote) {
+        if (entry != null && wand.consumeAllVisCrafting(stack, player, new AspectList().add(Aspect.ORDER, 20), true)) {
             BBBlock.dawnMachineMultiblock
                 .convertMultiblockWithOrientationFromSideBlock(world, x, y, z, entry.getValue(), false, entry.getKey());
             TileEntity newTile = world.getTileEntity(x, y, z);
