@@ -14,7 +14,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -41,6 +40,7 @@ import net.minecraftforge.fluids.IFluidTank;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 
 import WayofTime.alchemicalWizardry.AlchemicalWizardry;
@@ -254,7 +254,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             if (anythingToDo) {
                 this.executeCleanse(chunk);
                 try {
-                    cleansedChunks.add(new ChunkCoordIntPair( this.chunkX, this.chunkZ ));
+                    cleansedChunks.add(new ChunkCoordIntPair(this.chunkX, this.chunkZ));
                 } catch (Exception e) {
                     BlightBuster.logger.error(e);
                     worldObj.playerEntities.get(0)
