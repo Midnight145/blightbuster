@@ -1,33 +1,30 @@
 package talonos.blightbuster.mixins.late;
 
+import java.util.List;
+
+import net.minecraft.world.ChunkCoordIntPair;
+
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
+import thaumcraft.api.TileThaumcraft;
 import thaumcraft.common.tiles.TileNode;
 
 @Mixin(value = TileNode.class, remap = false)
-public abstract class MixinTileNode {
+public abstract class MixinTileNode extends TileThaumcraft {
 
-    @Inject(method = "handleTaintNode", at = @At(value = "HEAD", remap = false), cancellable = true)
-    private void handleTaintNodeMixin(boolean change, CallbackInfoReturnable<Boolean> cir) {
-        // BlightBuster.logger.info("Mixed into handleTaintNode");
-        if (DawnMachineTileEntity.coords != null) {
-            int[] coords = DawnMachineTileEntity.coords;
-            TileNode tmp = (TileNode) (Object) this;
-            DawnMachineTileEntity tile = (DawnMachineTileEntity) tmp.getWorldObj()
-                .getTileEntity(coords[0], coords[1], coords[2]);
-            if (tile != null) {
-                for (int i = 0; i < tile.cleansedChunks.size(); i++) {
-                    int[] chunkCoords = tile.cleansedChunks.get(i);
-                    if (chunkCoords[0] == tmp.xCoord / 16 && chunkCoords[1] == tmp.zCoord / 16) {
-                        cir.setReturnValue(false);
-                        return;
-                    }
-                }
+    @WrapMethod(method = "handleTaintNode")
+    private boolean handleTaintNodeMixin(boolean change, Operation<Boolean> original) {
+        List<DawnMachineTileEntity> tiles = DawnMachineTileEntity.getDawnMachines(this.worldObj);
+        ChunkCoordIntPair chunk = new ChunkCoordIntPair(this.xCoord >> 4, this.zCoord >> 4);
+        for (DawnMachineTileEntity tile : tiles) {
+            if (tile.cleansedChunks.contains(chunk)) {
+                return change;
             }
         }
+        return original.call(change);
     }
 }

@@ -38,6 +38,11 @@ public enum Mixins {
         .setSide(Side.BOTH)
         .setPhase(Phase.LATE)
         .addMixinClasses("MixinFluxGoo")
+        .setApplyIf(() -> true)),
+    DISABLE_BIOME_SPREAD(new Builder("Disables biome taint spread").addTargetedMod(TargetedMod.THAUMCRAFT)
+        .setSide(Side.BOTH)
+        .setPhase(Phase.LATE)
+        .addMixinClasses("MixinUtils")
         .setApplyIf(() -> true));
 
     private final List<String> mixinClasses;

@@ -5,11 +5,13 @@ import static talonos.blightbuster.lib.CleansingHelper.cleanseMobFromMapping;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.function.Function;
 
 import net.minecraft.block.Block;
@@ -49,6 +51,7 @@ import noppes.npcs.entity.EntityCustomNpc;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.BlightbusterConfig;
 import talonos.blightbuster.lib.CleansingHelper;
+import talonos.blightbuster.lib.Coordinates;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.network.packets.SpawnCleanseParticlesPacket;
 import talonos.blightbuster.tileentity.dawnmachine.DawnMachineResource;
@@ -76,7 +79,7 @@ import vazkii.botania.api.mana.spark.SparkHelper;
 public class DawnMachineTileEntity extends TileEntity implements IAspectSource, IAspectContainer, IEnergyReceiver,
     IEnergyStorage, ISparkAttachable, IFluidTank, IFluidHandler {
 
-    public static int[] coords = null;
+    private static final ArrayList<Coordinates> dawnMachines = new ArrayList<>();
 
     // FLUID INTEGRATION (Blood Magic)
     private static final int MAX_BLOOD = 100000;
@@ -173,7 +176,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     // Denotes if waiting for chunk to load
     private boolean waiting = false;
 
-    public final ArrayList<int[]> cleansedChunks = new ArrayList<>();
+    public final Set<ChunkCoordIntPair> cleansedChunks = new HashSet<>();
 
     public boolean isActive = false;
 
@@ -197,9 +200,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             return;
         }
         if (this.init) {
+
             // this all has to wait for the first tick because the tileentity isn't fully initialized until then
-            coords = new int[] { this.xCoord, this.yCoord, this.zCoord };
-            this.dawnMachineBlockCoords = new int[] { this.xCoord, this.zCoord };
+            Coordinates coords = new Coordinates(this.xCoord, this.yCoord, this.zCoord);
+            dawnMachines.add(coords);
+            this.dawnMachineBlockCoords = new int[] { coords.x, coords.y };
             this.scanlineCoords = this.generateScanlineCoords();
             this.scanlineAerCoords = this.generateScanlineAerCoords();
             this.dawnMachineChunkCoords = this.getDawnMachineChunkCoords();
@@ -248,7 +253,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             if (anythingToDo) {
                 this.executeCleanse(chunk);
                 try {
-                    cleansedChunks.add(new int[] { this.chunkX, this.chunkZ });
+                    cleansedChunks.add(new ChunkCoordIntPair(this.chunkX, this.chunkZ));
                 } catch (Exception e) {
                     BlightBuster.logger.error(e);
                     worldObj.playerEntities.get(0)
@@ -914,7 +919,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     }
 
     private int[] getDawnMachineChunkCoords() {
-        return new int[] { (int) Math.floor(this.xCoord / 16.0), (int) Math.floor(this.zCoord / 16.0) };
+        return new int[] { this.xCoord >> 4, this.zCoord >> 4 };
     }
 
     // END HELPER FUNCTIONS
@@ -941,7 +946,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         cleansedChunks.clear();
         for (int i = 0; i < unpackedCoords.length - 1; i += 2) {
             try {
-                cleansedChunks.add(new int[] { unpackedCoords[i], unpackedCoords[i + 1] });
+                cleansedChunks.add(new ChunkCoordIntPair(unpackedCoords[i], unpackedCoords[i + 1]));
             } catch (Exception e) {
                 BlightBuster.logger.error(e);
                 worldObj.playerEntities.get(0)
@@ -968,11 +973,10 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         tag.setInteger("CurrentRF", this.currentRF);
         tag.setInteger("Blood", this.fluid.amount);
         tag.setInteger("Mana", this.currentMana);
-        // int[] tmpArray = ArrayUtils.toPrimitive(cleansedChunks.toArray(new Integer[0]));
         ArrayList<Integer> unpackedCoords = new ArrayList<>();
-        for (int[] coords : cleansedChunks) {
-            unpackedCoords.add(coords[0]);
-            unpackedCoords.add(coords[1]);
+        for (ChunkCoordIntPair coords : cleansedChunks) {
+            unpackedCoords.add(coords.chunkXPos);
+            unpackedCoords.add(coords.chunkZPos);
         }
         tag.setIntArray("CleansedChunks", ArrayUtils.toPrimitive(unpackedCoords.toArray(new Integer[0])));
     }
@@ -1424,8 +1428,22 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     }
 
     public static void deconstruct(World world, int x, int y, int z) {
-        coords = null;
+        Coordinates coords = new Coordinates(x, y, z);
+        DawnMachineTileEntity.dawnMachines.remove(coords);
     }
 
+    public static List<DawnMachineTileEntity> getDawnMachines(World world) {
+        ArrayList<DawnMachineTileEntity> tiles = new ArrayList<>();
+        synchronized (dawnMachines) {
+            for (Coordinates coords : dawnMachines) {
+                TileEntity te = world.getTileEntity(coords.x, coords.y, coords.z);
+                if (te instanceof DawnMachineTileEntity) {
+                    tiles.add((DawnMachineTileEntity) te);
+                }
+            }
+        }
+
+        return tiles;
+    }
     // END MISC. FUNCTIONS
 }
