@@ -40,7 +40,6 @@ import net.minecraftforge.fluids.IFluidTank;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 
 import WayofTime.alchemicalWizardry.AlchemicalWizardry;
@@ -920,7 +919,7 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
     }
 
     private int[] getDawnMachineChunkCoords() {
-        return new int[] { (int) Math.floor(this.xCoord / 16.0), (int) Math.floor(this.zCoord / 16.0) };
+        return new int[] { this.xCoord >> 4, this.zCoord >> 4 };
     }
 
     // END HELPER FUNCTIONS
@@ -974,7 +973,6 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         tag.setInteger("CurrentRF", this.currentRF);
         tag.setInteger("Blood", this.fluid.amount);
         tag.setInteger("Mana", this.currentMana);
-        // int[] tmpArray = ArrayUtils.toPrimitive(cleansedChunks.toArray(new Integer[0]));
         ArrayList<Integer> unpackedCoords = new ArrayList<>();
         for (ChunkCoordIntPair coords : cleansedChunks) {
             unpackedCoords.add(coords.chunkXPos);
@@ -1434,18 +1432,18 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
         DawnMachineTileEntity.dawnMachines.remove(coords);
     }
 
-    public static ImmutableList<DawnMachineTileEntity> getDawnMachines(World world) {
-        ImmutableList.Builder<DawnMachineTileEntity> tiles = ImmutableList.builder();
+    public static List<DawnMachineTileEntity> getDawnMachines(World world) {
+        ArrayList<DawnMachineTileEntity> tiles = new ArrayList<>();
         synchronized (dawnMachines) {
             for (Coordinates coords : dawnMachines) {
-                DawnMachineTileEntity tile = (DawnMachineTileEntity) world.getTileEntity(coords.x, coords.y, coords.z);
-                if (tile != null) {
-                    tiles.add(tile);
+                TileEntity te = world.getTileEntity(coords.x, coords.y, coords.z);
+                if (te instanceof DawnMachineTileEntity) {
+                    tiles.add((DawnMachineTileEntity) te);
                 }
             }
         }
 
-        return tiles.build();
+        return tiles;
     }
     // END MISC. FUNCTIONS
 }
