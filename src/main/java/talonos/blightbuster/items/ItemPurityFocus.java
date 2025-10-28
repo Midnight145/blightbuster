@@ -208,17 +208,18 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
     private void cleanNode(int x, int y, int z, EntityPlayer player, ItemStack itemstack) {
         TileEntity tile = player.getEntityWorld()
             .getTileEntity(x, y, z);
-        if (tile instanceof TileNode node) {
+
+        if (tile instanceof TileNode node_) {
             ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
             boolean hasNodeUpgrade = isUpgradedWith(wand.getFocusItem(itemstack), ItemPurityFocus.node);
-            if (node.getNodeType() == NodeType.TAINTED
+            if (node_.getNodeType() == NodeType.TAINTED
                 && wand.consumeAllVis(itemstack, player, getNodeVisCost(), true, false)) {
                 if (hasNodeUpgrade) {
-                    node.setNodeType(NodeType.PURE);
+                    node_.setNodeType(NodeType.PURE);
                 } else {
-                    node.setNodeType(NodeType.NORMAL);
+                    node_.setNodeType(NodeType.NORMAL);
                 }
-                node.markDirty();
+                node_.markDirty();
                 player.worldObj.markBlockForUpdate(x, y, z);
                 PurityFocusFX.node(player, x, y, z);
             }
@@ -347,6 +348,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         } else return axis == EnumAxis.Z && (dim == 0 || dim == 2);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         AspectList al = this.getVisCost(stack);
@@ -372,7 +374,7 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         this.addFocusInformation(stack, player, list, par4);
     }
 
-    private static void addVis(List list, AspectList al) {
+    private static void addVis(List<String> list, AspectList al) {
         if (al.size() < 1) {
             list.add(" " + StatCollector.translateToLocal("gui.visCost.noCost"));
             return;
@@ -421,18 +423,26 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
     }
 
     public static void setBlockVisCost(AspectList list) {
-        for (Aspect a : blockCost.getAspects()) {
-            blockCost.remove(a);
-        }
-        if (list.size() < 1) {
-            return;
-        }
-        for (Aspect a : list.getAspects()) {
-            blockCost.add(a, list.getAmount(a));
-        }
+        setVisCost(list, blockCost);
     }
 
     public static void setNodeVisCost(AspectList list) {
+        setVisCost(list, nodeCost);
+    }
+
+    public static void setAttackVisCost(AspectList list) {
+        setVisCost(list, attackCost);
+    }
+
+    public static void setHealVisCost(AspectList list) {
+        setVisCost(list, healCost);
+    }
+
+    public static void setVacuumVisCost(AspectList list) {
+        setVisCost(list, vacuumCost);
+    }
+
+    private static void setVisCost(AspectList list, AspectList nodeCost) {
         for (Aspect a : nodeCost.getAspects()) {
             nodeCost.remove(a);
         }
@@ -441,42 +451,6 @@ public class ItemPurityFocus extends ItemFocusBasic implements IArchitect {
         }
         for (Aspect a : list.getAspects()) {
             nodeCost.add(a, list.getAmount(a));
-        }
-    }
-
-    public static void setAttackVisCost(AspectList list) {
-        for (Aspect a : attackCost.getAspects()) {
-            attackCost.remove(a);
-        }
-        if (list.size() < 1) {
-            return;
-        }
-        for (Aspect a : list.getAspects()) {
-            attackCost.add(a, list.getAmount(a));
-        }
-    }
-
-    public static void setHealVisCost(AspectList list) {
-        for (Aspect a : healCost.getAspects()) {
-            healCost.remove(a);
-        }
-        if (list.size() < 1) {
-            return;
-        }
-        for (Aspect a : list.getAspects()) {
-            healCost.add(a, list.getAmount(a));
-        }
-    }
-
-    public static void setVacuumVisCost(AspectList list) {
-        for (Aspect a : vacuumCost.getAspects()) {
-            vacuumCost.remove(a);
-        }
-        if (list.size() < 1) {
-            return;
-        }
-        for (Aspect a : list.getAspects()) {
-            vacuumCost.add(a, list.getAmount(a));
         }
     }
 
