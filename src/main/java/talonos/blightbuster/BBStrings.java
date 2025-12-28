@@ -12,4 +12,5 @@ public class BBStrings {
     public static final String cyberTotemName = "cyberTotem";
     public static final String offeringName = "offering";
     public static final String dawnChargerName = "dawnCharger";
+    public static final String stabilizerFocusName = "stabilizerFocus";
 }

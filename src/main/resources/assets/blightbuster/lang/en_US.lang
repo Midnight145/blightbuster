@@ -13,6 +13,7 @@ item.blightbuster_purityFocus.cost3=Vis per creature cured or healed
 item.blightbuster_purityFocus.cost4=Vis per node purified
 item.blightbuster_purityFocus.cost5=Vis per flux vacuumed
 item.blightbuster_purityFocus.cost6=Vis per blight busted
+item.blightbuster_stabilizerFocus.name=Wand Focus: Node Stabilizer
 item.blightbuster_silverPotion.name=Silverleaf Splash Potion
 item.blightbuster_worldTainter.name=World Tainter
 item.blightbuster_chunkTainter.name=Chunk Tainter

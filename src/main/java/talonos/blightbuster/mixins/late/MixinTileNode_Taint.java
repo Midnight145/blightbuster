@@ -9,12 +9,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
+import talonos.blightbuster.lib.INodeStabilizer;
 import talonos.blightbuster.tileentity.DawnMachineTileEntity;
 import thaumcraft.api.TileThaumcraft;
 import thaumcraft.common.tiles.TileNode;
 
 @Mixin(value = TileNode.class, remap = false)
-public abstract class MixinTileNode extends TileThaumcraft {
+public abstract class MixinTileNode_Taint extends TileThaumcraft implements INodeStabilizer {
 
     @WrapMethod(method = "handleTaintNode")
     private boolean handleTaintNodeMixin(boolean change, Operation<Boolean> original) {

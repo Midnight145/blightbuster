@@ -27,7 +27,7 @@ public enum Mixins {
     DISABLE_SHEEP_SPREAD(new Builder("Disables tainted sheep taint spread").addTargetedMod(TargetedMod.THAUMCRAFT)
         .setSide(Side.BOTH)
         .setPhase(Phase.LATE)
-        .addMixinClasses("MixinTileNode")
+        .addMixinClasses("MixinTileNode_Taint")
         .setApplyIf(() -> true)),
     DISABLE_CREEPER_EXPLOSION(new Builder("Disabled tainted creeper explosions").addTargetedMod(TargetedMod.THAUMCRAFT)
         .setSide(Side.BOTH)
@@ -43,7 +43,25 @@ public enum Mixins {
         .setSide(Side.BOTH)
         .setPhase(Phase.LATE)
         .addMixinClasses("MixinUtils")
-        .setApplyIf(() -> true));
+        .setApplyIf(() -> true)),
+    ADD_TILE_RENDERER(new Builder("Add custom node tile renderer").addTargetedMod(TargetedMod.THAUMCRAFT)
+        .setSide(Side.CLIENT)
+        .setPhase(Phase.LATE)
+        .addMixinClasses("MixinTileNodeRenderer")
+        .setApplyIf(() -> true)),
+    ADD_NODE_STABILIZER(new Builder("Add node stabilizer functionality").addTargetedMod(TargetedMod.THAUMCRAFT)
+        .setSide(Side.BOTH)
+        .setPhase(Phase.LATE)
+        .addMixinClasses("MixinTileNode_Stabilize")
+        .setApplyIf(() -> true)),
+    STOP_STABILIZER_FOCUS_BREAK(
+        new Builder("Prevent stabilizer focus from breaking nodes").addTargetedMod(TargetedMod.THAUMCRAFT)
+            .setSide(Side.BOTH)
+            .setPhase(Phase.LATE)
+            .addMixinClasses("MixinItemWandCasting_FocusNoBreak")
+            .setApplyIf(() -> true)),
+
+    ;
 
     private final List<String> mixinClasses;
     private final List<TargetedMod> targetedMods;
