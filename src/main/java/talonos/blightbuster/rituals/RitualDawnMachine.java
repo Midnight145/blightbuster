@@ -68,7 +68,7 @@ public class RitualDawnMachine extends RitualEffect {
 
     @Override
     public int getCostPerRefresh() {
-        return 500;
+        return 5000;
     }
 
     @Override
