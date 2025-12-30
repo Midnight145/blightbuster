@@ -1,14 +1,9 @@
 package talonos.blightbuster;
 
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.config.Configuration;
 
+import talonos.blightbuster.api.BlightbusterAPI;
 import talonos.blightbuster.compat.CompatFixes;
 import talonos.blightbuster.items.ItemPurityFocus;
 import thaumcraft.api.aspects.Aspect;
@@ -31,22 +26,10 @@ public class BlightbusterConfig {
     public static boolean createThaumTab = false;
 
     public static boolean customNpcSupport = false;
-    // public static String purifiedMappingsString =
-    // "thaumcraft.common.entities.monster.EntityTaintSheep:net.minecraft.entity.passive.EntitySheep,"
-    // + "thaumcraft.common.entities.monster.EntityTaintCow:net.minecraft.entity.passive.EntityCow,"
-    // + "thaumcraft.common.entities.monster.EntityTaintChicken:net.minecraft.entity.passive.EntityChicken,"
-    // + "thaumcraft.common.entities.monster.EntityTaintPig:net.minecraft.entity.passive.EntityPig,"
-    // + "thaumcraft.common.entities.monster.EntityTaintVillager:net.minecraft.entity.passive.EntityVillager,"
-    // + "thaumcraft.common.entities.monster.EntityTaintCreeper:net.minecraft.entity.monster.EntityCreeper";
-    public static String purifiedMappingsString = "Thaumcraft.TaintedSheep:Sheep," + "Thaumcraft.TaintedCow:Cow,"
-        + "Thaumcraft.TaintedChicken:Chicken,"
-        + "Thaumcraft.TaintedPig:Pig,"
-        + "Thaumcraft.TaintedVillager:Villager,"
-        + "Thaumcraft.TaintedCreeper:Creeper";
-    public static HashMap<Class<?>, Constructor<?>> purifiedMappings = new HashMap<>();
+
+    public static String purifiedMappingsString = "";
     public static String customNpcMappingsString = "TaintedOcelot:Ozelot," + "TaintedWolf:Wolf,"
         + "TaintedTownsfolk:Villager";
-    public static HashMap<String, Constructor<?>> customNpcMappings = new HashMap<>();
 
     public static boolean enableBlood = false;
     public static boolean enableRf = false;
@@ -262,40 +245,23 @@ public class BlightbusterConfig {
         return cost;
     }
 
-    @SuppressWarnings("unchecked")
-    public static Class<? extends EntityLivingBase> getEntityConstructorByStringId(String entityId) {
-        return (Class<? extends EntityLivingBase>) EntityList.stringToClassMapping.get(entityId);
-    }
-
-    public static void init_mappings() {
+    public static void initConfigMaps() {
         if (customNpcSupport) {
             for (String s : customNpcMappingsString.split(",")) {
                 String[] split = s.split(":");
                 if (split.length == 2) {
-                    Class<? extends EntityLivingBase> clazz = getEntityConstructorByStringId(split[1]);
-                    if (clazz != null) {
-                        try {
-                            customNpcMappings.put(split[0], clazz.getConstructor(World.class));
-                            continue;
-                        } catch (NoSuchMethodException e) {
-                            BlightBuster.logger.error(e);
-
-                        }
+                    if (!BlightbusterAPI.registerCustomNpcPurificationMapping(split[0], split[1])) {
+                        BlightBuster.logger
+                            .error("Error registering CustomNPC purification mapping: {} to {}", split[0], split[1]);
                     }
-                    BlightBuster.logger.error("Error finding entity: {}", split[1]);
                 }
             }
         }
         for (String s : purifiedMappingsString.split(",")) {
             String[] split = s.split(":");
             if (split.length == 2) {
-                try {
-                    Class<?> tainted = getEntityConstructorByStringId(split[0]);
-                    Class<?> purified = getEntityConstructorByStringId(split[1]);
-                    purifiedMappings.put(tainted, purified.getConstructor(World.class));
-                } catch (NoSuchMethodException e) {
-                    BlightBuster.logger.error(e);
-                    BlightBuster.logger.error("Error parsing class: {} or {}", split[0], split[1]);
+                if (!BlightbusterAPI.registerEntityPurificationMapping(split[0], split[1])) {
+                    BlightBuster.logger.error("Error registering purification mapping: {} to {}", split[0], split[1]);
                 }
             }
         }

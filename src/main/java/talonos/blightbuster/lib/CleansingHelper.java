@@ -1,5 +1,7 @@
 package talonos.blightbuster.lib;
 
+import java.lang.reflect.Constructor;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,6 +14,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import noppes.npcs.entity.EntityCustomNpc;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.BlightbusterConfig;
+import talonos.blightbuster.api.BlightbusterAPI;
 import talonos.blightbuster.network.BlightbusterNetwork;
 import thaumcraft.common.blocks.BlockFluxGoo;
 import thaumcraft.common.config.Config;
@@ -20,36 +23,35 @@ import thaumcraft.common.config.ConfigBlocks;
 public class CleansingHelper {
 
     public static boolean cleanseMobFromMapping(Entity entity, World world) {
+        boolean didSomething = false;
         Class<?> clazz = entity.getClass();
-        if (BlightbusterConfig.purifiedMappings.containsKey(clazz)) {
-            try {
-                cleanseSingleMob(
-                    entity,
-                    (EntityLivingBase) BlightbusterConfig.purifiedMappings.get(clazz)
-                        .newInstance(world));
-                return true;
-            } catch (final Exception e) {
-                BlightBuster.logger.error("Failed to cleanse entity from mapping: {}", clazz.getName(), e);
-            }
-        }
-        if (BlightbusterConfig.customNpcSupport && entity instanceof EntityCustomNpc npc) {
-            if (BlightbusterConfig.customNpcMappings.containsKey(npc.linkedName)) {
+        Constructor<?> constructor;
+        if (!BlightbusterConfig.customNpcSupport || !(entity instanceof EntityCustomNpc)) {
+            constructor = BlightbusterAPI.getPurifiedEntityConstructor(clazz);
+            if (constructor != null) {
                 try {
-                    cleanseSingleMob(
-                        entity,
-                        (EntityLivingBase) BlightbusterConfig.customNpcMappings.get(npc.linkedName)
-                            .newInstance(world));
-                    return true;
+                    cleanseSingleMob(entity, (EntityLivingBase) constructor.newInstance(world));
+                    didSomething = true;
                 } catch (final Exception e) {
-                    BlightBuster.logger.error("Failed to cleanse entity from mapping: {}", npc.linkedName, e);
+                    BlightBuster.logger.error("Failed to cleanse entity from mapping: {}", clazz.getName(), e);
+                }
+            }
+        } else {
+            constructor = BlightbusterAPI.getCustomNpcPurifiedEntityConstructor(((EntityCustomNpc) entity).linkedName);
+            if (constructor != null) {
+                try {
+                    cleanseSingleMob(entity, (EntityLivingBase) constructor.newInstance(world));
+                    didSomething = true;
+                } catch (final Exception e) {
+                    BlightBuster.logger.error("Failed to cleanse CustomNPC from mapping: {}", clazz.getName(), e);
                 }
             }
         }
         if (entity instanceof EntityLivingBase e && e.isPotionActive(Config.potionTaintPoisonID)) {
             e.removePotionEffect(Config.potionTaintPoisonID);
-            return true;
+            didSomething = true;
         }
-        return false;
+        return didSomething;
     }
 
     private static void cleanseSingleMob(Entity tainted, EntityLivingBase cleansed) {

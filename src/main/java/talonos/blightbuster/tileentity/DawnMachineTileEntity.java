@@ -50,6 +50,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import noppes.npcs.entity.EntityCustomNpc;
 import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.BlightbusterConfig;
+import talonos.blightbuster.api.BlightbusterAPI;
 import talonos.blightbuster.lib.CleansingHelper;
 import talonos.blightbuster.lib.Coordinates;
 import talonos.blightbuster.network.BlightbusterNetwork;
@@ -355,10 +356,11 @@ public class DawnMachineTileEntity extends TileEntity implements IAspectSource, 
             for (final List<Entity> list : chunk.entityLists) {
                 for (final Entity entity : list) {
                     if (entity instanceof EntityCustomNpc && BlightbusterConfig.customNpcSupport
-                        && BlightbusterConfig.customNpcMappings.containsKey(((EntityCustomNpc) entity).linkedName)) {
+                        && BlightbusterAPI.getCustomNpcPurifiedEntityConstructor(((EntityCustomNpc) entity).linkedName)
+                            != null) {
                         return true;
                     }
-                    if (BlightbusterConfig.purifiedMappings.containsKey(entity.getClass())) {
+                    if (BlightbusterAPI.getPurifiedEntityConstructor(entity.getClass()) != null) {
                         return true;
                     }
                 }
