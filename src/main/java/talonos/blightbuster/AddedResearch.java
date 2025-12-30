@@ -139,7 +139,9 @@ public class AddedResearch {
                 2,
                 new ItemStack(BBItems.isolationFocus));
 
-            isolationFocusResearch.setPages(new ResearchPage("tc.research_page.ISOLATIONFOCUS.1"), new ResearchPage(isolationFocusRecipe));
+            isolationFocusResearch.setPages(
+                new ResearchPage("tc.research_page.ISOLATIONFOCUS.1"),
+                new ResearchPage(isolationFocusRecipe));
 
             isolationFocusResearch.setConcealed();
             isolationFocusResearch.setParents("PURITYFOCUS");
