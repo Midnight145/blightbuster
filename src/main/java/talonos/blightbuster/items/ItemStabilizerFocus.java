@@ -12,7 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
-import talonos.blightbuster.lib.INodeStabilizer;
+import talonos.blightbuster.lib.INodeStabilized;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
@@ -33,7 +33,7 @@ public class ItemStabilizerFocus extends ItemFocusBasic {
             MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(player.worldObj, player, true);
             if (mop != null && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                 if (!(player.worldObj
-                    .getTileEntity(mop.blockX, mop.blockY, mop.blockZ) instanceof INodeStabilizer node)) {
+                    .getTileEntity(mop.blockX, mop.blockY, mop.blockZ) instanceof INodeStabilized node)) {
                     return super.onEntitySwing(player, stack);
                 }
                 if (!wand.consumeAllVis(stack, player, this.getVisCost(stack), true, false)) {
@@ -53,7 +53,7 @@ public class ItemStabilizerFocus extends ItemFocusBasic {
     @Override
     public boolean onFocusBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) {
         return player.getEntityWorld()
-            .getTileEntity(x, y, z) instanceof INodeStabilizer && !player.isSneaking();
+            .getTileEntity(x, y, z) instanceof INodeStabilized && !player.isSneaking();
     }
 
     @Override

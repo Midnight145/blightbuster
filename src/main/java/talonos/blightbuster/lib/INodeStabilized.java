@@ -1,6 +1,6 @@
 package talonos.blightbuster.lib;
 
-public interface INodeStabilizer {
+public interface INodeStabilized {
 
     void setStabilized(boolean stable);
 

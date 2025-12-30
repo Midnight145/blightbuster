@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import talonos.blightbuster.client.StabilizedNodeRenderer;
-import talonos.blightbuster.lib.INodeStabilizer;
+import talonos.blightbuster.lib.INodeStabilized;
 import thaumcraft.client.renderers.tile.TileNodeRenderer;
 
 @Mixin(TileNodeRenderer.class)
@@ -22,7 +22,7 @@ public class MixinTileNodeRenderer {
             shift = At.Shift.AFTER),
         remap = false)
     public void renderWardedNode(TileEntity tile, double x, double y, double z, float partialTicks, CallbackInfo ci) {
-        if (tile instanceof INodeStabilizer node && node.isStabilized()) {
+        if (tile instanceof INodeStabilized node && node.isStabilized()) {
             StabilizedNodeRenderer.render(tile.xCoord, tile.yCoord, tile.zCoord, partialTicks);
         }
     }
