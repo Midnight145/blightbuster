@@ -43,5 +43,5 @@ dependencies {
     runtimeOnly("com.azanor.baubles:Baubles:1.0.1.10:deobf")
     compileOnly(rfg.deobf("curse.maven:ubc-72744:2304497"))
     compileOnly("curse.maven:cofhcore-69162:2388751")
-
+    runtimeOnlyNonPublishable(rfg.deobf("maven.modrinth:salis-arcana:v2.4.0"))
 }
