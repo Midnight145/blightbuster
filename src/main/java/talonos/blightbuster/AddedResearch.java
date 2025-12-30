@@ -109,6 +109,43 @@ public class AddedResearch {
             purityFocusResearch.registerResearchItem();
         }
 
+        if (BlightbusterConfig.enableStabilizerFocus) {
+            ShapedArcaneRecipe isolationFocusRecipe = ThaumcraftApi.addArcaneCraftingRecipe(
+                "ISOLATIONFOCUS",
+                new ItemStack(BBItems.isolationFocus),
+                new AspectList().add(Aspect.EARTH, 15)
+                    .add(Aspect.AIR, 10),
+                "SQS",
+                "AFA",
+                "SQS",
+                'S',
+                new ItemStack(ConfigItems.itemShard, 1, 3),
+                'A',
+                new ItemStack(ConfigItems.itemResource, 1, 6),
+                'Q',
+                new ItemStack(Items.quartz),
+                'F',
+                new ItemStack(BBItems.purityFocus, 1));
+
+            ResearchItem isolationFocusResearch = new ResearchItem(
+                "ISOLATIONFOCUS",
+                category,
+                new AspectList().add(Aspect.ORDER, 3)
+                    .add(Aspect.MAGIC, 3)
+                    .add(Aspect.AURA, 5)
+                    .add(Aspect.ARMOR, 4),
+                -2,
+                -3,
+                2,
+                new ItemStack(BBItems.isolationFocus));
+
+            isolationFocusResearch.setPages(new ResearchPage("tc.research_page.ISOLATIONFOCUS.1"), new ResearchPage(isolationFocusRecipe));
+
+            isolationFocusResearch.setConcealed();
+            isolationFocusResearch.setParents("PURITYFOCUS");
+            isolationFocusResearch.registerResearchItem();
+        }
+
         if (BlightbusterConfig.enableDawnTotem) {
             InfusionRecipe dawnTotemRecipe = ThaumcraftApi.addInfusionCraftingRecipe(
                 "DAWNTOTEM",

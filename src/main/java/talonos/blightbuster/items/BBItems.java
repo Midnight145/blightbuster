@@ -10,7 +10,7 @@ public class BBItems {
     public static Item silverPotion;
     public static Item worldTainter;
     public static Item worldSuperTainter;
-    public static Item stabilizerFocus;
+    public static Item isolationFocus;
 
     public static void init() {
         if (BlightbusterConfig.enablePurityFocus) {
@@ -26,7 +26,7 @@ public class BBItems {
             worldSuperTainter = new ItemSuperTestWorldTainter();
         }
         if (BlightbusterConfig.enableStabilizerFocus) {
-            stabilizerFocus = new ItemStabilizerFocus();
+            isolationFocus = new ItemStabilizerFocus();
         }
     }
 }
