@@ -49,13 +49,13 @@ public enum Mixins {
         .setPhase(Phase.LATE)
         .addMixinClasses("MixinTileNodeRenderer")
         .setApplyIf(() -> true)),
-    ADD_NODE_STABILIZER(new Builder("Add node stabilizer functionality").addTargetedMod(TargetedMod.THAUMCRAFT)
+    ADD_NODE_STABILIZER(new Builder("Add node isolation functionality").addTargetedMod(TargetedMod.THAUMCRAFT)
         .setSide(Side.BOTH)
         .setPhase(Phase.LATE)
-        .addMixinClasses("MixinTileNode_Stabilize")
+        .addMixinClasses("MixinTileNode_Isolate")
         .setApplyIf(() -> true)),
     STOP_STABILIZER_FOCUS_BREAK(
-        new Builder("Prevent stabilizer focus from breaking nodes").addTargetedMod(TargetedMod.THAUMCRAFT)
+        new Builder("Prevent isolation focus from breaking nodes").addTargetedMod(TargetedMod.THAUMCRAFT)
             .setSide(Side.BOTH)
             .setPhase(Phase.LATE)
             .addMixinClasses("MixinItemWandCasting_FocusNoBreak")

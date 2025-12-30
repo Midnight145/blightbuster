@@ -13,7 +13,7 @@ item.blightbuster_purityFocus.cost3=Vis per creature cured or healed
 item.blightbuster_purityFocus.cost4=Vis per node purified
 item.blightbuster_purityFocus.cost5=Vis per flux vacuumed
 item.blightbuster_purityFocus.cost6=Vis per blight busted
-item.blightbuster_stabilizerFocus.name=Wand Focus: Node Stabilizer
+item.blightbuster_isolationFocus.name=Wand Focus: Node Isolation
 item.blightbuster_silverPotion.name=Silverleaf Splash Potion
 item.blightbuster_worldTainter.name=World Tainter
 item.blightbuster_chunkTainter.name=Chunk Tainter
@@ -43,7 +43,7 @@ tc.research_page.PURITYFOCUS.node=      §nNode Purifier: Level 5§r<IMG>blightb
 tc.research_page.PURITYFOCUS.curative=         §nCurative: Level 5§r<IMG>blightbuster:textures/foci/curative.png:0:0:255:255:0.0625</IMG>This upgrade augments the Purity Focus's therapeutic light. It will now heal all friendly creatures and players (except for the caster) in its area of effect or are targeted with right click by %s hearts of health.<BR>Just like curing creatures of taint infections, healing creatures costs %s for each one healed.<BR>A Purity Focus with this upgrade will also remove the Taint Poison and Flux Flu effects while on a wand in the inventory.
 tc.research_page.PURITYFOCUS.blightBuster=      §nBlight Buster: Level 5§r<IMG>blightbuster:textures/foci/blightBuster.png:0:0:255:255:0.0625</IMG>This upgrade modifies the Purity Focus's cleansing power to deal massive damage to tainted creatures.<BR>Deals %s hearts of damage to any tainted creatures it finds in its area of effect or are targeted with right click at the cost of %s each.<BR>This shift in priority removes the ability to cure tainted animals and villagers; all blighted creatures shall feel your wrath.
 
-tc.research_name.ISOLATIONFOCUS=Wand Focus: Node Isolator
+tc.research_name.ISOLATIONFOCUS=Wand Focus: Node Isolation
 tc.research_text.ISOLATIONFOCUS=Keeping nodes safe!
 tc.research_page.ISOLATIONFOCUS.1=You have created a focus that can isolate aura nodes, protecting both the node and the surrounding environment. The node will be immune to the effects of taint, and the environment will be immune to any of the node's special effects.<BR>You will be unable to draw vis from the node while it is isolated, so it is not a permanent solution.<BR>Left-clicking a node with a wand equipped with this focus will toggle the isolated effect.
 

@@ -109,23 +109,23 @@ public class AddedResearch {
             purityFocusResearch.registerResearchItem();
         }
 
-        if (BlightbusterConfig.enableStabilizerFocus) {
+        if (BlightbusterConfig.enableIsolationFocus) {
             ShapedArcaneRecipe isolationFocusRecipe = ThaumcraftApi.addArcaneCraftingRecipe(
                 "ISOLATIONFOCUS",
                 new ItemStack(BBItems.isolationFocus),
                 new AspectList().add(Aspect.EARTH, 15)
                     .add(Aspect.AIR, 10),
                 "SQS",
-                "AFA",
+                "QAQ",
                 "SQS",
                 'S',
                 new ItemStack(ConfigItems.itemShard, 1, 3),
                 'A',
-                new ItemStack(ConfigItems.itemResource, 1, 6),
+                new ItemStack(ConfigBlocks.blockCosmeticOpaque),
                 'Q',
                 new ItemStack(Items.quartz),
                 'F',
-                new ItemStack(BBItems.purityFocus, 1));
+                new ItemStack(BBItems.purityFocus));
 
             ResearchItem isolationFocusResearch = new ResearchItem(
                 "ISOLATIONFOCUS",

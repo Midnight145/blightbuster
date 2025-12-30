@@ -9,7 +9,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 
-import talonos.blightbuster.items.ItemStabilizerFocus;
+import talonos.blightbuster.items.ItemIsolationFocus;
 import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.common.items.wands.ItemWandCasting;
 
@@ -25,7 +25,7 @@ public class MixinItemWandCasting_FocusNoBreak {
         remap = false)
     private boolean preventBreakIfFocusActive(EntityLivingBase entityLiving, Operation<Boolean> original,
         @Local(name = "focus") ItemFocusBasic focus) {
-        if (focus instanceof ItemStabilizerFocus) {
+        if (focus instanceof ItemIsolationFocus) {
             return entityLiving.isSneaking(); // gets inverted in the original method, so will prevent breaking when not
                                               // sneaking
         }

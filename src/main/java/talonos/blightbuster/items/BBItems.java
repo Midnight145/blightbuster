@@ -25,8 +25,8 @@ public class BBItems {
         if (BlightbusterConfig.enableSuperWorldTainter) {
             worldSuperTainter = new ItemSuperTestWorldTainter();
         }
-        if (BlightbusterConfig.enableStabilizerFocus) {
-            isolationFocus = new ItemStabilizerFocus();
+        if (BlightbusterConfig.enableIsolationFocus) {
+            isolationFocus = new ItemIsolationFocus();
         }
     }
 }

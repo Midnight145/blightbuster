@@ -12,20 +12,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import talonos.blightbuster.BBStrings;
 import talonos.blightbuster.BlightBuster;
-import talonos.blightbuster.lib.INodeStabilized;
+import talonos.blightbuster.lib.INodeIsolated;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.common.items.wands.ItemWandCasting;
 
-public class ItemStabilizerFocus extends ItemFocusBasic {
+public class ItemIsolationFocus extends ItemFocusBasic {
 
-    public ItemStabilizerFocus() {
-        setUnlocalizedName(BlightBuster.MODID + "_" + BBStrings.stabilizerFocusName);
-        GameRegistry.registerItem(this, BlightBuster.MODID + ":" + BBStrings.stabilizerFocusName);
+    public ItemIsolationFocus() {
+        setUnlocalizedName(BlightBuster.MODID + "_" + BBStrings.isolationFocusName);
+        GameRegistry.registerItem(this, BlightBuster.MODID + ":" + BBStrings.isolationFocusName);
         setCreativeTab(CreativeTabs.tabMaterials);
-        setTextureName(BlightBuster.MODID + ":" + BBStrings.stabilizerFocusName);
+        setTextureName(BlightBuster.MODID + ":" + BBStrings.isolationFocusName);
     }
 
     public boolean onEntitySwing(EntityLivingBase entity, ItemStack stack) {
@@ -33,13 +33,13 @@ public class ItemStabilizerFocus extends ItemFocusBasic {
             MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(player.worldObj, player, true);
             if (mop != null && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                 if (!(player.worldObj
-                    .getTileEntity(mop.blockX, mop.blockY, mop.blockZ) instanceof INodeStabilized node)) {
+                    .getTileEntity(mop.blockX, mop.blockY, mop.blockZ) instanceof INodeIsolated node)) {
                     return super.onEntitySwing(player, stack);
                 }
                 if (!wand.consumeAllVis(stack, player, this.getVisCost(stack), true, false)) {
                     return super.onEntitySwing(player, stack);
                 }
-                node.setStabilized(!node.isStabilized());
+                node.setIsolated(!node.isIsolated());
             }
         }
         return super.onEntitySwing(entity, stack);
@@ -53,7 +53,7 @@ public class ItemStabilizerFocus extends ItemFocusBasic {
     @Override
     public boolean onFocusBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) {
         return player.getEntityWorld()
-            .getTileEntity(x, y, z) instanceof INodeStabilized && !player.isSneaking();
+            .getTileEntity(x, y, z) instanceof INodeIsolated && !player.isSneaking();
     }
 
     @Override
