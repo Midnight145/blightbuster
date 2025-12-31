@@ -7,13 +7,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import talonos.blightbuster.BlightBuster;
 import talonos.blightbuster.BlightbusterConfig;
+import talonos.blightbuster.api.BlightbusterAPI;
 import thaumcraft.api.potions.PotionVisExhaust;
 import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.common.config.Config;
@@ -26,14 +25,8 @@ public class PurityFocusEventHandler {
     public void onEntityDrop(LivingDropsEvent event) {
         if (event.entity instanceof EntityLivingBase entity) {
             if (entity.isPotionActive(Config.potionTaintPoisonID)) {
-                try {
-                    if (BlightbusterConfig.purifiedMappings.containsValue(
-                        entity.getClass()
-                            .getConstructor(World.class))) {
-                        entity.capturedDrops.clear();
-                    }
-                } catch (NoSuchMethodException e) {
-                    BlightBuster.logger.error("Error capturing drops from class {}", entity.getClass());
+                if (BlightbusterAPI.isMapped(entity.getClass()) && !(entity instanceof EntityPlayer)) {
+                    entity.capturedDrops.clear();
                 }
             }
         }

@@ -1,5 +1,11 @@
 package talonos.blightbuster;
 
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -14,6 +20,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import talonos.blightbuster.api.BlightbusterAPI;
 import talonos.blightbuster.blocks.BBBlock;
 import talonos.blightbuster.entities.EntitySilverPotion;
 import talonos.blightbuster.handlers.PurityFocusEventHandler;
@@ -22,6 +29,12 @@ import talonos.blightbuster.network.BlightbusterNetwork;
 import talonos.blightbuster.rituals.RitualDawnMachine;
 import talonos.blightbuster.tileentity.DawnMachineSpoutTileEntity;
 import talonos.blightbuster.tileentity.dawnmachine.DawnMachineChunkLoader;
+import thaumcraft.common.entities.monster.EntityTaintChicken;
+import thaumcraft.common.entities.monster.EntityTaintCow;
+import thaumcraft.common.entities.monster.EntityTaintCreeper;
+import thaumcraft.common.entities.monster.EntityTaintPig;
+import thaumcraft.common.entities.monster.EntityTaintSheep;
+import thaumcraft.common.entities.monster.EntityTaintVillager;
 import thaumicenergistics.api.ThEApi;
 
 @Mod(
@@ -93,8 +106,18 @@ public class BlightBuster {
         if (BlightbusterConfig.enableBlood) {
             RitualDawnMachine.init();
         }
-        BlightbusterConfig.init_mappings();
+        BlightbusterConfig.initConfigMaps();
+        registerMappings();
 
         BlightBuster.proxy.reloadResearchOnLangChange();
+    }
+
+    private void registerMappings() {
+        BlightbusterAPI.registerEntityPurificationMapping(EntityTaintSheep.class, EntitySheep.class);
+        BlightbusterAPI.registerEntityPurificationMapping(EntityTaintCow.class, EntityCow.class);
+        BlightbusterAPI.registerEntityPurificationMapping(EntityTaintChicken.class, EntityChicken.class);
+        BlightbusterAPI.registerEntityPurificationMapping(EntityTaintPig.class, EntityPig.class);
+        BlightbusterAPI.registerEntityPurificationMapping(EntityTaintVillager.class, EntityVillager.class);
+        BlightbusterAPI.registerEntityPurificationMapping(EntityTaintCreeper.class, EntityCreeper.class);
     }
 }
