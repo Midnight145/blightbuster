@@ -107,6 +107,7 @@ public class BlightBuster {
             RitualDawnMachine.init();
         }
         BlightbusterConfig.initConfigMaps();
+        registerMappings();
 
         BlightBuster.proxy.reloadResearchOnLangChange();
     }
