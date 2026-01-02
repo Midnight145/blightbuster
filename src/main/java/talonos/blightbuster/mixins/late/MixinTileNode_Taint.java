@@ -14,7 +14,7 @@ import thaumcraft.api.TileThaumcraft;
 import thaumcraft.common.tiles.TileNode;
 
 @Mixin(value = TileNode.class, remap = false)
-public abstract class MixinTileNode extends TileThaumcraft {
+public abstract class MixinTileNode_Taint extends TileThaumcraft {
 
     @WrapMethod(method = "handleTaintNode")
     private boolean handleTaintNodeMixin(boolean change, Operation<Boolean> original) {
