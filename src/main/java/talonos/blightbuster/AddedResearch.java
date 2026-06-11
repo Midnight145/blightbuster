@@ -134,7 +134,7 @@ public class AddedResearch {
                     .add(Aspect.MAGIC, 3)
                     .add(Aspect.AURA, 5)
                     .add(Aspect.ARMOR, 4),
-                -2,
+                -4,
                 -3,
                 2,
                 new ItemStack(BBItems.isolationFocus));
