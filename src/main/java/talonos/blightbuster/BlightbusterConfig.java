@@ -16,6 +16,7 @@ public class BlightbusterConfig {
     public static boolean enableSuperWorldTainter = false;
     public static boolean enableDawnMachine = true;
     public static boolean enablePurityFocus = true;
+    public static boolean enableIsolationFocus = true;
     public static boolean enableSilverPotion = true;
     public static boolean enableDawnTotem = true;
     public static boolean enableDawnCharger = false;
@@ -59,6 +60,8 @@ public class BlightbusterConfig {
             .getBoolean(enableDawnMachine);
         enablePurityFocus = config.get("General", "Enable Purity Focus", enablePurityFocus)
             .getBoolean(enablePurityFocus);
+        enableIsolationFocus = config.get("General", "Enable Node Isolation Focus", enableIsolationFocus)
+            .getBoolean(enableIsolationFocus);
         enableSilverPotion = config.get("General", "Enable Silver Potion", enableSilverPotion)
             .getBoolean(enableSilverPotion);
         enableDawnTotem = config.get("General", "Enable Dawn Totem", enableDawnTotem)

@@ -13,6 +13,7 @@ item.blightbuster_purityFocus.cost3=Vis per creature cured or healed
 item.blightbuster_purityFocus.cost4=Vis per node purified
 item.blightbuster_purityFocus.cost5=Vis per flux vacuumed
 item.blightbuster_purityFocus.cost6=Vis per blight busted
+item.blightbuster_isolationFocus.name=Wand Focus: Node Isolation
 item.blightbuster_silverPotion.name=Silverleaf Splash Potion
 item.blightbuster_worldTainter.name=World Tainter
 item.blightbuster_chunkTainter.name=Chunk Tainter
@@ -25,11 +26,13 @@ item.blightbuster_boundRing.2.name=Fairy Wings
 item.blightbuster_boundRing.3.name=Dragon Wings
 item.blightbuster_boundRing.4.name=Golden Wings
 
+tc.research_category.BLIGHTBUSTER=BlightBuster
+
 tc.research_name.SILVERPOTION=Silverwood Potions
 tc.research_text.SILVERPOTION=Spot cleaning taint!
 tc.research_page.SILVERPOTION.1=Ethereal blooms are wonderful, but if you plant them too far apart, you can miss spots, especially in the corners. This potion, made from silverwood leaves, will cure blighted land and creatures in a 5 block radius. It doesn't eradicate tainted blocks besides those it hits directly, but any remaining blocks will not survive long on cured land. Unlike a bloom, this potion does not offer continuous protection, meaning it's possible for the land to become reinfected, sometimes quite quickly. On the plus side, the potion will also vacuum up any flux created from the purification of tainted land.
 
-tc.research_name.PURITYFOCUS=Purity Focus
+tc.research_name.PURITYFOCUS=Wand Focus: Purity
 tc.research_text.PURITYFOCUS=The Blight Buster
 tc.research_page.PURITYFOCUS.1=You have found a way to infuse the properties of an ethereal bloom into a wand focus. When you right click on a block, a 3x3 area and all blocks above and below it will immediately be cured of taint. Left click will clean only one column of blocks. Each column of tainted blocks that is purified costs %s.<BR>Crusted taint will leave behind large amounts of flux goo, so be wary of creating rapidly-growing thaumic slimes when working near it.
 tc.research_page.PURITYFOCUS.2=As well as cleaning blighted lands, you may heal creatures infected by the taint by right clicking them with a wand equipped with this focus. This will also cure them of the Taint Poison debuff. Healing creatures costs %s. This effect works at great distances.<BR>Additionally, you can remove taint from nodes by left clicking them. Note that wands equipped with this focus are unable to destroy any blocks, so fear not for the node's safety. This requires a lot of vis, however, needing %s. Take care to ensure that the nodes you clean do not get infected again in the future.
@@ -39,6 +42,10 @@ tc.research_page.PURITYFOCUS.vacuum=       §nFlux Vacuum: Level 3§r<IMG>blight
 tc.research_page.PURITYFOCUS.node=      §nNode Purifier: Level 5§r<IMG>blightbuster:textures/foci/nodePurifier.png:0:0:255:255:0.0625</IMG>All nodes cleansed by a Purity Focus with this upgrade will become pure nodes which are naturally immune to being reinfected. They will work to keep the taint at bay by transforming their surrounding biome into a magical forest.<BR>This upgrade also allows the Purity Focus to purify all nodes in its area of effect, rather than only ones that are directly targeted with left click.
 tc.research_page.PURITYFOCUS.curative=         §nCurative: Level 5§r<IMG>blightbuster:textures/foci/curative.png:0:0:255:255:0.0625</IMG>This upgrade augments the Purity Focus's therapeutic light. It will now heal all friendly creatures and players (except for the caster) in its area of effect or are targeted with right click by %s hearts of health.<BR>Just like curing creatures of taint infections, healing creatures costs %s for each one healed.<BR>A Purity Focus with this upgrade will also remove the Taint Poison and Flux Flu effects while on a wand in the inventory.
 tc.research_page.PURITYFOCUS.blightBuster=      §nBlight Buster: Level 5§r<IMG>blightbuster:textures/foci/blightBuster.png:0:0:255:255:0.0625</IMG>This upgrade modifies the Purity Focus's cleansing power to deal massive damage to tainted creatures.<BR>Deals %s hearts of damage to any tainted creatures it finds in its area of effect or are targeted with right click at the cost of %s each.<BR>This shift in priority removes the ability to cure tainted animals and villagers; all blighted creatures shall feel your wrath.
+
+tc.research_name.ISOLATIONFOCUS=Wand Focus: Node Isolation
+tc.research_text.ISOLATIONFOCUS=Keeping nodes safe!
+tc.research_page.ISOLATIONFOCUS.1=You have created a focus that can isolate aura nodes, protecting both the node and the surrounding environment. The node will be immune to the effects of taint, and the environment will be immune to any of the node's special effects.<BR>You will be unable to draw vis from the node while it is isolated, so it is not a permanent solution.<BR>Left-clicking a node with a wand equipped with this focus will toggle the isolated effect.
 
 tc.research_name.DAWNTOTEM=Totems of Dawn
 tc.research_text.DAWNTOTEM=The start of a glorious new era!
